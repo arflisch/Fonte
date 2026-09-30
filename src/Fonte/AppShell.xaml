@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Fonte.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:views="clr-namespace:Fonte.Views"
+    Title="Fonte"
+    FlyoutBehavior="Disabled">
+
+    <TabBar>
+        <ShellContent
+            Title="{l:Tr Tab_Workouts}"
+            ContentTemplate="{DataTemplate views:HomePage}"
+            Icon="tab_workouts.png"
+            Route="home" />
+        <ShellContent
+            Title="{l:Tr Tab_Exercises}"
+            ContentTemplate="{DataTemplate views:ExercisesPage}"
+            Icon="tab_exercises.png"
+            Route="exercises" />
+    </TabBar>
+
+</Shell>

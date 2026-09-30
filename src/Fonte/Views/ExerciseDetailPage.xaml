@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fonte.Views.ExerciseDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Fonte.Controls"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:vm="clr-namespace:Fonte.ViewModels"
+    x:DataType="vm:ExerciseDetailViewModel"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
+    SafeAreaEdges="None">
+
+    <ContentPage.Resources>
+        <Style x:Key="StatValue" TargetType="Label">
+            <Setter Property="FontFamily" Value="OpenSansSemibold" />
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="LineBreakMode" Value="TailTruncation" />
+        </Style>
+        <Style x:Key="StatLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="TextColor" Value="{StaticResource WhiteSoft}" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid
+        RowDefinitions="Auto,*"
+        SafeAreaEdges="Container,Container,Container,None"
+        Style="{StaticResource PageColumn}">
+
+        <!-- Top bar -->
+        <Grid Padding="20,8,20,6" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+            <Border
+                c:Touch.Command="{Binding GoBackCommand}"
+                Style="{StaticResource IconButton}"
+                SemanticProperties.Description="{l:Tr Common_Back}">
+                <c:IconView Color="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" Data="{x:Static c:Icons.ChevronLeft}" />
+            </Border>
+            <Label Grid.Column="1" Style="{StaticResource PageTitle}" Text="{Binding Name}" />
+            <Border
+                Grid.Column="2"
+                c:Touch.Command="{Binding EditCommand}"
+                IsVisible="{Binding IsCustom}"
+                Style="{StaticResource IconButton}"
+                SemanticProperties.Description="{l:Tr Detail_Edit}">
+                <c:IconView Color="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" Data="{x:Static c:Icons.Pencil}" />
+            </Border>
+            <!-- Keeps the title centred when there is nothing to edit. -->
+            <BoxView
+                Grid.Column="2"
+                IsVisible="{Binding IsCustom, Converter={StaticResource InvertBool}}"
+                WidthRequest="42"
+                Color="Transparent" />
+        </Grid>
+
+        <ScrollView Grid.Row="1" SafeAreaEdges="None">
+            <VerticalStackLayout Padding="20,8,20,40" Spacing="18">
+
+                <!-- Exercise and its figures, in the muscle group's colour -->
+                <Border Background="{Binding HeroBrush}" StrokeShape="RoundRectangle 28" StrokeThickness="0">
+                    <VerticalStackLayout Padding="22,22,22,20" Spacing="18">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                            <Border
+                                Padding="12"
+                                BackgroundColor="{StaticResource WhiteGlass}"
+                                HeightRequest="56"
+                                StrokeShape="RoundRectangle 18"
+                                StrokeThickness="0"
+                                WidthRequest="56">
+                                <c:IconView Color="White" Data="{Binding Icon}" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                <Label
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="21"
+                                    Text="{Binding Name}"
+                                    TextColor="White" />
+                                <Label FontSize="14" Text="{Binding Subtitle}" TextColor="{StaticResource WhiteSoft}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                            <Border
+                                Grid.ColumnSpan="{Binding RecordSpan}"
+                                Padding="6,10"
+                                BackgroundColor="{StaticResource WhiteGlass}"
+                                StrokeShape="RoundRectangle 16"
+                                StrokeThickness="0">
+                                <VerticalStackLayout Spacing="0">
+                                    <Label Style="{StaticResource StatValue}" Text="{Binding RecordText}" />
+                                    <Label Style="{StaticResource StatLabel}" Text="{l:Tr Detail_Record}" />
+                                </VerticalStackLayout>
+                            </Border>
+                            <Border
+                                Grid.Column="1"
+                                Padding="6,10"
+                                BackgroundColor="{StaticResource WhiteGlass}"
+                                IsVisible="{Binding ShowOneRepMax}"
+                                StrokeShape="RoundRectangle 16"
+                                StrokeThickness="0">
+                                <VerticalStackLayout Spacing="0">
+                                    <Label Style="{StaticResource StatValue}" Text="{Binding OneRepMaxText}" />
+                                    <Label Style="{StaticResource StatLabel}" Text="{l:Tr Detail_OneRepMax}" />
+                                </VerticalStackLayout>
+                            </Border>
+                            <Border
+                                Grid.Column="2"
+                                Padding="6,10"
+                                BackgroundColor="{StaticResource WhiteGlass}"
+                                StrokeShape="RoundRectangle 16"
+                                StrokeThickness="0">
+                                <VerticalStackLayout Spacing="0">
+                                    <Label Style="{StaticResource StatValue}" Text="{Binding SessionsText}" />
+                                    <Label Style="{StaticResource StatLabel}" Text="{l:Tr Detail_Sessions}" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Progress -->
+                <Border IsVisible="{Binding HasProgress}" Padding="16,14,16,10" Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Style="{StaticResource Strong}" Text="{l:Tr Detail_Progress}" />
+                        <Label Style="{StaticResource Caption}" Text="{Binding ProgressHint}" />
+                        <c:SparklineView
+                            Margin="0,12,0,0"
+                            HeightRequest="120"
+                            LineColor="{Binding Color}"
+                            Points="{Binding Points}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Never done -->
+                <Border IsVisible="{Binding IsEmpty}" Padding="24,26" Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label FontSize="40" HorizontalOptions="Center" Text="📈" />
+                        <Label HorizontalTextAlignment="Center" Style="{StaticResource Secondary}" Text="{l:Tr Detail_Empty}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- History -->
+                <VerticalStackLayout IsVisible="{Binding HasSessions}" Spacing="12">
+                    <Label Style="{StaticResource SectionTitle}" Text="{l:Tr Detail_History}" />
+                    <Border Padding="16,4" Style="{StaticResource Card}">
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Sessions}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:SessionItem">
+                                    <Grid Padding="0,12" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                        <VerticalStackLayout Spacing="2">
+                                            <Label FontFamily="OpenSansSemibold" Text="{Binding DayText}" />
+                                            <Label Style="{StaticResource Caption}" Text="{Binding SetsText}" />
+                                        </VerticalStackLayout>
+                                        <c:IconView
+                                            Grid.Column="1"
+                                            Color="#BA7517"
+                                            Data="{x:Static c:Icons.Trophy}"
+                                            HeightRequest="18"
+                                            IsVisible="{Binding HasRecord}"
+                                            VerticalOptions="Center"
+                                            WidthRequest="18" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <Label
+                    Padding="0,6"
+                    c:Touch.Command="{Binding DeleteCommand}"
+                    FontFamily="OpenSansSemibold"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding IsCustom}"
+                    Text="{l:Tr Detail_Delete}"
+                    TextColor="{AppThemeBinding Light={StaticResource NegativeLight}, Dark={StaticResource NegativeDark}}" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

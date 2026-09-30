@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fonte.Views.ExercisesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Fonte.Controls"
+    xmlns:comp="clr-namespace:Fonte.Views.Components"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:vm="clr-namespace:Fonte.ViewModels"
+    x:DataType="vm:ExercisesViewModel"
+    Shell.NavBarIsVisible="False"
+    SafeAreaEdges="None">
+
+    <Grid
+        RowDefinitions="Auto,Auto,*"
+        SafeAreaEdges="Container,Container,Container,None"
+        Style="{StaticResource PageColumn}">
+
+        <!-- Header -->
+        <Grid Padding="20,12,20,0" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+            <Label Style="{StaticResource LargeTitle}" Text="{l:Tr Tab_Exercises}" VerticalOptions="Center" />
+            <Border
+                Grid.Column="1"
+                c:Touch.Command="{Binding NewExerciseCommand}"
+                Style="{StaticResource IconButton}"
+                VerticalOptions="Center"
+                SemanticProperties.Description="{l:Tr Exercise_New}">
+                <c:IconView Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" Data="{x:Static c:Icons.Plus}" StrokeWidth="2.4" />
+            </Border>
+        </Grid>
+
+        <comp:ExerciseChips
+            Grid.Row="1"
+            Padding="20,16,20,8"
+            Filter="{Binding Filter}"
+            Search="{Binding Search}" />
+
+        <CollectionView
+            Grid.Row="2"
+            IsGrouped="True"
+            ItemsSource="{Binding Groups}"
+            SelectionMode="None"
+            VerticalScrollBarVisibility="Never">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="20,40" IsVisible="{Binding HasNoResult}" Spacing="8">
+                    <Label FontSize="40" HorizontalOptions="Center" Text="🔍" />
+                    <Label HorizontalTextAlignment="Center" Style="{StaticResource Secondary}" Text="{l:Tr Library_NoResult}" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate x:DataType="vm:ExerciseGroup">
+                    <HorizontalStackLayout Padding="20,14,20,2" Spacing="8">
+                        <Ellipse
+                            Fill="{Binding Color}"
+                            HeightRequest="10"
+                            VerticalOptions="Center"
+                            WidthRequest="10" />
+                        <Label Style="{StaticResource SectionTitle}" Text="{Binding Title}" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:ExerciseItemViewModel">
+                    <Border
+                        Margin="20,0"
+                        Padding="12"
+                        c:Touch.Command="{Binding TapCommand}"
+                        Style="{StaticResource Card}">
+                        <Grid ColumnDefinitions="44,*,Auto" ColumnSpacing="14">
+                            <Border
+                                Padding="10"
+                                BackgroundColor="{Binding SoftColor}"
+                                HeightRequest="44"
+                                StrokeShape="RoundRectangle 14"
+                                StrokeThickness="0"
+                                WidthRequest="44">
+                                <c:IconView Color="{Binding Color}" Data="{Binding Icon}" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                                <Label
+                                    LineBreakMode="TailTruncation"
+                                    Style="{StaticResource Strong}"
+                                    Text="{Binding Name}" />
+                                <Label
+                                    LineBreakMode="TailTruncation"
+                                    Style="{StaticResource Caption}"
+                                    Text="{Binding Caption}" />
+                            </VerticalStackLayout>
+                            <c:IconView
+                                Grid.Column="2"
+                                Color="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}"
+                                Data="{x:Static c:Icons.ChevronRight}"
+                                HeightRequest="16"
+                                VerticalOptions="Center"
+                                WidthRequest="16" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.Footer>
+                <BoxView HeightRequest="40" Color="Transparent" />
+            </CollectionView.Footer>
+        </CollectionView>
+    </Grid>
+</ContentPage>

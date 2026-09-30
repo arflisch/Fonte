@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fonte.Views.CustomExercisePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Fonte.Controls"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:vm="clr-namespace:Fonte.ViewModels"
+    x:DataType="vm:CustomExerciseViewModel"
+    ios:Page.ModalPresentationStyle="PageSheet"
+    Shell.NavBarIsVisible="False"
+    SafeAreaEdges="All"
+    Shell.PresentationMode="ModalAnimated">
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="ChipTemplate" x:DataType="vm:SelectableOption">
+            <Border
+                Margin="0,0,8,8"
+                c:Touch.Command="{Binding SelectCommand}"
+                Style="{StaticResource Chip}">
+                <Border.Triggers>
+                    <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
+                        <Setter Property="Background" Value="{StaticResource AccentGradient}" />
+                        <Setter Property="Stroke" Value="Transparent" />
+                    </DataTrigger>
+                </Border.Triggers>
+                <Label FontFamily="OpenSansSemibold" FontSize="14" Text="{Binding Label}">
+                    <Label.Triggers>
+                        <DataTrigger Binding="{Binding IsSelected}" TargetType="Label" Value="True">
+                            <Setter Property="TextColor" Value="White" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </Border>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Sheet header -->
+        <Grid Padding="20,18,20,6" ColumnDefinitions="100,*,100">
+            <Label
+                c:Touch.Command="{Binding CancelCommand}"
+                Style="{StaticResource LinkLabel}"
+                Text="{l:Tr Common_Cancel}" />
+            <Label Grid.Column="1" Style="{StaticResource PageTitle}" Text="{Binding Title}" />
+            <Label
+                Grid.Column="2"
+                c:Touch.Command="{Binding SaveCommand}"
+                HorizontalTextAlignment="End"
+                Style="{StaticResource LinkLabel}"
+                Text="{l:Tr Common_Save}" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,12,20,32" Spacing="22">
+
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Custom_Name}" />
+                    <Border Style="{StaticResource InputField}">
+                        <Entry
+                            IsSpellCheckEnabled="False"
+                            IsTextPredictionEnabled="False"
+                            Keyboard="Text"
+                            MaxLength="60"
+                            Placeholder="{l:Tr Custom_NamePlaceholder}"
+                            ReturnType="Done"
+                            Text="{Binding Name}" />
+                    </Border>
+                    <Label IsVisible="{Binding HasError}" Style="{StaticResource ErrorLabel}" Text="{Binding ErrorMessage}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Custom_Muscle}" />
+                    <FlexLayout
+                        BindableLayout.ItemTemplate="{StaticResource ChipTemplate}"
+                        BindableLayout.ItemsSource="{Binding Muscles}"
+                        Wrap="Wrap" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Custom_Equipment}" />
+                    <FlexLayout
+                        BindableLayout.ItemTemplate="{StaticResource ChipTemplate}"
+                        BindableLayout.ItemsSource="{Binding Equipments}"
+                        Wrap="Wrap" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Custom_Tracking}" />
+                    <Border
+                        Padding="4"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceMutedLight}, Dark={StaticResource SurfaceMutedDark}}"
+                        StrokeShape="RoundRectangle 16"
+                        StrokeThickness="0">
+                        <Grid BindableLayout.ItemsSource="{Binding Trackings}" ColumnDefinitions="*,*,*">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:SelectableOption">
+                                    <Grid Grid.Column="{Binding Column}" c:Touch.Command="{Binding SelectCommand}" HeightRequest="42">
+                                        <Border
+                                            Padding="0"
+                                            IsVisible="{Binding IsSelected}"
+                                            StrokeShape="RoundRectangle 12"
+                                            Style="{StaticResource Card}" />
+                                        <Label
+                                            FontFamily="OpenSansSemibold"
+                                            FontSize="13"
+                                            HorizontalOptions="Center"
+                                            HorizontalTextAlignment="Center"
+                                            Opacity="{Binding LabelOpacity}"
+                                            Text="{Binding Label}"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fonte.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Fonte.Controls"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:vm="clr-namespace:Fonte.ViewModels"
+    x:DataType="vm:SettingsViewModel"
+    ios:Page.ModalPresentationStyle="PageSheet"
+    Shell.NavBarIsVisible="False"
+    SafeAreaEdges="All"
+    Shell.PresentationMode="ModalAnimated">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Sheet header -->
+        <Grid Padding="20,18,20,6" ColumnDefinitions="90,*,90">
+            <Label
+                c:Touch.Command="{Binding CloseCommand}"
+                Style="{StaticResource LinkLabel}"
+                Text="{l:Tr Common_Close}" />
+            <Label Grid.Column="1" Style="{StaticResource PageTitle}" Text="{l:Tr Settings_Title}" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,14,20,32" Spacing="10">
+
+                <!-- Workout -->
+                <Label Margin="0,4,0,0" Style="{StaticResource FieldLabel}" Text="{l:Tr Settings_WorkoutSection}" />
+                <Border Padding="16,0" Style="{StaticResource Card}">
+                    <VerticalStackLayout>
+                        <Grid Style="{StaticResource Row}">
+                            <Border BackgroundColor="#26534AB7" Style="{StaticResource RowIcon}">
+                                <c:IconView Color="#534AB7" Data="{x:Static c:Icons.Timer}" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                <Label Style="{StaticResource RowTitle}" Text="{l:Tr Settings_RestTimer}" />
+                                <Label Style="{StaticResource Caption}" Text="{l:Tr Settings_RestTimerHint}" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="2" IsToggled="{Binding IsRestTimerEnabled}" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView IsVisible="{Binding IsRestTimerEnabled}" Style="{StaticResource Divider}" />
+                        <Grid
+                            c:Touch.Command="{Binding ChooseRestCommand}"
+                            IsVisible="{Binding IsRestTimerEnabled}"
+                            Style="{StaticResource Row}">
+                            <Border BackgroundColor="#26D97706" Style="{StaticResource RowIcon}">
+                                <c:IconView Color="#D97706" Data="{x:Static c:Icons.Bell}" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                <Label Style="{StaticResource RowTitle}" Text="{l:Tr Settings_Rest}" />
+                                <Label Style="{StaticResource Caption}" Text="{l:Tr Settings_RestHint}" />
+                            </VerticalStackLayout>
+                            <HorizontalStackLayout Grid.Column="2" Spacing="6" VerticalOptions="Center">
+                                <Label Style="{StaticResource Secondary}" Text="{Binding RestText}" VerticalOptions="Center" />
+                                <c:IconView
+                                    Color="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}"
+                                    Data="{x:Static c:Icons.ChevronRight}"
+                                    HeightRequest="16"
+                                    VerticalOptions="Center"
+                                    WidthRequest="16" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Display -->
+                <Label Margin="0,14,0,0" Style="{StaticResource FieldLabel}" Text="{l:Tr Settings_Display}" />
+                <Border Padding="16,0" Style="{StaticResource Card}">
+                    <Grid c:Touch.Command="{Binding ChooseLanguageCommand}" Style="{StaticResource Row}">
+                        <Border BackgroundColor="#260891B2" Style="{StaticResource RowIcon}">
+                            <c:IconView Color="#0891B2" Data="{x:Static c:Icons.Globe}" />
+                        </Border>
+                        <Label Grid.Column="1" Style="{StaticResource RowTitle}" Text="{l:Tr Settings_Language}" VerticalOptions="Center" />
+                        <HorizontalStackLayout Grid.Column="2" Spacing="6" VerticalOptions="Center">
+                            <Label Style="{StaticResource Secondary}" Text="{Binding LanguageName}" VerticalOptions="Center" />
+                            <c:IconView
+                                Color="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}"
+                                Data="{x:Static c:Icons.ChevronRight}"
+                                HeightRequest="16"
+                                VerticalOptions="Center"
+                                WidthRequest="16" />
+                        </HorizontalStackLayout>
+                    </Grid>
+                </Border>
+
+                <Label
+                    Margin="0,24,0,0"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource Caption}"
+                    Text="{Binding AppVersion}" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

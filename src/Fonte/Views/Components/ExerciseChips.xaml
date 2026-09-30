@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Search field and muscle-group chips above a list of exercises (library and picker). -->
+<VerticalStackLayout
+    x:Class="Fonte.Views.Components.ExerciseChips"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Fonte.Controls"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:vm="clr-namespace:Fonte.ViewModels"
+    x:Name="Root"
+    Spacing="12">
+
+    <Border Padding="12,0" Style="{StaticResource InputField}">
+        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+            <c:IconView
+                Color="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}"
+                Data="{x:Static c:Icons.Search}"
+                HeightRequest="18"
+                VerticalOptions="Center"
+                WidthRequest="18" />
+            <Entry
+                x:Name="SearchEntry"
+                Grid.Column="1"
+                ClearButtonVisibility="WhileEditing"
+                Keyboard="Plain"
+                Placeholder="{l:Tr Library_Search}"
+                ReturnType="Search" />
+        </Grid>
+    </Border>
+
+    <ScrollView Margin="-20,0" Orientation="Horizontal">
+        <HorizontalStackLayout x:Name="ChipsLayout" Padding="20,0" Spacing="8">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="vm:SelectableOption">
+                    <Border c:Touch.Command="{Binding SelectCommand}" Style="{StaticResource Chip}">
+                        <Border.Triggers>
+                            <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
+                                <Setter Property="Background" Value="{StaticResource AccentGradient}" />
+                                <Setter Property="Stroke" Value="Transparent" />
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <Label FontFamily="OpenSansSemibold" FontSize="14" Text="{Binding Label}">
+                            <Label.Triggers>
+                                <DataTrigger Binding="{Binding IsSelected}" TargetType="Label" Value="True">
+                                    <Setter Property="TextColor" Value="White" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Border>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </HorizontalStackLayout>
+    </ScrollView>
+</VerticalStackLayout>

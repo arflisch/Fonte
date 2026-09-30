@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Common_Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Common_Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Common_Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Common_Oops" xml:space="preserve">
+    <value>Oops</value>
+  </data>
+  <data name="Date_Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="Date_Yesterday" xml:space="preserve">
+    <value>Yesterday</value>
+  </data>
+  <data name="Unit_Reps" xml:space="preserve">
+    <value>reps</value>
+  </data>
+  <data name="Workout_One" xml:space="preserve">
+    <value>workout</value>
+  </data>
+  <data name="Workout_Many" xml:space="preserve">
+    <value>workouts</value>
+  </data>
+  <data name="Exercise_One" xml:space="preserve">
+    <value>exercise</value>
+  </data>
+  <data name="Exercise_Many" xml:space="preserve">
+    <value>exercises</value>
+  </data>
+  <data name="Tab_Workouts" xml:space="preserve">
+    <value>Workouts</value>
+  </data>
+  <data name="Tab_Exercises" xml:space="preserve">
+    <value>Exercises</value>
+  </data>
+  <data name="Home_ReadyTitle" xml:space="preserve">
+    <value>Ready to train?</value>
+  </data>
+  <data name="Home_ReadyText" xml:space="preserve">
+    <value>Log every set and beat what you did last time.</value>
+  </data>
+  <data name="Home_Start" xml:space="preserve">
+    <value>Start a workout</value>
+  </data>
+  <data name="Home_InProgress" xml:space="preserve">
+    <value>Workout in progress</value>
+  </data>
+  <data name="Home_InProgressSince" xml:space="preserve">
+    <value>Started at {0} · {1}</value>
+  </data>
+  <data name="Home_Resume" xml:space="preserve">
+    <value>Resume</value>
+  </data>
+  <data name="Home_ThisWeek" xml:space="preserve">
+    <value>THIS WEEK</value>
+  </data>
+  <data name="Home_Recent" xml:space="preserve">
+    <value>Recent workouts</value>
+  </data>
+  <data name="Home_EmptyTitle" xml:space="preserve">
+    <value>No workouts yet</value>
+  </data>
+  <data name="Home_EmptyText" xml:space="preserve">
+    <value>Your finished workouts will show up here, with your records.</value>
+  </data>
+  <data name="Workout_Title" xml:space="preserve">
+    <value>Workout</value>
+  </data>
+  <data name="Workout_Finish" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="Workout_EmptyTitle" xml:space="preserve">
+    <value>Add your first exercise</value>
+  </data>
+  <data name="Workout_EmptyText" xml:space="preserve">
+    <value>The sets you did last time are filled in, ready to beat.</value>
+  </data>
+  <data name="Workout_AddExercise" xml:space="preserve">
+    <value>Add an exercise</value>
+  </data>
+  <data name="Workout_AddSet" xml:space="preserve">
+    <value>Add a set</value>
+  </data>
+  <data name="Workout_Discard" xml:space="preserve">
+    <value>Discard workout</value>
+  </data>
+  <data name="Workout_DiscardTitle" xml:space="preserve">
+    <value>Discard this workout?</value>
+  </data>
+  <data name="Workout_DiscardText" xml:space="preserve">
+    <value>Everything logged in it will be deleted.</value>
+  </data>
+  <data name="Workout_DiscardConfirm" xml:space="preserve">
+    <value>Discard</value>
+  </data>
+  <data name="Workout_FinishTitle" xml:space="preserve">
+    <value>Finish the workout?</value>
+  </data>
+  <data name="Workout_FinishText" xml:space="preserve">
+    <value>Sets that aren't ticked won't be saved.</value>
+  </data>
+  <data name="Workout_NothingDoneTitle" xml:space="preserve">
+    <value>No set ticked</value>
+  </data>
+  <data name="Workout_NothingDoneText" xml:space="preserve">
+    <value>Tick the sets you've done, or discard the workout.</value>
+  </data>
+  <data name="Workout_KeepGoing" xml:space="preserve">
+    <value>Keep going</value>
+  </data>
+  <data name="Workout_ColSet" xml:space="preserve">
+    <value>SET</value>
+  </data>
+  <data name="Workout_ColPrevious" xml:space="preserve">
+    <value>PREVIOUS</value>
+  </data>
+  <data name="Workout_ColKg" xml:space="preserve">
+    <value>KG</value>
+  </data>
+  <data name="Workout_ColReps" xml:space="preserve">
+    <value>REPS</value>
+  </data>
+  <data name="Workout_ColSeconds" xml:space="preserve">
+    <value>SEC</value>
+  </data>
+  <data name="Workout_ColMinutes" xml:space="preserve">
+    <value>MIN</value>
+  </data>
+  <data name="Workout_History" xml:space="preserve">
+    <value>See history</value>
+  </data>
+  <data name="Workout_RemoveExercise" xml:space="preserve">
+    <value>Remove from workout</value>
+  </data>
+  <data name="Workout_SetNumber" xml:space="preserve">
+    <value>Set {0}</value>
+  </data>
+  <data name="Workout_DeleteSet" xml:space="preserve">
+    <value>Delete set</value>
+  </data>
+  <data name="Workout_ExerciseOptions" xml:space="preserve">
+    <value>Exercise options</value>
+  </data>
+  <data name="Workout_TickSet" xml:space="preserve">
+    <value>Tick the set</value>
+  </data>
+  <data name="Workout_Rest" xml:space="preserve">
+    <value>Rest</value>
+  </data>
+  <data name="Workout_RestOver" xml:space="preserve">
+    <value>Rest over, let's go!</value>
+  </data>
+  <data name="Workout_Skip" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="Rest_NotificationTitle" xml:space="preserve">
+    <value>Rest over</value>
+  </data>
+  <data name="Rest_NotificationText" xml:space="preserve">
+    <value>Time for your next set 💪</value>
+  </data>
+  <data name="Picker_Add" xml:space="preserve">
+    <value>Add ({0})</value>
+  </data>
+  <data name="Picker_AddNone" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Exercise_New" xml:space="preserve">
+    <value>New exercise</value>
+  </data>
+  <data name="Library_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Library_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Library_Best" xml:space="preserve">
+    <value>Best: {0}</value>
+  </data>
+  <data name="Library_NoResult" xml:space="preserve">
+    <value>No exercise found</value>
+  </data>
+  <data name="Detail_Record" xml:space="preserve">
+    <value>Record</value>
+  </data>
+  <data name="Detail_OneRepMax" xml:space="preserve">
+    <value>Est. 1RM</value>
+  </data>
+  <data name="Detail_Sessions" xml:space="preserve">
+    <value>Workouts</value>
+  </data>
+  <data name="Detail_Progress" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="Detail_ProgressOneRepMax" xml:space="preserve">
+    <value>Estimated one-rep max, workout after workout</value>
+  </data>
+  <data name="Detail_ProgressReps" xml:space="preserve">
+    <value>Best set, workout after workout</value>
+  </data>
+  <data name="Detail_ProgressTime" xml:space="preserve">
+    <value>Longest set, workout after workout</value>
+  </data>
+  <data name="Detail_History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="Detail_Empty" xml:space="preserve">
+    <value>Not done yet. Add it to a workout to follow your progress.</value>
+  </data>
+  <data name="Detail_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Detail_Delete" xml:space="preserve">
+    <value>Delete exercise</value>
+  </data>
+  <data name="Detail_DeleteTitle" xml:space="preserve">
+    <value>Delete this exercise?</value>
+  </data>
+  <data name="Detail_DeleteText" xml:space="preserve">
+    <value>It leaves the library; past workouts keep it.</value>
+  </data>
+  <data name="Detail_DeleteConfirm" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Custom_TitleEdit" xml:space="preserve">
+    <value>Edit exercise</value>
+  </data>
+  <data name="Custom_Name" xml:space="preserve">
+    <value>NAME</value>
+  </data>
+  <data name="Custom_NamePlaceholder" xml:space="preserve">
+    <value>e.g. Landmine press</value>
+  </data>
+  <data name="Custom_Muscle" xml:space="preserve">
+    <value>MUSCLE GROUP</value>
+  </data>
+  <data name="Custom_Equipment" xml:space="preserve">
+    <value>EQUIPMENT</value>
+  </data>
+  <data name="Custom_Tracking" xml:space="preserve">
+    <value>WHAT TO LOG</value>
+  </data>
+  <data name="Custom_Saved" xml:space="preserve">
+    <value>Exercise saved</value>
+  </data>
+  <data name="Summary_TitleFresh" xml:space="preserve">
+    <value>Workout done!</value>
+  </data>
+  <data name="Summary_Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="Summary_Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Summary_Sets" xml:space="preserve">
+    <value>Sets</value>
+  </data>
+  <data name="Summary_Records" xml:space="preserve">
+    <value>Personal records</value>
+  </data>
+  <data name="Summary_RecordBefore" xml:space="preserve">
+    <value>Previous best: {0}</value>
+  </data>
+  <data name="Summary_Feeling" xml:space="preserve">
+    <value>HOW DID IT FEEL?</value>
+  </data>
+  <data name="Summary_Note" xml:space="preserve">
+    <value>NOTE</value>
+  </data>
+  <data name="Summary_NotePlaceholder" xml:space="preserve">
+    <value>Sleep, energy, aches…</value>
+  </data>
+  <data name="Summary_Saved" xml:space="preserve">
+    <value>Workout saved</value>
+  </data>
+  <data name="Summary_Delete" xml:space="preserve">
+    <value>Delete workout</value>
+  </data>
+  <data name="Summary_DeleteTitle" xml:space="preserve">
+    <value>Delete this workout?</value>
+  </data>
+  <data name="Summary_DeleteText" xml:space="preserve">
+    <value>Its sets and records will be removed from your history.</value>
+  </data>
+  <data name="Feeling_1" xml:space="preserve">
+    <value>Exhausting</value>
+  </data>
+  <data name="Feeling_2" xml:space="preserve">
+    <value>Hard</value>
+  </data>
+  <data name="Feeling_3" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Feeling_4" xml:space="preserve">
+    <value>Good</value>
+  </data>
+  <data name="Feeling_5" xml:space="preserve">
+    <value>Excellent</value>
+  </data>
+  <data name="Settings_Title" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Settings_Display" xml:space="preserve">
+    <value>DISPLAY</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Settings_WorkoutSection" xml:space="preserve">
+    <value>WORKOUT</value>
+  </data>
+  <data name="Settings_RestTimer" xml:space="preserve">
+    <value>Rest timer</value>
+  </data>
+  <data name="Settings_RestTimerHint" xml:space="preserve">
+    <value>Starts when you tick a set</value>
+  </data>
+  <data name="Settings_Rest" xml:space="preserve">
+    <value>Rest time</value>
+  </data>
+  <data name="Settings_RestHint" xml:space="preserve">
+    <value>An alert tells you when to go again</value>
+  </data>
+  <data name="Muscle_Chest" xml:space="preserve">
+    <value>Chest</value>
+  </data>
+  <data name="Muscle_Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Muscle_Shoulders" xml:space="preserve">
+    <value>Shoulders</value>
+  </data>
+  <data name="Muscle_Arms" xml:space="preserve">
+    <value>Arms</value>
+  </data>
+  <data name="Muscle_Legs" xml:space="preserve">
+    <value>Legs</value>
+  </data>
+  <data name="Muscle_Core" xml:space="preserve">
+    <value>Core</value>
+  </data>
+  <data name="Muscle_Cardio" xml:space="preserve">
+    <value>Cardio</value>
+  </data>
+  <data name="Equipment_Barbell" xml:space="preserve">
+    <value>Barbell</value>
+  </data>
+  <data name="Equipment_Dumbbell" xml:space="preserve">
+    <value>Dumbbells</value>
+  </data>
+  <data name="Equipment_Machine" xml:space="preserve">
+    <value>Machine</value>
+  </data>
+  <data name="Equipment_Cable" xml:space="preserve">
+    <value>Cable</value>
+  </data>
+  <data name="Equipment_Bodyweight" xml:space="preserve">
+    <value>Bodyweight</value>
+  </data>
+  <data name="Equipment_Kettlebell" xml:space="preserve">
+    <value>Kettlebell</value>
+  </data>
+  <data name="Equipment_Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Tracking_WeightAndReps" xml:space="preserve">
+    <value>Weight × reps</value>
+  </data>
+  <data name="Tracking_Reps" xml:space="preserve">
+    <value>Reps</value>
+  </data>
+  <data name="Tracking_Time" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="Error_EmptyExerciseName" xml:space="preserve">
+    <value>Give the exercise a name.</value>
+  </data>
+  <data name="Error_ExerciseNotFound" xml:space="preserve">
+    <value>This exercise no longer exists.</value>
+  </data>
+  <data name="Error_WorkoutNotFound" xml:space="preserve">
+    <value>This workout no longer exists.</value>
+  </data>
+  <data name="Error_SetNotFound" xml:space="preserve">
+    <value>This set no longer exists.</value>
+  </data>
+  <data name="Error_IncompleteSet" xml:space="preserve">
+    <value>Enter the reps (or the duration) before ticking the set.</value>
+  </data>
+  <data name="Ex_bench_press" xml:space="preserve">
+    <value>Bench press</value>
+  </data>
+  <data name="Ex_incline_bench_press" xml:space="preserve">
+    <value>Incline bench press</value>
+  </data>
+  <data name="Ex_dumbbell_bench_press" xml:space="preserve">
+    <value>Dumbbell bench press</value>
+  </data>
+  <data name="Ex_incline_dumbbell_press" xml:space="preserve">
+    <value>Incline dumbbell press</value>
+  </data>
+  <data name="Ex_dumbbell_fly" xml:space="preserve">
+    <value>Dumbbell fly</value>
+  </data>
+  <data name="Ex_cable_crossover" xml:space="preserve">
+    <value>Cable crossover</value>
+  </data>
+  <data name="Ex_chest_press_machine" xml:space="preserve">
+    <value>Chest press machine</value>
+  </data>
+  <data name="Ex_push_up" xml:space="preserve">
+    <value>Push-up</value>
+  </data>
+  <data name="Ex_dips" xml:space="preserve">
+    <value>Dips</value>
+  </data>
+  <data name="Ex_deadlift" xml:space="preserve">
+    <value>Deadlift</value>
+  </data>
+  <data name="Ex_barbell_row" xml:space="preserve">
+    <value>Barbell row</value>
+  </data>
+  <data name="Ex_dumbbell_row" xml:space="preserve">
+    <value>Dumbbell row</value>
+  </data>
+  <data name="Ex_pull_up" xml:space="preserve">
+    <value>Pull-up</value>
+  </data>
+  <data name="Ex_chin_up" xml:space="preserve">
+    <value>Chin-up</value>
+  </data>
+  <data name="Ex_lat_pulldown" xml:space="preserve">
+    <value>Lat pulldown</value>
+  </data>
+  <data name="Ex_seated_cable_row" xml:space="preserve">
+    <value>Seated cable row</value>
+  </data>
+  <data name="Ex_back_extension" xml:space="preserve">
+    <value>Back extension</value>
+  </data>
+  <data name="Ex_overhead_press" xml:space="preserve">
+    <value>Overhead press</value>
+  </data>
+  <data name="Ex_dumbbell_shoulder_press" xml:space="preserve">
+    <value>Dumbbell shoulder press</value>
+  </data>
+  <data name="Ex_lateral_raise" xml:space="preserve">
+    <value>Lateral raise</value>
+  </data>
+  <data name="Ex_front_raise" xml:space="preserve">
+    <value>Front raise</value>
+  </data>
+  <data name="Ex_rear_delt_fly" xml:space="preserve">
+    <value>Rear delt fly</value>
+  </data>
+  <data name="Ex_face_pull" xml:space="preserve">
+    <value>Face pull</value>
+  </data>
+  <data name="Ex_shrug" xml:space="preserve">
+    <value>Shrug</value>
+  </data>
+  <data name="Ex_barbell_curl" xml:space="preserve">
+    <value>Barbell curl</value>
+  </data>
+  <data name="Ex_dumbbell_curl" xml:space="preserve">
+    <value>Dumbbell curl</value>
+  </data>
+  <data name="Ex_hammer_curl" xml:space="preserve">
+    <value>Hammer curl</value>
+  </data>
+  <data name="Ex_triceps_pushdown" xml:space="preserve">
+    <value>Triceps pushdown</value>
+  </data>
+  <data name="Ex_skull_crusher" xml:space="preserve">
+    <value>Skull crusher</value>
+  </data>
+  <data name="Ex_overhead_triceps_extension" xml:space="preserve">
+    <value>Overhead triceps extension</value>
+  </data>
+  <data name="Ex_close_grip_bench_press" xml:space="preserve">
+    <value>Close-grip bench press</value>
+  </data>
+  <data name="Ex_squat" xml:space="preserve">
+    <value>Squat</value>
+  </data>
+  <data name="Ex_front_squat" xml:space="preserve">
+    <value>Front squat</value>
+  </data>
+  <data name="Ex_leg_press" xml:space="preserve">
+    <value>Leg press</value>
+  </data>
+  <data name="Ex_romanian_deadlift" xml:space="preserve">
+    <value>Romanian deadlift</value>
+  </data>
+  <data name="Ex_lunge" xml:space="preserve">
+    <value>Lunge</value>
+  </data>
+  <data name="Ex_bulgarian_split_squat" xml:space="preserve">
+    <value>Bulgarian split squat</value>
+  </data>
+  <data name="Ex_leg_extension" xml:space="preserve">
+    <value>Leg extension</value>
+  </data>
+  <data name="Ex_leg_curl" xml:space="preserve">
+    <value>Leg curl</value>
+  </data>
+  <data name="Ex_hip_thrust" xml:space="preserve">
+    <value>Hip thrust</value>
+  </data>
+  <data name="Ex_calf_raise" xml:space="preserve">
+    <value>Calf raise</value>
+  </data>
+  <data name="Ex_goblet_squat" xml:space="preserve">
+    <value>Goblet squat</value>
+  </data>
+  <data name="Ex_plank" xml:space="preserve">
+    <value>Plank</value>
+  </data>
+  <data name="Ex_crunch" xml:space="preserve">
+    <value>Crunch</value>
+  </data>
+  <data name="Ex_hanging_leg_raise" xml:space="preserve">
+    <value>Hanging leg raise</value>
+  </data>
+  <data name="Ex_cable_crunch" xml:space="preserve">
+    <value>Cable crunch</value>
+  </data>
+  <data name="Ex_ab_wheel" xml:space="preserve">
+    <value>Ab wheel</value>
+  </data>
+  <data name="Ex_running" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="Ex_rowing_machine" xml:space="preserve">
+    <value>Rowing machine</value>
+  </data>
+  <data name="Ex_cycling" xml:space="preserve">
+    <value>Cycling</value>
+  </data>
+  <data name="Ex_jump_rope" xml:space="preserve">
+    <value>Jump rope</value>
+  </data>
+  <data name="Summary_RecordOneRepMax" xml:space="preserve">
+    <value>Est. 1RM {0} · +{1}</value>
+  </data>
+</root>

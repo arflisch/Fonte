@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fonte.Views.SummaryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Fonte.Controls"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:vm="clr-namespace:Fonte.ViewModels"
+    x:DataType="vm:SummaryViewModel"
+    ios:Page.ModalPresentationStyle="PageSheet"
+    HideSoftInputOnTapped="True"
+    Shell.NavBarIsVisible="False"
+    SafeAreaEdges="All"
+    Shell.PresentationMode="ModalAnimated">
+
+    <ContentPage.Resources>
+        <Style x:Key="StatValue" TargetType="Label">
+            <Setter Property="FontFamily" Value="OpenSansSemibold" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="LineBreakMode" Value="NoWrap" />
+        </Style>
+        <Style x:Key="StatLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="TextColor" Value="{StaticResource WhiteSoft}" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Sheet header -->
+        <Grid Padding="20,18,20,6" ColumnDefinitions="90,*,90">
+            <Label
+                c:Touch.Command="{Binding CloseCommand}"
+                Style="{StaticResource LinkLabel}"
+                Text="{l:Tr Common_Close}" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,4,20,32" Spacing="18">
+
+                <!-- Title and key figures -->
+                <Border
+                    Background="{StaticResource HeroGradient}"
+                    Shadow="{StaticResource FloatingShadow}"
+                    StrokeShape="RoundRectangle 28"
+                    StrokeThickness="0">
+                    <Grid>
+                        <Ellipse
+                            Margin="0,-110,-80,0"
+                            Fill="#1AFFFFFF"
+                            HeightRequest="240"
+                            HorizontalOptions="End"
+                            VerticalOptions="Start"
+                            WidthRequest="240" />
+                        <VerticalStackLayout Padding="22,24,22,20" Spacing="4">
+                            <Label
+                                FontSize="40"
+                                HorizontalOptions="Center"
+                                IsVisible="{Binding IsFresh}"
+                                Text="🎉" />
+                            <Label
+                                FontFamily="OpenSansSemibold"
+                                FontSize="26"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Title}"
+                                TextColor="White" />
+                            <Label
+                                FontSize="14"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Subtitle}"
+                                TextColor="{StaticResource WhiteSoft}" />
+                            <Grid Margin="0,16,0,0" ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                                <Border
+                                    Padding="6,10"
+                                    BackgroundColor="{StaticResource WhiteGlass}"
+                                    StrokeShape="RoundRectangle 16"
+                                    StrokeThickness="0">
+                                    <VerticalStackLayout Spacing="0">
+                                        <Label Style="{StaticResource StatValue}" Text="{Binding DurationText}" />
+                                        <Label Style="{StaticResource StatLabel}" Text="{l:Tr Summary_Duration}" />
+                                    </VerticalStackLayout>
+                                </Border>
+                                <Border
+                                    Grid.Column="1"
+                                    Padding="6,10"
+                                    BackgroundColor="{StaticResource WhiteGlass}"
+                                    StrokeShape="RoundRectangle 16"
+                                    StrokeThickness="0">
+                                    <VerticalStackLayout Spacing="0">
+                                        <Label Style="{StaticResource StatValue}" Text="{Binding VolumeText}" />
+                                        <Label Style="{StaticResource StatLabel}" Text="{l:Tr Summary_Volume}" />
+                                    </VerticalStackLayout>
+                                </Border>
+                                <Border
+                                    Grid.Column="2"
+                                    Padding="6,10"
+                                    BackgroundColor="{StaticResource WhiteGlass}"
+                                    StrokeShape="RoundRectangle 16"
+                                    StrokeThickness="0">
+                                    <VerticalStackLayout Spacing="0">
+                                        <Label Style="{StaticResource StatValue}" Text="{Binding SetsText}" />
+                                        <Label Style="{StaticResource StatLabel}" Text="{l:Tr Summary_Sets}" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <!-- Personal records -->
+                <Border IsVisible="{Binding HasRecords}" Padding="16,14" Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="12">
+                        <HorizontalStackLayout Spacing="8">
+                            <c:IconView
+                                Color="#BA7517"
+                                Data="{x:Static c:Icons.Trophy}"
+                                HeightRequest="20"
+                                VerticalOptions="Center"
+                                WidthRequest="20" />
+                            <Label Style="{StaticResource Strong}" Text="{l:Tr Summary_Records}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Records}" Spacing="10">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:RecordItem">
+                                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                        <VerticalStackLayout Spacing="0">
+                                            <Label FontFamily="OpenSansSemibold" Text="{Binding Name}" />
+                                            <Label Style="{StaticResource Caption}" Text="{Binding Detail}" />
+                                        </VerticalStackLayout>
+                                        <Border
+                                            Grid.Column="1"
+                                            Padding="10,5"
+                                            BackgroundColor="#26EF9F27"
+                                            StrokeShape="RoundRectangle 12"
+                                            StrokeThickness="0"
+                                            VerticalOptions="Center">
+                                            <Label
+                                                FontFamily="OpenSansSemibold"
+                                                FontSize="14"
+                                                Text="{Binding SetText}"
+                                                TextColor="#BA7517" />
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- What was done -->
+                <Border Padding="16,14" Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Style="{StaticResource Strong}" Text="{l:Tr Tab_Exercises}" />
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Exercises}" Spacing="12">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:RecapItem">
+                                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                        <Ellipse
+                                            Margin="0,6,0,0"
+                                            Fill="{Binding Color}"
+                                            HeightRequest="8"
+                                            VerticalOptions="Start"
+                                            WidthRequest="8" />
+                                        <VerticalStackLayout Grid.Column="1" Spacing="1">
+                                            <Label FontFamily="OpenSansSemibold" Text="{Binding Name}" />
+                                            <Label Style="{StaticResource Caption}" Text="{Binding SetsText}" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- How it felt -->
+                <VerticalStackLayout Spacing="10">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Summary_Feeling}" />
+                        <Label
+                            Grid.Column="1"
+                            FontFamily="OpenSansSemibold"
+                            FontSize="13"
+                            Text="{Binding FeelingText}"
+                            TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                    </Grid>
+                    <Grid BindableLayout.ItemsSource="{Binding Feelings}" ColumnDefinitions="*,*,*,*,*" ColumnSpacing="8">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:SelectableOption">
+                                <Border
+                                    Grid.Column="{Binding Column}"
+                                    c:Touch.Command="{Binding SelectCommand}"
+                                    HeightRequest="56"
+                                    Stroke="Transparent"
+                                    StrokeThickness="2"
+                                    Style="{StaticResource Card}"
+                                    Padding="0">
+                                    <Border.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
+                                            <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PrimarySoftLight}, Dark={StaticResource PrimarySoftDark}}" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
+                                    <Label
+                                        FontSize="26"
+                                        HorizontalOptions="Center"
+                                        Opacity="{Binding LabelOpacity}"
+                                        Text="{Binding Label}"
+                                        VerticalOptions="Center" />
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </Grid>
+                </VerticalStackLayout>
+
+                <!-- Note -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Summary_Note}" />
+                    <Border Padding="12,4" Style="{StaticResource InputField}">
+                        <Editor
+                            AutoSize="TextChanges"
+                            BackgroundColor="Transparent"
+                            FontSize="16"
+                            MaxLength="500"
+                            MinimumHeightRequest="80"
+                            Placeholder="{l:Tr Summary_NotePlaceholder}"
+                            PlaceholderColor="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}"
+                            Text="{Binding Note}" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <Border
+                    Margin="0,6,0,0"
+                    c:Touch.Command="{Binding SaveCommand}"
+                    Style="{StaticResource PrimaryButton}">
+                    <Label Style="{StaticResource PrimaryButtonText}" Text="{l:Tr Common_Save}" />
+                </Border>
+
+                <Label
+                    Padding="0,6"
+                    c:Touch.Command="{Binding DeleteCommand}"
+                    FontFamily="OpenSansSemibold"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding IsFresh, Converter={StaticResource InvertBool}}"
+                    Text="{l:Tr Summary_Delete}"
+                    TextColor="{AppThemeBinding Light={StaticResource NegativeLight}, Dark={StaticResource NegativeDark}}" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

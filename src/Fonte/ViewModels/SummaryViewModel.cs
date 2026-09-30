@@ -1,0 +1,182 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Fonte.Core.Data;
+using Fonte.Core.Models;
+using Fonte.Core.Training;
+using Fonte.Localization;
+using Fonte.Services;
+
+namespace Fonte.ViewModels;
+
+/// <summary>What a workout achieved: shown when it is finished, and when it is opened from the history.</summary>
+public sealed partial class SummaryViewModel : ObservableObject, IQueryAttributable, ISheetViewModel
+{
+    /// <summary>How the workout felt, from 1 (exhausting) to 5 (excellent).</summary>
+    public static readonly IReadOnlyList<string> FeelingEmojis = ["😫", "😕", "😐", "🙂", "🤩"];
+
+    private readonly FonteStore _store;
+    private readonly IDialogService _dialogs;
+    private int _workoutId;
+    private int? _feeling;
+
+    public SummaryViewModel(FonteStore store, IDialogService dialogs)
+    {
+        _store = store;
+        _dialogs = dialogs;
+        Feelings = SelectableOption.Grid(FeelingEmojis, FeelingEmojis.Count, SelectFeeling);
+    }
+
+    public System.Windows.Input.ICommand DismissCommand => CloseCommand;
+
+    public IReadOnlyList<SelectableOption> Feelings { get; }
+
+    /// <summary>Just finished (a celebration) rather than opened from the history.</summary>
+    [ObservableProperty]
+    private bool _isFresh;
+
+    [ObservableProperty]
+    private string _title = string.Empty;
+
+    [ObservableProperty]
+    private string _subtitle = string.Empty;
+
+    [ObservableProperty]
+    private string _durationText = string.Empty;
+
+    [ObservableProperty]
+    private string _volumeText = string.Empty;
+
+    [ObservableProperty]
+    private string _setsText = string.Empty;
+
+    [ObservableProperty]
+    private IReadOnlyList<RecordItem> _records = [];
+
+    [ObservableProperty]
+    private bool _hasRecords;
+
+    [ObservableProperty]
+    private IReadOnlyList<RecapItem> _exercises = [];
+
+    [ObservableProperty]
+    private string _feelingText = string.Empty;
+
+    [ObservableProperty]
+    private string _note = string.Empty;
+
+    public async void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if (!query.TryGetValue("id", out var id) || !int.TryParse(id?.ToString(), out _workoutId))
+            return;
+        IsFresh = query.ContainsKey("fresh");
+        try
+        {
+            await LoadAsync();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Summary not loaded: {ex}");
+        }
+    }
+
+    private async Task LoadAsync()
+    {
+        if (await _store.GetWorkoutSummaryAsync(_workoutId) is not { } summary)
+        {
+            await Shell.Current.GoToAsync("..");
+            return;
+        }
+
+        var workout = summary.Workout;
+        Title = IsFresh ? Loc.Get("Summary_TitleFresh") : Loc.Day(workout.StartedAt);
+        Subtitle = IsFresh
+            ? Loc.Date(workout.StartedAt, "dddd d MMMM")
+            : $"{Loc.Time(workout.StartedAt)} – {Loc.Time(workout.FinishedAt ?? workout.StartedAt)}";
+        DurationText = Loc.Duration(summary.Duration);
+        VolumeText = Loc.Volume(summary.Volume);
+        SetsText = summary.SetCount.ToString(Loc.Culture);
+        Records = summary.Records.Select(r => new RecordItem(Loc.ExerciseName(r.Exercise), Loc.Set(r.Exercise, r.Set), RecordDetail(r))).ToList();
+        HasRecords = Records.Count > 0;
+        Exercises = summary.Exercises
+            .Select(e => new RecapItem(
+                Loc.ExerciseName(e.Exercise),
+                Palette.Muscle(e.Exercise.Muscle),
+                string.Join("   ", e.Sets.Select(s => Loc.Set(e.Exercise, s)))))
+            .ToList();
+        Note = workout.Note ?? string.Empty;
+        ShowFeeling(workout.Feeling);
+    }
+
+    /// <summary>"Est. 1RM 122.5 kg · +5.8" for loads, "Previous best: 12 reps" otherwise.</summary>
+    private static string RecordDetail(PersonalRecord record)
+    {
+        if (record.Exercise.Tracking == Tracking.WeightAndReps && record.Set.Weight > 0)
+        {
+            var oneRepMax = Performance.EstimatedOneRepMax(record.Set.Weight, record.Set.Reps);
+            return Loc.Format("Summary_RecordOneRepMax", Loc.Weight(Math.Round(oneRepMax, 1)), Loc.Number(Math.Round(oneRepMax - record.PreviousBest, 1)));
+        }
+        var before = record.Exercise.Tracking == Tracking.Time
+            ? Loc.Seconds((int)record.PreviousBest)
+            : $"{Loc.Number(record.PreviousBest)} {Loc.Get("Unit_Reps")}";
+        return Loc.Format("Summary_RecordBefore", before);
+    }
+
+    private void SelectFeeling(SelectableOption option)
+    {
+        var feeling = Feelings.ToList().IndexOf(option) + 1;
+        ShowFeeling(_feeling == feeling ? null : feeling);
+        Palette.Haptic();
+    }
+
+    private void ShowFeeling(int? feeling)
+    {
+        _feeling = feeling;
+        for (var i = 0; i < Feelings.Count; i++)
+            Feelings[i].IsSelected = feeling == i + 1;
+        FeelingText = feeling switch
+        {
+            1 => Loc.Get("Feeling_1"),
+            2 => Loc.Get("Feeling_2"),
+            3 => Loc.Get("Feeling_3"),
+            4 => Loc.Get("Feeling_4"),
+            5 => Loc.Get("Feeling_5"),
+            _ => string.Empty,
+        };
+    }
+
+    [RelayCommand]
+    private async Task SaveAsync()
+    {
+        try
+        {
+            await _store.SaveWorkoutReviewAsync(_workoutId, _feeling, Note);
+            SuccessToast.Show(Loc.Get("Summary_Saved"));
+            await Shell.Current.GoToAsync("..");
+        }
+        catch (FonteException ex)
+        {
+            await _dialogs.AlertAsync(Loc.Get("Common_Oops"), Loc.Error(ex));
+        }
+    }
+
+    [RelayCommand]
+    private async Task DeleteAsync()
+    {
+        var confirmed = await _dialogs.ConfirmAsync(
+            Loc.Get("Summary_DeleteTitle"),
+            Loc.Get("Summary_DeleteText"),
+            Loc.Get("Summary_Delete"));
+        if (!confirmed)
+            return;
+        await _store.DeleteWorkoutAsync(_workoutId);
+        Palette.Haptic();
+        await Shell.Current.GoToAsync("..");
+    }
+
+    [RelayCommand]
+    private Task CloseAsync() => Shell.Current.GoToAsync("..");
+}
+
+public sealed record RecordItem(string Name, string SetText, string Detail);
+
+public sealed record RecapItem(string Name, Color Color, string SetsText);
