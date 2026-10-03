@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fonte.Views.ProgramsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Fonte.Controls"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:vm="clr-namespace:Fonte.ViewModels"
+    x:DataType="vm:ProgramsViewModel"
+    Shell.NavBarIsVisible="False"
+    SafeAreaEdges="None">
+
+    <ContentPage.Resources>
+        <!-- A workout of a program or of the user's own: letter, name, muscles, start button. -->
+        <DataTemplate x:Key="TemplateRow" x:DataType="vm:TemplateItemViewModel">
+            <Border Padding="12" c:Touch.Command="{Binding OpenCommand}" Style="{StaticResource Card}">
+                <Grid ColumnDefinitions="44,*,Auto" ColumnSpacing="14">
+                    <Border
+                        BackgroundColor="{Binding SoftColor}"
+                        HeightRequest="44"
+                        StrokeShape="RoundRectangle 14"
+                        StrokeThickness="0"
+                        VerticalOptions="Center"
+                        WidthRequest="44">
+                        <Label
+                            FontFamily="OpenSansSemibold"
+                            FontSize="18"
+                            HorizontalOptions="Center"
+                            Text="{Binding Letter}"
+                            TextColor="{Binding Color}"
+                            VerticalOptions="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                        <Label LineBreakMode="TailTruncation" Style="{StaticResource Strong}" Text="{Binding Name}" />
+                        <Label LineBreakMode="TailTruncation" Style="{StaticResource Caption}" Text="{Binding MusclesText}" />
+                        <Label Style="{StaticResource Caption}" Text="{Binding Caption}">
+                            <Label.Triggers>
+                                <DataTrigger Binding="{Binding IsNext}" TargetType="Label" Value="True">
+                                    <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                    <Setter Property="FontFamily" Value="OpenSansSemibold" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </VerticalStackLayout>
+                    <Border
+                        Grid.Column="2"
+                        Padding="11"
+                        c:Touch.Command="{Binding StartCommand}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource PrimarySoftLight}, Dark={StaticResource PrimarySoftDark}}"
+                        HeightRequest="40"
+                        IsVisible="{Binding CanStart}"
+                        StrokeShape="RoundRectangle 20"
+                        StrokeThickness="0"
+                        VerticalOptions="Center"
+                        WidthRequest="40"
+                        SemanticProperties.Description="{l:Tr Programs_Start}">
+                        <Border.Triggers>
+                            <DataTrigger Binding="{Binding IsNext}" TargetType="Border" Value="True">
+                                <Setter Property="Background" Value="{StaticResource AccentGradient}" />
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <c:IconView Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" Data="{x:Static c:Icons.Play}" StrokeWidth="2.4">
+                            <c:IconView.Triggers>
+                                <DataTrigger Binding="{Binding IsNext}" TargetType="c:IconView" Value="True">
+                                    <Setter Property="Color" Value="White" />
+                                </DataTrigger>
+                            </c:IconView.Triggers>
+                        </c:IconView>
+                    </Border>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <Grid SafeAreaEdges="Container,Container,Container,None" Style="{StaticResource PageColumn}">
+        <ScrollView SafeAreaEdges="None">
+            <VerticalStackLayout Padding="20,12,20,40" Spacing="22">
+
+                <!-- Header -->
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                    <Label Style="{StaticResource LargeTitle}" Text="{l:Tr Tab_Programs}" VerticalOptions="Center" />
+                    <Border
+                        Grid.Column="1"
+                        c:Touch.Command="{Binding NewProgramCommand}"
+                        Style="{StaticResource IconButton}"
+                        VerticalOptions="Center"
+                        SemanticProperties.Description="{l:Tr Programs_NewProgram}">
+                        <c:IconView Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" Data="{x:Static c:Icons.Plus}" StrokeWidth="2.4" />
+                    </Border>
+                </Grid>
+
+                <!-- Program followed -->
+                <VerticalStackLayout IsVisible="{Binding HasActive}" Spacing="12">
+                    <Border
+                        Background="{StaticResource HeroGradient}"
+                        Shadow="{StaticResource FloatingShadow}"
+                        StrokeShape="RoundRectangle 26"
+                        StrokeThickness="0">
+                        <Grid>
+                            <Ellipse
+                                Margin="0,-110,-80,0"
+                                Fill="#1AFFFFFF"
+                                HeightRequest="220"
+                                HorizontalOptions="End"
+                                VerticalOptions="Start"
+                                WidthRequest="220" />
+                            <VerticalStackLayout Padding="22,20" Spacing="4">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label
+                                        FontFamily="OpenSansSemibold"
+                                        FontSize="13"
+                                        Text="{Binding ActiveWeekText}"
+                                        TextColor="{StaticResource WhiteSoft}"
+                                        VerticalOptions="Center" />
+                                    <Border
+                                        Grid.Column="1"
+                                        Padding="8"
+                                        c:Touch.Command="{Binding ActiveMenuCommand}"
+                                        BackgroundColor="{StaticResource WhiteGlass}"
+                                        HeightRequest="34"
+                                        StrokeShape="RoundRectangle 17"
+                                        StrokeThickness="0"
+                                        WidthRequest="34"
+                                        SemanticProperties.Description="{l:Tr Programs_Options}">
+                                        <c:IconView Color="White" Data="{x:Static c:Icons.More}" StrokeWidth="3.2" />
+                                    </Border>
+                                </Grid>
+                                <Label FontFamily="OpenSansSemibold" FontSize="26" Text="{Binding ActiveName}" TextColor="White" />
+                                <Label FontSize="15" Text="{Binding ActivePlanText}" TextColor="{StaticResource WhiteSoft}" />
+                                <c:ProgressPill
+                                    Margin="0,12,0,0"
+                                    FillColor="White"
+                                    HeightRequest="6"
+                                    Progress="{Binding ActiveProgress}"
+                                    TrackColor="{StaticResource WhiteGlass}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+
+                    <Label Margin="0,6,0,0" Style="{StaticResource FieldLabel}" Text="{l:Tr Programs_Sessions}" />
+                    <VerticalStackLayout
+                        BindableLayout.ItemTemplate="{StaticResource TemplateRow}"
+                        BindableLayout.ItemsSource="{Binding ActiveTemplates}"
+                        Spacing="10" />
+                    <Border
+                        Padding="18"
+                        c:Touch.Command="{Binding ActiveMenuCommand}"
+                        IsVisible="{Binding ActiveIsEmpty}"
+                        Style="{StaticResource Card}">
+                        <Label HorizontalTextAlignment="Center" Style="{StaticResource Secondary}" Text="{l:Tr Programs_EmptyProgram}" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- No program -->
+                <Border Padding="22,24" IsVisible="{Binding HasActive, Converter={StaticResource InvertBool}}" Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label FontSize="44" HorizontalOptions="Center" Text="🗓️" />
+                        <Label HorizontalTextAlignment="Center" Style="{StaticResource SectionTitle}" Text="{l:Tr Programs_NoneTitle}" />
+                        <Label HorizontalTextAlignment="Center" Style="{StaticResource Secondary}" Text="{l:Tr Programs_NoneText}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- The user's own workouts -->
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Style="{StaticResource SectionTitle}" Text="{l:Tr Programs_MyTemplates}" VerticalOptions="Center" />
+                        <HorizontalStackLayout
+                            Grid.Column="1"
+                            c:Touch.Command="{Binding NewTemplateCommand}"
+                            Spacing="4"
+                            VerticalOptions="Center">
+                            <c:IconView
+                                Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                                Data="{x:Static c:Icons.Plus}"
+                                HeightRequest="16"
+                                StrokeWidth="2.6"
+                                VerticalOptions="Center"
+                                WidthRequest="16" />
+                            <Label Style="{StaticResource LinkLabel}" Text="{l:Tr Programs_NewTemplate}" />
+                        </HorizontalStackLayout>
+                    </Grid>
+                    <VerticalStackLayout
+                        BindableLayout.ItemTemplate="{StaticResource TemplateRow}"
+                        BindableLayout.ItemsSource="{Binding Templates}"
+                        IsVisible="{Binding HasTemplates}"
+                        Spacing="10" />
+                    <Label IsVisible="{Binding HasTemplates, Converter={StaticResource InvertBool}}" Style="{StaticResource Caption}" Text="{l:Tr Programs_TemplatesHint}" />
+                </VerticalStackLayout>
+
+                <!-- Other programs -->
+                <VerticalStackLayout IsVisible="{Binding HasOtherPrograms}" Spacing="12">
+                    <Label Style="{StaticResource SectionTitle}" Text="{l:Tr Programs_Others}" />
+                    <Border Padding="16,0" Style="{StaticResource Card}">
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding OtherPrograms}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:ProgramRowViewModel">
+                                    <Grid Padding="0,14" c:Touch.Command="{Binding MenuCommand}" ColumnDefinitions="*,Auto">
+                                        <VerticalStackLayout Spacing="1">
+                                            <Label Style="{StaticResource Strong}" Text="{Binding Name}" />
+                                            <Label Style="{StaticResource Caption}" Text="{Binding Caption}" />
+                                        </VerticalStackLayout>
+                                        <c:IconView
+                                            Grid.Column="1"
+                                            Color="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}"
+                                            Data="{x:Static c:Icons.More}"
+                                            StrokeWidth="3.2"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Ready-made programs -->
+                <VerticalStackLayout Spacing="12">
+                    <Label Style="{StaticResource SectionTitle}" Text="{l:Tr Programs_Catalog}" />
+                    <Grid
+                        BindableLayout.ItemsSource="{Binding Catalog}"
+                        ColumnDefinitions="*,*"
+                        ColumnSpacing="10"
+                        RowDefinitions="Auto,Auto"
+                        RowSpacing="10"
+                        x:Name="CatalogGrid">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:CatalogItemViewModel">
+                                <Border Padding="14" c:Touch.Command="{Binding FollowCommand}" Style="{StaticResource Card}">
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label FontSize="26" Text="{Binding Emoji}" />
+                                        <Label Style="{StaticResource Strong}" Text="{Binding Name}" />
+                                        <Label MaxLines="2" Style="{StaticResource Caption}" Text="{Binding Text}" />
+                                        <Label
+                                            FontFamily="OpenSansSemibold"
+                                            FontSize="13"
+                                            Text="{Binding Plan}"
+                                            TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </Grid>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

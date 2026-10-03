@@ -14,6 +14,12 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(Routes.EditExercise, typeof(CustomExercisePage));
         Routing.RegisterRoute(Routes.Summary, typeof(SummaryPage));
         Routing.RegisterRoute(Routes.Settings, typeof(SettingsPage));
+        Routing.RegisterRoute(Routes.Welcome, typeof(WelcomePage));
+        Routing.RegisterRoute(Routes.Template, typeof(TemplatePage));
+        Routing.RegisterRoute(Routes.History, typeof(HistoryPage));
+        Routing.RegisterRoute(Routes.Plates, typeof(PlatesPage));
+        Routing.RegisterRoute(Routes.Photo, typeof(PhotoPage));
+        Routing.RegisterRoute(Routes.ComparePhotos, typeof(ComparePhotosPage));
 
 #if ANDROID
         // Android draws an opaque bottom bar: match the app's surfaces and accent (iOS keeps its native glass bar).

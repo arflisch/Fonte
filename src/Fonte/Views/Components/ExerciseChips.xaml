@@ -51,4 +51,34 @@
             </BindableLayout.ItemTemplate>
         </HorizontalStackLayout>
     </ScrollView>
+
+    <!-- Equipment: outlined, smaller, to tell them from the muscle groups -->
+    <ScrollView Margin="-20,-4,-20,0" Orientation="Horizontal">
+        <HorizontalStackLayout x:Name="EquipmentLayout" Padding="20,0" Spacing="6">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="vm:SelectableOption">
+                    <Border
+                        Padding="11,5"
+                        c:Touch.Command="{Binding SelectCommand}"
+                        BackgroundColor="Transparent"
+                        Style="{StaticResource Chip}">
+                        <Border.Triggers>
+                            <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
+                                <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PrimarySoftLight}, Dark={StaticResource PrimarySoftDark}}" />
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <Label FontSize="13" Style="{StaticResource Secondary}" Text="{Binding Label}">
+                            <Label.Triggers>
+                                <DataTrigger Binding="{Binding IsSelected}" TargetType="Label" Value="True">
+                                    <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                    <Setter Property="FontFamily" Value="OpenSansSemibold" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Border>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </HorizontalStackLayout>
+    </ScrollView>
 </VerticalStackLayout>

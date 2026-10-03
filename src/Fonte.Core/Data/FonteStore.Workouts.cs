@@ -163,9 +163,35 @@ public sealed partial class FonteStore
         OnChanged();
     }
 
+    /// <summary>Moves an exercise of the workout one place up (<paramref name="delta"/> = -1) or down (+1).</summary>
+    public async Task MoveWorkoutExerciseAsync(int workoutExerciseId, int delta)
+    {
+        var db = await GetConnectionAsync();
+        var item = await db.FindAsync<WorkoutExercise>(workoutExerciseId)
+            ?? throw new FonteException(FonteError.WorkoutNotFound, $"Workout exercise {workoutExerciseId} does not exist.");
+        var siblings = await db.Table<WorkoutExercise>().Where(i => i.WorkoutId == item.WorkoutId).OrderBy(i => i.Position).ToListAsync();
+        if (Swap(siblings, item.Id, delta) is { } changed)
+        {
+            await db.UpdateAllAsync(changed);
+            OnChanged();
+        }
+    }
+
+    /// <summary>Links an exercise to the next one (superset): no rest between them.</summary>
+    public async Task SetWorkoutExerciseLinkAsync(int workoutExerciseId, bool linkedToNext)
+    {
+        var db = await GetConnectionAsync();
+        var item = await db.FindAsync<WorkoutExercise>(workoutExerciseId)
+            ?? throw new FonteException(FonteError.WorkoutNotFound, $"Workout exercise {workoutExerciseId} does not exist.");
+        item.LinkedToNext = linkedToNext;
+        await db.UpdateAsync(item);
+        OnChanged();
+    }
+
     /// <summary>
     /// Ends the workout: sets left unticked are dropped, and so are exercises without any ticked set. A workout
-    /// where nothing was ticked is deleted and null is returned.
+    /// where nothing was ticked is deleted and null is returned. A workout started from a template raises the
+    /// template's targets where every planned set succeeded (<see cref="WorkoutSummary.Progressions"/>).
     /// </summary>
     public async Task<WorkoutSummary?> FinishWorkoutAsync(int workoutId, DateTime now)
     {
@@ -190,9 +216,41 @@ public sealed partial class FonteStore
             workout.FinishedAt = now;
             conn.Update(workout);
         });
-        OnChanged();
+        if (kept == 0)
+        {
+            OnChanged();
+            return null;
+        }
 
-        return kept == 0 ? null : await GetWorkoutSummaryAsync(workoutId);
+        var progressions = workout.TemplateId is { } templateId ? await ApplyProgressionAsync(db, workoutId, templateId) : [];
+        OnChanged();
+        return await GetWorkoutSummaryAsync(workoutId) is { } summary ? summary with { Progressions = progressions } : null;
+    }
+
+    private static async Task<IReadOnlyList<ProgressionStep>> ApplyProgressionAsync(SQLiteAsyncConnection db, int workoutId, int templateId)
+    {
+        if (await db.FindAsync<WorkoutTemplate>(templateId) is null)
+            return [];
+
+        var targets = await db.Table<TemplateExercise>().Where(t => t.TemplateId == templateId).ToListAsync();
+        var items = await db.Table<WorkoutExercise>().Where(i => i.WorkoutId == workoutId).ToListAsync();
+        var steps = new List<ProgressionStep>();
+        foreach (var target in targets)
+        {
+            var exercise = await db.FindAsync<Exercise>(target.ExerciseId);
+            if (exercise is null)
+                continue;
+            var sets = new List<WorkoutSet>();
+            foreach (var item in items.Where(i => i.ExerciseId == target.ExerciseId))
+                sets.AddRange(await db.Table<WorkoutSet>().Where(s => s.WorkoutExerciseId == item.Id && s.IsDone).ToListAsync());
+
+            var before = (target.Weight, target.Reps, target.Seconds);
+            if (Progression.Apply(exercise, target, sets) is { } step)
+                steps.Add(step);
+            if ((target.Weight, target.Reps, target.Seconds) != before)
+                await db.UpdateAsync(target);
+        }
+        return steps;
     }
 
     /// <summary>Deletes a workout (in progress or finished) and everything done in it.</summary>

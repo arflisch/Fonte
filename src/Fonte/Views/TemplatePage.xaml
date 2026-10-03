@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fonte.Views.TemplatePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Fonte.Controls"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:vm="clr-namespace:Fonte.ViewModels"
+    x:DataType="vm:TemplateViewModel"
+    HideSoftInputOnTapped="True"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
+    SafeAreaEdges="None">
+
+    <ContentPage.Resources>
+        <Style x:Key="ColumnHeader" TargetType="Label">
+            <Setter Property="FontFamily" Value="OpenSansSemibold" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="CharacterSpacing" Value="0.6" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="TargetField" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource SurfaceMutedLight}, Dark={StaticResource SurfaceMutedDark}}" />
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+            <Setter Property="HeightRequest" Value="40" />
+            <Setter Property="Padding" Value="4,0" />
+        </Style>
+        <Style x:Key="TargetEntry" TargetType="Entry">
+            <Setter Property="FontFamily" Value="OpenSansSemibold" />
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="Keyboard" Value="Numeric" />
+            <Setter Property="MaxLength" Value="6" />
+            <Setter Property="MinimumHeightRequest" Value="40" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid
+        RowDefinitions="Auto,*,Auto"
+        SafeAreaEdges="Container,Container,Container,None"
+        Style="{StaticResource PageColumn}">
+
+        <!-- Top bar -->
+        <Grid Padding="20,8,20,6" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+            <Border
+                c:Touch.Command="{Binding GoBackCommand}"
+                Style="{StaticResource IconButton}"
+                SemanticProperties.Description="{l:Tr Common_Back}">
+                <c:IconView Color="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" Data="{x:Static c:Icons.ChevronLeft}" />
+            </Border>
+            <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                <Label Style="{StaticResource PageTitle}" Text="{Binding Name}" />
+                <Label
+                    FontSize="13"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource Caption}"
+                    Text="{Binding SummaryText}" />
+            </VerticalStackLayout>
+            <Border
+                Grid.Column="2"
+                c:Touch.Command="{Binding MenuCommand}"
+                Style="{StaticResource IconButton}"
+                SemanticProperties.Description="{l:Tr Programs_Options}">
+                <c:IconView Color="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" Data="{x:Static c:Icons.More}" StrokeWidth="3.2" />
+            </Border>
+        </Grid>
+
+        <ScrollView Grid.Row="1" SafeAreaEdges="None">
+            <VerticalStackLayout Padding="16,8,16,24" Spacing="0">
+
+                <!-- No exercise yet -->
+                <Border Margin="0,0,0,14" Padding="24,26" IsVisible="{Binding IsEmpty}" Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label FontSize="44" HorizontalOptions="Center" Text="📝" />
+                        <Label HorizontalTextAlignment="Center" Style="{StaticResource SectionTitle}" Text="{l:Tr Template_EmptyTitle}" />
+                        <Label HorizontalTextAlignment="Center" Style="{StaticResource Secondary}" Text="{l:Tr Template_EmptyText}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Exercises -->
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Exercises}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="vm:TemplateExerciseViewModel">
+                            <VerticalStackLayout Spacing="0">
+                                <Border Padding="14,12,14,14" Style="{StaticResource Card}">
+                                    <Border.Triggers>
+                                        <DataTrigger Binding="{Binding IsLinkedFromPrevious}" TargetType="Border" Value="True">
+                                            <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                            <Setter Property="StrokeThickness" Value="1.5" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsLinkedToNext}" TargetType="Border" Value="True">
+                                            <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                            <Setter Property="StrokeThickness" Value="1.5" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
+                                    <VerticalStackLayout Spacing="10">
+                                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                                            <Ellipse
+                                                Fill="{Binding Color}"
+                                                HeightRequest="10"
+                                                VerticalOptions="Center"
+                                                WidthRequest="10" />
+                                            <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                                <Label Style="{StaticResource Strong}" Text="{Binding Name}" />
+                                                <Label Style="{StaticResource Caption}" Text="{Binding MuscleText}" />
+                                            </VerticalStackLayout>
+                                            <Border
+                                                Grid.Column="2"
+                                                Padding="8"
+                                                c:Touch.Command="{Binding MenuCommand}"
+                                                BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceMutedLight}, Dark={StaticResource SurfaceMutedDark}}"
+                                                HeightRequest="36"
+                                                StrokeShape="RoundRectangle 18"
+                                                StrokeThickness="0"
+                                                VerticalOptions="Start"
+                                                WidthRequest="36"
+                                                SemanticProperties.Description="{l:Tr Workout_ExerciseOptions}">
+                                                <c:IconView
+                                                    Color="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"
+                                                    Data="{x:Static c:Icons.More}"
+                                                    StrokeWidth="3.2" />
+                                            </Border>
+                                        </Grid>
+                                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" RowDefinitions="Auto,Auto" RowSpacing="4">
+                                            <Label Style="{StaticResource ColumnHeader}" Text="{l:Tr Template_ColSets}" />
+                                            <Label Grid.Column="1" Style="{StaticResource ColumnHeader}" Text="{Binding ValueHeader}" />
+                                            <Label
+                                                Grid.Column="2"
+                                                IsVisible="{Binding ShowWeight}"
+                                                Style="{StaticResource ColumnHeader}"
+                                                Text="{l:Tr Workout_ColKg}" />
+                                            <Border Grid.Row="1" Style="{StaticResource TargetField}">
+                                                <Entry Style="{StaticResource TargetEntry}" Text="{Binding SetsText}" />
+                                            </Border>
+                                            <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource TargetField}">
+                                                <Entry Placeholder="—" Style="{StaticResource TargetEntry}" Text="{Binding ValueText}" />
+                                            </Border>
+                                            <Border
+                                                Grid.Row="1"
+                                                Grid.Column="2"
+                                                IsVisible="{Binding ShowWeight}"
+                                                Style="{StaticResource TargetField}">
+                                                <Entry
+                                                    FontSize="15"
+                                                    Placeholder="{Binding WeightPlaceholder}"
+                                                    Style="{StaticResource TargetEntry}"
+                                                    Text="{Binding WeightText}" />
+                                            </Border>
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </Border>
+
+                                <!-- Superset with the next exercise: no rest in between -->
+                                <Grid HeightRequest="34" IsVisible="{Binding IsLinkedToNext}">
+                                    <BoxView
+                                        HorizontalOptions="Center"
+                                        WidthRequest="2"
+                                        Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                    <Border
+                                        Padding="10,3"
+                                        Background="{StaticResource AccentGradient}"
+                                        HorizontalOptions="Center"
+                                        StrokeShape="RoundRectangle 10"
+                                        StrokeThickness="0"
+                                        VerticalOptions="Center">
+                                        <HorizontalStackLayout Spacing="4">
+                                            <c:IconView
+                                                Color="White"
+                                                Data="{x:Static c:Icons.Link}"
+                                                HeightRequest="13"
+                                                VerticalOptions="Center"
+                                                WidthRequest="13" />
+                                            <Label
+                                                FontFamily="OpenSansSemibold"
+                                                FontSize="11"
+                                                Text="{l:Tr Template_Superset}"
+                                                TextColor="White"
+                                                VerticalOptions="Center" />
+                                        </HorizontalStackLayout>
+                                    </Border>
+                                </Grid>
+                                <BoxView HeightRequest="12" IsVisible="{Binding IsLinkedToNext, Converter={StaticResource InvertBool}}" Color="Transparent" />
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <!-- Add an exercise -->
+                <Border Padding="14" c:Touch.Command="{Binding AddExerciseCommand}" Style="{StaticResource Card}">
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                        <c:IconView
+                            Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                            Data="{x:Static c:Icons.Plus}"
+                            HeightRequest="18"
+                            StrokeWidth="2.6"
+                            VerticalOptions="Center"
+                            WidthRequest="18" />
+                        <Label Style="{StaticResource LinkLabel}" Text="{l:Tr Workout_AddExercise}" />
+                    </HorizontalStackLayout>
+                </Border>
+
+                <!-- How targets move on -->
+                <Border Margin="0,14,0,0" Padding="16,14" Style="{StaticResource Card}">
+                    <Grid ColumnDefinitions="36,*" ColumnSpacing="12">
+                        <Border BackgroundColor="#261D9E75" Style="{StaticResource RowIcon}">
+                            <c:IconView Color="#1D9E75" Data="{x:Static c:Icons.ArrowUp}" StrokeWidth="2.4" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                            <Label Style="{StaticResource RowTitle}" Text="{l:Tr Template_ProgressionTitle}" />
+                            <Label Style="{StaticResource Caption}" Text="{l:Tr Template_ProgressionText}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+                <Label Margin="4,10,4,0" Style="{StaticResource Caption}" Text="{l:Tr Template_SupersetHint}" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Start -->
+        <Border
+            Grid.Row="2"
+            Margin="16,8,16,12"
+            c:Touch.Command="{Binding StartCommand}"
+            IsVisible="{Binding CanStart}"
+            SafeAreaEdges="Container"
+            Style="{StaticResource PrimaryButton}">
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                <c:IconView
+                    Color="White"
+                    Data="{x:Static c:Icons.Play}"
+                    HeightRequest="18"
+                    StrokeWidth="2.4"
+                    VerticalOptions="Center"
+                    WidthRequest="18" />
+                <Label Style="{StaticResource PrimaryButtonText}" Text="{l:Tr Template_Start}" />
+            </HorizontalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>

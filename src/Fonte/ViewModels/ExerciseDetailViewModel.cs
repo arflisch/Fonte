@@ -10,10 +10,39 @@ using Fonte.Services;
 namespace Fonte.ViewModels;
 
 /// <summary>An exercise's record, its progress workout after workout, and every time it was done.</summary>
-public sealed partial class ExerciseDetailViewModel(FonteStore store, IDialogService dialogs)
-    : ReloadingViewModel, IQueryAttributable
+public sealed partial class ExerciseDetailViewModel : ReloadingViewModel, IQueryAttributable
 {
+    private readonly FonteStore _store;
+    private readonly IDialogService _dialogs;
     private int _exerciseId;
+    private ExerciseHistory? _history;
+    private int _months;
+
+    public ExerciseDetailViewModel(FonteStore store, IDialogService dialogs)
+    {
+        _store = store;
+        _dialogs = dialogs;
+        PeriodChips =
+        [
+            new SelectableOption("3", 0, 3, SelectPeriod) { Label = Loc.Get("Detail_Period3Months") },
+            new SelectableOption("12", 1, 3, SelectPeriod) { Label = Loc.Get("Detail_PeriodYear") },
+            new SelectableOption("0", 2, 3, SelectPeriod) { Label = Loc.Get("Detail_PeriodAll"), IsSelected = true },
+        ];
+    }
+
+    public IReadOnlyList<SelectableOption> PeriodChips { get; }
+
+    [ObservableProperty]
+    private string _chartStartText = string.Empty;
+
+    [ObservableProperty]
+    private string _chartEndText = string.Empty;
+
+    [ObservableProperty]
+    private string _tip = string.Empty;
+
+    [ObservableProperty]
+    private bool _hasTip;
 
     [ObservableProperty]
     private string _name = string.Empty;
@@ -84,7 +113,7 @@ public sealed partial class ExerciseDetailViewModel(FonteStore store, IDialogSer
         ExerciseHistory history;
         try
         {
-            history = await store.GetExerciseHistoryAsync(_exerciseId);
+            history = await _store.GetExerciseHistoryAsync(_exerciseId);
         }
         catch (FonteException)
         {
@@ -105,12 +134,11 @@ public sealed partial class ExerciseDetailViewModel(FonteStore store, IDialogSer
         OneRepMaxText = oneRepMax > 0 ? Loc.Weight(Math.Round(oneRepMax, 1)) : "—";
         SessionsText = history.Sessions.Count.ToString(Loc.Culture);
 
-        // Oldest first, one point per workout: its best set.
-        Points = history.Sessions
-            .Reverse()
-            .Select(s => s.Sets.Max(set => Performance.Score(exercise.Tracking, set)))
-            .ToList();
-        HasProgress = Points.Count >= 2;
+        _history = history;
+        ShowChart();
+        HasProgress = history.Sessions.Count >= 2;
+        Tip = exercise.CatalogKey is { } key ? Loc.Get($"Tip_{key}") : string.Empty;
+        HasTip = Tip.Length > 0;
         ProgressHint = exercise.Tracking switch
         {
             Tracking.Time => Loc.Get("Detail_ProgressTime"),
@@ -127,10 +155,49 @@ public sealed partial class ExerciseDetailViewModel(FonteStore store, IDialogSer
                     ? $"{Loc.Day(s.Workout.StartedAt)} · {Loc.Time(s.Workout.StartedAt)}"
                     : Loc.Day(s.Workout.StartedAt),
                 string.Join("   ", s.Sets.Select(set => Loc.Set(exercise, set))),
-                s.Sets.Any(set => set.Id == bestId)))
+                s.Sets.Any(set => set.Id == bestId),
+                Performance.Volume(s.Sets) is > 0 and var volume ? Loc.Format("Detail_Volume", Loc.Volume(volume)) : string.Empty))
             .ToList();
         HasSessions = Sessions.Count > 0;
         IsEmpty = !HasSessions;
+    }
+
+    private void SelectPeriod(SelectableOption chip)
+    {
+        foreach (var option in PeriodChips)
+            option.IsSelected = option == chip;
+        _months = int.Parse(chip.Value, Loc.Culture);
+        Palette.Haptic();
+        ShowChart();
+    }
+
+    /// <summary>Oldest first, one point per workout of the period: its best set.</summary>
+    private void ShowChart()
+    {
+        if (_history is not { } history)
+            return;
+        var tracking = history.Exercise.Tracking;
+        var from = _months > 0 ? DateTime.Today.AddMonths(-_months) : DateTime.MinValue;
+        var points = history.Sessions
+            .Where(s => s.Workout.StartedAt >= from)
+            .Reverse()
+            .Select(s => (s.Workout.StartedAt, Score: s.Sets.Max(set => Performance.Score(tracking, set))))
+            .ToList();
+        Points = points.Select(p => p.Score).ToList();
+        ChartStartText = points.Count > 0 ? ChartLabel(tracking, points[0]) : string.Empty;
+        ChartEndText = points.Count > 1 ? ChartLabel(tracking, points[^1]) : string.Empty;
+    }
+
+    /// <summary>"Oct 2025 · 78 kg".</summary>
+    private static string ChartLabel(Tracking tracking, (DateTime Date, double Score) point)
+    {
+        var value = tracking switch
+        {
+            Tracking.Time => Loc.Seconds((int)point.Score),
+            Tracking.Reps => $"{Loc.Number(point.Score)} {Loc.Get("Unit_Reps")}",
+            _ => Loc.Weight(Math.Round(point.Score, 1)),
+        };
+        return $"{point.Date.ToString("MMM yyyy", Loc.Culture)} · {value}";
     }
 
     [RelayCommand]
@@ -142,7 +209,7 @@ public sealed partial class ExerciseDetailViewModel(FonteStore store, IDialogSer
     [RelayCommand]
     private async Task DeleteAsync()
     {
-        var confirmed = await dialogs.ConfirmAsync(
+        var confirmed = await _dialogs.ConfirmAsync(
             Loc.Get("Detail_DeleteTitle"),
             Loc.Get("Detail_DeleteText"),
             Loc.Get("Detail_DeleteConfirm"));
@@ -151,16 +218,19 @@ public sealed partial class ExerciseDetailViewModel(FonteStore store, IDialogSer
 
         try
         {
-            await store.RemoveExerciseAsync(_exerciseId);
+            await _store.RemoveExerciseAsync(_exerciseId);
             Palette.Haptic();
             await Shell.Current.GoToAsync("..");
         }
         catch (FonteException ex)
         {
-            await dialogs.AlertAsync(Loc.Get("Common_Oops"), Loc.Error(ex));
+            await _dialogs.AlertAsync(Loc.Get("Common_Oops"), Loc.Error(ex));
         }
     }
 }
 
 /// <param name="HasRecord">The record was set during that workout.</param>
-public sealed record SessionItem(string DayText, string SetsText, bool HasRecord);
+public sealed record SessionItem(string DayText, string SetsText, bool HasRecord, string VolumeText)
+{
+    public bool HasVolume => VolumeText.Length > 0;
+}

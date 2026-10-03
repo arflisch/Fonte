@@ -591,4 +591,796 @@
   <data name="Summary_RecordOneRepMax" xml:space="preserve">
     <value>Est. 1RM {0} · +{1}</value>
   </data>
+  <data name="Welcome_Step" xml:space="preserve">
+    <value>Step {0} of {1}</value>
+  </data>
+  <data name="Welcome_Title" xml:space="preserve">
+    <value>Welcome to Fonte</value>
+  </data>
+  <data name="Welcome_Text" xml:space="preserve">
+    <value>Your training log, made to beat yourself workout after workout.</value>
+  </data>
+  <data name="Welcome_Feature1" xml:space="preserve">
+    <value>Every set in two taps</value>
+  </data>
+  <data name="Welcome_Feature1Text" xml:space="preserve">
+    <value>Last time's loads are filled in, the rest timer starts on its own.</value>
+  </data>
+  <data name="Welcome_Feature2" xml:space="preserve">
+    <value>Programs that progress</value>
+  </data>
+  <data name="Welcome_Feature2Text" xml:space="preserve">
+    <value>When every set succeeds, the next workout aims a little higher.</value>
+  </data>
+  <data name="Welcome_Feature3" xml:space="preserve">
+    <value>Progress you can see</value>
+  </data>
+  <data name="Welcome_Feature3Text" xml:space="preserve">
+    <value>Records, weekly volume, muscles worked and body measurements.</value>
+  </data>
+  <data name="Welcome_Feature4" xml:space="preserve">
+    <value>Private by design</value>
+  </data>
+  <data name="Welcome_Feature4Text" xml:space="preserve">
+    <value>No account, no ads: everything stays on your phone.</value>
+  </data>
+  <data name="Welcome_GoalTitle" xml:space="preserve">
+    <value>What's your goal?</value>
+  </data>
+  <data name="Welcome_GoalText" xml:space="preserve">
+    <value>Sets, reps and rest times are adapted to it.</value>
+  </data>
+  <data name="Welcome_SessionsTitle" xml:space="preserve">
+    <value>How many workouts a week?</value>
+  </data>
+  <data name="Welcome_ProgramTitle" xml:space="preserve">
+    <value>Your program</value>
+  </data>
+  <data name="Welcome_ProgramText" xml:space="preserve">
+    <value>A ready-made program that fits your goal and your week.</value>
+  </data>
+  <data name="Welcome_ProgramPlan" xml:space="preserve">
+    <value>{0} workouts a week · {1} weeks</value>
+  </data>
+  <data name="Welcome_ProgramHint" xml:space="preserve">
+    <value>You can change its exercises, or pick another program, in the Programs tab.</value>
+  </data>
+  <data name="Welcome_Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="Welcome_Follow" xml:space="preserve">
+    <value>Follow this program</value>
+  </data>
+  <data name="Welcome_Skip" xml:space="preserve">
+    <value>Later, I'll plan my own workouts</value>
+  </data>
+  <data name="Goal_Strength" xml:space="preserve">
+    <value>Get stronger</value>
+  </data>
+  <data name="GoalText_Strength" xml:space="preserve">
+    <value>3 to 6 reps · 2 to 3 min rest</value>
+  </data>
+  <data name="Goal_Muscle" xml:space="preserve">
+    <value>Build muscle</value>
+  </data>
+  <data name="GoalText_Muscle" xml:space="preserve">
+    <value>8 to 12 reps · 90 s rest</value>
+  </data>
+  <data name="Goal_Fitness" xml:space="preserve">
+    <value>Get fit</value>
+  </data>
+  <data name="GoalText_Fitness" xml:space="preserve">
+    <value>12 to 15 reps · short rests</value>
+  </data>
+  <data name="Program_full_body" xml:space="preserve">
+    <value>Full body</value>
+  </data>
+  <data name="ProgramText_full_body" xml:space="preserve">
+    <value>Beginner · the whole body every workout</value>
+  </data>
+  <data name="Program_five_by_five" xml:space="preserve">
+    <value>5×5</value>
+  </data>
+  <data name="ProgramText_five_by_five" xml:space="preserve">
+    <value>Strength · 5 sets of 5 on the big lifts</value>
+  </data>
+  <data name="Program_upper_lower" xml:space="preserve">
+    <value>Upper / Lower</value>
+  </data>
+  <data name="ProgramText_upper_lower" xml:space="preserve">
+    <value>Intermediate · upper and lower body in turn</value>
+  </data>
+  <data name="Program_push_pull_legs" xml:space="preserve">
+    <value>Push Pull Legs</value>
+  </data>
+  <data name="ProgramText_push_pull_legs" xml:space="preserve">
+    <value>Advanced · push, pull and leg days</value>
+  </data>
+  <data name="Template_full_body_a" xml:space="preserve">
+    <value>Full body A</value>
+  </data>
+  <data name="Template_full_body_b" xml:space="preserve">
+    <value>Full body B</value>
+  </data>
+  <data name="Template_five_by_five_a" xml:space="preserve">
+    <value>Workout A</value>
+  </data>
+  <data name="Template_five_by_five_b" xml:space="preserve">
+    <value>Workout B</value>
+  </data>
+  <data name="Template_upper_a" xml:space="preserve">
+    <value>Upper A</value>
+  </data>
+  <data name="Template_lower_a" xml:space="preserve">
+    <value>Lower A</value>
+  </data>
+  <data name="Template_upper_b" xml:space="preserve">
+    <value>Upper B</value>
+  </data>
+  <data name="Template_lower_b" xml:space="preserve">
+    <value>Lower B</value>
+  </data>
+  <data name="Template_push" xml:space="preserve">
+    <value>Push</value>
+  </data>
+  <data name="Template_pull" xml:space="preserve">
+    <value>Pull</value>
+  </data>
+  <data name="Template_legs" xml:space="preserve">
+    <value>Legs</value>
+  </data>
+  <data name="Tab_Programs" xml:space="preserve">
+    <value>Programs</value>
+  </data>
+  <data name="Tab_Progress" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="Tab_Body" xml:space="preserve">
+    <value>Body</value>
+  </data>
+  <data name="Session_One" xml:space="preserve">
+    <value>workout</value>
+  </data>
+  <data name="Session_Many" xml:space="preserve">
+    <value>workouts</value>
+  </data>
+  <data name="Launch_InProgressTitle" xml:space="preserve">
+    <value>A workout is in progress</value>
+  </data>
+  <data name="Launch_InProgressText" xml:space="preserve">
+    <value>Finish it before starting another one.</value>
+  </data>
+  <data name="Programs_Week" xml:space="preserve">
+    <value>Active program · week {0} of {1}</value>
+  </data>
+  <data name="Programs_Active" xml:space="preserve">
+    <value>Active program</value>
+  </data>
+  <data name="Programs_PerWeek" xml:space="preserve">
+    <value>{0} workouts a week</value>
+  </data>
+  <data name="Programs_Weeks" xml:space="preserve">
+    <value>{0} weeks</value>
+  </data>
+  <data name="Programs_CatalogPlan" xml:space="preserve">
+    <value>{0}×/week · {1} weeks</value>
+  </data>
+  <data name="Programs_Sessions" xml:space="preserve">
+    <value>PROGRAM WORKOUTS</value>
+  </data>
+  <data name="Programs_Next" xml:space="preserve">
+    <value>next</value>
+  </data>
+  <data name="Programs_DoneOn" xml:space="preserve">
+    <value>done {0}</value>
+  </data>
+  <data name="Programs_NoExercise" xml:space="preserve">
+    <value>No exercise yet</value>
+  </data>
+  <data name="Programs_Start" xml:space="preserve">
+    <value>Start this workout</value>
+  </data>
+  <data name="Programs_Options" xml:space="preserve">
+    <value>Program options</value>
+  </data>
+  <data name="Programs_EmptyProgram" xml:space="preserve">
+    <value>This program has no workout yet. Tap to add one.</value>
+  </data>
+  <data name="Programs_NoneTitle" xml:space="preserve">
+    <value>No program followed</value>
+  </data>
+  <data name="Programs_NoneText" xml:space="preserve">
+    <value>Pick a ready-made program below, or create your own with the + button.</value>
+  </data>
+  <data name="Programs_MyTemplates" xml:space="preserve">
+    <value>My workouts</value>
+  </data>
+  <data name="Programs_TemplatesHint" xml:space="preserve">
+    <value>Save the workouts you repeat ("Arms", "Cardio"…) to start them in one tap.</value>
+  </data>
+  <data name="Programs_Others" xml:space="preserve">
+    <value>Other programs</value>
+  </data>
+  <data name="Programs_Catalog" xml:space="preserve">
+    <value>Ready-made programs</value>
+  </data>
+  <data name="Programs_NewProgram" xml:space="preserve">
+    <value>New program</value>
+  </data>
+  <data name="Programs_NewTemplate" xml:space="preserve">
+    <value>New workout</value>
+  </data>
+  <data name="Programs_NamePlaceholder" xml:space="preserve">
+    <value>e.g. Summer plan</value>
+  </data>
+  <data name="Programs_TemplatePlaceholder" xml:space="preserve">
+    <value>e.g. Push</value>
+  </data>
+  <data name="Programs_DefaultTemplate" xml:space="preserve">
+    <value>Workout {0}</value>
+  </data>
+  <data name="Programs_AddTemplate" xml:space="preserve">
+    <value>Add a workout</value>
+  </data>
+  <data name="Programs_Rename" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="Programs_Restart" xml:space="preserve">
+    <value>Start again from week 1</value>
+  </data>
+  <data name="Programs_Restarted" xml:space="preserve">
+    <value>Back to week 1</value>
+  </data>
+  <data name="Programs_Stop" xml:space="preserve">
+    <value>Stop following</value>
+  </data>
+  <data name="Programs_Delete" xml:space="preserve">
+    <value>Delete program</value>
+  </data>
+  <data name="Programs_DeleteTitle" xml:space="preserve">
+    <value>Delete "{0}"?</value>
+  </data>
+  <data name="Programs_DeleteText" xml:space="preserve">
+    <value>Its workouts are removed from the program; the ones you did stay in your history.</value>
+  </data>
+  <data name="Programs_Follow" xml:space="preserve">
+    <value>Follow</value>
+  </data>
+  <data name="Programs_FollowTitle" xml:space="preserve">
+    <value>Follow {0}?</value>
+  </data>
+  <data name="Programs_FollowText" xml:space="preserve">
+    <value>Its workouts will be offered on the home screen, one after the other.</value>
+  </data>
+  <data name="Programs_FollowReplace" xml:space="preserve">
+    <value>It replaces {0}, which you can follow again later.</value>
+  </data>
+  <data name="Programs_Followed" xml:space="preserve">
+    <value>{0} followed</value>
+  </data>
+  <data name="Set_One" xml:space="preserve">
+    <value>set</value>
+  </data>
+  <data name="Set_Many" xml:space="preserve">
+    <value>sets</value>
+  </data>
+  <data name="Template_EmptyTitle" xml:space="preserve">
+    <value>Add the exercises of this workout</value>
+  </data>
+  <data name="Template_EmptyText" xml:space="preserve">
+    <value>No exercise yet</value>
+  </data>
+  <data name="Template_ColSets" xml:space="preserve">
+    <value>SETS</value>
+  </data>
+  <data name="Template_WeightAuto" xml:space="preserve">
+    <value>auto</value>
+  </data>
+  <data name="Template_Superset" xml:space="preserve">
+    <value>SUPERSET · NO REST</value>
+  </data>
+  <data name="Template_SupersetHint" xml:space="preserve">
+    <value>Link two exercises in the ⋯ menu to do them back to back: the rest timer waits for the second one.</value>
+  </data>
+  <data name="Template_ProgressionTitle" xml:space="preserve">
+    <value>Automatic progression</value>
+  </data>
+  <data name="Template_ProgressionText" xml:space="preserve">
+    <value>When every set reaches its reps, the load goes up next time: +2.5 kg on a barbell or machine, +2 kg with dumbbells, one more rep or 5 more seconds without a load. An empty load is taken from your first workout.</value>
+  </data>
+  <data name="Template_MoveUp" xml:space="preserve">
+    <value>Move up</value>
+  </data>
+  <data name="Template_MoveDown" xml:space="preserve">
+    <value>Move down</value>
+  </data>
+  <data name="Template_Link" xml:space="preserve">
+    <value>Superset with the next one</value>
+  </data>
+  <data name="Template_Unlink" xml:space="preserve">
+    <value>Undo the superset</value>
+  </data>
+  <data name="Template_Remove" xml:space="preserve">
+    <value>Remove from the workout</value>
+  </data>
+  <data name="Template_Delete" xml:space="preserve">
+    <value>Delete workout</value>
+  </data>
+  <data name="Template_DeleteText" xml:space="preserve">
+    <value>The workouts you already did with it stay in your history.</value>
+  </data>
+  <data name="Template_Start" xml:space="preserve">
+    <value>Start this workout</value>
+  </data>
+  <data name="Workout_Target" xml:space="preserve">
+    <value>Target {0}</value>
+  </data>
+  <data name="Workout_Plates" xml:space="preserve">
+    <value>Plate calculator</value>
+  </data>
+  <data name="Summary_CompareTitle" xml:space="preserve">
+    <value>Compared with last time</value>
+  </data>
+  <data name="Summary_CompareVolume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Summary_CompareSets" xml:space="preserve">
+    <value>Sets</value>
+  </data>
+  <data name="Summary_CompareWith" xml:space="preserve">
+    <value>{0} · against {1}</value>
+  </data>
+  <data name="Summary_NextTime" xml:space="preserve">
+    <value>Next time, aim higher</value>
+  </data>
+  <data name="Home_NextWeek" xml:space="preserve">
+    <value>Week {0} of {1} · {2}</value>
+  </data>
+  <data name="Home_Next" xml:space="preserve">
+    <value>Next workout · {0}</value>
+  </data>
+  <data name="Home_StartNext" xml:space="preserve">
+    <value>Start {0}</value>
+  </data>
+  <data name="Home_StartFree" xml:space="preserve">
+    <value>or a free workout</value>
+  </data>
+  <data name="Home_WeekGoal" xml:space="preserve">
+    <value>{0} / {1} workouts</value>
+  </data>
+  <data name="Home_Streak" xml:space="preserve">
+    <value>{0} weeks in a row on target</value>
+  </data>
+  <data name="Home_History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="History_PreviousMonth" xml:space="preserve">
+    <value>Previous month</value>
+  </data>
+  <data name="History_NextMonth" xml:space="preserve">
+    <value>Next month</value>
+  </data>
+  <data name="History_Workouts" xml:space="preserve">
+    <value>Workouts</value>
+  </data>
+  <data name="History_Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="History_Streak" xml:space="preserve">
+    <value>Regular weeks</value>
+  </data>
+  <data name="History_Weeks" xml:space="preserve">
+    <value>{0} wk</value>
+  </data>
+  <data name="History_Volume" xml:space="preserve">
+    <value>{0} lifted this month</value>
+  </data>
+  <data name="History_Empty" xml:space="preserve">
+    <value>No workout this month.</value>
+  </data>
+  <data name="Progress_Month" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="Progress_Quarter" xml:space="preserve">
+    <value>3 months</value>
+  </data>
+  <data name="Progress_EmptyTitle" xml:space="preserve">
+    <value>Your progress shows up here</value>
+  </data>
+  <data name="Progress_EmptyText" xml:space="preserve">
+    <value>Finish a few workouts to see your weekly volume, the muscles you work and your records.</value>
+  </data>
+  <data name="Progress_Volume" xml:space="preserve">
+    <value>Volume per week</value>
+  </data>
+  <data name="Progress_Average" xml:space="preserve">
+    <value>avg. {0}</value>
+  </data>
+  <data name="Progress_PeriodTotals" xml:space="preserve">
+    <value>{0} · {1} · {2}</value>
+  </data>
+  <data name="Progress_Muscles" xml:space="preserve">
+    <value>Sets per muscle</value>
+  </data>
+  <data name="Progress_MusclesHint" xml:space="preserve">
+    <value>Last 7 days · aim for about 10 sets each</value>
+  </data>
+  <data name="Progress_Neglected" xml:space="preserve">
+    <value>{0}: nothing in two weeks.</value>
+  </data>
+  <data name="Progress_BelowTarget" xml:space="preserve">
+    <value>{0} below your target ({1} sets).</value>
+  </data>
+  <data name="Progress_Records" xml:space="preserve">
+    <value>Records this month</value>
+  </data>
+  <data name="Progress_NoRecord" xml:space="preserve">
+    <value>No record yet this month. Beat last time's sets to set one!</value>
+  </data>
+  <data name="Week_One" xml:space="preserve">
+    <value>week</value>
+  </data>
+  <data name="Week_Many" xml:space="preserve">
+    <value>weeks</value>
+  </data>
+  <data name="Day_One" xml:space="preserve">
+    <value>day</value>
+  </data>
+  <data name="Day_Many" xml:space="preserve">
+    <value>days</value>
+  </data>
+  <data name="Body_Weight" xml:space="preserve">
+    <value>BODY WEIGHT</value>
+  </data>
+  <data name="Body_Weigh" xml:space="preserve">
+    <value>Weigh in</value>
+  </data>
+  <data name="Body_NoWeight" xml:space="preserve">
+    <value>Weigh yourself to follow your weight here.</value>
+  </data>
+  <data name="Body_Change" xml:space="preserve">
+    <value>{0} in {1}</value>
+  </data>
+  <data name="Body_Goal" xml:space="preserve">
+    <value>Goal {0}</value>
+  </data>
+  <data name="Body_GoalLeft" xml:space="preserve">
+    <value>Goal {0} · {1} to go</value>
+  </data>
+  <data name="Body_GoalReached" xml:space="preserve">
+    <value>Goal {0} reached 🎉</value>
+  </data>
+  <data name="Body_SetGoal" xml:space="preserve">
+    <value>Set a weight goal</value>
+  </data>
+  <data name="Body_GoalTitle" xml:space="preserve">
+    <value>Weight goal</value>
+  </data>
+  <data name="Body_GoalText" xml:space="preserve">
+    <value>In kilograms</value>
+  </data>
+  <data name="Body_AddWeight" xml:space="preserve">
+    <value>Today's weight</value>
+  </data>
+  <data name="Body_AddWeightText" xml:space="preserve">
+    <value>In kilograms; it replaces today's earlier weighing.</value>
+  </data>
+  <data name="Body_DeleteWeighing" xml:space="preserve">
+    <value>Delete this weighing</value>
+  </data>
+  <data name="Body_Measurements" xml:space="preserve">
+    <value>Measurements</value>
+  </data>
+  <data name="Body_MeasureText" xml:space="preserve">
+    <value>In centimetres, measured today.</value>
+  </data>
+  <data name="Body_TapToMeasure" xml:space="preserve">
+    <value>Tap to measure</value>
+  </data>
+  <data name="Body_Photos" xml:space="preserve">
+    <value>Progress photos</value>
+  </data>
+  <data name="Body_Compare" xml:space="preserve">
+    <value>Compare</value>
+  </data>
+  <data name="Body_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Body_Unlock" xml:space="preserve">
+    <value>Unlock with {0}</value>
+  </data>
+  <data name="Body_Passcode" xml:space="preserve">
+    <value>the passcode</value>
+  </data>
+  <data name="Body_UnlockReason" xml:space="preserve">
+    <value>Show your progress photos</value>
+  </data>
+  <data name="Body_PhotosLocked" xml:space="preserve">
+    <value>Kept in the app, not in your photo library, and locked with {0}.</value>
+  </data>
+  <data name="Body_PhotosPrivate" xml:space="preserve">
+    <value>Kept in the app, not in your photo library.</value>
+  </data>
+  <data name="Body_AddPhoto" xml:space="preserve">
+    <value>Progress photo</value>
+  </data>
+  <data name="Body_TakePhoto" xml:space="preserve">
+    <value>Take a photo</value>
+  </data>
+  <data name="Body_PickPhoto" xml:space="preserve">
+    <value>Choose from the library</value>
+  </data>
+  <data name="Body_PhotoSaved" xml:space="preserve">
+    <value>Photo saved</value>
+  </data>
+  <data name="Body_CameraDenied" xml:space="preserve">
+    <value>Fonte isn't allowed to use the camera. You can allow it in the Settings app.</value>
+  </data>
+  <data name="Body_Before" xml:space="preserve">
+    <value>Before</value>
+  </data>
+  <data name="Body_After" xml:space="preserve">
+    <value>After</value>
+  </data>
+  <data name="Photo_Delete" xml:space="preserve">
+    <value>Delete photo</value>
+  </data>
+  <data name="Photo_DeleteTitle" xml:space="preserve">
+    <value>Delete this photo?</value>
+  </data>
+  <data name="Photo_DeleteText" xml:space="preserve">
+    <value>It is removed from the app for good.</value>
+  </data>
+  <data name="Measure_Waist" xml:space="preserve">
+    <value>Waist</value>
+  </data>
+  <data name="Measure_Chest" xml:space="preserve">
+    <value>Chest</value>
+  </data>
+  <data name="Measure_Arms" xml:space="preserve">
+    <value>Arm</value>
+  </data>
+  <data name="Measure_Thighs" xml:space="preserve">
+    <value>Thigh</value>
+  </data>
+  <data name="Measure_Hips" xml:space="preserve">
+    <value>Hips</value>
+  </data>
+  <data name="Error_EmptyName" xml:space="preserve">
+    <value>Give it a name.</value>
+  </data>
+  <data name="Error_ProgramNotFound" xml:space="preserve">
+    <value>This program no longer exists.</value>
+  </data>
+  <data name="Error_TemplateNotFound" xml:space="preserve">
+    <value>This workout no longer exists.</value>
+  </data>
+  <data name="Error_InvalidBodyValue" xml:space="preserve">
+    <value>This value doesn't look right. Check the number and the unit.</value>
+  </data>
+  <data name="Plates_Title" xml:space="preserve">
+    <value>Plates</value>
+  </data>
+  <data name="Plates_Target" xml:space="preserve">
+    <value>LOAD AIMED FOR</value>
+  </data>
+  <data name="Plates_BarHint" xml:space="preserve">
+    <value>Weight of the bar</value>
+  </data>
+  <data name="Plates_BarOnly" xml:space="preserve">
+    <value>The bar alone is enough.</value>
+  </data>
+  <data name="Plates_PerSide" xml:space="preserve">
+    <value>On each side: {0}</value>
+  </data>
+  <data name="Plates_Closest" xml:space="preserve">
+    <value>Closest load with your plates: {0}</value>
+  </data>
+  <data name="Plates_Bar" xml:space="preserve">
+    <value>Bar</value>
+  </data>
+  <data name="Plates_WarmUp" xml:space="preserve">
+    <value>Suggested warm-up</value>
+  </data>
+  <data name="Plates_Available" xml:space="preserve">
+    <value>Plates: {0} kg · change them in the settings</value>
+  </data>
+  <data name="Settings_TrainingSection" xml:space="preserve">
+    <value>TRAINING</value>
+  </data>
+  <data name="Settings_Goal" xml:space="preserve">
+    <value>Goal</value>
+  </data>
+  <data name="Settings_GoalHint" xml:space="preserve">
+    <value>Shapes reps and rests</value>
+  </data>
+  <data name="Settings_Sessions" xml:space="preserve">
+    <value>Workouts per week</value>
+  </data>
+  <data name="Settings_SessionsHint" xml:space="preserve">
+    <value>Your weekly goal on the home screen</value>
+  </data>
+  <data name="Settings_SessionsValue" xml:space="preserve">
+    <value>{0} a week</value>
+  </data>
+  <data name="Settings_PlatesSection" xml:space="preserve">
+    <value>PLATES</value>
+  </data>
+  <data name="Settings_PlatesHint" xml:space="preserve">
+    <value>The plates your gym has, in kg: the calculator only uses these.</value>
+  </data>
+  <data name="Settings_OpenPlates" xml:space="preserve">
+    <value>Open the plate calculator</value>
+  </data>
+  <data name="Library_Never" xml:space="preserve">
+    <value>never done</value>
+  </data>
+  <data name="Detail_Tips" xml:space="preserve">
+    <value>Technique</value>
+  </data>
+  <data name="Detail_PeriodAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Detail_Period3Months" xml:space="preserve">
+    <value>3 m</value>
+  </data>
+  <data name="Detail_PeriodYear" xml:space="preserve">
+    <value>1 yr</value>
+  </data>
+  <data name="Detail_Volume" xml:space="preserve">
+    <value>Volume {0}</value>
+  </data>
+  <data name="Tip_bench_press" xml:space="preserve">
+    <value>Shoulder blades squeezed, feet planted, lower the bar to mid-chest and press up slightly back over the shoulders.</value>
+  </data>
+  <data name="Tip_incline_bench_press" xml:space="preserve">
+    <value>Bench at 30 to 45°, bar to the upper chest, elbows a little under the bar, never flared out wide.</value>
+  </data>
+  <data name="Tip_dumbbell_bench_press" xml:space="preserve">
+    <value>Lower the dumbbells to the sides of the chest with a full stretch, then press up and slightly together.</value>
+  </data>
+  <data name="Tip_incline_dumbbell_press" xml:space="preserve">
+    <value>Bench at 30°, wrists stacked over elbows, control the way down and stop just before the dumbbells touch.</value>
+  </data>
+  <data name="Tip_dumbbell_fly" xml:space="preserve">
+    <value>Elbows slightly bent and fixed, open the arms like hugging a tree, stop when the chest is stretched.</value>
+  </data>
+  <data name="Tip_cable_crossover" xml:space="preserve">
+    <value>Lean slightly forward, bring the handles together in an arc in front of the chest and squeeze for a second.</value>
+  </data>
+  <data name="Tip_chest_press_machine" xml:space="preserve">
+    <value>Handles at chest height, back against the pad, press without locking the elbows and come back slowly.</value>
+  </data>
+  <data name="Tip_push_up" xml:space="preserve">
+    <value>Body straight from head to heels, hands a little wider than the shoulders, chest close to the floor.</value>
+  </data>
+  <data name="Tip_dips" xml:space="preserve">
+    <value>Lean forward to work the chest, go down until the shoulders are level with the elbows, no lower.</value>
+  </data>
+  <data name="Tip_deadlift" xml:space="preserve">
+    <value>Bar against the shins, back flat, push the floor away with the legs and keep the bar close to the body.</value>
+  </data>
+  <data name="Tip_barbell_row" xml:space="preserve">
+    <value>Hinge until the torso is almost flat, pull the bar to the belly button and squeeze the shoulder blades.</value>
+  </data>
+  <data name="Tip_dumbbell_row" xml:space="preserve">
+    <value>Knee and hand on the bench, back flat, pull the elbow towards the hip rather than straight up.</value>
+  </data>
+  <data name="Tip_pull_up" xml:space="preserve">
+    <value>Start from straight arms, pull the chest towards the bar without swinging, come down under control.</value>
+  </data>
+  <data name="Tip_chin_up" xml:space="preserve">
+    <value>Palms facing you, shoulders down and back, pull until the chin passes the bar.</value>
+  </data>
+  <data name="Tip_lat_pulldown" xml:space="preserve">
+    <value>Chest up, pull the bar to the top of the chest with the elbows going down, never behind the neck.</value>
+  </data>
+  <data name="Tip_seated_cable_row" xml:space="preserve">
+    <value>Back straight, pull the handle to the belly, shoulders back, and let the arms stretch out fully.</value>
+  </data>
+  <data name="Tip_back_extension" xml:space="preserve">
+    <value>Hips on the pad, go down with a flat back and come up until the body is in line, not beyond.</value>
+  </data>
+  <data name="Tip_overhead_press" xml:space="preserve">
+    <value>Glutes and abs tight, press the bar straight up and move the head through once it passes the face.</value>
+  </data>
+  <data name="Tip_dumbbell_shoulder_press" xml:space="preserve">
+    <value>Seated with the back supported, dumbbells at ear height, press up without banging them together.</value>
+  </data>
+  <data name="Tip_lateral_raise" xml:space="preserve">
+    <value>Light weight, elbows slightly bent, raise to shoulder height leading with the elbows, no swinging.</value>
+  </data>
+  <data name="Tip_front_raise" xml:space="preserve">
+    <value>Arms almost straight, raise in front up to eye level and lower slowly.</value>
+  </data>
+  <data name="Tip_rear_delt_fly" xml:space="preserve">
+    <value>Bent forward, open the arms to the sides with the elbows slightly bent, thinking of the back of the shoulders.</value>
+  </data>
+  <data name="Tip_face_pull" xml:space="preserve">
+    <value>Rope at face height, pull towards the eyes, elbows high, and turn the hands out at the end.</value>
+  </data>
+  <data name="Tip_shrug" xml:space="preserve">
+    <value>Shoulders straight up towards the ears, hold one second, without rolling them.</value>
+  </data>
+  <data name="Tip_barbell_curl" xml:space="preserve">
+    <value>Elbows pinned to the sides, curl without leaning back and lower all the way.</value>
+  </data>
+  <data name="Tip_dumbbell_curl" xml:space="preserve">
+    <value>Turn the palm up as you lift, squeeze at the top, and lower slowly.</value>
+  </data>
+  <data name="Tip_hammer_curl" xml:space="preserve">
+    <value>Thumbs up the whole way, elbows still, one arm after the other or both together.</value>
+  </data>
+  <data name="Tip_triceps_pushdown" xml:space="preserve">
+    <value>Elbows tight against the body, push down until the arms are straight, only the forearms move.</value>
+  </data>
+  <data name="Tip_skull_crusher" xml:space="preserve">
+    <value>Upper arms vertical, lower the bar towards the forehead by bending only the elbows.</value>
+  </data>
+  <data name="Tip_overhead_triceps_extension" xml:space="preserve">
+    <value>Elbows pointing up and close to the head, lower the dumbbell behind it and extend fully.</value>
+  </data>
+  <data name="Tip_close_grip_bench_press" xml:space="preserve">
+    <value>Hands shoulder-width apart, elbows along the body, bar to the lower chest.</value>
+  </data>
+  <data name="Tip_squat" xml:space="preserve">
+    <value>Feet shoulder-width apart, knees following the toes, go down until the thighs are parallel, back straight.</value>
+  </data>
+  <data name="Tip_front_squat" xml:space="preserve">
+    <value>Bar on the front of the shoulders, elbows high, torso upright all the way down.</value>
+  </data>
+  <data name="Tip_leg_press" xml:space="preserve">
+    <value>Feet in the middle of the platform, lower until the knees reach 90°, never lift the lower back.</value>
+  </data>
+  <data name="Tip_romanian_deadlift" xml:space="preserve">
+    <value>Knees slightly bent, push the hips back with a flat back, until you feel the hamstrings stretch.</value>
+  </data>
+  <data name="Tip_lunge" xml:space="preserve">
+    <value>Big step forward, back knee towards the floor, torso upright, push through the front heel.</value>
+  </data>
+  <data name="Tip_bulgarian_split_squat" xml:space="preserve">
+    <value>Back foot on the bench, go straight down on the front leg, knee in line with the foot.</value>
+  </data>
+  <data name="Tip_leg_extension" xml:space="preserve">
+    <value>Back against the pad, extend the legs fully, hold one second and lower slowly.</value>
+  </data>
+  <data name="Tip_leg_curl" xml:space="preserve">
+    <value>Hips pressed against the pad, bend the knees as far as possible without arching the back.</value>
+  </data>
+  <data name="Tip_hip_thrust" xml:space="preserve">
+    <value>Upper back on the bench, push through the heels and squeeze the glutes, chin tucked, ribs down.</value>
+  </data>
+  <data name="Tip_calf_raise" xml:space="preserve">
+    <value>Full range: heels low to stretch, then as high as possible on the toes, pause at the top.</value>
+  </data>
+  <data name="Tip_goblet_squat" xml:space="preserve">
+    <value>Kettlebell held against the chest, elbows between the knees at the bottom, torso upright.</value>
+  </data>
+  <data name="Tip_plank" xml:space="preserve">
+    <value>Forearms under the shoulders, body in one straight line, glutes and abs tight, keep breathing.</value>
+  </data>
+  <data name="Tip_crunch" xml:space="preserve">
+    <value>Lift the shoulders off the floor by rolling the spine, without pulling on the neck.</value>
+  </data>
+  <data name="Tip_hanging_leg_raise" xml:space="preserve">
+    <value>Hang still, raise the legs by tilting the pelvis, without swinging.</value>
+  </data>
+  <data name="Tip_cable_crunch" xml:space="preserve">
+    <value>Kneeling, rope by the head, roll the spine down towards the knees, hips still.</value>
+  </data>
+  <data name="Tip_ab_wheel" xml:space="preserve">
+    <value>Roll forward while keeping the lower back rounded slightly, go only as far as you can come back.</value>
+  </data>
+  <data name="Tip_running" xml:space="preserve">
+    <value>Short quick steps, relaxed shoulders, at a pace where you can still talk for easy runs.</value>
+  </data>
+  <data name="Tip_rowing_machine" xml:space="preserve">
+    <value>Legs, then back, then arms; on the way back, arms, then back, then legs.</value>
+  </data>
+  <data name="Tip_cycling" xml:space="preserve">
+    <value>Saddle high enough for an almost straight leg at the bottom, smooth cadence around 80 to 90 rpm.</value>
+  </data>
+  <data name="Tip_jump_rope" xml:space="preserve">
+    <value>Small jumps on the balls of the feet, wrists turning the rope, elbows close to the body.</value>
+  </data>
 </root>

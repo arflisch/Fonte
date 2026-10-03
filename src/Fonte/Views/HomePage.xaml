@@ -54,17 +54,36 @@
                             WidthRequest="170" />
 
                         <VerticalStackLayout Padding="24,24,24,24" Spacing="6">
-                            <!-- Nothing started -->
+                            <!-- Nothing started, nothing planned -->
                             <Label
                                 FontFamily="OpenSansSemibold"
                                 FontSize="24"
-                                IsVisible="{Binding IsInProgress, Converter={StaticResource InvertBool}}"
+                                IsVisible="{Binding IsFree}"
                                 Text="{l:Tr Home_ReadyTitle}"
                                 TextColor="White" />
                             <Label
                                 FontSize="15"
-                                IsVisible="{Binding IsInProgress, Converter={StaticResource InvertBool}}"
+                                IsVisible="{Binding IsFree}"
                                 Text="{l:Tr Home_ReadyText}"
+                                TextColor="{StaticResource WhiteSoft}" />
+
+                            <!-- Next workout of the program -->
+                            <Label
+                                FontFamily="OpenSansSemibold"
+                                FontSize="13"
+                                IsVisible="{Binding HasNext}"
+                                Text="{Binding NextLabel}"
+                                TextColor="{StaticResource WhiteSoft}" />
+                            <Label
+                                FontFamily="OpenSansSemibold"
+                                FontSize="26"
+                                IsVisible="{Binding HasNext}"
+                                Text="{Binding NextName}"
+                                TextColor="White" />
+                            <Label
+                                FontSize="15"
+                                IsVisible="{Binding HasNext}"
+                                Text="{Binding NextText}"
                                 TextColor="{StaticResource WhiteSoft}" />
 
                             <!-- Workout in progress -->
@@ -98,15 +117,23 @@
                                         Color="{StaticResource Primary}"
                                         Data="{x:Static c:Icons.Plus}"
                                         HeightRequest="20"
-                                        IsVisible="{Binding IsInProgress, Converter={StaticResource InvertBool}}"
+                                        IsVisible="{Binding IsFree}"
                                         StrokeWidth="2.6"
                                         VerticalOptions="Center"
                                         WidthRequest="20" />
                                     <Label
                                         FontFamily="OpenSansSemibold"
                                         FontSize="16"
-                                        IsVisible="{Binding IsInProgress, Converter={StaticResource InvertBool}}"
+                                        IsVisible="{Binding IsFree}"
                                         Text="{l:Tr Home_Start}"
+                                        TextColor="{StaticResource Primary}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        FontFamily="OpenSansSemibold"
+                                        FontSize="16"
+                                        IsVisible="{Binding HasNext}"
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding StartNextText}"
                                         TextColor="{StaticResource Primary}"
                                         VerticalOptions="Center" />
                                     <Label
@@ -126,12 +153,25 @@
                                         WidthRequest="18" />
                                 </HorizontalStackLayout>
                             </Border>
+                            <Label
+                                Padding="0,10,0,0"
+                                c:Touch.Command="{Binding StartFreeCommand}"
+                                FontFamily="OpenSansSemibold"
+                                FontSize="14"
+                                HorizontalOptions="Center"
+                                IsVisible="{Binding HasNext}"
+                                Text="{l:Tr Home_StartFree}"
+                                TextColor="White" />
                         </VerticalStackLayout>
                     </Grid>
                 </Border>
 
                 <!-- This week -->
-                <Border Padding="18,16" IsVisible="{Binding IsLoaded}" Style="{StaticResource Card}">
+                <Border
+                    Padding="18,16"
+                    c:Touch.Command="{Binding OpenHistoryCommand}"
+                    IsVisible="{Binding IsLoaded}"
+                    Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="14">
                         <Grid ColumnDefinitions="*,Auto">
                             <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Home_ThisWeek}" VerticalOptions="Center" />
@@ -143,6 +183,18 @@
                                 TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
                                 VerticalOptions="Center" />
                         </Grid>
+                        <c:ProgressPill
+                            Margin="0,-6,0,0"
+                            FillColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                            HeightRequest="6"
+                            Progress="{Binding WeekProgress}"
+                            TrackColor="{AppThemeBinding Light={StaticResource SurfaceMutedLight}, Dark={StaticResource SurfaceMutedDark}}">
+                            <c:ProgressPill.Triggers>
+                                <DataTrigger Binding="{Binding IsWeekGoalMet}" TargetType="c:ProgressPill" Value="True">
+                                    <Setter Property="FillColor" Value="{StaticResource Positive}" />
+                                </DataTrigger>
+                            </c:ProgressPill.Triggers>
+                        </c:ProgressPill>
                         <Grid BindableLayout.ItemsSource="{Binding Week}" ColumnDefinitions="*,*,*,*,*,*,*">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate x:DataType="vm:WeekDayItem">
@@ -184,6 +236,19 @@
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
                         </Grid>
+                        <HorizontalStackLayout IsVisible="{Binding HasStreak}" Spacing="6">
+                            <c:IconView
+                                Color="#EF6C27"
+                                Data="{x:Static c:Icons.Flame}"
+                                HeightRequest="18"
+                                VerticalOptions="Center"
+                                WidthRequest="18" />
+                            <Label
+                                FontFamily="OpenSansSemibold"
+                                FontSize="14"
+                                Text="{Binding StreakText}"
+                                VerticalOptions="Center" />
+                        </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Border>
 
@@ -207,7 +272,22 @@
 
                 <!-- Last workouts -->
                 <VerticalStackLayout IsVisible="{Binding HasRecent}" Spacing="12">
-                    <Label Style="{StaticResource SectionTitle}" Text="{l:Tr Home_Recent}" />
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Style="{StaticResource SectionTitle}" Text="{l:Tr Home_Recent}" VerticalOptions="Center" />
+                        <HorizontalStackLayout
+                            Grid.Column="1"
+                            c:Touch.Command="{Binding OpenHistoryCommand}"
+                            Spacing="4"
+                            VerticalOptions="Center">
+                            <c:IconView
+                                Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                                Data="{x:Static c:Icons.Calendar}"
+                                HeightRequest="16"
+                                VerticalOptions="Center"
+                                WidthRequest="16" />
+                            <Label Style="{StaticResource LinkLabel}" Text="{l:Tr Home_History}" />
+                        </HorizontalStackLayout>
+                    </Grid>
                     <VerticalStackLayout BindableLayout.ItemsSource="{Binding Recent}" Spacing="12">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="vm:WorkoutItemViewModel">

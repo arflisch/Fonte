@@ -12,7 +12,11 @@ public sealed partial class TranslationTests
     private static readonly string StringsDirectory = Path.Combine(AppDirectory, "Resources", "Strings");
 
     /// <summary>Keys built at run time from a catalog key or an enum name: checked by the tests below instead.</summary>
-    private static readonly string[] DynamicPrefixes = ["Error_", "Ex_", "Muscle_", "Equipment_", "Tracking_"];
+    private static readonly string[] DynamicPrefixes =
+    [
+        "Error_", "Ex_", "Tip_", "Muscle_", "Equipment_", "Tracking_", "Goal_", "GoalText_", "Measure_",
+        "Program_", "ProgramText_", "Template_",
+    ];
 
     public static TheoryData<string> Languages => new() { "fr", "nl" };
 
@@ -65,6 +69,37 @@ public sealed partial class TranslationTests
 
         Assert.Empty(expected.Except(keys));
         Assert.Empty(keys.Where(k => k.StartsWith("Ex_", StringComparison.Ordinal)).Except(expected));
+    }
+
+    [Fact]
+    public void Every_built_in_exercise_has_a_tip()
+    {
+        var keys = Load("AppResources.resx").Keys.ToHashSet();
+        var expected = ExerciseCatalog.All.Select(e => $"Tip_{e.Key}").ToHashSet();
+
+        Assert.Empty(expected.Except(keys));
+        Assert.Empty(keys.Where(k => k.StartsWith("Tip_", StringComparison.Ordinal)).Except(expected));
+    }
+
+    [Fact]
+    public void Every_ready_made_program_and_workout_has_a_name()
+    {
+        var keys = Load("AppResources.resx").Keys.ToHashSet();
+        var expected = ProgramCatalog.All
+            .SelectMany(p => new[] { $"Program_{p.Key}", $"ProgramText_{p.Key}" }
+                .Concat(p.Templates.Select(t => $"Template_{t.Key}")));
+
+        Assert.Empty(expected.Except(keys));
+    }
+
+    [Fact]
+    public void Every_goal_and_measurement_is_translated()
+    {
+        var keys = Load("AppResources.resx").Keys.ToHashSet();
+        var expected = Enum.GetNames<TrainingGoal>().SelectMany(g => new[] { $"Goal_{g}", $"GoalText_{g}" })
+            .Concat(Enum.GetNames<MeasurementKind>().Select(m => $"Measure_{m}"));
+
+        Assert.Empty(expected.Except(keys));
     }
 
     [Fact]

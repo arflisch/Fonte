@@ -13,6 +13,9 @@ public interface IDialogService
 
     /// <summary>Asks for a short text; returns null when cancelled.</summary>
     Task<string?> PromptAsync(string title, string placeholder, string initialValue, int maxLength);
+
+    /// <summary>Asks for a number ("62.5" or "62,5"); returns null when cancelled or not a number.</summary>
+    Task<double?> PromptNumberAsync(string title, string? message, double? initialValue);
 }
 
 public sealed class DialogService : IDialogService
@@ -43,6 +46,17 @@ public sealed class DialogService : IDialogService
     {
         await PresentationGuard.WaitUntilSettledAsync();
         return await CurrentPage.DisplayPromptAsync(title, null, Loc.Get("Common_Ok"), Cancel, placeholder, maxLength, Keyboard.Text, initialValue);
+    }
+
+    public async Task<double?> PromptNumberAsync(string title, string? message, double? initialValue)
+    {
+        await PresentationGuard.WaitUntilSettledAsync();
+        var text = await CurrentPage.DisplayPromptAsync(title, message, Loc.Get("Common_Ok"), Cancel, "0", 6, Keyboard.Numeric,
+            initialValue is { } value ? Loc.Number(value) : string.Empty);
+        return double.TryParse(text?.Trim().Replace(',', '.'), System.Globalization.NumberStyles.Float,
+            System.Globalization.CultureInfo.InvariantCulture, out var number) && double.IsFinite(number) && number > 0
+            ? number
+            : null;
     }
 
     /// <summary>The top-most page, including modal sheets, so dialogs appear above them.</summary>

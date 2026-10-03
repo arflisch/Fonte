@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fonte.Views.PhotoPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Fonte.Controls"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:vm="clr-namespace:Fonte.ViewModels"
+    x:DataType="vm:PhotoViewModel"
+    ios:Page.ModalPresentationStyle="PageSheet"
+    BackgroundColor="Black"
+    Shell.NavBarIsVisible="False"
+    SafeAreaEdges="All"
+    Shell.PresentationMode="ModalAnimated">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Grid Padding="20,18,20,8" ColumnDefinitions="90,*,90">
+            <Label
+                c:Touch.Command="{Binding CloseCommand}"
+                Style="{StaticResource LinkLabel}"
+                Text="{l:Tr Common_Close}"
+                TextColor="White" />
+            <Label
+                Grid.Column="1"
+                Style="{StaticResource PageTitle}"
+                Text="{Binding DayText}"
+                TextColor="White" />
+        </Grid>
+        <Image Grid.Row="1" Aspect="AspectFit" Source="{Binding Image}" />
+        <Label
+            Grid.Row="2"
+            Padding="0,16"
+            c:Touch.Command="{Binding DeleteCommand}"
+            FontFamily="OpenSansSemibold"
+            HorizontalOptions="Center"
+            Text="{l:Tr Photo_Delete}"
+            TextColor="{StaticResource NegativeDark}" />
+    </Grid>
+</ContentPage>

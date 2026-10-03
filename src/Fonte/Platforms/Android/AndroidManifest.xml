@@ -9,4 +9,11 @@
 	<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 	<!-- The screen stays on during a workout. -->
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<!-- Progress photos taken with the camera. -->
+	<uses-permission android:name="android.permission.CAMERA" />
+	<queries>
+		<intent>
+			<action android:name="android.media.action.IMAGE_CAPTURE" />
+		</intent>
+	</queries>
 </manifest>

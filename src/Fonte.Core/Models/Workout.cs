@@ -19,6 +19,9 @@ public sealed class Workout
     /// <summary>How the session felt, from 1 (hard) to 5 (great); null when not given.</summary>
     public int? Feeling { get; set; }
 
+    /// <summary>Template it was started from; null for a free workout.</summary>
+    public int? TemplateId { get; set; }
+
     [Ignore]
     public bool IsInProgress => FinishedAt is null;
 
@@ -40,6 +43,18 @@ public sealed class WorkoutExercise
     public int ExerciseId { get; set; }
 
     public int Position { get; set; }
+
+    /// <summary>Done back to back with the next exercise, without resting in between (superset).</summary>
+    public bool LinkedToNext { get; set; }
+
+    /// <summary>What the template aimed for, shown during the workout; null for an exercise added freely.</summary>
+    public int? TargetSets { get; set; }
+
+    public int? TargetReps { get; set; }
+
+    public double? TargetWeight { get; set; }
+
+    public int? TargetSeconds { get; set; }
 }
 
 [Table("workout_sets")]

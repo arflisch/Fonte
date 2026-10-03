@@ -25,6 +25,8 @@ public partial class App : Application
     {
         var window = new Window(_shell) { Title = "Fonte" };
         DesktopWindow.Configure(window, _preferences);
+        // The progress photos lock again as soon as the app leaves the screen.
+        window.Stopped += (_, _) => WeakReferenceMessenger.Default.Send(new AppBackgroundedMessage());
         return window;
     }
 }

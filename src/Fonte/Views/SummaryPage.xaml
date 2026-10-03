@@ -110,6 +110,70 @@
                     </Grid>
                 </Border>
 
+                <!-- Compared with last time -->
+                <Border IsVisible="{Binding HasComparison}" Padding="16,14" Style="{StaticResource Card}">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                        <Border
+                            Padding="12,6"
+                            BackgroundColor="{AppThemeBinding Light=#FDECEF, Dark=#3B1220}"
+                            StrokeShape="RoundRectangle 12"
+                            StrokeThickness="0"
+                            VerticalOptions="Center">
+                            <Border.Triggers>
+                                <DataTrigger Binding="{Binding IsBetter}" TargetType="Border" Value="True">
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PositiveSoftLight}, Dark={StaticResource PositiveSoftDark}}" />
+                                </DataTrigger>
+                            </Border.Triggers>
+                            <Label
+                                FontFamily="OpenSansSemibold"
+                                FontSize="18"
+                                Text="{Binding ComparisonText}"
+                                TextColor="{AppThemeBinding Light={StaticResource NegativeLight}, Dark={StaticResource NegativeDark}}">
+                                <Label.Triggers>
+                                    <DataTrigger Binding="{Binding IsBetter}" TargetType="Label" Value="True">
+                                        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource PositiveLight}, Dark={StaticResource PositiveDark}}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                            <Label Style="{StaticResource Strong}" Text="{l:Tr Summary_CompareTitle}" />
+                            <Label Style="{StaticResource Caption}" Text="{Binding ComparisonDetail}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <!-- Targets raised for next time -->
+                <Border IsVisible="{Binding HasProgressions}" Padding="16,14" Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="12">
+                        <HorizontalStackLayout Spacing="8">
+                            <c:IconView
+                                Color="{StaticResource Positive}"
+                                Data="{x:Static c:Icons.ArrowUp}"
+                                HeightRequest="20"
+                                StrokeWidth="2.4"
+                                VerticalOptions="Center"
+                                WidthRequest="20" />
+                            <Label Style="{StaticResource Strong}" Text="{l:Tr Summary_NextTime}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Progressions}" Spacing="8">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:ProgressionItem">
+                                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                        <Label FontFamily="OpenSansSemibold" Text="{Binding Name}" VerticalOptions="Center" />
+                                        <Label
+                                            Grid.Column="1"
+                                            FontFamily="OpenSansSemibold"
+                                            Text="{Binding Text}"
+                                            TextColor="{AppThemeBinding Light={StaticResource PositiveLight}, Dark={StaticResource PositiveDark}}"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
                 <!-- Personal records -->
                 <Border IsVisible="{Binding HasRecords}" Padding="16,14" Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="12">

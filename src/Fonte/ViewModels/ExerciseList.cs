@@ -18,12 +18,15 @@ public sealed partial class ExerciseItemViewModel : ObservableObject
         var exercise = overview.Exercise;
         Id = exercise.Id;
         Muscle = exercise.Muscle;
+        Equipment = exercise.Equipment;
         Name = Loc.ExerciseName(exercise);
         Icon = Icons.For(exercise.Equipment);
         Color = Palette.Muscle(exercise.Muscle);
         SoftColor = Palette.Soft(Color);
         var equipment = Loc.Equipment(exercise.Equipment);
-        Caption = overview.Best is { } best ? $"{equipment} · {Loc.Format("Library_Best", Loc.Set(exercise, best))}" : equipment;
+        Caption = overview.Best is { } best
+            ? $"{equipment} · {Loc.Format("Library_Best", Loc.Set(exercise, best))}"
+            : $"{equipment} · {Loc.Get("Library_Never")}";
         SearchText = TextSearch.Normalize($"{Name} {Loc.Muscle(exercise.Muscle)} {equipment}");
         TapCommand = new RelayCommand(() => tapped(this));
     }
@@ -31,6 +34,8 @@ public sealed partial class ExerciseItemViewModel : ObservableObject
     public int Id { get; }
 
     public MuscleGroup Muscle { get; }
+
+    public Equipment Equipment { get; }
 
     public string Name { get; }
 
@@ -60,7 +65,10 @@ public sealed class ExerciseGroup(string title, Color color, IEnumerable<Exercis
     public Color Color { get; } = color;
 }
 
-/// <summary>The "All · Chest · Back…" chips above a list of exercises, and the search that goes with them.</summary>
+/// <summary>
+/// The "All · Chest · Back…" and "Barbell · Dumbbells…" chips above a list of exercises, and the search that goes
+/// with them.
+/// </summary>
 public sealed class ExerciseFilter
 {
     private readonly Action _changed;
@@ -76,11 +84,22 @@ public sealed class ExerciseFilter
             })
             .ToList();
         Chips[0].IsSelected = true;
+        EquipmentChips = Enum.GetValues<Equipment>()
+            .Select((equipment, index) => new SelectableOption(equipment.ToString(), index, int.MaxValue, SelectEquipment)
+            {
+                Label = Loc.Equipment(equipment),
+            })
+            .ToList();
     }
 
     public IReadOnlyList<SelectableOption> Chips { get; }
 
+    /// <summary>Equipment chips: none selected shows every exercise, a second tap unselects.</summary>
+    public IReadOnlyList<SelectableOption> EquipmentChips { get; }
+
     public MuscleGroup? Muscle { get; private set; }
+
+    public Equipment? Equipment { get; private set; }
 
     public string Search { get; set; } = string.Empty;
 
@@ -90,10 +109,13 @@ public sealed class ExerciseFilter
         var words = TextSearch.Normalize(Search).Split(' ', StringSplitOptions.RemoveEmptyEntries);
         var comparer = StringComparer.Create(Loc.Culture, CompareOptions.IgnoreCase);
         return exercises
-            .Where(e => (Muscle is null || e.Muscle == Muscle) && words.All(w => e.SearchText.Contains(w, StringComparison.Ordinal)))
+            .Where(e => (Muscle is null || e.Muscle == Muscle)
+                && (Equipment is null || e.Equipment == Equipment)
+                && words.All(w => e.SearchText.Contains(w, StringComparison.Ordinal)))
             .GroupBy(e => e.Muscle)
             .OrderBy(g => g.Key)
-            .Select(g => new ExerciseGroup(Loc.Muscle(g.Key), Palette.Muscle(g.Key), g.OrderBy(e => e.Name, comparer)))
+            .Select(g => new ExerciseGroup(
+                $"{Loc.Muscle(g.Key)} · {g.Count().ToString(Loc.Culture)}", Palette.Muscle(g.Key), g.OrderBy(e => e.Name, comparer)))
             .ToList();
     }
 
@@ -102,6 +124,16 @@ public sealed class ExerciseFilter
         foreach (var option in Chips)
             option.IsSelected = option == chip;
         Muscle = Enum.TryParse<MuscleGroup>(chip.Value, out var muscle) ? muscle : null;
+        Palette.Haptic();
+        _changed();
+    }
+
+    private void SelectEquipment(SelectableOption chip)
+    {
+        var selected = !chip.IsSelected;
+        foreach (var option in EquipmentChips)
+            option.IsSelected = selected && option == chip;
+        Equipment = selected && Enum.TryParse<Equipment>(chip.Value, out var equipment) ? equipment : null;
         Palette.Haptic();
         _changed();
     }

@@ -1,6 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Fonte.Core.Catalog;
 using Fonte.Core.Data;
 using Fonte.Core.Models;
 using Fonte.Localization;
@@ -11,19 +12,25 @@ namespace Fonte.ViewModels;
 /// <summary>Sent when the user creates an exercise, so the picker that opened the form ticks it.</summary>
 public sealed record ExerciseCreatedMessage(int ExerciseId);
 
-/// <summary>Sheet to add one or several exercises to the workout in progress, in the order they are ticked.</summary>
+/// <summary>
+/// Sheet to add one or several exercises, in the order they are ticked, to the workout in progress or to a
+/// workout template.
+/// </summary>
 public sealed partial class ExercisePickerViewModel : ReloadingViewModel, IQueryAttributable, ISheetViewModel
 {
     private readonly FonteStore _store;
+    private readonly AppSettings _settings;
     private readonly IDialogService _dialogs;
     private readonly List<int> _selected = [];
     private IReadOnlyList<ExerciseItemViewModel> _all = [];
     private int _workoutId;
+    private int _templateId;
     private bool _isAdding;
 
-    public ExercisePickerViewModel(FonteStore store, IDialogService dialogs)
+    public ExercisePickerViewModel(FonteStore store, AppSettings settings, IDialogService dialogs)
     {
         _store = store;
+        _settings = settings;
         _dialogs = dialogs;
         Filter = new ExerciseFilter(ApplyFilter);
         WeakReferenceMessenger.Default.Register<ExercisePickerViewModel, ExerciseCreatedMessage>(
@@ -53,6 +60,8 @@ public sealed partial class ExercisePickerViewModel : ReloadingViewModel, IQuery
     {
         if (query.TryGetValue("workout", out var id) && int.TryParse(id?.ToString(), out var workoutId))
             _workoutId = workoutId;
+        if (query.TryGetValue("template", out var template) && int.TryParse(template?.ToString(), out var templateId))
+            _templateId = templateId;
         UpdateAddText();
         RequestReload();
     }
@@ -113,7 +122,12 @@ public sealed partial class ExercisePickerViewModel : ReloadingViewModel, IQuery
         try
         {
             foreach (var exerciseId in _selected)
-                await _store.AddExerciseToWorkoutAsync(_workoutId, exerciseId);
+            {
+                if (_templateId != 0)
+                    await _store.AddExerciseToTemplateAsync(_templateId, exerciseId, 3, ProgramCatalog.DefaultReps(_settings.Goal));
+                else
+                    await _store.AddExerciseToWorkoutAsync(_workoutId, exerciseId);
+            }
             Palette.Haptic();
             await Shell.Current.GoToAsync("..");
         }

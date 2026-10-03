@@ -24,6 +24,12 @@
 		<string>fr</string>
 		<string>nl</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Fonte uses the camera to take your progress photos. They stay on your Mac.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Fonte lets you pick progress photos from your library. They are copied into the app and stay on your Mac.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Fonte uses Touch ID to keep your progress photos private.</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
 </dict>

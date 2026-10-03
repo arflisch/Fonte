@@ -26,8 +26,52 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="20,14,20,32" Spacing="10">
 
+                <!-- Training -->
+                <Label Margin="0,4,0,0" Style="{StaticResource FieldLabel}" Text="{l:Tr Settings_TrainingSection}" />
+                <Border Padding="16,0" Style="{StaticResource Card}">
+                    <VerticalStackLayout>
+                        <Grid c:Touch.Command="{Binding ChooseGoalCommand}" Style="{StaticResource Row}">
+                            <Border BackgroundColor="#26E24B4A" Style="{StaticResource RowIcon}">
+                                <c:IconView Color="#E24B4A" Data="{x:Static c:Icons.Target}" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                <Label Style="{StaticResource RowTitle}" Text="{l:Tr Settings_Goal}" />
+                                <Label Style="{StaticResource Caption}" Text="{l:Tr Settings_GoalHint}" />
+                            </VerticalStackLayout>
+                            <HorizontalStackLayout Grid.Column="2" Spacing="6" VerticalOptions="Center">
+                                <Label Style="{StaticResource Secondary}" Text="{Binding GoalName}" VerticalOptions="Center" />
+                                <c:IconView
+                                    Color="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}"
+                                    Data="{x:Static c:Icons.ChevronRight}"
+                                    HeightRequest="16"
+                                    VerticalOptions="Center"
+                                    WidthRequest="16" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                        <BoxView Style="{StaticResource Divider}" />
+                        <Grid c:Touch.Command="{Binding ChooseSessionsCommand}" Style="{StaticResource Row}">
+                            <Border BackgroundColor="#261D9E75" Style="{StaticResource RowIcon}">
+                                <c:IconView Color="#1D9E75" Data="{x:Static c:Icons.Calendar}" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                <Label Style="{StaticResource RowTitle}" Text="{l:Tr Settings_Sessions}" />
+                                <Label Style="{StaticResource Caption}" Text="{l:Tr Settings_SessionsHint}" />
+                            </VerticalStackLayout>
+                            <HorizontalStackLayout Grid.Column="2" Spacing="6" VerticalOptions="Center">
+                                <Label Style="{StaticResource Secondary}" Text="{Binding SessionsText}" VerticalOptions="Center" />
+                                <c:IconView
+                                    Color="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}"
+                                    Data="{x:Static c:Icons.ChevronRight}"
+                                    HeightRequest="16"
+                                    VerticalOptions="Center"
+                                    WidthRequest="16" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
                 <!-- Workout -->
-                <Label Margin="0,4,0,0" Style="{StaticResource FieldLabel}" Text="{l:Tr Settings_WorkoutSection}" />
+                <Label Margin="0,14,0,0" Style="{StaticResource FieldLabel}" Text="{l:Tr Settings_WorkoutSection}" />
                 <Border Padding="16,0" Style="{StaticResource Card}">
                     <VerticalStackLayout>
                         <Grid Style="{StaticResource Row}">
@@ -62,6 +106,47 @@
                                     WidthRequest="16" />
                             </HorizontalStackLayout>
                         </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Plates -->
+                <Label Margin="0,14,0,0" Style="{StaticResource FieldLabel}" Text="{l:Tr Settings_PlatesSection}" />
+                <Border Padding="16,14" Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Style="{StaticResource Caption}" Text="{l:Tr Settings_PlatesHint}" />
+                        <FlexLayout BindableLayout.ItemsSource="{Binding PlateOptions}" Wrap="Wrap">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:SelectableOption">
+                                    <Border
+                                        Margin="0,0,8,8"
+                                        c:Touch.Command="{Binding SelectCommand}"
+                                        Style="{StaticResource Chip}">
+                                        <Border.Triggers>
+                                            <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
+                                                <Setter Property="Background" Value="{StaticResource AccentGradient}" />
+                                                <Setter Property="Stroke" Value="Transparent" />
+                                            </DataTrigger>
+                                        </Border.Triggers>
+                                        <Label FontFamily="OpenSansSemibold" FontSize="14" Text="{Binding Label}">
+                                            <Label.Triggers>
+                                                <DataTrigger Binding="{Binding IsSelected}" TargetType="Label" Value="True">
+                                                    <Setter Property="TextColor" Value="White" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                    </Border>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </FlexLayout>
+                        <HorizontalStackLayout c:Touch.Command="{Binding OpenPlatesCommand}" Spacing="6">
+                            <c:IconView
+                                Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                                Data="{x:Static c:Icons.Plate}"
+                                HeightRequest="18"
+                                VerticalOptions="Center"
+                                WidthRequest="18" />
+                            <Label Style="{StaticResource LinkLabel}" Text="{l:Tr Settings_OpenPlates}" />
+                        </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Border>
 

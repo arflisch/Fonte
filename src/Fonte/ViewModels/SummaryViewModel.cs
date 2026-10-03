@@ -59,6 +59,24 @@ public sealed partial class SummaryViewModel : ObservableObject, IQueryAttributa
     private IReadOnlyList<RecapItem> _exercises = [];
 
     [ObservableProperty]
+    private string _comparisonText = string.Empty;
+
+    [ObservableProperty]
+    private string _comparisonDetail = string.Empty;
+
+    [ObservableProperty]
+    private bool _hasComparison;
+
+    [ObservableProperty]
+    private bool _isBetter;
+
+    [ObservableProperty]
+    private IReadOnlyList<ProgressionItem> _progressions = [];
+
+    [ObservableProperty]
+    private bool _hasProgressions;
+
+    [ObservableProperty]
     private string _feelingText = string.Empty;
 
     [ObservableProperty]
@@ -88,10 +106,21 @@ public sealed partial class SummaryViewModel : ObservableObject, IQueryAttributa
         }
 
         var workout = summary.Workout;
-        Title = IsFresh ? Loc.Get("Summary_TitleFresh") : Loc.Day(workout.StartedAt);
-        Subtitle = IsFresh
-            ? Loc.Date(workout.StartedAt, "dddd d MMMM")
-            : $"{Loc.Time(workout.StartedAt)} – {Loc.Time(workout.FinishedAt ?? workout.StartedAt)}";
+        var day = Loc.Date(workout.StartedAt, "dddd d MMMM");
+        var hours = $"{Loc.Time(workout.StartedAt)} – {Loc.Time(workout.FinishedAt ?? workout.StartedAt)}";
+        if (IsFresh)
+        {
+            Title = Loc.Get("Summary_TitleFresh");
+            Subtitle = summary.TemplateName is { } name ? $"{name} · {day}" : day;
+        }
+        else
+        {
+            Title = summary.TemplateName ?? Loc.Day(workout.StartedAt);
+            Subtitle = summary.TemplateName is null ? hours : $"{Loc.Day(workout.StartedAt)} · {hours}";
+        }
+        ShowComparison(summary);
+        Progressions = summary.Progressions.Select(p => new ProgressionItem(Loc.ExerciseName(p.Exercise), ProgressionText(p))).ToList();
+        HasProgressions = Progressions.Count > 0;
         DurationText = Loc.Duration(summary.Duration);
         VolumeText = Loc.Volume(summary.Volume);
         SetsText = summary.SetCount.ToString(Loc.Culture);
@@ -106,6 +135,39 @@ public sealed partial class SummaryViewModel : ObservableObject, IQueryAttributa
         Note = workout.Note ?? string.Empty;
         ShowFeeling(workout.Feeling);
     }
+
+    /// <summary>"+4 % volume compared with last time", or more sets when nothing was loaded.</summary>
+    private void ShowComparison(WorkoutSummary summary)
+    {
+        HasComparison = summary.Previous is not null;
+        if (summary.Previous is not { } previous)
+            return;
+
+        double change;
+        string what;
+        if (previous.Volume > 0 && summary.Volume > 0)
+        {
+            change = (summary.Volume - previous.Volume) / previous.Volume;
+            what = Loc.Get("Summary_CompareVolume");
+        }
+        else
+        {
+            change = previous.SetCount > 0 ? (double)(summary.SetCount - previous.SetCount) / previous.SetCount : 0;
+            what = Loc.Get("Summary_CompareSets");
+        }
+        var percent = (int)Math.Round(change * 100);
+        IsBetter = percent >= 0;
+        ComparisonText = percent == 0 ? "=" : $"{(percent > 0 ? "+" : "−")}{Math.Abs(percent)} %";
+        ComparisonDetail = Loc.Format("Summary_CompareWith", what, Loc.Day(previous.Workout.StartedAt).ToLower(Loc.Culture));
+    }
+
+    /// <summary>"60 → 62.5 kg", "8 → 9 reps", "45 s → 50 s".</summary>
+    private static string ProgressionText(ProgressionStep step) => step.Kind switch
+    {
+        ProgressionKind.Weight => $"{Loc.Number(step.From)} → {Loc.Weight(step.To)}",
+        ProgressionKind.Seconds => $"{Loc.Seconds((int)step.From)} → {Loc.Seconds((int)step.To)}",
+        _ => $"{Loc.Number(step.From)} → {Loc.Number(step.To)} {Loc.Get("Unit_Reps")}",
+    };
 
     /// <summary>"Est. 1RM 122.5 kg · +5.8" for loads, "Previous best: 12 reps" otherwise.</summary>
     private static string RecordDetail(PersonalRecord record)
@@ -180,3 +242,6 @@ public sealed partial class SummaryViewModel : ObservableObject, IQueryAttributa
 public sealed record RecordItem(string Name, string SetText, string Detail);
 
 public sealed record RecapItem(string Name, Color Color, string SetsText);
+
+/// <summary>A target of the template raised for next time.</summary>
+public sealed record ProgressionItem(string Name, string Text);

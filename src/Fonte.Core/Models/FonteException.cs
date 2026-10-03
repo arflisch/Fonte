@@ -8,6 +8,10 @@ public enum FonteError
     WorkoutNotFound,
     SetNotFound,
     IncompleteSet,
+    EmptyName,
+    ProgramNotFound,
+    TemplateNotFound,
+    InvalidBodyValue,
 }
 
 public sealed class FonteException(FonteError error, string message) : Exception(message)

@@ -19,6 +19,20 @@ public static class Icons
     public const string Globe = "M12 3a9 9 0 1 1 0 18 9 9 0 0 1 0-18zM3 12h18M12 3c2.4 2.5 3.6 5.5 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.5-3.6-9S9.6 5.5 12 3z";
     public const string Bell = "M6 16v-5a6 6 0 1 1 12 0v5l1.5 2.5h-15zM10 21a2.2 2.2 0 0 0 4 0";
     public const string Timer = "M12 8v5l3 2M9 2h6M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16z";
+    public const string Calendar = "M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM3 10h18M8 3v4M16 3v4";
+    public const string Chart = "M4 20h16M7 16v-4M12 16V8M17 16V5";
+    public const string Lock = "M6 11h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1zM8 11V8a4 4 0 0 1 8 0v3";
+    public const string Camera = "M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1zM12 10a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7z";
+    public const string Image = "M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM3 16l5-5 4 4 3-3 6 6M15.5 7.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z";
+    public const string ArrowUp = "M12 19V5M6 11l6-6 6 6";
+    public const string ArrowDown = "M12 5v14M6 13l6 6 6-6";
+    public const string Link = "M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1";
+    public const string Play = "M8 5l11 7-11 7z";
+    public const string Plate = "M12 3a9 9 0 1 1 0 18 9 9 0 0 1 0-18zM12 10a2 2 0 1 1 0 4 2 2 0 0 1 0-4z";
+    public const string Scale = "M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM8 11a4 4 0 0 1 8 0M12 11l1.5-2.5";
+    public const string Ruler = "M3 15L15 3l6 6L9 21zM7 11l2 2M10 8l2 2M13 5l2 2";
+    public const string Flame = "M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 0.3 2 1.3 3 2.5 3.5C12 9 11 6 12 3z";
+    public const string Warning = "M12 4l9 16H3zM12 10v4M12 17h0.01";
     public const string Trophy = "M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v6M8 20h8";
 
     // Equipment

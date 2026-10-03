@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fonte.Views.WelcomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Fonte.Controls"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:vm="clr-namespace:Fonte.ViewModels"
+    x:DataType="vm:WelcomeViewModel"
+    ios:Page.ModalPresentationStyle="FullScreen"
+    Shell.NavBarIsVisible="False"
+    SafeAreaEdges="All"
+    Shell.PresentationMode="ModalAnimated">
+
+    <ContentPage.Resources>
+        <Style x:Key="Feature" TargetType="Grid">
+            <Setter Property="ColumnDefinitions" Value="44,*" />
+            <Setter Property="ColumnSpacing" Value="14" />
+        </Style>
+        <Style x:Key="FeatureIcon" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PrimarySoftLight}, Dark={StaticResource PrimarySoftDark}}" />
+            <Setter Property="HeightRequest" Value="44" />
+            <Setter Property="WidthRequest" Value="44" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 14" />
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto" Style="{StaticResource PageColumn}">
+
+        <!-- Step and back -->
+        <Grid Padding="20,12,20,0" ColumnDefinitions="42,*,42" ColumnSpacing="12">
+            <Border
+                c:Touch.Command="{Binding BackCommand}"
+                IsVisible="{Binding IsIntro, Converter={StaticResource InvertBool}}"
+                Style="{StaticResource IconButton}"
+                SemanticProperties.Description="{l:Tr Common_Back}">
+                <c:IconView Color="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}" Data="{x:Static c:Icons.ChevronLeft}" />
+            </Border>
+            <VerticalStackLayout Grid.Column="1" Spacing="8" VerticalOptions="Center">
+                <Label
+                    FontFamily="OpenSansSemibold"
+                    FontSize="13"
+                    HorizontalTextAlignment="Center"
+                    Style="{StaticResource Caption}"
+                    Text="{Binding StepText}" />
+                <c:ProgressPill
+                    FillColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                    HeightRequest="5"
+                    HorizontalOptions="Center"
+                    Progress="{Binding StepProgress}"
+                    TrackColor="{AppThemeBinding Light={StaticResource SurfaceMutedLight}, Dark={StaticResource SurfaceMutedDark}}"
+                    WidthRequest="120" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <Grid Padding="20,24,20,20">
+
+                <!-- 1. What Fonte does -->
+                <VerticalStackLayout IsVisible="{Binding IsIntro}" Spacing="22">
+                    <Border
+                        Background="{StaticResource HeroGradient}"
+                        HeightRequest="96"
+                        HorizontalOptions="Center"
+                        Shadow="{StaticResource FloatingShadow}"
+                        StrokeShape="RoundRectangle 30"
+                        StrokeThickness="0"
+                        WidthRequest="96">
+                        <c:IconView
+                            Color="White"
+                            Data="{x:Static c:Icons.Barbell}"
+                            HeightRequest="52"
+                            StrokeWidth="2.2"
+                            WidthRequest="52" />
+                    </Border>
+                    <VerticalStackLayout Spacing="8">
+                        <Label HorizontalTextAlignment="Center" Style="{StaticResource LargeTitle}" Text="{l:Tr Welcome_Title}" />
+                        <Label HorizontalTextAlignment="Center" Style="{StaticResource Secondary}" Text="{l:Tr Welcome_Text}" FontSize="16" />
+                    </VerticalStackLayout>
+                    <Border Padding="18" Style="{StaticResource Card}">
+                        <VerticalStackLayout Spacing="18">
+                            <Grid Style="{StaticResource Feature}">
+                                <Border Padding="11" Style="{StaticResource FeatureIcon}">
+                                    <c:IconView Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" Data="{x:Static c:Icons.Check}" />
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                                    <Label Style="{StaticResource Strong}" Text="{l:Tr Welcome_Feature1}" />
+                                    <Label Style="{StaticResource Caption}" Text="{l:Tr Welcome_Feature1Text}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                            <Grid Style="{StaticResource Feature}">
+                                <Border Padding="11" Style="{StaticResource FeatureIcon}">
+                                    <c:IconView Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" Data="{x:Static c:Icons.Calendar}" />
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                                    <Label Style="{StaticResource Strong}" Text="{l:Tr Welcome_Feature2}" />
+                                    <Label Style="{StaticResource Caption}" Text="{l:Tr Welcome_Feature2Text}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                            <Grid Style="{StaticResource Feature}">
+                                <Border Padding="11" Style="{StaticResource FeatureIcon}">
+                                    <c:IconView Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" Data="{x:Static c:Icons.Chart}" />
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                                    <Label Style="{StaticResource Strong}" Text="{l:Tr Welcome_Feature3}" />
+                                    <Label Style="{StaticResource Caption}" Text="{l:Tr Welcome_Feature3Text}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                            <Grid Style="{StaticResource Feature}">
+                                <Border Padding="11" Style="{StaticResource FeatureIcon}">
+                                    <c:IconView Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" Data="{x:Static c:Icons.Lock}" />
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                                    <Label Style="{StaticResource Strong}" Text="{l:Tr Welcome_Feature4}" />
+                                    <Label Style="{StaticResource Caption}" Text="{l:Tr Welcome_Feature4Text}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- 2. Goal and workouts per week -->
+                <VerticalStackLayout IsVisible="{Binding IsGoal}" Spacing="14">
+                    <Label Style="{StaticResource LargeTitle}" FontSize="26" Text="{l:Tr Welcome_GoalTitle}" />
+                    <Label Style="{StaticResource Secondary}" Text="{l:Tr Welcome_GoalText}" />
+                    <VerticalStackLayout Margin="0,6,0,0" BindableLayout.ItemsSource="{Binding Goals}" Spacing="10">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:ChoiceItem">
+                                <Border
+                                    Padding="14"
+                                    c:Touch.Command="{Binding SelectCommand}"
+                                    Stroke="Transparent"
+                                    StrokeThickness="2"
+                                    Style="{StaticResource Card}">
+                                    <Border.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
+                                            <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PrimarySoftLight}, Dark={StaticResource PrimarySoftDark}}" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
+                                    <Grid ColumnDefinitions="44,*,Auto" ColumnSpacing="14">
+                                        <Label FontSize="30" HorizontalOptions="Center" Text="{Binding Emoji}" VerticalOptions="Center" />
+                                        <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                                            <Label Style="{StaticResource Strong}" Text="{Binding Title}" />
+                                            <Label Style="{StaticResource Caption}" Text="{Binding Text}" />
+                                        </VerticalStackLayout>
+                                        <Grid Grid.Column="2" HeightRequest="26" VerticalOptions="Center" WidthRequest="26">
+                                            <Ellipse Stroke="{AppThemeBinding Light={StaticResource DividerLight}, Dark={StaticResource DividerDark}}" StrokeThickness="2" />
+                                            <Ellipse Fill="{StaticResource AccentGradient}" IsVisible="{Binding IsSelected}" />
+                                            <c:IconView
+                                                Color="White"
+                                                Data="{x:Static c:Icons.Check}"
+                                                HeightRequest="15"
+                                                HorizontalOptions="Center"
+                                                IsVisible="{Binding IsSelected}"
+                                                StrokeWidth="2.8"
+                                                VerticalOptions="Center"
+                                                WidthRequest="15" />
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+
+                    <Label Margin="0,14,0,0" Style="{StaticResource SectionTitle}" Text="{l:Tr Welcome_SessionsTitle}" />
+                    <Grid BindableLayout.ItemsSource="{Binding Sessions}" ColumnDefinitions="*,*,*,*,*" ColumnSpacing="10">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:SelectableOption">
+                                <Border
+                                    Grid.Column="{Binding Column}"
+                                    Padding="0"
+                                    c:Touch.Command="{Binding SelectCommand}"
+                                    HeightRequest="52"
+                                    Style="{StaticResource Card}">
+                                    <Border.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource AccentGradient}" />
+                                        </DataTrigger>
+                                    </Border.Triggers>
+                                    <Label
+                                        FontFamily="OpenSansSemibold"
+                                        FontSize="18"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Label}"
+                                        VerticalOptions="Center">
+                                        <Label.Triggers>
+                                            <DataTrigger Binding="{Binding IsSelected}" TargetType="Label" Value="True">
+                                                <Setter Property="TextColor" Value="White" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </Grid>
+                </VerticalStackLayout>
+
+                <!-- 3. A program that fits -->
+                <VerticalStackLayout IsVisible="{Binding IsProgram}" Spacing="14">
+                    <Label Style="{StaticResource LargeTitle}" FontSize="26" Text="{l:Tr Welcome_ProgramTitle}" />
+                    <Label Style="{StaticResource Secondary}" Text="{l:Tr Welcome_ProgramText}" />
+                    <Border
+                        Margin="0,6,0,0"
+                        Background="{StaticResource HeroGradient}"
+                        Shadow="{StaticResource FloatingShadow}"
+                        StrokeShape="RoundRectangle 26"
+                        StrokeThickness="0">
+                        <VerticalStackLayout Padding="22" Spacing="4">
+                            <Label FontFamily="OpenSansSemibold" FontSize="24" Text="{Binding ProgramName}" TextColor="White" />
+                            <Label FontSize="15" Text="{Binding ProgramText}" TextColor="{StaticResource WhiteSoft}" />
+                            <Label
+                                Margin="0,6,0,10"
+                                FontFamily="OpenSansSemibold"
+                                FontSize="14"
+                                Text="{Binding ProgramPlan}"
+                                TextColor="White" />
+                            <VerticalStackLayout BindableLayout.ItemsSource="{Binding ProgramTemplates}" Spacing="8">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="x:String">
+                                        <Border
+                                            Padding="14,10"
+                                            BackgroundColor="{StaticResource WhiteGlass}"
+                                            StrokeShape="RoundRectangle 14"
+                                            StrokeThickness="0">
+                                            <Label FontFamily="OpenSansSemibold" Text="{Binding .}" TextColor="White" />
+                                        </Border>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+                    <Label Style="{StaticResource Caption}" Text="{l:Tr Welcome_ProgramHint}" />
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+
+        <!-- Actions -->
+        <VerticalStackLayout Grid.Row="2" Padding="20,8,20,16" Spacing="6">
+            <Border
+                c:Touch.Command="{Binding NextCommand}"
+                IsVisible="{Binding IsProgram, Converter={StaticResource InvertBool}}"
+                Style="{StaticResource PrimaryButton}">
+                <Label Style="{StaticResource PrimaryButtonText}" Text="{l:Tr Welcome_Continue}" />
+            </Border>
+            <Border
+                c:Touch.Command="{Binding FollowCommand}"
+                IsVisible="{Binding IsProgram}"
+                Style="{StaticResource PrimaryButton}">
+                <Label Style="{StaticResource PrimaryButtonText}" Text="{l:Tr Welcome_Follow}" />
+            </Border>
+            <Label
+                Padding="0,10"
+                c:Touch.Command="{Binding SkipCommand}"
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsProgram}"
+                Style="{StaticResource LinkLabel}"
+                Text="{l:Tr Welcome_Skip}" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

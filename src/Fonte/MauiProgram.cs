@@ -29,12 +29,36 @@ public static class MauiProgram
         builder.Services.AddSingleton<AppSettings>();
         builder.Services.AddSingleton<RestTimer>();
         builder.Services.AddSingleton<IDialogService, DialogService>();
+        builder.Services.AddSingleton<WorkoutLauncher>();
+        builder.Services.AddSingleton<DeviceAuthentication>();
+        builder.Services.AddSingleton<PhotoStore>();
         builder.Services.AddSingleton<AppShell>();
 
+        // Tabs
         builder.Services.AddSingleton<HomeViewModel>();
         builder.Services.AddSingleton<HomePage>();
+        builder.Services.AddSingleton<ProgramsViewModel>();
+        builder.Services.AddSingleton<ProgramsPage>();
+        builder.Services.AddSingleton<ProgressViewModel>();
+        builder.Services.AddSingleton<ProgressPage>();
+        builder.Services.AddSingleton<BodyViewModel>();
+        builder.Services.AddSingleton<BodyPage>();
         builder.Services.AddSingleton<ExercisesViewModel>();
         builder.Services.AddSingleton<ExercisesPage>();
+
+        // Pages opened from the tabs
+        builder.Services.AddTransient<WelcomeViewModel>();
+        builder.Services.AddTransient<WelcomePage>();
+        builder.Services.AddTransient<TemplateViewModel>();
+        builder.Services.AddTransient<TemplatePage>();
+        builder.Services.AddTransient<HistoryViewModel>();
+        builder.Services.AddTransient<HistoryPage>();
+        builder.Services.AddTransient<PlatesViewModel>();
+        builder.Services.AddTransient<PlatesPage>();
+        builder.Services.AddTransient<PhotoViewModel>();
+        builder.Services.AddTransient<PhotoPage>();
+        builder.Services.AddTransient<ComparePhotosViewModel>();
+        builder.Services.AddTransient<ComparePhotosPage>();
         builder.Services.AddTransient<WorkoutViewModel>();
         builder.Services.AddTransient<WorkoutPage>();
         builder.Services.AddTransient<ExercisePickerViewModel>();

@@ -120,7 +120,10 @@ public sealed partial class FonteStore(string databasePath) : IAsyncDisposable
                     databasePath,
                     SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
                 await connection.EnableWriteAheadLoggingAsync();
+                // Creates the tables, and adds the columns of a newer version to existing ones.
                 await connection.CreateTablesAsync<Exercise, Workout, WorkoutExercise, WorkoutSet>();
+                await connection.CreateTablesAsync<TrainingProgram, WorkoutTemplate, TemplateExercise>();
+                await connection.CreateTablesAsync<BodyWeight, BodyMeasurement, BodyPhoto>();
                 await AddMissingCatalogExercisesAsync(connection);
                 _connection = connection;
             }

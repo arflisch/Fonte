@@ -591,4 +591,796 @@
   <data name="Summary_RecordOneRepMax" xml:space="preserve">
     <value>Geschat 1RM {0} · +{1}</value>
   </data>
+  <data name="Welcome_Step" xml:space="preserve">
+    <value>Stap {0} van {1}</value>
+  </data>
+  <data name="Welcome_Title" xml:space="preserve">
+    <value>Welkom bij Fonte</value>
+  </data>
+  <data name="Welcome_Text" xml:space="preserve">
+    <value>Je trainingslogboek, gemaakt om jezelf training na training te verbeteren.</value>
+  </data>
+  <data name="Welcome_Feature1" xml:space="preserve">
+    <value>Elke set in twee tikken</value>
+  </data>
+  <data name="Welcome_Feature1Text" xml:space="preserve">
+    <value>De gewichten van de vorige keer staan al klaar, de rusttimer start vanzelf.</value>
+  </data>
+  <data name="Welcome_Feature2" xml:space="preserve">
+    <value>Programma's die meegroeien</value>
+  </data>
+  <data name="Welcome_Feature2Text" xml:space="preserve">
+    <value>Lukken alle sets, dan mikt de volgende training iets hoger.</value>
+  </data>
+  <data name="Welcome_Feature3" xml:space="preserve">
+    <value>Zichtbare vooruitgang</value>
+  </data>
+  <data name="Welcome_Feature3Text" xml:space="preserve">
+    <value>Records, volume per week, getrainde spieren en lichaamsmaten.</value>
+  </data>
+  <data name="Welcome_Feature4" xml:space="preserve">
+    <value>Privé van nature</value>
+  </data>
+  <data name="Welcome_Feature4Text" xml:space="preserve">
+    <value>Geen account, geen advertenties: alles blijft op je telefoon.</value>
+  </data>
+  <data name="Welcome_GoalTitle" xml:space="preserve">
+    <value>Wat is je doel?</value>
+  </data>
+  <data name="Welcome_GoalText" xml:space="preserve">
+    <value>Sets, herhalingen en rusttijden worden erop afgestemd.</value>
+  </data>
+  <data name="Welcome_SessionsTitle" xml:space="preserve">
+    <value>Hoeveel trainingen per week?</value>
+  </data>
+  <data name="Welcome_ProgramTitle" xml:space="preserve">
+    <value>Je programma</value>
+  </data>
+  <data name="Welcome_ProgramText" xml:space="preserve">
+    <value>Een kant-en-klaar programma dat past bij je doel en je week.</value>
+  </data>
+  <data name="Welcome_ProgramPlan" xml:space="preserve">
+    <value>{0} trainingen per week · {1} weken</value>
+  </data>
+  <data name="Welcome_ProgramHint" xml:space="preserve">
+    <value>Je kunt de oefeningen aanpassen of een ander programma kiezen in het tabblad Programma's.</value>
+  </data>
+  <data name="Welcome_Continue" xml:space="preserve">
+    <value>Doorgaan</value>
+  </data>
+  <data name="Welcome_Follow" xml:space="preserve">
+    <value>Dit programma volgen</value>
+  </data>
+  <data name="Welcome_Skip" xml:space="preserve">
+    <value>Later, ik plan mijn eigen trainingen</value>
+  </data>
+  <data name="Goal_Strength" xml:space="preserve">
+    <value>Sterker worden</value>
+  </data>
+  <data name="GoalText_Strength" xml:space="preserve">
+    <value>3 tot 6 herh. · 2 tot 3 min rust</value>
+  </data>
+  <data name="Goal_Muscle" xml:space="preserve">
+    <value>Spiermassa opbouwen</value>
+  </data>
+  <data name="GoalText_Muscle" xml:space="preserve">
+    <value>8 tot 12 herh. · 90 s rust</value>
+  </data>
+  <data name="Goal_Fitness" xml:space="preserve">
+    <value>Fitter worden</value>
+  </data>
+  <data name="GoalText_Fitness" xml:space="preserve">
+    <value>12 tot 15 herh. · korte rust</value>
+  </data>
+  <data name="Program_full_body" xml:space="preserve">
+    <value>Full body</value>
+  </data>
+  <data name="ProgramText_full_body" xml:space="preserve">
+    <value>Beginner · het hele lichaam elke training</value>
+  </data>
+  <data name="Program_five_by_five" xml:space="preserve">
+    <value>5×5</value>
+  </data>
+  <data name="ProgramText_five_by_five" xml:space="preserve">
+    <value>Kracht · 5 sets van 5 op de basisoefeningen</value>
+  </data>
+  <data name="Program_upper_lower" xml:space="preserve">
+    <value>Boven / Onder</value>
+  </data>
+  <data name="ProgramText_upper_lower" xml:space="preserve">
+    <value>Gevorderd · boven- en onderlichaam om de beurt</value>
+  </data>
+  <data name="Program_push_pull_legs" xml:space="preserve">
+    <value>Push Pull Legs</value>
+  </data>
+  <data name="ProgramText_push_pull_legs" xml:space="preserve">
+    <value>Ervaren · duw-, trek- en beendagen</value>
+  </data>
+  <data name="Template_full_body_a" xml:space="preserve">
+    <value>Full body A</value>
+  </data>
+  <data name="Template_full_body_b" xml:space="preserve">
+    <value>Full body B</value>
+  </data>
+  <data name="Template_five_by_five_a" xml:space="preserve">
+    <value>Training A</value>
+  </data>
+  <data name="Template_five_by_five_b" xml:space="preserve">
+    <value>Training B</value>
+  </data>
+  <data name="Template_upper_a" xml:space="preserve">
+    <value>Boven A</value>
+  </data>
+  <data name="Template_lower_a" xml:space="preserve">
+    <value>Onder A</value>
+  </data>
+  <data name="Template_upper_b" xml:space="preserve">
+    <value>Boven B</value>
+  </data>
+  <data name="Template_lower_b" xml:space="preserve">
+    <value>Onder B</value>
+  </data>
+  <data name="Template_push" xml:space="preserve">
+    <value>Push</value>
+  </data>
+  <data name="Template_pull" xml:space="preserve">
+    <value>Pull</value>
+  </data>
+  <data name="Template_legs" xml:space="preserve">
+    <value>Benen</value>
+  </data>
+  <data name="Tab_Programs" xml:space="preserve">
+    <value>Programma's</value>
+  </data>
+  <data name="Tab_Progress" xml:space="preserve">
+    <value>Voortgang</value>
+  </data>
+  <data name="Tab_Body" xml:space="preserve">
+    <value>Lichaam</value>
+  </data>
+  <data name="Session_One" xml:space="preserve">
+    <value>training</value>
+  </data>
+  <data name="Session_Many" xml:space="preserve">
+    <value>trainingen</value>
+  </data>
+  <data name="Launch_InProgressTitle" xml:space="preserve">
+    <value>Er loopt al een training</value>
+  </data>
+  <data name="Launch_InProgressText" xml:space="preserve">
+    <value>Rond die eerst af voor je een nieuwe begint.</value>
+  </data>
+  <data name="Programs_Week" xml:space="preserve">
+    <value>Actief programma · week {0} van {1}</value>
+  </data>
+  <data name="Programs_Active" xml:space="preserve">
+    <value>Actief programma</value>
+  </data>
+  <data name="Programs_PerWeek" xml:space="preserve">
+    <value>{0} trainingen per week</value>
+  </data>
+  <data name="Programs_Weeks" xml:space="preserve">
+    <value>{0} weken</value>
+  </data>
+  <data name="Programs_CatalogPlan" xml:space="preserve">
+    <value>{0}×/week · {1} weken</value>
+  </data>
+  <data name="Programs_Sessions" xml:space="preserve">
+    <value>TRAININGEN VAN HET PROGRAMMA</value>
+  </data>
+  <data name="Programs_Next" xml:space="preserve">
+    <value>volgende</value>
+  </data>
+  <data name="Programs_DoneOn" xml:space="preserve">
+    <value>gedaan {0}</value>
+  </data>
+  <data name="Programs_NoExercise" xml:space="preserve">
+    <value>Nog geen oefening</value>
+  </data>
+  <data name="Programs_Start" xml:space="preserve">
+    <value>Deze training starten</value>
+  </data>
+  <data name="Programs_Options" xml:space="preserve">
+    <value>Programma-opties</value>
+  </data>
+  <data name="Programs_EmptyProgram" xml:space="preserve">
+    <value>Dit programma heeft nog geen training. Tik om er een toe te voegen.</value>
+  </data>
+  <data name="Programs_NoneTitle" xml:space="preserve">
+    <value>Geen programma gevolgd</value>
+  </data>
+  <data name="Programs_NoneText" xml:space="preserve">
+    <value>Kies hieronder een kant-en-klaar programma, of maak je eigen met de knop +.</value>
+  </data>
+  <data name="Programs_MyTemplates" xml:space="preserve">
+    <value>Mijn trainingen</value>
+  </data>
+  <data name="Programs_TemplatesHint" xml:space="preserve">
+    <value>Bewaar de trainingen die je herhaalt ("Armen", "Cardio"…) om ze met één tik te starten.</value>
+  </data>
+  <data name="Programs_Others" xml:space="preserve">
+    <value>Andere programma's</value>
+  </data>
+  <data name="Programs_Catalog" xml:space="preserve">
+    <value>Kant-en-klare programma's</value>
+  </data>
+  <data name="Programs_NewProgram" xml:space="preserve">
+    <value>Nieuw programma</value>
+  </data>
+  <data name="Programs_NewTemplate" xml:space="preserve">
+    <value>Nieuwe training</value>
+  </data>
+  <data name="Programs_NamePlaceholder" xml:space="preserve">
+    <value>bv. Zomerplan</value>
+  </data>
+  <data name="Programs_TemplatePlaceholder" xml:space="preserve">
+    <value>bv. Push</value>
+  </data>
+  <data name="Programs_DefaultTemplate" xml:space="preserve">
+    <value>Training {0}</value>
+  </data>
+  <data name="Programs_AddTemplate" xml:space="preserve">
+    <value>Training toevoegen</value>
+  </data>
+  <data name="Programs_Rename" xml:space="preserve">
+    <value>Naam wijzigen</value>
+  </data>
+  <data name="Programs_Restart" xml:space="preserve">
+    <value>Opnieuw beginnen bij week 1</value>
+  </data>
+  <data name="Programs_Restarted" xml:space="preserve">
+    <value>Terug naar week 1</value>
+  </data>
+  <data name="Programs_Stop" xml:space="preserve">
+    <value>Niet meer volgen</value>
+  </data>
+  <data name="Programs_Delete" xml:space="preserve">
+    <value>Programma verwijderen</value>
+  </data>
+  <data name="Programs_DeleteTitle" xml:space="preserve">
+    <value>"{0}" verwijderen?</value>
+  </data>
+  <data name="Programs_DeleteText" xml:space="preserve">
+    <value>De trainingen verdwijnen uit het programma; wat je gedaan hebt, blijft in je geschiedenis.</value>
+  </data>
+  <data name="Programs_Follow" xml:space="preserve">
+    <value>Volgen</value>
+  </data>
+  <data name="Programs_FollowTitle" xml:space="preserve">
+    <value>{0} volgen?</value>
+  </data>
+  <data name="Programs_FollowText" xml:space="preserve">
+    <value>De trainingen worden op het startscherm voorgesteld, de een na de ander.</value>
+  </data>
+  <data name="Programs_FollowReplace" xml:space="preserve">
+    <value>Het vervangt {0}, dat je later weer kunt volgen.</value>
+  </data>
+  <data name="Programs_Followed" xml:space="preserve">
+    <value>{0} gevolgd</value>
+  </data>
+  <data name="Set_One" xml:space="preserve">
+    <value>set</value>
+  </data>
+  <data name="Set_Many" xml:space="preserve">
+    <value>sets</value>
+  </data>
+  <data name="Template_EmptyTitle" xml:space="preserve">
+    <value>Voeg de oefeningen van deze training toe</value>
+  </data>
+  <data name="Template_EmptyText" xml:space="preserve">
+    <value>Nog geen oefening</value>
+  </data>
+  <data name="Template_ColSets" xml:space="preserve">
+    <value>SETS</value>
+  </data>
+  <data name="Template_WeightAuto" xml:space="preserve">
+    <value>auto</value>
+  </data>
+  <data name="Template_Superset" xml:space="preserve">
+    <value>SUPERSET · ZONDER RUST</value>
+  </data>
+  <data name="Template_SupersetHint" xml:space="preserve">
+    <value>Koppel twee oefeningen via het menu ⋯ om ze na elkaar te doen: de rusttimer wacht op de tweede.</value>
+  </data>
+  <data name="Template_ProgressionTitle" xml:space="preserve">
+    <value>Automatische progressie</value>
+  </data>
+  <data name="Template_ProgressionText" xml:space="preserve">
+    <value>Halen alle sets hun herhalingen, dan gaat het gewicht de volgende keer omhoog: +2,5 kg met een stang of machine, +2 kg met dumbbells, één herhaling of 5 seconden meer zonder gewicht. Een leeg gewicht wordt overgenomen van je eerste training.</value>
+  </data>
+  <data name="Template_MoveUp" xml:space="preserve">
+    <value>Omhoog</value>
+  </data>
+  <data name="Template_MoveDown" xml:space="preserve">
+    <value>Omlaag</value>
+  </data>
+  <data name="Template_Link" xml:space="preserve">
+    <value>Superset met de volgende</value>
+  </data>
+  <data name="Template_Unlink" xml:space="preserve">
+    <value>Superset opheffen</value>
+  </data>
+  <data name="Template_Remove" xml:space="preserve">
+    <value>Uit de training halen</value>
+  </data>
+  <data name="Template_Delete" xml:space="preserve">
+    <value>Training verwijderen</value>
+  </data>
+  <data name="Template_DeleteText" xml:space="preserve">
+    <value>De trainingen die je er al mee deed, blijven in je geschiedenis.</value>
+  </data>
+  <data name="Template_Start" xml:space="preserve">
+    <value>Deze training starten</value>
+  </data>
+  <data name="Workout_Target" xml:space="preserve">
+    <value>Doel {0}</value>
+  </data>
+  <data name="Workout_Plates" xml:space="preserve">
+    <value>Schijvencalculator</value>
+  </data>
+  <data name="Summary_CompareTitle" xml:space="preserve">
+    <value>Vergeleken met de vorige keer</value>
+  </data>
+  <data name="Summary_CompareVolume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Summary_CompareSets" xml:space="preserve">
+    <value>Sets</value>
+  </data>
+  <data name="Summary_CompareWith" xml:space="preserve">
+    <value>{0} · tegenover {1}</value>
+  </data>
+  <data name="Summary_NextTime" xml:space="preserve">
+    <value>Volgende keer mikken we hoger</value>
+  </data>
+  <data name="Home_NextWeek" xml:space="preserve">
+    <value>Week {0} van {1} · {2}</value>
+  </data>
+  <data name="Home_Next" xml:space="preserve">
+    <value>Volgende training · {0}</value>
+  </data>
+  <data name="Home_StartNext" xml:space="preserve">
+    <value>{0} starten</value>
+  </data>
+  <data name="Home_StartFree" xml:space="preserve">
+    <value>of een vrije training</value>
+  </data>
+  <data name="Home_WeekGoal" xml:space="preserve">
+    <value>{0} / {1} trainingen</value>
+  </data>
+  <data name="Home_Streak" xml:space="preserve">
+    <value>{0} weken op rij op doel</value>
+  </data>
+  <data name="Home_History" xml:space="preserve">
+    <value>Geschiedenis</value>
+  </data>
+  <data name="History_PreviousMonth" xml:space="preserve">
+    <value>Vorige maand</value>
+  </data>
+  <data name="History_NextMonth" xml:space="preserve">
+    <value>Volgende maand</value>
+  </data>
+  <data name="History_Workouts" xml:space="preserve">
+    <value>Trainingen</value>
+  </data>
+  <data name="History_Time" xml:space="preserve">
+    <value>Tijd</value>
+  </data>
+  <data name="History_Streak" xml:space="preserve">
+    <value>Regelmatige weken</value>
+  </data>
+  <data name="History_Weeks" xml:space="preserve">
+    <value>{0} wk</value>
+  </data>
+  <data name="History_Volume" xml:space="preserve">
+    <value>{0} getild deze maand</value>
+  </data>
+  <data name="History_Empty" xml:space="preserve">
+    <value>Geen training deze maand.</value>
+  </data>
+  <data name="Progress_Month" xml:space="preserve">
+    <value>Maand</value>
+  </data>
+  <data name="Progress_Quarter" xml:space="preserve">
+    <value>3 maanden</value>
+  </data>
+  <data name="Progress_EmptyTitle" xml:space="preserve">
+    <value>Je vooruitgang verschijnt hier</value>
+  </data>
+  <data name="Progress_EmptyText" xml:space="preserve">
+    <value>Rond een paar trainingen af om je volume per week, je getrainde spieren en je records te zien.</value>
+  </data>
+  <data name="Progress_Volume" xml:space="preserve">
+    <value>Volume per week</value>
+  </data>
+  <data name="Progress_Average" xml:space="preserve">
+    <value>gem. {0}</value>
+  </data>
+  <data name="Progress_PeriodTotals" xml:space="preserve">
+    <value>{0} · {1} · {2}</value>
+  </data>
+  <data name="Progress_Muscles" xml:space="preserve">
+    <value>Sets per spiergroep</value>
+  </data>
+  <data name="Progress_MusclesHint" xml:space="preserve">
+    <value>Laatste 7 dagen · mik op ongeveer 10 sets per groep</value>
+  </data>
+  <data name="Progress_Neglected" xml:space="preserve">
+    <value>{0}: niets in twee weken.</value>
+  </data>
+  <data name="Progress_BelowTarget" xml:space="preserve">
+    <value>{0} onder je doel ({1} sets).</value>
+  </data>
+  <data name="Progress_Records" xml:space="preserve">
+    <value>Records deze maand</value>
+  </data>
+  <data name="Progress_NoRecord" xml:space="preserve">
+    <value>Nog geen record deze maand. Verbeter de sets van de vorige keer!</value>
+  </data>
+  <data name="Week_One" xml:space="preserve">
+    <value>week</value>
+  </data>
+  <data name="Week_Many" xml:space="preserve">
+    <value>weken</value>
+  </data>
+  <data name="Day_One" xml:space="preserve">
+    <value>dag</value>
+  </data>
+  <data name="Day_Many" xml:space="preserve">
+    <value>dagen</value>
+  </data>
+  <data name="Body_Weight" xml:space="preserve">
+    <value>GEWICHT</value>
+  </data>
+  <data name="Body_Weigh" xml:space="preserve">
+    <value>Wegen</value>
+  </data>
+  <data name="Body_NoWeight" xml:space="preserve">
+    <value>Weeg jezelf om je gewicht hier te volgen.</value>
+  </data>
+  <data name="Body_Change" xml:space="preserve">
+    <value>{0} in {1}</value>
+  </data>
+  <data name="Body_Goal" xml:space="preserve">
+    <value>Doel {0}</value>
+  </data>
+  <data name="Body_GoalLeft" xml:space="preserve">
+    <value>Doel {0} · nog {1}</value>
+  </data>
+  <data name="Body_GoalReached" xml:space="preserve">
+    <value>Doel {0} bereikt 🎉</value>
+  </data>
+  <data name="Body_SetGoal" xml:space="preserve">
+    <value>Een gewichtsdoel instellen</value>
+  </data>
+  <data name="Body_GoalTitle" xml:space="preserve">
+    <value>Gewichtsdoel</value>
+  </data>
+  <data name="Body_GoalText" xml:space="preserve">
+    <value>In kilogram</value>
+  </data>
+  <data name="Body_AddWeight" xml:space="preserve">
+    <value>Gewicht van vandaag</value>
+  </data>
+  <data name="Body_AddWeightText" xml:space="preserve">
+    <value>In kilogram; vervangt de eerdere weging van vandaag.</value>
+  </data>
+  <data name="Body_DeleteWeighing" xml:space="preserve">
+    <value>Deze weging verwijderen</value>
+  </data>
+  <data name="Body_Measurements" xml:space="preserve">
+    <value>Lichaamsmaten</value>
+  </data>
+  <data name="Body_MeasureText" xml:space="preserve">
+    <value>In centimeter, vandaag gemeten.</value>
+  </data>
+  <data name="Body_TapToMeasure" xml:space="preserve">
+    <value>Tik om te meten</value>
+  </data>
+  <data name="Body_Photos" xml:space="preserve">
+    <value>Voortgangsfoto's</value>
+  </data>
+  <data name="Body_Compare" xml:space="preserve">
+    <value>Vergelijken</value>
+  </data>
+  <data name="Body_Add" xml:space="preserve">
+    <value>Toevoegen</value>
+  </data>
+  <data name="Body_Unlock" xml:space="preserve">
+    <value>Ontgrendelen met {0}</value>
+  </data>
+  <data name="Body_Passcode" xml:space="preserve">
+    <value>de toegangscode</value>
+  </data>
+  <data name="Body_UnlockReason" xml:space="preserve">
+    <value>Je voortgangsfoto's tonen</value>
+  </data>
+  <data name="Body_PhotosLocked" xml:space="preserve">
+    <value>Bewaard in de app, niet in je fotobibliotheek, en vergrendeld met {0}.</value>
+  </data>
+  <data name="Body_PhotosPrivate" xml:space="preserve">
+    <value>Bewaard in de app, niet in je fotobibliotheek.</value>
+  </data>
+  <data name="Body_AddPhoto" xml:space="preserve">
+    <value>Voortgangsfoto</value>
+  </data>
+  <data name="Body_TakePhoto" xml:space="preserve">
+    <value>Foto maken</value>
+  </data>
+  <data name="Body_PickPhoto" xml:space="preserve">
+    <value>Kiezen uit de fotobibliotheek</value>
+  </data>
+  <data name="Body_PhotoSaved" xml:space="preserve">
+    <value>Foto bewaard</value>
+  </data>
+  <data name="Body_CameraDenied" xml:space="preserve">
+    <value>Fonte heeft geen toegang tot de camera. Je kunt dit toestaan in de app Instellingen.</value>
+  </data>
+  <data name="Body_Before" xml:space="preserve">
+    <value>Voor</value>
+  </data>
+  <data name="Body_After" xml:space="preserve">
+    <value>Na</value>
+  </data>
+  <data name="Photo_Delete" xml:space="preserve">
+    <value>Foto verwijderen</value>
+  </data>
+  <data name="Photo_DeleteTitle" xml:space="preserve">
+    <value>Deze foto verwijderen?</value>
+  </data>
+  <data name="Photo_DeleteText" xml:space="preserve">
+    <value>Ze wordt definitief uit de app verwijderd.</value>
+  </data>
+  <data name="Measure_Waist" xml:space="preserve">
+    <value>Taille</value>
+  </data>
+  <data name="Measure_Chest" xml:space="preserve">
+    <value>Borst</value>
+  </data>
+  <data name="Measure_Arms" xml:space="preserve">
+    <value>Arm</value>
+  </data>
+  <data name="Measure_Thighs" xml:space="preserve">
+    <value>Dij</value>
+  </data>
+  <data name="Measure_Hips" xml:space="preserve">
+    <value>Heupen</value>
+  </data>
+  <data name="Error_EmptyName" xml:space="preserve">
+    <value>Geef het een naam.</value>
+  </data>
+  <data name="Error_ProgramNotFound" xml:space="preserve">
+    <value>Dit programma bestaat niet meer.</value>
+  </data>
+  <data name="Error_TemplateNotFound" xml:space="preserve">
+    <value>Deze training bestaat niet meer.</value>
+  </data>
+  <data name="Error_InvalidBodyValue" xml:space="preserve">
+    <value>Deze waarde lijkt niet te kloppen. Controleer het getal en de eenheid.</value>
+  </data>
+  <data name="Plates_Title" xml:space="preserve">
+    <value>Schijven</value>
+  </data>
+  <data name="Plates_Target" xml:space="preserve">
+    <value>BEOOGD GEWICHT</value>
+  </data>
+  <data name="Plates_BarHint" xml:space="preserve">
+    <value>Gewicht van de stang</value>
+  </data>
+  <data name="Plates_BarOnly" xml:space="preserve">
+    <value>De stang alleen volstaat.</value>
+  </data>
+  <data name="Plates_PerSide" xml:space="preserve">
+    <value>Aan elke kant: {0}</value>
+  </data>
+  <data name="Plates_Closest" xml:space="preserve">
+    <value>Dichtstbijzijnde gewicht met je schijven: {0}</value>
+  </data>
+  <data name="Plates_Bar" xml:space="preserve">
+    <value>Stang</value>
+  </data>
+  <data name="Plates_WarmUp" xml:space="preserve">
+    <value>Voorgestelde opwarming</value>
+  </data>
+  <data name="Plates_Available" xml:space="preserve">
+    <value>Schijven: {0} kg · aan te passen in de instellingen</value>
+  </data>
+  <data name="Settings_TrainingSection" xml:space="preserve">
+    <value>TRAINING</value>
+  </data>
+  <data name="Settings_Goal" xml:space="preserve">
+    <value>Doel</value>
+  </data>
+  <data name="Settings_GoalHint" xml:space="preserve">
+    <value>Bepaalt herhalingen en rust</value>
+  </data>
+  <data name="Settings_Sessions" xml:space="preserve">
+    <value>Trainingen per week</value>
+  </data>
+  <data name="Settings_SessionsHint" xml:space="preserve">
+    <value>Je weekdoel op het startscherm</value>
+  </data>
+  <data name="Settings_SessionsValue" xml:space="preserve">
+    <value>{0} per week</value>
+  </data>
+  <data name="Settings_PlatesSection" xml:space="preserve">
+    <value>SCHIJVEN</value>
+  </data>
+  <data name="Settings_PlatesHint" xml:space="preserve">
+    <value>De schijven van je sportschool, in kg: de calculator gebruikt alleen deze.</value>
+  </data>
+  <data name="Settings_OpenPlates" xml:space="preserve">
+    <value>Schijvencalculator openen</value>
+  </data>
+  <data name="Library_Never" xml:space="preserve">
+    <value>nog nooit gedaan</value>
+  </data>
+  <data name="Detail_Tips" xml:space="preserve">
+    <value>Techniek</value>
+  </data>
+  <data name="Detail_PeriodAll" xml:space="preserve">
+    <value>Alles</value>
+  </data>
+  <data name="Detail_Period3Months" xml:space="preserve">
+    <value>3 mnd</value>
+  </data>
+  <data name="Detail_PeriodYear" xml:space="preserve">
+    <value>1 jaar</value>
+  </data>
+  <data name="Detail_Volume" xml:space="preserve">
+    <value>Volume {0}</value>
+  </data>
+  <data name="Tip_bench_press" xml:space="preserve">
+    <value>Schouderbladen samen, voeten stevig, laat de stang naar het midden van de borst zakken en duw terug boven de schouders.</value>
+  </data>
+  <data name="Tip_incline_bench_press" xml:space="preserve">
+    <value>Bank op 30 tot 45°, stang naar de bovenkant van de borst, ellebogen iets onder de stang, nooit wijd open.</value>
+  </data>
+  <data name="Tip_dumbbell_bench_press" xml:space="preserve">
+    <value>Laat de dumbbells zakken naast de borst met een goede stretch en duw ze omhoog en iets naar elkaar toe.</value>
+  </data>
+  <data name="Tip_incline_dumbbell_press" xml:space="preserve">
+    <value>Bank op 30°, polsen boven de ellebogen, beheers de daling en stop net voor de dumbbells elkaar raken.</value>
+  </data>
+  <data name="Tip_dumbbell_fly" xml:space="preserve">
+    <value>Ellebogen licht gebogen en vast, open de armen alsof je een boom omhelst, stop als de borst gestrekt is.</value>
+  </data>
+  <data name="Tip_cable_crossover" xml:space="preserve">
+    <value>Leun iets voorover, breng de handgrepen in een boog voor de borst samen en knijp een seconde aan.</value>
+  </data>
+  <data name="Tip_chest_press_machine" xml:space="preserve">
+    <value>Handgrepen op borsthoogte, rug tegen de leuning, duw zonder de ellebogen op slot te zetten en kom traag terug.</value>
+  </data>
+  <data name="Tip_push_up" xml:space="preserve">
+    <value>Lichaam recht van hoofd tot hielen, handen iets breder dan de schouders, borst dicht bij de grond.</value>
+  </data>
+  <data name="Tip_dips" xml:space="preserve">
+    <value>Leun voorover voor de borst, zak tot de schouders op ellebooghoogte zijn, niet lager.</value>
+  </data>
+  <data name="Tip_deadlift" xml:space="preserve">
+    <value>Stang tegen de schenen, rug recht, duw de vloer weg met de benen en houd de stang dicht bij het lichaam.</value>
+  </data>
+  <data name="Tip_barbell_row" xml:space="preserve">
+    <value>Buig voorover tot de romp bijna horizontaal is, trek de stang naar de navel en knijp de schouderbladen samen.</value>
+  </data>
+  <data name="Tip_dumbbell_row" xml:space="preserve">
+    <value>Knie en hand op de bank, rug recht, trek de elleboog naar de heup in plaats van recht omhoog.</value>
+  </data>
+  <data name="Tip_pull_up" xml:space="preserve">
+    <value>Begin met gestrekte armen, trek de borst naar de stang zonder te zwaaien en zak gecontroleerd.</value>
+  </data>
+  <data name="Tip_chin_up" xml:space="preserve">
+    <value>Handpalmen naar je toe, schouders laag, trek tot je kin boven de stang komt.</value>
+  </data>
+  <data name="Tip_lat_pulldown" xml:space="preserve">
+    <value>Borst vooruit, trek de stang naar de bovenkant van de borst met de ellebogen naar beneden, nooit achter de nek.</value>
+  </data>
+  <data name="Tip_seated_cable_row" xml:space="preserve">
+    <value>Rug recht, trek de handgreep naar de buik, schouders naar achteren, en laat de armen volledig uitstrekken.</value>
+  </data>
+  <data name="Tip_back_extension" xml:space="preserve">
+    <value>Heupen op het kussen, zak met een rechte rug en kom omhoog tot je lichaam in lijn is, niet verder.</value>
+  </data>
+  <data name="Tip_overhead_press" xml:space="preserve">
+    <value>Billen en buik aangespannen, duw de stang recht omhoog en breng het hoofd naar voren zodra ze je gezicht passeert.</value>
+  </data>
+  <data name="Tip_dumbbell_shoulder_press" xml:space="preserve">
+    <value>Zittend met gesteunde rug, dumbbells op oorhoogte, duw omhoog zonder ze tegen elkaar te tikken.</value>
+  </data>
+  <data name="Tip_lateral_raise" xml:space="preserve">
+    <value>Licht gewicht, ellebogen licht gebogen, til tot schouderhoogte met de ellebogen voorop, zonder zwaaien.</value>
+  </data>
+  <data name="Tip_front_raise" xml:space="preserve">
+    <value>Armen bijna gestrekt, til voor je uit tot ooghoogte en laat langzaam zakken.</value>
+  </data>
+  <data name="Tip_rear_delt_fly" xml:space="preserve">
+    <value>Voorovergebogen, open de armen opzij met licht gebogen ellebogen en denk aan de achterkant van de schouders.</value>
+  </data>
+  <data name="Tip_face_pull" xml:space="preserve">
+    <value>Touw op gezichtshoogte, trek naar de ogen met hoge ellebogen en draai de handen op het einde naar buiten.</value>
+  </data>
+  <data name="Tip_shrug" xml:space="preserve">
+    <value>Trek de schouders recht omhoog naar de oren, houd een seconde vast, zonder te rollen.</value>
+  </data>
+  <data name="Tip_barbell_curl" xml:space="preserve">
+    <value>Ellebogen tegen het lichaam, krul zonder achterover te leunen en laat helemaal zakken.</value>
+  </data>
+  <data name="Tip_dumbbell_curl" xml:space="preserve">
+    <value>Draai de handpalm omhoog tijdens het heffen, knijp bovenaan en laat traag zakken.</value>
+  </data>
+  <data name="Tip_hammer_curl" xml:space="preserve">
+    <value>Duimen de hele tijd omhoog, ellebogen stil, één arm na de andere of beide samen.</value>
+  </data>
+  <data name="Tip_triceps_pushdown" xml:space="preserve">
+    <value>Ellebogen tegen het lichaam, duw omlaag tot de armen gestrekt zijn, alleen de onderarmen bewegen.</value>
+  </data>
+  <data name="Tip_skull_crusher" xml:space="preserve">
+    <value>Bovenarmen verticaal, laat de stang naar het voorhoofd zakken door alleen de ellebogen te buigen.</value>
+  </data>
+  <data name="Tip_overhead_triceps_extension" xml:space="preserve">
+    <value>Ellebogen omhoog en dicht bij het hoofd, laat de dumbbell erachter zakken en strek volledig.</value>
+  </data>
+  <data name="Tip_close_grip_bench_press" xml:space="preserve">
+    <value>Handen op schouderbreedte, ellebogen langs het lichaam, stang naar de onderkant van de borst.</value>
+  </data>
+  <data name="Tip_squat" xml:space="preserve">
+    <value>Voeten op schouderbreedte, knieën in lijn met de tenen, zak tot de dijen horizontaal zijn, rug recht.</value>
+  </data>
+  <data name="Tip_front_squat" xml:space="preserve">
+    <value>Stang op de voorkant van de schouders, ellebogen hoog, romp rechtop tijdens de hele daling.</value>
+  </data>
+  <data name="Tip_leg_press" xml:space="preserve">
+    <value>Voeten midden op het platform, zak tot de knieën 90° zijn, til de onderrug nooit op.</value>
+  </data>
+  <data name="Tip_romanian_deadlift" xml:space="preserve">
+    <value>Knieën licht gebogen, duw de heupen naar achteren met een rechte rug tot je de hamstrings voelt rekken.</value>
+  </data>
+  <data name="Tip_lunge" xml:space="preserve">
+    <value>Grote stap vooruit, achterste knie naar de grond, romp rechtop, duw af via de voorste hiel.</value>
+  </data>
+  <data name="Tip_bulgarian_split_squat" xml:space="preserve">
+    <value>Achterste voet op de bank, zak recht naar beneden op het voorste been, knie in lijn met de voet.</value>
+  </data>
+  <data name="Tip_leg_extension" xml:space="preserve">
+    <value>Rug tegen de leuning, strek de benen volledig, houd een seconde vast en laat traag zakken.</value>
+  </data>
+  <data name="Tip_leg_curl" xml:space="preserve">
+    <value>Heupen tegen het kussen, buig de knieën zo ver mogelijk zonder de rug hol te trekken.</value>
+  </data>
+  <data name="Tip_hip_thrust" xml:space="preserve">
+    <value>Bovenrug op de bank, duw via de hielen en knijp de billen samen, kin ingetrokken, ribben laag.</value>
+  </data>
+  <data name="Tip_calf_raise" xml:space="preserve">
+    <value>Volledige beweging: hielen laag om te rekken, dan zo hoog mogelijk op de tenen, pauze bovenaan.</value>
+  </data>
+  <data name="Tip_goblet_squat" xml:space="preserve">
+    <value>Kettlebell tegen de borst, ellebogen onderaan tussen de knieën, romp rechtop.</value>
+  </data>
+  <data name="Tip_plank" xml:space="preserve">
+    <value>Onderarmen onder de schouders, lichaam in één rechte lijn, billen en buik aangespannen, blijf ademen.</value>
+  </data>
+  <data name="Tip_crunch" xml:space="preserve">
+    <value>Til de schouders van de grond door de rug op te rollen, zonder aan de nek te trekken.</value>
+  </data>
+  <data name="Tip_hanging_leg_raise" xml:space="preserve">
+    <value>Hang stil en til de benen op door het bekken te kantelen, zonder te zwaaien.</value>
+  </data>
+  <data name="Tip_cable_crunch" xml:space="preserve">
+    <value>Geknield, touw bij het hoofd, rol de rug naar de knieën, heupen stil.</value>
+  </data>
+  <data name="Tip_ab_wheel" xml:space="preserve">
+    <value>Rol naar voren met een licht ronde onderrug en ga maar zo ver als je terug kunt komen.</value>
+  </data>
+  <data name="Tip_running" xml:space="preserve">
+    <value>Korte snelle passen, ontspannen schouders, in een tempo waarop je nog kunt praten bij rustige loopjes.</value>
+  </data>
+  <data name="Tip_rowing_machine" xml:space="preserve">
+    <value>Benen, dan rug, dan armen; terug: armen, dan rug, dan benen.</value>
+  </data>
+  <data name="Tip_cycling" xml:space="preserve">
+    <value>Zadel hoog genoeg voor een bijna gestrekt been onderaan, vloeiende cadans rond 80 tot 90 tpm.</value>
+  </data>
+  <data name="Tip_jump_rope" xml:space="preserve">
+    <value>Kleine sprongetjes op de voorvoet, de polsen draaien het touw, ellebogen dicht bij het lichaam.</value>
+  </data>
 </root>

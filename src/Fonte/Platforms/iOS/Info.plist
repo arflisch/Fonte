@@ -33,6 +33,32 @@
 		<string>fr</string>
 		<string>nl</string>
 	</array>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>__MAUI_DEFAULT_SCENE_CONFIGURATION__</string>
+					<key>UISceneDelegateClassName</key>
+					<string>SceneDelegate</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+	<!-- Progress photos: taken with the camera or picked from the library, kept in the app, behind Face ID. -->
+	<key>NSCameraUsageDescription</key>
+	<string>Fonte uses the camera to take your progress photos. They stay on your phone.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Fonte lets you pick progress photos from your library. They are copied into the app and stay on your phone.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Fonte uses Face ID to keep your progress photos private.</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
 </dict>

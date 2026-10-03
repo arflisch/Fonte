@@ -10,7 +10,12 @@ public partial class ExerciseChips : VerticalStackLayout
 
     public static readonly BindableProperty FilterProperty =
         BindableProperty.Create(nameof(Filter), typeof(ExerciseFilter), typeof(ExerciseChips), null,
-            propertyChanged: (b, _, n) => BindableLayout.SetItemsSource(((ExerciseChips)b).ChipsLayout, ((ExerciseFilter?)n)?.Chips));
+            propertyChanged: (b, _, n) =>
+            {
+                var chips = (ExerciseChips)b;
+                BindableLayout.SetItemsSource(chips.ChipsLayout, ((ExerciseFilter?)n)?.Chips);
+                BindableLayout.SetItemsSource(chips.EquipmentLayout, ((ExerciseFilter?)n)?.EquipmentChips);
+            });
 
     public ExerciseChips()
     {

@@ -44,6 +44,10 @@ public sealed partial class WorkoutViewModel : ReloadingViewModel
     [ObservableProperty]
     private string _elapsedText = "0:00";
 
+    /// <summary>The template's name for a planned workout.</summary>
+    [ObservableProperty]
+    private string _title = string.Empty;
+
     [ObservableProperty]
     private bool _isLoaded;
 
@@ -100,9 +104,13 @@ public sealed partial class WorkoutViewModel : ReloadingViewModel
         var detail = await _store.GetWorkoutDetailAsync(workout.Id);
         var added = IsLoaded && detail.Entries.Count > Exercises.Count;
         _workout = workout;
+        Title = await TemplateNameAsync(workout) ?? Loc.Get("Workout_Title");
         Exercises.Clear();
-        foreach (var entry in detail.Entries)
-            Exercises.Add(new WorkoutExerciseViewModel(entry, this));
+        for (var i = 0; i < detail.Entries.Count; i++)
+        {
+            var linkedFromPrevious = i > 0 && detail.Entries[i - 1].Item.LinkedToNext;
+            Exercises.Add(new WorkoutExerciseViewModel(detail.Entries[i], linkedFromPrevious, i == detail.Entries.Count - 1, this));
+        }
         IsEmpty = Exercises.Count == 0;
         IsLoaded = true;
         Tick();
@@ -152,7 +160,8 @@ public sealed partial class WorkoutViewModel : ReloadingViewModel
         Palette.Haptic();
         if (done)
             row.Exercise.PrefillAfter(row);
-        if (done && _settings.RestTimerEnabled)
+        // In a superset, the rest comes after the last exercise of the chain.
+        if (done && _settings.RestTimerEnabled && !row.Exercise.IsLinkedToNext)
         {
             _rest.Start(_settings.RestSeconds);
             _restOverUntil = null;
@@ -196,10 +205,42 @@ public sealed partial class WorkoutViewModel : ReloadingViewModel
 
     internal async Task ExerciseMenuAsync(WorkoutExerciseViewModel exercise)
     {
+        var index = Exercises.IndexOf(exercise);
+        var plates = Loc.Get("Workout_Plates");
+        var up = Loc.Get("Template_MoveUp");
+        var down = Loc.Get("Template_MoveDown");
+        var link = exercise.IsLinkedToNext ? Loc.Get("Template_Unlink") : Loc.Get("Template_Link");
         var history = Loc.Get("Workout_History");
         var remove = Loc.Get("Workout_RemoveExercise");
-        var choice = await _dialogs.ChooseAsync(exercise.Name, remove, history);
-        if (choice == history)
+        var options = new List<string>();
+        if (exercise.Exercise.Equipment == Equipment.Barbell && exercise.ShowWeight)
+            options.Add(plates);
+        if (index > 0)
+            options.Add(up);
+        if (index >= 0 && index < Exercises.Count - 1)
+        {
+            options.Add(down);
+            options.Add(link);
+        }
+        options.Add(history);
+
+        var choice = await _dialogs.ChooseAsync(exercise.Name, remove, [.. options]);
+        if (choice == plates)
+        {
+            var weight = exercise.Sets.FirstOrDefault(s => !s.IsDone)?.Weight ?? exercise.Sets.LastOrDefault()?.Weight ?? 0;
+            await Shell.Current.GoToAsync($"{Routes.Plates}?weight={weight.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
+        }
+        else if (choice == up || choice == down)
+        {
+            await _queue.Enqueue(() => _store.MoveWorkoutExerciseAsync(exercise.ItemId, choice == up ? -1 : 1));
+            Palette.Haptic();
+        }
+        else if (choice == link)
+        {
+            await _queue.Enqueue(() => _store.SetWorkoutExerciseLinkAsync(exercise.ItemId, !exercise.IsLinkedToNext));
+            Palette.Haptic();
+        }
+        else if (choice == history)
         {
             await Shell.Current.GoToAsync($"{Routes.Exercise}?id={exercise.Exercise.Id}");
         }
@@ -209,6 +250,20 @@ public sealed partial class WorkoutViewModel : ReloadingViewModel
             Exercises.Remove(exercise);
             IsEmpty = Exercises.Count == 0;
             Palette.Haptic();
+        }
+    }
+
+    private async Task<string?> TemplateNameAsync(Workout workout)
+    {
+        if (workout.TemplateId is not { } templateId)
+            return null;
+        try
+        {
+            return (await _store.GetTemplateAsync(templateId)).Template.Name;
+        }
+        catch (FonteException)
+        {
+            return null; // The template was deleted since.
         }
     }
 
@@ -365,9 +420,12 @@ public sealed class WorkoutExerciseViewModel
 {
     private readonly IReadOnlyList<WorkoutSet> _previous;
 
-    public WorkoutExerciseViewModel(Core.Training.WorkoutEntry entry, WorkoutViewModel owner)
+    public WorkoutExerciseViewModel(Core.Training.WorkoutEntry entry, bool linkedFromPrevious, bool isLast, WorkoutViewModel owner)
     {
         var exercise = entry.Exercise;
+        IsLinkedToNext = entry.Item.LinkedToNext && !isLast;
+        IsLinkedFromPrevious = linkedFromPrevious;
+        TargetText = Target(exercise, entry.Item);
         ItemId = entry.Item.Id;
         Exercise = exercise;
         _previous = entry.PreviousSets;
@@ -391,6 +449,16 @@ public sealed class WorkoutExerciseViewModel
 
     public Exercise Exercise { get; }
 
+    /// <summary>Done back to back with the next exercise: no rest after its sets.</summary>
+    public bool IsLinkedToNext { get; }
+
+    public bool IsLinkedFromPrevious { get; }
+
+    /// <summary>What the template aims for: "Target 3 × 8 · 45 kg".</summary>
+    public string TargetText { get; }
+
+    public bool HasTarget => TargetText.Length > 0;
+
     public string Name { get; }
 
     public string MuscleText { get; }
@@ -411,6 +479,19 @@ public sealed class WorkoutExerciseViewModel
     public IAsyncRelayCommand AddSetCommand { get; }
 
     public IAsyncRelayCommand MenuCommand { get; }
+
+    private static string Target(Exercise exercise, WorkoutExercise item)
+    {
+        if (item.TargetSets is not { } sets)
+            return string.Empty;
+        var each = exercise.Tracking == Tracking.Time
+            ? item.TargetSeconds is { } seconds ? Loc.Seconds(seconds) : null
+            : item.TargetReps?.ToString(Loc.Culture);
+        var plan = each is null ? Loc.Count(sets, "Set") : $"{sets} × {each}";
+        if (exercise.Tracking == Tracking.WeightAndReps && item.TargetWeight is { } weight)
+            plan += $" · {Loc.Weight(weight)}";
+        return Loc.Format("Workout_Target", plan);
+    }
 
     /// <summary>The set after <paramref name="done"/>, when still blank, gets the same load and repetitions.</summary>
     public void PrefillAfter(SetRowViewModel done)

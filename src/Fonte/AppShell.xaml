@@ -15,6 +15,21 @@
             Icon="tab_workouts.png"
             Route="home" />
         <ShellContent
+            Title="{l:Tr Tab_Programs}"
+            ContentTemplate="{DataTemplate views:ProgramsPage}"
+            Icon="tab_programs.png"
+            Route="programs" />
+        <ShellContent
+            Title="{l:Tr Tab_Progress}"
+            ContentTemplate="{DataTemplate views:ProgressPage}"
+            Icon="tab_progress.png"
+            Route="progress" />
+        <ShellContent
+            Title="{l:Tr Tab_Body}"
+            ContentTemplate="{DataTemplate views:BodyPage}"
+            Icon="tab_body.png"
+            Route="body" />
+        <ShellContent
             Title="{l:Tr Tab_Exercises}"
             ContentTemplate="{DataTemplate views:ExercisesPage}"
             Icon="tab_exercises.png"

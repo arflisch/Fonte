@@ -121,15 +121,56 @@
                 </Border>
 
                 <!-- Progress -->
-                <Border IsVisible="{Binding HasProgress}" Padding="16,14,16,10" Style="{StaticResource Card}">
+                <Border IsVisible="{Binding HasProgress}" Padding="16,14,16,12" Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="2">
-                        <Label Style="{StaticResource Strong}" Text="{l:Tr Detail_Progress}" />
-                        <Label Style="{StaticResource Caption}" Text="{Binding ProgressHint}" />
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Style="{StaticResource Strong}" Text="{l:Tr Detail_Progress}" />
+                                <Label Style="{StaticResource Caption}" Text="{Binding ProgressHint}" />
+                            </VerticalStackLayout>
+                            <Border
+                                Grid.Column="1"
+                                Padding="3"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceMutedLight}, Dark={StaticResource SurfaceMutedDark}}"
+                                StrokeShape="RoundRectangle 12"
+                                StrokeThickness="0"
+                                VerticalOptions="Start">
+                                <Grid BindableLayout.ItemsSource="{Binding PeriodChips}" ColumnDefinitions="Auto,Auto,Auto">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:SelectableOption">
+                                            <Border
+                                                Grid.Column="{Binding Column}"
+                                                Padding="9,4"
+                                                c:Touch.Command="{Binding SelectCommand}"
+                                                BackgroundColor="Transparent"
+                                                StrokeShape="RoundRectangle 9"
+                                                StrokeThickness="0">
+                                                <Border.Triggers>
+                                                    <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
+                                                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}" />
+                                                    </DataTrigger>
+                                                </Border.Triggers>
+                                                <Label FontFamily="OpenSansSemibold" FontSize="12" Opacity="{Binding LabelOpacity}" Text="{Binding Label}" />
+                                            </Border>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </Grid>
+                            </Border>
+                        </Grid>
                         <c:SparklineView
                             Margin="0,12,0,0"
                             HeightRequest="120"
                             LineColor="{Binding Color}"
                             Points="{Binding Points}" />
+                        <Grid Margin="0,6,0,0" ColumnDefinitions="*,*">
+                            <Label FontSize="12" Style="{StaticResource Caption}" Text="{Binding ChartStartText}" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="12"
+                                HorizontalTextAlignment="End"
+                                Style="{StaticResource Caption}"
+                                Text="{Binding ChartEndText}" />
+                        </Grid>
                     </VerticalStackLayout>
                 </Border>
 
@@ -152,6 +193,11 @@
                                         <VerticalStackLayout Spacing="2">
                                             <Label FontFamily="OpenSansSemibold" Text="{Binding DayText}" />
                                             <Label Style="{StaticResource Caption}" Text="{Binding SetsText}" />
+                                            <Label
+                                                FontSize="12"
+                                                IsVisible="{Binding HasVolume}"
+                                                Style="{StaticResource Caption}"
+                                                Text="{Binding VolumeText}" />
                                         </VerticalStackLayout>
                                         <c:IconView
                                             Grid.Column="1"
@@ -167,6 +213,19 @@
                         </VerticalStackLayout>
                     </Border>
                 </VerticalStackLayout>
+
+                <!-- Technique -->
+                <Border IsVisible="{Binding HasTip}" Padding="16,14" Style="{StaticResource Card}">
+                    <Grid ColumnDefinitions="36,*" ColumnSpacing="12">
+                        <Border BackgroundColor="#26534AB7" Style="{StaticResource RowIcon}" VerticalOptions="Start">
+                            <c:IconView Color="#534AB7" Data="{x:Static c:Icons.Check}" StrokeWidth="2.4" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                            <Label Style="{StaticResource RowTitle}" Text="{l:Tr Detail_Tips}" />
+                            <Label Style="{StaticResource Secondary}" Text="{Binding Tip}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
 
                 <Label
                     Padding="0,6"
