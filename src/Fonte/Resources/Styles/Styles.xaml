@@ -68,7 +68,7 @@
     </Style>
 
     <Style TargetType="Switch">
-        <Setter Property="OnColor" Value="{StaticResource Primary}" />
+        <Setter Property="OnColor" Value="{DynamicResource Primary}" />
         <Setter Property="ThumbColor" Value="White" />
     </Style>
 
@@ -119,7 +119,7 @@
     </Style>
 
     <Style x:Key="LinkLabel" TargetType="Label">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+        <Setter Property="TextColor" Value="{DynamicResource Accent}" />
         <Setter Property="FontFamily" Value="OpenSansSemibold" />
         <Setter Property="FontSize" Value="15" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
@@ -165,7 +165,7 @@
         <Setter Property="StrokeThickness" Value="0" />
         <Setter Property="StrokeShape" Value="RoundRectangle 18" />
         <Setter Property="HeightRequest" Value="56" />
-        <Setter Property="Background" Value="{StaticResource AccentGradient}" />
+        <Setter Property="Background" Value="{DynamicResource AccentGradient}" />
     </Style>
 
     <Style x:Key="PrimaryButtonText" TargetType="Label">

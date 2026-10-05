@@ -1383,4 +1383,31 @@
   <data name="Tip_jump_rope" xml:space="preserve">
     <value>Kleine sprongetjes op de voorvoet, de polsen draaien het touw, ellebogen dicht bij het lichaam.</value>
   </data>
+  <data name="Settings_Accent" xml:space="preserve">
+    <value>Kleur van de app</value>
+  </data>
+  <data name="Accent_Violet" xml:space="preserve">
+    <value>Paars</value>
+  </data>
+  <data name="Accent_Blue" xml:space="preserve">
+    <value>Blauw</value>
+  </data>
+  <data name="Accent_Teal" xml:space="preserve">
+    <value>Turquoise</value>
+  </data>
+  <data name="Accent_Green" xml:space="preserve">
+    <value>Groen</value>
+  </data>
+  <data name="Accent_Orange" xml:space="preserve">
+    <value>Oranje</value>
+  </data>
+  <data name="Accent_Red" xml:space="preserve">
+    <value>Rood</value>
+  </data>
+  <data name="Accent_Pink" xml:space="preserve">
+    <value>Roze</value>
+  </data>
+  <data name="Accent_Slate" xml:space="preserve">
+    <value>Leisteen</value>
+  </data>
 </root>

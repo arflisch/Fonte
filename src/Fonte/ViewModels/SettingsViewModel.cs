@@ -21,6 +21,16 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
         _isRestTimerEnabled = settings.RestTimerEnabled;
         _goalName = NameOf(settings.Goal);
         _sessionsText = Loc.Format("Settings_SessionsValue", settings.SessionsPerWeek);
+        var accent = settings.Accent;
+        _accentName = accent.Name;
+        AccentOptions = AccentTheme.All
+            .Select((a, i) => new SelectableOption(a.Key, i, AccentTheme.All.Count, SelectAccent)
+            {
+                Label = a.Name,
+                Accent = a.Base,
+                IsSelected = a == accent,
+            })
+            .ToList();
         var available = settings.Plates;
         PlateOptions = Plates.Standard
             .Select((p, i) => new SelectableOption(p.ToString(System.Globalization.CultureInfo.InvariantCulture), i, int.MaxValue, TogglePlate)
@@ -36,6 +46,12 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
     public string AppVersion => $"Fonte {AppInfo.Current.VersionString}";
 
     public IReadOnlyList<SelectableOption> PlateOptions { get; }
+
+    /// <summary>The colours the app can take, as swatches.</summary>
+    public IReadOnlyList<SelectableOption> AccentOptions { get; }
+
+    [ObservableProperty]
+    private string _accentName;
 
     [ObservableProperty]
     private string _languageName;
@@ -72,6 +88,7 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
 
         _settings.Language = language;
         LanguageName = language.NativeName;
+        AccentName = _settings.Accent.Name;
         RestText = Loc.Seconds(_settings.RestSeconds);
         GoalName = NameOf(_settings.Goal);
         SessionsText = Loc.Format("Settings_SessionsValue", _settings.SessionsPerWeek);
@@ -129,6 +146,16 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
         var sessions = AppSettings.SessionChoices.First(s => choice.Replace("✓", string.Empty).Trim() == Loc.Format("Settings_SessionsValue", s));
         _settings.SessionsPerWeek = sessions;
         SessionsText = Loc.Format("Settings_SessionsValue", sessions);
+    }
+
+    private void SelectAccent(SelectableOption option)
+    {
+        foreach (var item in AccentOptions)
+            item.IsSelected = item == option;
+        var accent = AccentTheme.Find(option.Value);
+        _settings.Accent = accent;
+        AccentName = accent.Name;
+        Palette.Haptic();
     }
 
     private void TogglePlate(SelectableOption option)

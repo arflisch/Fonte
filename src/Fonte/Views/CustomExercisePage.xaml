@@ -21,7 +21,7 @@
                 Style="{StaticResource Chip}">
                 <Border.Triggers>
                     <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
-                        <Setter Property="Background" Value="{StaticResource AccentGradient}" />
+                        <Setter Property="Background" Value="{DynamicResource AccentGradient}" />
                         <Setter Property="Stroke" Value="Transparent" />
                     </DataTrigger>
                 </Border.Triggers>

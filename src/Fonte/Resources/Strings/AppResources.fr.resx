@@ -1383,4 +1383,31 @@
   <data name="Tip_jump_rope" xml:space="preserve">
     <value>Petits sauts sur l'avant des pieds, ce sont les poignets qui tournent la corde, coudes près du corps.</value>
   </data>
+  <data name="Settings_Accent" xml:space="preserve">
+    <value>Couleur de l'app</value>
+  </data>
+  <data name="Accent_Violet" xml:space="preserve">
+    <value>Violet</value>
+  </data>
+  <data name="Accent_Blue" xml:space="preserve">
+    <value>Bleu</value>
+  </data>
+  <data name="Accent_Teal" xml:space="preserve">
+    <value>Turquoise</value>
+  </data>
+  <data name="Accent_Green" xml:space="preserve">
+    <value>Vert</value>
+  </data>
+  <data name="Accent_Orange" xml:space="preserve">
+    <value>Orange</value>
+  </data>
+  <data name="Accent_Red" xml:space="preserve">
+    <value>Rouge</value>
+  </data>
+  <data name="Accent_Pink" xml:space="preserve">
+    <value>Rose</value>
+  </data>
+  <data name="Accent_Slate" xml:space="preserve">
+    <value>Ardoise</value>
+  </data>
 </root>

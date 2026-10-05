@@ -217,8 +217,8 @@
                 <!-- Technique -->
                 <Border IsVisible="{Binding HasTip}" Padding="16,14" Style="{StaticResource Card}">
                     <Grid ColumnDefinitions="36,*" ColumnSpacing="12">
-                        <Border BackgroundColor="#26534AB7" Style="{StaticResource RowIcon}" VerticalOptions="Start">
-                            <c:IconView Color="#534AB7" Data="{x:Static c:Icons.Check}" StrokeWidth="2.4" />
+                        <Border BackgroundColor="{DynamicResource AccentTint}" Style="{StaticResource RowIcon}" VerticalOptions="Start">
+                            <c:IconView Color="{DynamicResource Primary}" Data="{x:Static c:Icons.Check}" StrokeWidth="2.4" />
                         </Border>
                         <VerticalStackLayout Grid.Column="1" Spacing="2">
                             <Label Style="{StaticResource RowTitle}" Text="{l:Tr Detail_Tips}" />

@@ -10,11 +10,8 @@ public class AppDelegate : MauiUIApplicationDelegate
 
 	public override bool FinishedLaunching(UIApplication application, NSDictionary? launchOptions)
 	{
-		// Selected tab in the brand violet. Only the tint is set, so the iOS 26 glass tab bar keeps its look.
-		UITabBar.Appearance.TintColor = new UIColor(traits =>
-			traits.UserInterfaceStyle == UIUserInterfaceStyle.Dark
-				? UIColor.FromRGB(0xAF, 0xA9, 0xEC)
-				: UIColor.FromRGB(0x53, 0x4A, 0xB7));
+		// Selected tab in the accent colour. Only the tint is set, so the iOS 26 glass tab bar keeps its look.
+		UITabBar.Appearance.TintColor = Fonte.Services.AccentTheme.TabTint();
 		return base.FinishedLaunching(application, launchOptions);
 	}
 }

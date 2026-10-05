@@ -70,7 +70,7 @@
                                 FontFamily="OpenSansSemibold"
                                 FontSize="14"
                                 Text="{Binding AverageText}"
-                                TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                TextColor="{DynamicResource Accent}" />
                         </Grid>
                         <Label Style="{StaticResource Caption}" Text="{Binding PeriodText}" />
                         <c:BarChartView
@@ -78,7 +78,7 @@
                             HeightRequest="150"
                             LabelColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"
                             Labels="{Binding WeekLabels}"
-                            PositiveColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                            PositiveColor="{DynamicResource Accent}"
                             Values="{Binding Volumes}" />
                     </VerticalStackLayout>
                 </Border>

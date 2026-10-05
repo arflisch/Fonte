@@ -88,11 +88,11 @@
                                 <Border Padding="14,12,14,14" Style="{StaticResource Card}">
                                     <Border.Triggers>
                                         <DataTrigger Binding="{Binding IsLinkedFromPrevious}" TargetType="Border" Value="True">
-                                            <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                            <Setter Property="Stroke" Value="{DynamicResource Accent}" />
                                             <Setter Property="StrokeThickness" Value="1.5" />
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding IsLinkedToNext}" TargetType="Border" Value="True">
-                                            <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                            <Setter Property="Stroke" Value="{DynamicResource Accent}" />
                                             <Setter Property="StrokeThickness" Value="1.5" />
                                         </DataTrigger>
                                     </Border.Triggers>
@@ -158,10 +158,10 @@
                                     <BoxView
                                         HorizontalOptions="Center"
                                         WidthRequest="2"
-                                        Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                        Color="{DynamicResource Accent}" />
                                     <Border
                                         Padding="10,3"
-                                        Background="{StaticResource AccentGradient}"
+                                        Background="{DynamicResource AccentGradient}"
                                         HorizontalOptions="Center"
                                         StrokeShape="RoundRectangle 10"
                                         StrokeThickness="0"
@@ -192,7 +192,7 @@
                 <Border Padding="14" c:Touch.Command="{Binding AddExerciseCommand}" Style="{StaticResource Card}">
                     <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
                         <c:IconView
-                            Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                            Color="{DynamicResource Accent}"
                             Data="{x:Static c:Icons.Plus}"
                             HeightRequest="18"
                             StrokeWidth="2.6"

@@ -75,8 +75,8 @@
                 <Border Padding="16,0" Style="{StaticResource Card}">
                     <VerticalStackLayout>
                         <Grid Style="{StaticResource Row}">
-                            <Border BackgroundColor="#26534AB7" Style="{StaticResource RowIcon}">
-                                <c:IconView Color="#534AB7" Data="{x:Static c:Icons.Timer}" />
+                            <Border BackgroundColor="{DynamicResource AccentTint}" Style="{StaticResource RowIcon}">
+                                <c:IconView Color="{DynamicResource Primary}" Data="{x:Static c:Icons.Timer}" />
                             </Border>
                             <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
                                 <Label Style="{StaticResource RowTitle}" Text="{l:Tr Settings_RestTimer}" />
@@ -123,7 +123,7 @@
                                         Style="{StaticResource Chip}">
                                         <Border.Triggers>
                                             <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
-                                                <Setter Property="Background" Value="{StaticResource AccentGradient}" />
+                                                <Setter Property="Background" Value="{DynamicResource AccentGradient}" />
                                                 <Setter Property="Stroke" Value="Transparent" />
                                             </DataTrigger>
                                         </Border.Triggers>
@@ -140,7 +140,7 @@
                         </FlexLayout>
                         <HorizontalStackLayout c:Touch.Command="{Binding OpenPlatesCommand}" Spacing="6">
                             <c:IconView
-                                Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                                Color="{DynamicResource Accent}"
                                 Data="{x:Static c:Icons.Plate}"
                                 HeightRequest="18"
                                 VerticalOptions="Center"
@@ -153,21 +153,70 @@
                 <!-- Display -->
                 <Label Margin="0,14,0,0" Style="{StaticResource FieldLabel}" Text="{l:Tr Settings_Display}" />
                 <Border Padding="16,0" Style="{StaticResource Card}">
-                    <Grid c:Touch.Command="{Binding ChooseLanguageCommand}" Style="{StaticResource Row}">
-                        <Border BackgroundColor="#260891B2" Style="{StaticResource RowIcon}">
-                            <c:IconView Color="#0891B2" Data="{x:Static c:Icons.Globe}" />
-                        </Border>
-                        <Label Grid.Column="1" Style="{StaticResource RowTitle}" Text="{l:Tr Settings_Language}" VerticalOptions="Center" />
-                        <HorizontalStackLayout Grid.Column="2" Spacing="6" VerticalOptions="Center">
-                            <Label Style="{StaticResource Secondary}" Text="{Binding LanguageName}" VerticalOptions="Center" />
-                            <c:IconView
-                                Color="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}"
-                                Data="{x:Static c:Icons.ChevronRight}"
-                                HeightRequest="16"
-                                VerticalOptions="Center"
-                                WidthRequest="16" />
-                        </HorizontalStackLayout>
-                    </Grid>
+                    <VerticalStackLayout>
+                        <!-- Colour of the app -->
+                        <Grid Style="{StaticResource Row}">
+                            <Border BackgroundColor="{DynamicResource AccentTint}" Style="{StaticResource RowIcon}">
+                                <c:IconView Color="{DynamicResource Primary}" Data="{x:Static c:Icons.Palette}" />
+                            </Border>
+                            <Label Grid.Column="1" Style="{StaticResource RowTitle}" Text="{l:Tr Settings_Accent}" VerticalOptions="Center" />
+                            <Label Grid.Column="2" Style="{StaticResource Secondary}" Text="{Binding AccentName}" VerticalOptions="Center" />
+                        </Grid>
+                        <Grid
+                            Margin="0,0,0,14"
+                            BindableLayout.ItemsSource="{Binding AccentOptions}"
+                            ColumnDefinitions="*,*,*,*,*,*,*,*">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:SelectableOption">
+                                    <Grid
+                                        Grid.Column="{Binding Column}"
+                                        c:Touch.Command="{Binding SelectCommand}"
+                                        HeightRequest="34"
+                                        HorizontalOptions="Center"
+                                        WidthRequest="34"
+                                        SemanticProperties.Description="{Binding Label}">
+                                        <!-- Ring around the colour in use -->
+                                        <Ellipse
+                                            IsVisible="{Binding IsSelected}"
+                                            Stroke="{Binding Accent}"
+                                            StrokeThickness="2" />
+                                        <Ellipse Fill="{Binding Accent}" Margin="0">
+                                            <Ellipse.Triggers>
+                                                <DataTrigger Binding="{Binding IsSelected}" TargetType="Ellipse" Value="True">
+                                                    <Setter Property="Margin" Value="5" />
+                                                </DataTrigger>
+                                            </Ellipse.Triggers>
+                                        </Ellipse>
+                                        <c:IconView
+                                            Color="White"
+                                            Data="{x:Static c:Icons.Check}"
+                                            HeightRequest="14"
+                                            HorizontalOptions="Center"
+                                            IsVisible="{Binding IsSelected}"
+                                            StrokeWidth="3"
+                                            VerticalOptions="Center"
+                                            WidthRequest="14" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </Grid>
+                        <BoxView Style="{StaticResource Divider}" />
+                        <Grid c:Touch.Command="{Binding ChooseLanguageCommand}" Style="{StaticResource Row}">
+                            <Border BackgroundColor="#260891B2" Style="{StaticResource RowIcon}">
+                                <c:IconView Color="#0891B2" Data="{x:Static c:Icons.Globe}" />
+                            </Border>
+                            <Label Grid.Column="1" Style="{StaticResource RowTitle}" Text="{l:Tr Settings_Language}" VerticalOptions="Center" />
+                            <HorizontalStackLayout Grid.Column="2" Spacing="6" VerticalOptions="Center">
+                                <Label Style="{StaticResource Secondary}" Text="{Binding LanguageName}" VerticalOptions="Center" />
+                                <c:IconView
+                                    Color="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}"
+                                    Data="{x:Static c:Icons.ChevronRight}"
+                                    HeightRequest="16"
+                                    VerticalOptions="Center"
+                                    WidthRequest="16" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
                 </Border>
 
                 <Label

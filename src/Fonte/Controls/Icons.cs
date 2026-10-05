@@ -33,6 +33,7 @@ public static class Icons
     public const string Ruler = "M3 15L15 3l6 6L9 21zM7 11l2 2M10 8l2 2M13 5l2 2";
     public const string Flame = "M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 0.3 2 1.3 3 2.5 3.5C12 9 11 6 12 3z";
     public const string Warning = "M12 4l9 16H3zM12 10v4M12 17h0.01";
+    public const string Palette = "M12 3a9 9 0 1 0 0 18c1 0 1.5-0.8 1.5-1.5 0-0.4-0.2-0.8-0.4-1.1-0.3-0.3-0.4-0.6-0.4-1.1 0-0.8 0.7-1.5 1.5-1.5H16a5 5 0 0 0 5-5c0-4.4-4-7.8-9-7.8zM7.5 12.5h0.01M9.5 8h0.01M14.5 8h0.01M17 11.5h0.01";
     public const string Trophy = "M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v6M8 20h8";
 
     // Equipment

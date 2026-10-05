@@ -1383,4 +1383,31 @@
   <data name="Tip_jump_rope" xml:space="preserve">
     <value>Small jumps on the balls of the feet, wrists turning the rope, elbows close to the body.</value>
   </data>
+  <data name="Settings_Accent" xml:space="preserve">
+    <value>App colour</value>
+  </data>
+  <data name="Accent_Violet" xml:space="preserve">
+    <value>Violet</value>
+  </data>
+  <data name="Accent_Blue" xml:space="preserve">
+    <value>Blue</value>
+  </data>
+  <data name="Accent_Teal" xml:space="preserve">
+    <value>Teal</value>
+  </data>
+  <data name="Accent_Green" xml:space="preserve">
+    <value>Green</value>
+  </data>
+  <data name="Accent_Orange" xml:space="preserve">
+    <value>Orange</value>
+  </data>
+  <data name="Accent_Red" xml:space="preserve">
+    <value>Red</value>
+  </data>
+  <data name="Accent_Pink" xml:space="preserve">
+    <value>Pink</value>
+  </data>
+  <data name="Accent_Slate" xml:space="preserve">
+    <value>Slate</value>
+  </data>
 </root>

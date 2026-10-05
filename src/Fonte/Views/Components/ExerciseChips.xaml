@@ -35,7 +35,7 @@
                     <Border c:Touch.Command="{Binding SelectCommand}" Style="{StaticResource Chip}">
                         <Border.Triggers>
                             <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
-                                <Setter Property="Background" Value="{StaticResource AccentGradient}" />
+                                <Setter Property="Background" Value="{DynamicResource AccentGradient}" />
                                 <Setter Property="Stroke" Value="Transparent" />
                             </DataTrigger>
                         </Border.Triggers>
@@ -64,14 +64,14 @@
                         Style="{StaticResource Chip}">
                         <Border.Triggers>
                             <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
-                                <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
-                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PrimarySoftLight}, Dark={StaticResource PrimarySoftDark}}" />
+                                <Setter Property="Stroke" Value="{DynamicResource Accent}" />
+                                <Setter Property="BackgroundColor" Value="{DynamicResource AccentSoft}" />
                             </DataTrigger>
                         </Border.Triggers>
                         <Label FontSize="13" Style="{StaticResource Secondary}" Text="{Binding Label}">
                             <Label.Triggers>
                                 <DataTrigger Binding="{Binding IsSelected}" TargetType="Label" Value="True">
-                                    <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                    <Setter Property="TextColor" Value="{DynamicResource Accent}" />
                                     <Setter Property="FontFamily" Value="OpenSansSemibold" />
                                 </DataTrigger>
                             </Label.Triggers>

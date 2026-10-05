@@ -16,7 +16,7 @@
 
     <ContentPage.Resources>
         <Style x:Key="StepButton" TargetType="Border">
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PrimarySoftLight}, Dark={StaticResource PrimarySoftDark}}" />
+            <Setter Property="BackgroundColor" Value="{DynamicResource AccentSoft}" />
             <Setter Property="HeightRequest" Value="52" />
             <Setter Property="WidthRequest" Value="64" />
             <Setter Property="StrokeShape" Value="RoundRectangle 16" />
@@ -49,7 +49,7 @@
                                     FontSize="17"
                                     HorizontalOptions="Center"
                                     Text="{Binding RemoveText}"
-                                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                                    TextColor="{DynamicResource Accent}"
                                     VerticalOptions="Center" />
                             </Border>
                             <HorizontalStackLayout Grid.Column="1" HorizontalOptions="Center" Spacing="4">
@@ -75,7 +75,7 @@
                                     FontSize="17"
                                     HorizontalOptions="Center"
                                     Text="{Binding AddText}"
-                                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                                    TextColor="{DynamicResource Accent}"
                                     VerticalOptions="Center" />
                             </Border>
                         </Grid>
@@ -91,7 +91,7 @@
                                         Style="{StaticResource Chip}">
                                         <Border.Triggers>
                                             <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
-                                                <Setter Property="Background" Value="{StaticResource AccentGradient}" />
+                                                <Setter Property="Background" Value="{DynamicResource AccentGradient}" />
                                                 <Setter Property="Stroke" Value="Transparent" />
                                             </DataTrigger>
                                         </Border.Triggers>

@@ -39,7 +39,7 @@
             <Setter Property="Placeholder" Value="0" />
         </Style>
         <Style x:Key="RestButton" TargetType="Border">
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#FFFFFF, Dark=#3C3489}" />
+            <Setter Property="BackgroundColor" Value="{DynamicResource AccentButton}" />
             <Setter Property="StrokeThickness" Value="0" />
             <Setter Property="StrokeShape" Value="RoundRectangle 14" />
             <Setter Property="HeightRequest" Value="40" />
@@ -52,7 +52,7 @@
             <Setter Property="FontSize" Value="15" />
             <Setter Property="HorizontalOptions" Value="Center" />
             <Setter Property="VerticalOptions" Value="Center" />
-            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark=#FFFFFF}" />
+            <Setter Property="TextColor" Value="{DynamicResource AccentOnButton}" />
         </Style>
     </ContentPage.Resources>
 
@@ -76,13 +76,13 @@
                     FontSize="14"
                     HorizontalTextAlignment="Center"
                     Text="{Binding ElapsedText}"
-                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                    TextColor="{DynamicResource Accent}" />
             </VerticalStackLayout>
             <Border
                 Grid.Column="2"
                 Padding="18,0"
                 c:Touch.Command="{Binding FinishCommand}"
-                Background="{StaticResource AccentGradient}"
+                Background="{DynamicResource AccentGradient}"
                 HeightRequest="42"
                 StrokeShape="RoundRectangle 21"
                 StrokeThickness="0"
@@ -122,11 +122,11 @@
                             <Border Padding="14,14,14,4" Style="{StaticResource Card}">
                                 <Border.Triggers>
                                     <DataTrigger Binding="{Binding IsLinkedFromPrevious}" TargetType="Border" Value="True">
-                                        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                        <Setter Property="Stroke" Value="{DynamicResource Accent}" />
                                         <Setter Property="StrokeThickness" Value="1.5" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding IsLinkedToNext}" TargetType="Border" Value="True">
-                                        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                        <Setter Property="Stroke" Value="{DynamicResource Accent}" />
                                         <Setter Property="StrokeThickness" Value="1.5" />
                                     </DataTrigger>
                                 </Border.Triggers>
@@ -145,14 +145,14 @@
                                             <Border
                                                 Margin="0,6,0,0"
                                                 Padding="8,3"
-                                                BackgroundColor="{AppThemeBinding Light={StaticResource PrimarySoftLight}, Dark={StaticResource PrimarySoftDark}}"
+                                                BackgroundColor="{DynamicResource AccentSoft}"
                                                 HorizontalOptions="Start"
                                                 IsVisible="{Binding HasTarget}"
                                                 StrokeShape="RoundRectangle 9"
                                                 StrokeThickness="0">
                                                 <HorizontalStackLayout Spacing="4">
                                                     <c:IconView
-                                                        Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                                                        Color="{DynamicResource Accent}"
                                                         Data="{x:Static c:Icons.Target}"
                                                         HeightRequest="13"
                                                         VerticalOptions="Center"
@@ -161,7 +161,7 @@
                                                         FontFamily="OpenSansSemibold"
                                                         FontSize="12"
                                                         Text="{Binding TargetText}"
-                                                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                                                        TextColor="{DynamicResource Accent}"
                                                         VerticalOptions="Center" />
                                                 </HorizontalStackLayout>
                                             </Border>
@@ -286,7 +286,7 @@
                                         HorizontalOptions="Center"
                                         Spacing="6">
                                         <c:IconView
-                                            Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                                            Color="{DynamicResource Accent}"
                                             Data="{x:Static c:Icons.Plus}"
                                             HeightRequest="16"
                                             StrokeWidth="2.6"
@@ -302,10 +302,10 @@
                                 <BoxView
                                     HorizontalOptions="Center"
                                     WidthRequest="2"
-                                    Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                    Color="{DynamicResource Accent}" />
                                 <Border
                                     Padding="10,3"
-                                    Background="{StaticResource AccentGradient}"
+                                    Background="{DynamicResource AccentGradient}"
                                     HorizontalOptions="Center"
                                     StrokeShape="RoundRectangle 10"
                                     StrokeThickness="0"
@@ -369,16 +369,16 @@
             <Border
                 Margin="16,0,16,16"
                 Padding="16,14"
-                BackgroundColor="{AppThemeBinding Light={StaticResource PrimarySoftLight}, Dark={StaticResource PrimarySoftDark}}"
+                BackgroundColor="{DynamicResource AccentSoft}"
                 IsVisible="{Binding IsResting}"
-                Shadow="{StaticResource FloatingShadow}"
+                Shadow="{DynamicResource FloatingShadow}"
                 StrokeShape="RoundRectangle 24"
                 StrokeThickness="0"
                 VerticalOptions="End">
                 <VerticalStackLayout Spacing="12">
                     <Grid ColumnDefinitions="Auto,*,Auto,Auto,Auto" ColumnSpacing="8">
                         <c:IconView
-                            Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                            Color="{DynamicResource Accent}"
                             Data="{x:Static c:Icons.Timer}"
                             HeightRequest="26"
                             VerticalOptions="Center"
@@ -388,12 +388,12 @@
                                 FontFamily="OpenSansSemibold"
                                 FontSize="12"
                                 Text="{l:Tr Workout_Rest}"
-                                TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                TextColor="{DynamicResource Accent}" />
                             <Label
                                 FontFamily="OpenSansSemibold"
                                 FontSize="28"
                                 Text="{Binding RestText}"
-                                TextColor="{AppThemeBinding Light=#26215C, Dark=#FFFFFF}" />
+                                TextColor="{DynamicResource AccentInk}" />
                         </VerticalStackLayout>
                         <Border Grid.Column="2" c:Touch.Command="{Binding RemoveRestCommand}" Style="{StaticResource RestButton}">
                             <Label Style="{StaticResource RestButtonText}" Text="−15" />
@@ -404,16 +404,16 @@
                         <Border
                             Grid.Column="4"
                             c:Touch.Command="{Binding SkipRestCommand}"
-                            Background="{StaticResource AccentGradient}"
+                            Background="{DynamicResource AccentGradient}"
                             Style="{StaticResource RestButton}">
                             <Label Style="{StaticResource RestButtonText}" Text="{l:Tr Workout_Skip}" TextColor="White" />
                         </Border>
                     </Grid>
                     <c:ProgressPill
-                        FillColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                        FillColor="{DynamicResource Accent}"
                         HeightRequest="6"
                         Progress="{Binding RestProgress}"
-                        TrackColor="{AppThemeBinding Light=#D6D3F7, Dark=#3C3489}" />
+                        TrackColor="{DynamicResource AccentTrack}" />
                 </VerticalStackLayout>
             </Border>
 

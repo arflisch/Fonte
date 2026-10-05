@@ -109,10 +109,10 @@
                                         HorizontalOptions="Center"
                                         Opacity="{Binding Opacity}"
                                         WidthRequest="38">
-                                        <Ellipse Fill="{StaticResource AccentGradient}" IsVisible="{Binding IsDone}" />
+                                        <Ellipse Fill="{DynamicResource AccentGradient}" IsVisible="{Binding IsDone}" />
                                         <Ellipse
                                             IsVisible="{Binding IsTodayToDo}"
-                                            Stroke="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                                            Stroke="{DynamicResource Accent}"
                                             StrokeThickness="2" />
                                         <Label
                                             FontFamily="OpenSansSemibold"
@@ -170,7 +170,7 @@
                             <Border Padding="14" c:Touch.Command="{Binding OpenCommand}" Style="{StaticResource Card}">
                                 <Grid ColumnDefinitions="52,*,Auto" ColumnSpacing="14">
                                     <Border
-                                        BackgroundColor="{AppThemeBinding Light={StaticResource PrimarySoftLight}, Dark={StaticResource PrimarySoftDark}}"
+                                        BackgroundColor="{DynamicResource AccentSoft}"
                                         HeightRequest="52"
                                         StrokeShape="RoundRectangle 16"
                                         StrokeThickness="0"
@@ -182,13 +182,13 @@
                                                 FontSize="20"
                                                 HorizontalOptions="Center"
                                                 Text="{Binding DayNumber}"
-                                                TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                                TextColor="{DynamicResource Accent}" />
                                             <Label
                                                 FontFamily="OpenSansSemibold"
                                                 FontSize="10"
                                                 HorizontalOptions="Center"
                                                 Text="{Binding Month}"
-                                                TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                                TextColor="{DynamicResource Accent}" />
                                         </VerticalStackLayout>
                                     </Border>
                                     <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">

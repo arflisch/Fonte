@@ -13,6 +13,7 @@ public partial class App : Application
     public App(AppShell shell, FonteStore store, AppSettings settings, IPreferences preferences)
     {
         InitializeComponent();
+        AccentTheme.Apply(settings.Accent);
         _shell = shell;
         _preferences = preferences;
 

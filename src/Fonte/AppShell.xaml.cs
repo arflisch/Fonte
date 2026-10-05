@@ -24,9 +24,18 @@ public partial class AppShell : Shell
 #if ANDROID
         // Android draws an opaque bottom bar: match the app's surfaces and accent (iOS keeps its native glass bar).
         this.SetAppThemeColor(TabBarBackgroundColorProperty, Color.FromArgb("#FFFFFF"), Color.FromArgb("#161922"));
-        this.SetAppThemeColor(TabBarForegroundColorProperty, Color.FromArgb("#534AB7"), Color.FromArgb("#AFA9EC"));
-        this.SetAppThemeColor(TabBarTitleColorProperty, Color.FromArgb("#534AB7"), Color.FromArgb("#AFA9EC"));
         this.SetAppThemeColor(TabBarUnselectedColorProperty, Color.FromArgb("#94A3B8"), Color.FromArgb("#5B6475"));
+        ColorTabs();
+        AccentTheme.Changed += (_, _) => ColorTabs();
 #endif
     }
+
+#if ANDROID
+    private void ColorTabs()
+    {
+        var accent = AccentTheme.Current;
+        this.SetAppThemeColor(TabBarForegroundColorProperty, accent.Base, accent.OnDark);
+        this.SetAppThemeColor(TabBarTitleColorProperty, accent.Base, accent.OnDark);
+    }
+#endif
 }

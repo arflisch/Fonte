@@ -29,9 +29,9 @@ Carnet de musculation hors ligne : on note chaque série pendant la séance, l'a
 - **Corps** (quatrième onglet) : **poids** et courbe sur 3 mois, évolution sur 8 semaines, **objectif de poids** avec progression ; **mensurations** (taille, poitrine, bras, cuisse, hanches) avec l'écart depuis la mesure précédente ; **photos de progression** prises ou choisies, gardées dans l'app (pas dans la photothèque), **verrouillées par Face ID**, à comparer avant / après.
 - **Exercices** (cinquième onglet) : 51 exercices intégrés avec **conseils d'exécution**, filtres par groupe musculaire et par **matériel**, recherche sans accents ; chaque fiche montre le record, le **1RM estimé**, la progression sur 3 mois, 1 an ou tout, et l'historique avec le volume de chaque séance. On peut créer ses propres exercices.
 - **Calculateur de disques** : disques à mettre de chaque côté pour une charge, barre de 20, 15 ou 10 kg, **échauffement proposé** (barre, puis environ 40, 60 et 80 %) ; les disques disponibles se règlent dans les réglages.
-- **Réglages** : objectif, séances par semaine, minuteur et durée du repos, disques disponibles, langue.
+- **Réglages** : objectif, séances par semaine, minuteur et durée du repos, disques disponibles, **couleur de l'app** (violet, bleu, turquoise, vert, orange, rouge, rose ou ardoise, appliquée aussitôt, en clair comme en sombre), langue.
 - **Langues** : français, néerlandais et anglais (par défaut : la langue du téléphone), changement immédiat.
-- **Thème clair / sombre** automatique.
+- **Thème clair / sombre** automatique. La couleur d'accent vient de `Services/AccentTheme.cs` : les pages l'utilisent par des ressources dynamiques (`Accent`, `AccentSoft`, `HeroGradient`…), redéfinies quand on change de couleur ou de thème. L'icône et l'écran de lancement restent violets.
 
 ## Persistance
 

@@ -17,6 +17,7 @@ public sealed class AppSettings
     private const string GoalWeightKey = "goal_weight";
     private const string BarKey = "bar_weight";
     private const string PlatesKey = "plates";
+    private const string AccentKey = "accent";
 
     /// <summary>Rest durations offered, in seconds.</summary>
     public static readonly IReadOnlyList<int> RestChoices = [30, 45, 60, 90, 120, 150, 180, 240, 300];
@@ -110,6 +111,17 @@ public sealed class AppSettings
         }
         set => Update(() => _preferences.Set(PlatesKey,
             string.Join(';', value.Select(v => v.ToString(CultureInfo.InvariantCulture)))));
+    }
+
+    /// <summary>The app's colour (<see cref="AccentTheme"/>); violet by default.</summary>
+    public AccentColor Accent
+    {
+        get => AccentTheme.Find(_preferences.Get<string?>(AccentKey, null));
+        set => Update(() =>
+        {
+            _preferences.Set(AccentKey, value.Key);
+            AccentTheme.Apply(value);
+        });
     }
 
     private void Update(Action write)

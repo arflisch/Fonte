@@ -25,7 +25,7 @@
                 Style="{StaticResource IconButton}"
                 VerticalOptions="Center"
                 SemanticProperties.Description="{l:Tr Exercise_New}">
-                <c:IconView Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" Data="{x:Static c:Icons.Plus}" StrokeWidth="2.4" />
+                <c:IconView Color="{DynamicResource Accent}" Data="{x:Static c:Icons.Plus}" StrokeWidth="2.4" />
             </Border>
         </Grid>
 

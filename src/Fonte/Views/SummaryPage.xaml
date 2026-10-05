@@ -43,8 +43,8 @@
 
                 <!-- Title and key figures -->
                 <Border
-                    Background="{StaticResource HeroGradient}"
-                    Shadow="{StaticResource FloatingShadow}"
+                    Background="{DynamicResource HeroGradient}"
+                    Shadow="{DynamicResource FloatingShadow}"
                     StrokeShape="RoundRectangle 28"
                     StrokeThickness="0">
                     <Grid>
@@ -248,7 +248,7 @@
                             FontFamily="OpenSansSemibold"
                             FontSize="13"
                             Text="{Binding FeelingText}"
-                            TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                            TextColor="{DynamicResource Accent}" />
                     </Grid>
                     <Grid BindableLayout.ItemsSource="{Binding Feelings}" ColumnDefinitions="*,*,*,*,*" ColumnSpacing="8">
                         <BindableLayout.ItemTemplate>
@@ -263,8 +263,8 @@
                                     Padding="0">
                                     <Border.Triggers>
                                         <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
-                                            <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
-                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PrimarySoftLight}, Dark={StaticResource PrimarySoftDark}}" />
+                                            <Setter Property="Stroke" Value="{DynamicResource Accent}" />
+                                            <Setter Property="BackgroundColor" Value="{DynamicResource AccentSoft}" />
                                         </DataTrigger>
                                     </Border.Triggers>
                                     <Label

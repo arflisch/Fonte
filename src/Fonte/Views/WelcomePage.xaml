@@ -19,7 +19,7 @@
             <Setter Property="ColumnSpacing" Value="14" />
         </Style>
         <Style x:Key="FeatureIcon" TargetType="Border">
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PrimarySoftLight}, Dark={StaticResource PrimarySoftDark}}" />
+            <Setter Property="BackgroundColor" Value="{DynamicResource AccentSoft}" />
             <Setter Property="HeightRequest" Value="44" />
             <Setter Property="WidthRequest" Value="44" />
             <Setter Property="StrokeShape" Value="RoundRectangle 14" />
@@ -47,7 +47,7 @@
                     Style="{StaticResource Caption}"
                     Text="{Binding StepText}" />
                 <c:ProgressPill
-                    FillColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                    FillColor="{DynamicResource Accent}"
                     HeightRequest="5"
                     HorizontalOptions="Center"
                     Progress="{Binding StepProgress}"
@@ -62,10 +62,10 @@
                 <!-- 1. What Fonte does -->
                 <VerticalStackLayout IsVisible="{Binding IsIntro}" Spacing="22">
                     <Border
-                        Background="{StaticResource HeroGradient}"
+                        Background="{DynamicResource HeroGradient}"
                         HeightRequest="96"
                         HorizontalOptions="Center"
-                        Shadow="{StaticResource FloatingShadow}"
+                        Shadow="{DynamicResource FloatingShadow}"
                         StrokeShape="RoundRectangle 30"
                         StrokeThickness="0"
                         WidthRequest="96">
@@ -84,7 +84,7 @@
                         <VerticalStackLayout Spacing="18">
                             <Grid Style="{StaticResource Feature}">
                                 <Border Padding="11" Style="{StaticResource FeatureIcon}">
-                                    <c:IconView Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" Data="{x:Static c:Icons.Check}" />
+                                    <c:IconView Color="{DynamicResource Accent}" Data="{x:Static c:Icons.Check}" />
                                 </Border>
                                 <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
                                     <Label Style="{StaticResource Strong}" Text="{l:Tr Welcome_Feature1}" />
@@ -93,7 +93,7 @@
                             </Grid>
                             <Grid Style="{StaticResource Feature}">
                                 <Border Padding="11" Style="{StaticResource FeatureIcon}">
-                                    <c:IconView Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" Data="{x:Static c:Icons.Calendar}" />
+                                    <c:IconView Color="{DynamicResource Accent}" Data="{x:Static c:Icons.Calendar}" />
                                 </Border>
                                 <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
                                     <Label Style="{StaticResource Strong}" Text="{l:Tr Welcome_Feature2}" />
@@ -102,7 +102,7 @@
                             </Grid>
                             <Grid Style="{StaticResource Feature}">
                                 <Border Padding="11" Style="{StaticResource FeatureIcon}">
-                                    <c:IconView Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" Data="{x:Static c:Icons.Chart}" />
+                                    <c:IconView Color="{DynamicResource Accent}" Data="{x:Static c:Icons.Chart}" />
                                 </Border>
                                 <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
                                     <Label Style="{StaticResource Strong}" Text="{l:Tr Welcome_Feature3}" />
@@ -111,7 +111,7 @@
                             </Grid>
                             <Grid Style="{StaticResource Feature}">
                                 <Border Padding="11" Style="{StaticResource FeatureIcon}">
-                                    <c:IconView Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" Data="{x:Static c:Icons.Lock}" />
+                                    <c:IconView Color="{DynamicResource Accent}" Data="{x:Static c:Icons.Lock}" />
                                 </Border>
                                 <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
                                     <Label Style="{StaticResource Strong}" Text="{l:Tr Welcome_Feature4}" />
@@ -137,8 +137,8 @@
                                     Style="{StaticResource Card}">
                                     <Border.Triggers>
                                         <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
-                                            <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
-                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PrimarySoftLight}, Dark={StaticResource PrimarySoftDark}}" />
+                                            <Setter Property="Stroke" Value="{DynamicResource Accent}" />
+                                            <Setter Property="BackgroundColor" Value="{DynamicResource AccentSoft}" />
                                         </DataTrigger>
                                     </Border.Triggers>
                                     <Grid ColumnDefinitions="44,*,Auto" ColumnSpacing="14">
@@ -149,7 +149,7 @@
                                         </VerticalStackLayout>
                                         <Grid Grid.Column="2" HeightRequest="26" VerticalOptions="Center" WidthRequest="26">
                                             <Ellipse Stroke="{AppThemeBinding Light={StaticResource DividerLight}, Dark={StaticResource DividerDark}}" StrokeThickness="2" />
-                                            <Ellipse Fill="{StaticResource AccentGradient}" IsVisible="{Binding IsSelected}" />
+                                            <Ellipse Fill="{DynamicResource AccentGradient}" IsVisible="{Binding IsSelected}" />
                                             <c:IconView
                                                 Color="White"
                                                 Data="{x:Static c:Icons.Check}"
@@ -178,7 +178,7 @@
                                     Style="{StaticResource Card}">
                                     <Border.Triggers>
                                         <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
-                                            <Setter Property="Background" Value="{StaticResource AccentGradient}" />
+                                            <Setter Property="Background" Value="{DynamicResource AccentGradient}" />
                                         </DataTrigger>
                                     </Border.Triggers>
                                     <Label
@@ -205,8 +205,8 @@
                     <Label Style="{StaticResource Secondary}" Text="{l:Tr Welcome_ProgramText}" />
                     <Border
                         Margin="0,6,0,0"
-                        Background="{StaticResource HeroGradient}"
-                        Shadow="{StaticResource FloatingShadow}"
+                        Background="{DynamicResource HeroGradient}"
+                        Shadow="{DynamicResource FloatingShadow}"
                         StrokeShape="RoundRectangle 26"
                         StrokeThickness="0">
                         <VerticalStackLayout Padding="22" Spacing="4">

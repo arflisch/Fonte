@@ -5,7 +5,8 @@ namespace Fonte.Services;
 /// <summary>Colours given to the muscle groups, and small feedbacks (haptics, vibration).</summary>
 public static class Palette
 {
-    public static readonly Color Primary = Color.FromArgb("#534AB7");
+    /// <summary>The accent colour chosen in the settings.</summary>
+    public static Color Primary => AccentTheme.Current.Base;
 
     public static Color Muscle(MuscleGroup muscle) => muscle switch
     {

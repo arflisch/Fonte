@@ -62,18 +62,18 @@
                     <Grid ColumnDefinitions="44,*" ColumnSpacing="14">
                         <Border
                             Padding="11"
-                            BackgroundColor="{AppThemeBinding Light={StaticResource PrimarySoftLight}, Dark={StaticResource PrimarySoftDark}}"
+                            BackgroundColor="{DynamicResource AccentSoft}"
                             HeightRequest="44"
                             StrokeShape="RoundRectangle 14"
                             StrokeThickness="0"
                             WidthRequest="44">
-                            <c:IconView Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" Data="{x:Static c:Icons.Plus}" StrokeWidth="2.4" />
+                            <c:IconView Color="{DynamicResource Accent}" Data="{x:Static c:Icons.Plus}" StrokeWidth="2.4" />
                         </Border>
                         <Label
                             Grid.Column="1"
                             Style="{StaticResource Strong}"
                             Text="{l:Tr Exercise_New}"
-                            TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}"
+                            TextColor="{DynamicResource Accent}"
                             VerticalOptions="Center" />
                     </Grid>
                 </Border>
@@ -110,7 +110,7 @@
                         Style="{StaticResource Card}">
                         <Border.Triggers>
                             <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
-                                <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDarkMode}}" />
+                                <Setter Property="Stroke" Value="{DynamicResource Accent}" />
                             </DataTrigger>
                         </Border.Triggers>
                         <Grid ColumnDefinitions="44,*,Auto" ColumnSpacing="14">
@@ -138,7 +138,7 @@
                                 <Ellipse
                                     Stroke="{AppThemeBinding Light={StaticResource DividerLight}, Dark={StaticResource DividerDark}}"
                                     StrokeThickness="2" />
-                                <Ellipse Fill="{StaticResource AccentGradient}" IsVisible="{Binding IsSelected}" />
+                                <Ellipse Fill="{DynamicResource AccentGradient}" IsVisible="{Binding IsSelected}" />
                                 <c:IconView
                                     Color="White"
                                     Data="{x:Static c:Icons.Check}"
