@@ -32,6 +32,11 @@ public static class MauiProgram
         builder.Services.AddSingleton<WorkoutLauncher>();
         builder.Services.AddSingleton<DeviceAuthentication>();
         builder.Services.AddSingleton<PhotoStore>();
+        builder.Services.AddSingleton(FilePicker.Default);
+        builder.Services.AddSingleton(Share.Default);
+        builder.Services.AddSingleton<BackupFilePicker>();
+        builder.Services.AddSingleton<PasswordPrompt>();
+        builder.Services.AddSingleton<BackupService>();
         builder.Services.AddSingleton<AppShell>();
 
         // Tabs

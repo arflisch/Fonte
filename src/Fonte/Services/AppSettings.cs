@@ -18,6 +18,7 @@ public sealed class AppSettings
     private const string BarKey = "bar_weight";
     private const string PlatesKey = "plates";
     private const string AccentKey = "accent";
+    private const string LastBackupKey = "last_backup";
 
     /// <summary>Rest durations offered, in seconds.</summary>
     public static readonly IReadOnlyList<int> RestChoices = [30, 45, 60, 90, 120, 150, 180, 240, 300];
@@ -122,6 +123,13 @@ public sealed class AppSettings
             _preferences.Set(AccentKey, value.Key);
             AccentTheme.Apply(value);
         });
+    }
+
+    /// <summary>When a backup was last saved or sent; null before the first one.</summary>
+    public DateTimeOffset? LastBackupAt
+    {
+        get => _preferences.Get(LastBackupKey, 0L) is > 0 and var seconds ? DateTimeOffset.FromUnixTimeSeconds(seconds) : null;
+        set => Update(() => _preferences.Set(LastBackupKey, value?.ToUnixTimeSeconds() ?? 0L));
     }
 
     private void Update(Action write)

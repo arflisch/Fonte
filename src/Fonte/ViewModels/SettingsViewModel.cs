@@ -11,11 +11,14 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
 {
     private readonly AppSettings _settings;
     private readonly IDialogService _dialogs;
+    private readonly BackupService _backup;
 
-    public SettingsViewModel(AppSettings settings, IDialogService dialogs)
+    public SettingsViewModel(AppSettings settings, IDialogService dialogs, BackupService backup)
     {
         _settings = settings;
         _dialogs = dialogs;
+        _backup = backup;
+        _lastBackupText = LastBackupOf(settings.LastBackupAt);
         _languageName = settings.Language.NativeName;
         _restText = Loc.Seconds(settings.RestSeconds);
         _isRestTimerEnabled = settings.RestTimerEnabled;
@@ -68,6 +71,17 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
     [ObservableProperty]
     private string _sessionsText;
 
+    [ObservableProperty]
+    private string _lastBackupText;
+
+    [ObservableProperty]
+    private bool _isBackupBusy;
+
+    /// <summary>Names only the cloud of the platform: an Apple app must not mention other platforms.</summary>
+    public string BackupHint => DeviceInfo.Platform == DevicePlatform.Android
+        ? Loc.Get("Settings_BackupHintAndroid")
+        : Loc.Get("Settings_BackupHintApple");
+
     partial void OnIsRestTimerEnabledChanged(bool value)
     {
         _settings.RestTimerEnabled = value;
@@ -75,6 +89,10 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
     }
 
     private static string NameOf(TrainingGoal goal) => Loc.Get($"Goal_{goal}");
+
+    private static string LastBackupOf(DateTimeOffset? date) => date is { } last
+        ? Loc.Format("Settings_LastBackup", Loc.Date(last.LocalDateTime, "d MMMM yyyy"))
+        : Loc.Get("Settings_NoBackup");
 
     [RelayCommand]
     private async Task ChooseLanguageAsync()
@@ -169,6 +187,41 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
             .Select(o => double.Parse(o.Value, System.Globalization.CultureInfo.InvariantCulture))
             .ToList();
         Palette.Haptic();
+    }
+
+    [RelayCommand]
+    private async Task BackUpAsync()
+    {
+        if (IsBackupBusy)
+            return;
+        IsBackupBusy = true;
+        try
+        {
+            if (await _backup.BackUpAsync())
+                LastBackupText = LastBackupOf(_settings.LastBackupAt);
+        }
+        finally
+        {
+            IsBackupBusy = false;
+        }
+    }
+
+    [RelayCommand]
+    private async Task RestoreAsync()
+    {
+        if (IsBackupBusy)
+            return;
+        IsBackupBusy = true;
+        try
+        {
+            // Every setting shown here may have changed: close rather than refresh each of them.
+            if (await _backup.RestoreAsync())
+                await CloseAsync();
+        }
+        finally
+        {
+            IsBackupBusy = false;
+        }
     }
 
     [RelayCommand]

@@ -10,4 +10,8 @@
     <PackageReference Include="sqlite-net-pcl" Version="1.11.285" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Fonte.Core.Tests" />
+  </ItemGroup>
+
 </Project>

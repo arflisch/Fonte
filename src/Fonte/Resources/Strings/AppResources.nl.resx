@@ -1410,4 +1410,131 @@
   <data name="Accent_Slate" xml:space="preserve">
     <value>Leisteen</value>
   </data>
+  <data name="Error_BackupInvalidFile" xml:space="preserve">
+    <value>Dit bestand is geen back-up van Fonte.</value>
+  </data>
+  <data name="Error_BackupFromNewerVersion" xml:space="preserve">
+    <value>Deze back-up komt van een nieuwere versie van Fonte. Werk de app bij om hem terug te zetten.</value>
+  </data>
+  <data name="Error_BackupWrongPassword" xml:space="preserve">
+    <value>Onjuist wachtwoord.</value>
+  </data>
+  <data name="Error_BackupDamaged" xml:space="preserve">
+    <value>Deze back-up is onvolledig of beschadigd: hij kan niet worden teruggezet.</value>
+  </data>
+  <data name="Settings_BackupSection" xml:space="preserve">
+    <value>BACK-UP</value>
+  </data>
+  <data name="Settings_BackUp" xml:space="preserve">
+    <value>Back-up van mijn gegevens maken</value>
+  </data>
+  <data name="Settings_LastBackup" xml:space="preserve">
+    <value>Laatste back-up: {0}</value>
+  </data>
+  <data name="Settings_NoBackup" xml:space="preserve">
+    <value>Nog geen back-up</value>
+  </data>
+  <data name="Settings_Restore" xml:space="preserve">
+    <value>Een back-up terugzetten</value>
+  </data>
+  <data name="Settings_RestoreHint" xml:space="preserve">
+    <value>Vervangt de gegevens op dit apparaat</value>
+  </data>
+  <data name="Settings_BackupHintApple" xml:space="preserve">
+    <value>Trainingen, programma's, lichaamsmetingen en instellingen in één bestand, versleuteld met een wachtwoord dat je zelf kiest. Bewaar het in iCloud Drive of mail het naar jezelf om alles terug te vinden op een ander apparaat.</value>
+  </data>
+  <data name="Settings_BackupHintAndroid" xml:space="preserve">
+    <value>Trainingen, programma's, lichaamsmetingen en instellingen in één bestand, versleuteld met een wachtwoord dat je zelf kiest. Bewaar het in Google Drive of mail het naar jezelf om alles terug te vinden op een ander apparaat.</value>
+  </data>
+  <data name="Backup_PhotosTitle" xml:space="preserve">
+    <value>Je voortgangsfoto's meenemen?</value>
+  </data>
+  <data name="Backup_WithPhotos" xml:space="preserve">
+    <value>Met foto's ({0} MB)</value>
+  </data>
+  <data name="Backup_WithoutPhotos" xml:space="preserve">
+    <value>Zonder foto's</value>
+  </data>
+  <data name="Backup_PhotosReason" xml:space="preserve">
+    <value>Een back-up maken van je voortgangsfoto's</value>
+  </data>
+  <data name="Backup_ShareTitle" xml:space="preserve">
+    <value>Back-up van Fonte</value>
+  </data>
+  <data name="Backup_NotCreated" xml:space="preserve">
+    <value>De back-up kon niet worden gemaakt. ({0})</value>
+  </data>
+  <data name="Backup_NotRead" xml:space="preserve">
+    <value>Het bestand kon niet worden gelezen. ({0})</value>
+  </data>
+  <data name="Restore_Title" xml:space="preserve">
+    <value>Deze back-up terugzetten?</value>
+  </data>
+  <data name="Restore_TextWithPhotos" xml:space="preserve">
+    <value>Back-up van {0}: {1}, {2}.
+
+Alles op dit apparaat wordt vervangen.</value>
+  </data>
+  <data name="Restore_TextWithoutPhotos" xml:space="preserve">
+    <value>Back-up van {0}: {1}, zonder foto's.
+
+Alles op dit apparaat wordt vervangen, behalve de foto's: die blijven bewaard.</value>
+  </data>
+  <data name="Restore_Accept" xml:space="preserve">
+    <value>Terugzetten</value>
+  </data>
+  <data name="Restore_DoneTitle" xml:space="preserve">
+    <value>Klaar</value>
+  </data>
+  <data name="Restore_DoneText" xml:space="preserve">
+    <value>Je gegevens zijn teruggezet.</value>
+  </data>
+  <data name="Restore_FailedTitle" xml:space="preserve">
+    <value>Terugzetten mislukt</value>
+  </data>
+  <data name="Photo_One" xml:space="preserve">
+    <value>foto</value>
+  </data>
+  <data name="Photo_Many" xml:space="preserve">
+    <value>foto's</value>
+  </data>
+  <data name="Password_CreateTitle" xml:space="preserve">
+    <value>De back-up beveiligen</value>
+  </data>
+  <data name="Password_CreateText" xml:space="preserve">
+    <value>Kies een wachtwoord van minstens {0} tekens. Het bestand wordt versleuteld: zonder het wachtwoord kan niemand het lezen.</value>
+  </data>
+  <data name="Password_UnlockTitle" xml:space="preserve">
+    <value>Versleutelde back-up</value>
+  </data>
+  <data name="Password_UnlockText" xml:space="preserve">
+    <value>Voer het wachtwoord in dat je koos toen deze back-up werd gemaakt.</value>
+  </data>
+  <data name="Password_Warning" xml:space="preserve">
+    <value>Bewaar dit wachtwoord goed: het kan niet worden hersteld, en zonder dit wachtwoord kan de back-up nooit worden teruggezet.</value>
+  </data>
+  <data name="Password_Label" xml:space="preserve">
+    <value>WACHTWOORD</value>
+  </data>
+  <data name="Password_ConfirmLabel" xml:space="preserve">
+    <value>BEVESTIG HET WACHTWOORD</value>
+  </data>
+  <data name="Password_Show" xml:space="preserve">
+    <value>Wachtwoord tonen</value>
+  </data>
+  <data name="Password_CreateConfirm" xml:space="preserve">
+    <value>Versleutelen en opslaan</value>
+  </data>
+  <data name="Password_UnlockConfirm" xml:space="preserve">
+    <value>Ontgrendelen</value>
+  </data>
+  <data name="Password_TooShort" xml:space="preserve">
+    <value>Het wachtwoord moet minstens {0} tekens hebben.</value>
+  </data>
+  <data name="Password_Mismatch" xml:space="preserve">
+    <value>De twee wachtwoorden komen niet overeen.</value>
+  </data>
+  <data name="Welcome_Restore" xml:space="preserve">
+    <value>Ik heb al een back-up</value>
+  </data>
 </root>

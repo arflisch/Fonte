@@ -246,6 +246,13 @@
                 Style="{StaticResource PrimaryButton}">
                 <Label Style="{StaticResource PrimaryButtonText}" Text="{l:Tr Welcome_Continue}" />
             </Border>
+            <Label
+                Padding="0,10"
+                c:Touch.Command="{Binding RestoreCommand}"
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsIntro}"
+                Style="{StaticResource LinkLabel}"
+                Text="{l:Tr Welcome_Restore}" />
             <Border
                 c:Touch.Command="{Binding FollowCommand}"
                 IsVisible="{Binding IsProgram}"

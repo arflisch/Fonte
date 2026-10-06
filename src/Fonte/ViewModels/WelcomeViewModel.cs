@@ -18,13 +18,15 @@ public sealed partial class WelcomeViewModel : ObservableObject
     private readonly FonteStore _store;
     private readonly AppSettings _settings;
     private readonly IDialogService _dialogs;
+    private readonly BackupService _backup;
     private bool _isClosing;
 
-    public WelcomeViewModel(FonteStore store, AppSettings settings, IDialogService dialogs)
+    public WelcomeViewModel(FonteStore store, AppSettings settings, IDialogService dialogs, BackupService backup)
     {
         _store = store;
         _settings = settings;
         _dialogs = dialogs;
+        _backup = backup;
         Goals = ChoiceItem.Goals(SelectGoal);
         Sessions = SelectableOption.Grid(AppSettings.SessionChoices.Select(s => s.ToString(Loc.Culture)), AppSettings.SessionChoices.Count, SelectSessions);
         SelectGoal(Goals[1]);
@@ -117,6 +119,24 @@ public sealed partial class WelcomeViewModel : ObservableObject
     {
         if (Step > 1)
             ShowStep(Step - 1);
+    }
+
+    /// <summary>A new phone: bring back everything from a backup instead of starting afresh.</summary>
+    [RelayCommand]
+    private async Task RestoreAsync()
+    {
+        if (_isClosing)
+            return;
+        _isClosing = true;
+        try
+        {
+            if (await _backup.RestoreAsync())
+                await Shell.Current.GoToAsync("..");
+        }
+        finally
+        {
+            _isClosing = false;
+        }
     }
 
     [RelayCommand]

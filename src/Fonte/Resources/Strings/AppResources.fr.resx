@@ -1410,4 +1410,131 @@
   <data name="Accent_Slate" xml:space="preserve">
     <value>Ardoise</value>
   </data>
+  <data name="Error_BackupInvalidFile" xml:space="preserve">
+    <value>Ce fichier n'est pas une sauvegarde Fonte.</value>
+  </data>
+  <data name="Error_BackupFromNewerVersion" xml:space="preserve">
+    <value>Cette sauvegarde vient d'une version plus récente de Fonte. Mets l'app à jour pour la restaurer.</value>
+  </data>
+  <data name="Error_BackupWrongPassword" xml:space="preserve">
+    <value>Mot de passe incorrect.</value>
+  </data>
+  <data name="Error_BackupDamaged" xml:space="preserve">
+    <value>Cette sauvegarde est incomplète ou abîmée : elle ne peut pas être restaurée.</value>
+  </data>
+  <data name="Settings_BackupSection" xml:space="preserve">
+    <value>SAUVEGARDE</value>
+  </data>
+  <data name="Settings_BackUp" xml:space="preserve">
+    <value>Sauvegarder mes données</value>
+  </data>
+  <data name="Settings_LastBackup" xml:space="preserve">
+    <value>Dernière sauvegarde : {0}</value>
+  </data>
+  <data name="Settings_NoBackup" xml:space="preserve">
+    <value>Aucune sauvegarde pour l'instant</value>
+  </data>
+  <data name="Settings_Restore" xml:space="preserve">
+    <value>Restaurer une sauvegarde</value>
+  </data>
+  <data name="Settings_RestoreHint" xml:space="preserve">
+    <value>Remplace les données de cet appareil</value>
+  </data>
+  <data name="Settings_BackupHintApple" xml:space="preserve">
+    <value>Séances, programmes, suivi du corps et réglages dans un seul fichier, chiffré par un mot de passe que tu choisis. Enregistre-le dans iCloud Drive ou envoie-le-toi par mail pour tout retrouver sur un autre appareil.</value>
+  </data>
+  <data name="Settings_BackupHintAndroid" xml:space="preserve">
+    <value>Séances, programmes, suivi du corps et réglages dans un seul fichier, chiffré par un mot de passe que tu choisis. Enregistre-le dans Google Drive ou envoie-le-toi par mail pour tout retrouver sur un autre appareil.</value>
+  </data>
+  <data name="Backup_PhotosTitle" xml:space="preserve">
+    <value>Inclure tes photos de progression ?</value>
+  </data>
+  <data name="Backup_WithPhotos" xml:space="preserve">
+    <value>Avec les photos ({0} Mo)</value>
+  </data>
+  <data name="Backup_WithoutPhotos" xml:space="preserve">
+    <value>Sans les photos</value>
+  </data>
+  <data name="Backup_PhotosReason" xml:space="preserve">
+    <value>Sauvegarder tes photos de progression</value>
+  </data>
+  <data name="Backup_ShareTitle" xml:space="preserve">
+    <value>Sauvegarde Fonte</value>
+  </data>
+  <data name="Backup_NotCreated" xml:space="preserve">
+    <value>La sauvegarde n'a pas pu être créée. ({0})</value>
+  </data>
+  <data name="Backup_NotRead" xml:space="preserve">
+    <value>Le fichier n'a pas pu être lu. ({0})</value>
+  </data>
+  <data name="Restore_Title" xml:space="preserve">
+    <value>Restaurer cette sauvegarde ?</value>
+  </data>
+  <data name="Restore_TextWithPhotos" xml:space="preserve">
+    <value>Sauvegarde du {0} : {1}, {2}.
+
+Tout ce qui est sur cet appareil sera remplacé.</value>
+  </data>
+  <data name="Restore_TextWithoutPhotos" xml:space="preserve">
+    <value>Sauvegarde du {0} : {1}, sans les photos.
+
+Tout ce qui est sur cet appareil sera remplacé, sauf les photos, qui sont gardées.</value>
+  </data>
+  <data name="Restore_Accept" xml:space="preserve">
+    <value>Restaurer</value>
+  </data>
+  <data name="Restore_DoneTitle" xml:space="preserve">
+    <value>C'est fait</value>
+  </data>
+  <data name="Restore_DoneText" xml:space="preserve">
+    <value>Tes données sont restaurées.</value>
+  </data>
+  <data name="Restore_FailedTitle" xml:space="preserve">
+    <value>Restauration impossible</value>
+  </data>
+  <data name="Photo_One" xml:space="preserve">
+    <value>photo</value>
+  </data>
+  <data name="Photo_Many" xml:space="preserve">
+    <value>photos</value>
+  </data>
+  <data name="Password_CreateTitle" xml:space="preserve">
+    <value>Protéger la sauvegarde</value>
+  </data>
+  <data name="Password_CreateText" xml:space="preserve">
+    <value>Choisis un mot de passe d'au moins {0} caractères. Le fichier sera chiffré : sans ce mot de passe, personne ne pourra le lire.</value>
+  </data>
+  <data name="Password_UnlockTitle" xml:space="preserve">
+    <value>Sauvegarde chiffrée</value>
+  </data>
+  <data name="Password_UnlockText" xml:space="preserve">
+    <value>Saisis le mot de passe choisi lors de la création de cette sauvegarde.</value>
+  </data>
+  <data name="Password_Warning" xml:space="preserve">
+    <value>Garde bien ce mot de passe : il ne peut pas être récupéré, et sans lui la sauvegarde ne pourra jamais être restaurée.</value>
+  </data>
+  <data name="Password_Label" xml:space="preserve">
+    <value>MOT DE PASSE</value>
+  </data>
+  <data name="Password_ConfirmLabel" xml:space="preserve">
+    <value>CONFIRME LE MOT DE PASSE</value>
+  </data>
+  <data name="Password_Show" xml:space="preserve">
+    <value>Afficher le mot de passe</value>
+  </data>
+  <data name="Password_CreateConfirm" xml:space="preserve">
+    <value>Chiffrer et sauvegarder</value>
+  </data>
+  <data name="Password_UnlockConfirm" xml:space="preserve">
+    <value>Déverrouiller</value>
+  </data>
+  <data name="Password_TooShort" xml:space="preserve">
+    <value>Le mot de passe doit faire au moins {0} caractères.</value>
+  </data>
+  <data name="Password_Mismatch" xml:space="preserve">
+    <value>Les deux mots de passe ne correspondent pas.</value>
+  </data>
+  <data name="Welcome_Restore" xml:space="preserve">
+    <value>J'ai déjà une sauvegarde</value>
+  </data>
 </root>

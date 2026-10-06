@@ -219,6 +219,41 @@
                     </VerticalStackLayout>
                 </Border>
 
+                <!-- Backup -->
+                <Label Margin="0,14,0,0" Style="{StaticResource FieldLabel}" Text="{l:Tr Settings_BackupSection}" />
+                <Border Padding="16,0" Style="{StaticResource Card}">
+                    <VerticalStackLayout>
+                        <Grid c:Touch.Command="{Binding BackUpCommand}" Style="{StaticResource Row}">
+                            <Border BackgroundColor="#262563EB" Style="{StaticResource RowIcon}">
+                                <c:IconView Color="#2563EB" Data="{x:Static c:Icons.Upload}" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                <Label Style="{StaticResource RowTitle}" Text="{l:Tr Settings_BackUp}" />
+                                <Label Style="{StaticResource Caption}" Text="{Binding LastBackupText}" />
+                            </VerticalStackLayout>
+                            <ActivityIndicator
+                                Grid.Column="2"
+                                HeightRequest="20"
+                                IsRunning="{Binding IsBackupBusy}"
+                                IsVisible="{Binding IsBackupBusy}"
+                                VerticalOptions="Center"
+                                WidthRequest="20"
+                                Color="{DynamicResource Primary}" />
+                        </Grid>
+                        <BoxView Style="{StaticResource Divider}" />
+                        <Grid c:Touch.Command="{Binding RestoreCommand}" Style="{StaticResource Row}">
+                            <Border BackgroundColor="#2664748B" Style="{StaticResource RowIcon}">
+                                <c:IconView Color="#64748B" Data="{x:Static c:Icons.Download}" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                <Label Style="{StaticResource RowTitle}" Text="{l:Tr Settings_Restore}" />
+                                <Label Style="{StaticResource Caption}" Text="{l:Tr Settings_RestoreHint}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+                <Label Margin="4,0" Style="{StaticResource Caption}" Text="{Binding BackupHint}" />
+
                 <Label
                     Margin="0,24,0,0"
                     HorizontalTextAlignment="Center"

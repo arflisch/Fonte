@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using SQLite;
 
 namespace Fonte.Core.Models;
@@ -22,10 +23,10 @@ public sealed class Workout
     /// <summary>Template it was started from; null for a free workout.</summary>
     public int? TemplateId { get; set; }
 
-    [Ignore]
+    [Ignore, JsonIgnore]
     public bool IsInProgress => FinishedAt is null;
 
-    [Ignore]
+    [Ignore, JsonIgnore]
     public TimeSpan Duration => (FinishedAt ?? DateTime.Now) - StartedAt;
 }
 

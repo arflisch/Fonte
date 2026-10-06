@@ -8,7 +8,7 @@ Carnet de musculation hors ligne : on note chaque série pendant la séance, l'a
 
 ## Fonctionnalités
 
-- **Bienvenue** (premier lancement, en 3 étapes) : ce que fait l'app, l'**objectif** (force, muscle, forme) et le nombre de **séances par semaine**, puis un programme prêt à l'emploi qui leur correspond, à suivre ou non. L'objectif règle le temps de repos et les répétitions proposées.
+- **Bienvenue** (premier lancement, en 3 étapes) : ce que fait l'app, l'**objectif** (force, muscle, forme) et le nombre de **séances par semaine**, puis un programme prêt à l'emploi qui leur correspond, à suivre ou non. L'objectif règle le temps de repos et les répétitions proposées. « J'ai déjà une sauvegarde » restaure tout sur un nouveau téléphone.
 - **Séances** (premier onglet) :
   - la **prochaine séance du programme** suivi (« Semaine 3 sur 8 · Haut / Bas »), à lancer en une touche, ou une séance libre ;
   - la semaine en cours face à l'**objectif hebdomadaire** (« 2 / 4 séances ») et la **série de semaines** réussies d'affilée ;
@@ -29,7 +29,8 @@ Carnet de musculation hors ligne : on note chaque série pendant la séance, l'a
 - **Corps** (quatrième onglet) : **poids** et courbe sur 3 mois, évolution sur 8 semaines, **objectif de poids** avec progression ; **mensurations** (taille, poitrine, bras, cuisse, hanches) avec l'écart depuis la mesure précédente ; **photos de progression** prises ou choisies, gardées dans l'app (pas dans la photothèque), **verrouillées par Face ID**, à comparer avant / après.
 - **Exercices** (cinquième onglet) : 51 exercices intégrés avec **conseils d'exécution**, filtres par groupe musculaire et par **matériel**, recherche sans accents ; chaque fiche montre le record, le **1RM estimé**, la progression sur 3 mois, 1 an ou tout, et l'historique avec le volume de chaque séance. On peut créer ses propres exercices.
 - **Calculateur de disques** : disques à mettre de chaque côté pour une charge, barre de 20, 15 ou 10 kg, **échauffement proposé** (barre, puis environ 40, 60 et 80 %) ; les disques disponibles se règlent dans les réglages.
-- **Réglages** : objectif, séances par semaine, minuteur et durée du repos, disques disponibles, **couleur de l'app** (violet, bleu, turquoise, vert, orange, rouge, rose ou ardoise, appliquée aussitôt, en clair comme en sombre), langue.
+- **Réglages** : objectif, séances par semaine, minuteur et durée du repos, disques disponibles, **couleur de l'app** (violet, bleu, turquoise, vert, orange, rouge, rose ou ardoise, appliquée aussitôt, en clair comme en sombre), langue, **sauvegarde**.
+- **Sauvegarde / restauration** : toutes les données (séances, programmes, exercices, poids, mensurations) et les réglages dans un fichier `fonte-AAAA-MM-JJ.fontebackup` **chiffré par un mot de passe** choisi à chaque sauvegarde, remis à la feuille de partage (iCloud Drive, mail, AirDrop…) ou au panneau Enregistrer sur Mac. Les **photos de progression** sont incluses au choix (Face ID demandé, comme pour les voir). La restauration, depuis les réglages ou l'écran de bienvenue, lit et vérifie tout le fichier avant de remplacer quoi que ce soit ; une sauvegarde sans photos garde celles de l'appareil. La langue n'est pas restaurée : elle suit le nouvel appareil.
 - **Langues** : français, néerlandais et anglais (par défaut : la langue du téléphone), changement immédiat.
 - **Thème clair / sombre** automatique. La couleur d'accent vient de `Services/AccentTheme.cs` : les pages l'utilisent par des ressources dynamiques (`Accent`, `AccentSoft`, `HeroGradient`…), redéfinies quand on change de couleur ou de thème. L'icône et l'écran de lancement restent violets.
 
@@ -43,6 +44,7 @@ Carnet de musculation hors ligne : on note chaque série pendant la séance, l'a
 - Il y a au plus une séance en cours (`FinishedAt` nul). Les records, la dernière fois et les statistiques sont **toujours recalculés** à partir des séries validées des séances terminées : rien ne peut se désynchroniser.
 - Un exercice déjà utilisé n'est jamais effacé, seulement masqué de la bibliothèque, pour que les anciennes séances le montrent encore.
 - Comparaison des séries : 1RM estimé pour les séries chargées (plafonné à 12 répétitions), répétitions sinon, durée pour les exercices chronométrés.
+- **Format de sauvegarde** (`Fonte.Core/Backup`) : une archive tar (`data.json`, puis `photos/<fichier>`) chiffrée en flux, pour que les photos ne passent jamais entièrement en mémoire. Clé dérivée du mot de passe par PBKDF2-HMAC-SHA256 (600 000 itérations, sel aléatoire de 16 octets, mot de passe normalisé NFC), puis morceaux de 64 Kio scellés chacun par AES-256-GCM, avec l'en-tête en données associées et le numéro du morceau dans le nonce ; le dernier est marqué et plus court (construction STREAM). Un morceau modifié, déplacé, ajouté ou retiré est refusé. Un mauvais mot de passe échoue dès le premier morceau ; un fichier abîmé plus loin est signalé comme tel. Le mot de passe n'est stocké nulle part : perdu, la sauvegarde est irrécupérable. Les dates restent à l'heure locale où elles ont été notées, sans fuseau. La restauration garde les identifiants des lignes. Le chiffrement passe uniquement par les fonctions cryptographiques du système (CryptoKit et CommonCrypto sur iPhone et Mac) : l'Info.plist iOS garde `ITSAppUsesNonExemptEncryption = false`.
 - La fin du repos est enregistrée : le minuteur continue si l'app est fermée, et une notification locale (`Plugin.LocalNotification`) sonne à l'heure. Sur Android 14+, l'autorisation « Alarmes et rappels » la rend exacte ; sans elle, elle peut arriver avec un peu de retard.
 
 ## Architecture
@@ -93,5 +95,5 @@ Sur un vrai iPhone, un compte Apple Developer est nécessaire pour signer l'app.
 ## Idées pour la suite
 
 - Unité en livres.
-- Sauvegarde chiffrée et restauration (comme Poches), export CSV.
+- Export CSV.
 - Repos propre à chaque exercice d'une séance type.

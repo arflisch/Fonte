@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using SQLite;
 
 namespace Fonte.Core.Models;
@@ -62,6 +63,6 @@ public sealed class Exercise
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-    [Ignore]
+    [Ignore, JsonIgnore]
     public bool IsCustom => CatalogKey is null;
 }

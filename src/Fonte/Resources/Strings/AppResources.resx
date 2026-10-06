@@ -1410,4 +1410,131 @@
   <data name="Accent_Slate" xml:space="preserve">
     <value>Slate</value>
   </data>
+  <data name="Error_BackupInvalidFile" xml:space="preserve">
+    <value>This file isn't a Fonte backup.</value>
+  </data>
+  <data name="Error_BackupFromNewerVersion" xml:space="preserve">
+    <value>This backup comes from a newer version of Fonte. Update the app to restore it.</value>
+  </data>
+  <data name="Error_BackupWrongPassword" xml:space="preserve">
+    <value>Incorrect password.</value>
+  </data>
+  <data name="Error_BackupDamaged" xml:space="preserve">
+    <value>This backup is incomplete or damaged: it can't be restored.</value>
+  </data>
+  <data name="Settings_BackupSection" xml:space="preserve">
+    <value>BACKUP</value>
+  </data>
+  <data name="Settings_BackUp" xml:space="preserve">
+    <value>Back up my data</value>
+  </data>
+  <data name="Settings_LastBackup" xml:space="preserve">
+    <value>Last backup: {0}</value>
+  </data>
+  <data name="Settings_NoBackup" xml:space="preserve">
+    <value>No backup yet</value>
+  </data>
+  <data name="Settings_Restore" xml:space="preserve">
+    <value>Restore a backup</value>
+  </data>
+  <data name="Settings_RestoreHint" xml:space="preserve">
+    <value>Replaces the data on this device</value>
+  </data>
+  <data name="Settings_BackupHintApple" xml:space="preserve">
+    <value>Workouts, programs, body tracking and settings in one file, encrypted with a password you choose. Save it to iCloud Drive or email it to yourself to get everything back on another device.</value>
+  </data>
+  <data name="Settings_BackupHintAndroid" xml:space="preserve">
+    <value>Workouts, programs, body tracking and settings in one file, encrypted with a password you choose. Save it to Google Drive or email it to yourself to get everything back on another device.</value>
+  </data>
+  <data name="Backup_PhotosTitle" xml:space="preserve">
+    <value>Include your progress photos?</value>
+  </data>
+  <data name="Backup_WithPhotos" xml:space="preserve">
+    <value>With photos ({0} MB)</value>
+  </data>
+  <data name="Backup_WithoutPhotos" xml:space="preserve">
+    <value>Without photos</value>
+  </data>
+  <data name="Backup_PhotosReason" xml:space="preserve">
+    <value>Back up your progress photos</value>
+  </data>
+  <data name="Backup_ShareTitle" xml:space="preserve">
+    <value>Fonte backup</value>
+  </data>
+  <data name="Backup_NotCreated" xml:space="preserve">
+    <value>The backup could not be created. ({0})</value>
+  </data>
+  <data name="Backup_NotRead" xml:space="preserve">
+    <value>The file could not be read. ({0})</value>
+  </data>
+  <data name="Restore_Title" xml:space="preserve">
+    <value>Restore this backup?</value>
+  </data>
+  <data name="Restore_TextWithPhotos" xml:space="preserve">
+    <value>Backup from {0}: {1}, {2}.
+
+Everything on this device will be replaced.</value>
+  </data>
+  <data name="Restore_TextWithoutPhotos" xml:space="preserve">
+    <value>Backup from {0}: {1}, without photos.
+
+Everything on this device will be replaced, except the photos, which are kept.</value>
+  </data>
+  <data name="Restore_Accept" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="Restore_DoneTitle" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Restore_DoneText" xml:space="preserve">
+    <value>Your data is restored.</value>
+  </data>
+  <data name="Restore_FailedTitle" xml:space="preserve">
+    <value>Restore failed</value>
+  </data>
+  <data name="Photo_One" xml:space="preserve">
+    <value>photo</value>
+  </data>
+  <data name="Photo_Many" xml:space="preserve">
+    <value>photos</value>
+  </data>
+  <data name="Password_CreateTitle" xml:space="preserve">
+    <value>Protect the backup</value>
+  </data>
+  <data name="Password_CreateText" xml:space="preserve">
+    <value>Choose a password of at least {0} characters. The file will be encrypted: without the password, nobody can read it.</value>
+  </data>
+  <data name="Password_UnlockTitle" xml:space="preserve">
+    <value>Encrypted backup</value>
+  </data>
+  <data name="Password_UnlockText" xml:space="preserve">
+    <value>Enter the password chosen when this backup was created.</value>
+  </data>
+  <data name="Password_Warning" xml:space="preserve">
+    <value>Keep this password safe: it cannot be recovered, and without it the backup can never be restored.</value>
+  </data>
+  <data name="Password_Label" xml:space="preserve">
+    <value>PASSWORD</value>
+  </data>
+  <data name="Password_ConfirmLabel" xml:space="preserve">
+    <value>CONFIRM THE PASSWORD</value>
+  </data>
+  <data name="Password_Show" xml:space="preserve">
+    <value>Show the password</value>
+  </data>
+  <data name="Password_CreateConfirm" xml:space="preserve">
+    <value>Encrypt and save</value>
+  </data>
+  <data name="Password_UnlockConfirm" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
+  <data name="Password_TooShort" xml:space="preserve">
+    <value>The password needs at least {0} characters.</value>
+  </data>
+  <data name="Password_Mismatch" xml:space="preserve">
+    <value>The two passwords don't match.</value>
+  </data>
+  <data name="Welcome_Restore" xml:space="preserve">
+    <value>I already have a backup</value>
+  </data>
 </root>

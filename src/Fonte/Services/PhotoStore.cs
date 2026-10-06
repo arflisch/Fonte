@@ -3,7 +3,7 @@ namespace Fonte.Services;
 /// <summary>Progress photos, as files in the app's private storage (never in the phone's photo library).</summary>
 public sealed class PhotoStore
 {
-    private static string Folder => Path.Combine(FileSystem.AppDataDirectory, "photos");
+    public static string Folder => Path.Combine(FileSystem.AppDataDirectory, "photos");
 
     public static string PathOf(string fileName) => Path.Combine(Folder, fileName);
 
