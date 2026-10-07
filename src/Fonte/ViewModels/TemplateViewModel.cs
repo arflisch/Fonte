@@ -10,7 +10,8 @@ using Fonte.Services;
 namespace Fonte.ViewModels;
 
 /// <summary>A workout template: its exercises in order, what each aims for, supersets; and starting it.</summary>
-public sealed partial class TemplateViewModel(FonteStore store, IDialogService dialogs, WorkoutLauncher launcher)
+public sealed partial class TemplateViewModel(
+    FonteStore store, IDialogService dialogs, WorkoutLauncher launcher, ProService pro, AppSettings settings)
     : ReloadingViewModel, IQueryAttributable
 {
     // Typed targets are saved one after the other, never out of order.
@@ -107,7 +108,8 @@ public sealed partial class TemplateViewModel(FonteStore store, IDialogService d
         var link = item.IsLinkedToNext ? Loc.Get("Template_Unlink") : Loc.Get("Template_Link");
         var history = Loc.Get("Workout_History");
         var remove = Loc.Get("Template_Remove");
-        var options = new List<string>();
+        var rest = pro.IsUnlocked ? Loc.Get("Workout_RestTime") : $"{Loc.Get("Workout_RestTime")} · PRO";
+        var options = new List<string> { rest };
         if (index > 0)
             options.Add(up);
         if (index < Exercises.Count - 1)
@@ -119,7 +121,9 @@ public sealed partial class TemplateViewModel(FonteStore store, IDialogService d
 
         var choice = await dialogs.ChooseAsync(item.Name, remove, [.. options]);
         await _queue.WhenIdle();
-        if (choice == up || choice == down)
+        if (choice == rest)
+            await ChooseRestAsync(item);
+        else if (choice == up || choice == down)
             await store.MoveTemplateExerciseAsync(item.ItemId, choice == up ? -1 : 1);
         else if (choice == link)
             await store.SetTemplateExerciseLinkAsync(item.ItemId, !item.IsLinkedToNext);
@@ -129,6 +133,25 @@ public sealed partial class TemplateViewModel(FonteStore store, IDialogService d
             await store.RemoveTemplateExerciseAsync(item.ItemId);
         if (choice is not null && choice != history)
             Palette.Haptic();
+    }
+
+    /// <summary>The rest after each set of this exercise (Fonte Pro).</summary>
+    private async Task ChooseRestAsync(TemplateExerciseViewModel item)
+    {
+        if (!pro.IsUnlocked)
+        {
+            await Shell.Current.GoToAsync(Routes.Pro);
+            return;
+        }
+        var standard = Loc.Format("Workout_RestDefault", Loc.Seconds(settings.RestSeconds));
+        var options = new[] { standard }
+            .Concat(AppSettings.RestChoices.Select(s => Loc.Seconds(s) + (s == item.RestSeconds ? "  ✓" : string.Empty)))
+            .ToArray();
+        var choice = await dialogs.ChooseAsync(Loc.Format("Workout_RestFor", item.Name), null, options);
+        if (choice is null)
+            return;
+        var seconds = choice == standard ? 0 : AppSettings.RestChoices[Array.IndexOf(options, choice) - 1];
+        await store.SetTemplateExerciseRestAsync(item.ItemId, seconds);
     }
 
     [RelayCommand]
@@ -183,7 +206,9 @@ public sealed partial class TemplateExerciseViewModel : ObservableObject
         ItemId = item.Id;
         ExerciseId = entry.Exercise.Id;
         Name = Loc.ExerciseName(entry.Exercise);
-        MuscleText = $"{Loc.Muscle(entry.Exercise.Muscle)} · {Loc.Equipment(entry.Exercise.Equipment)}";
+        RestSeconds = item.RestSeconds;
+        MuscleText = $"{Loc.Muscle(entry.Exercise.Muscle)} · {Loc.Equipment(entry.Exercise.Equipment)}"
+            + (item.RestSeconds > 0 ? $" · {Loc.Format("Workout_RestShort", Loc.Seconds(item.RestSeconds))}" : string.Empty);
         Color = Palette.Muscle(entry.Exercise.Muscle);
         IsTime = entry.Exercise.Tracking == Tracking.Time;
         ShowWeight = entry.Exercise.Tracking == Tracking.WeightAndReps;
@@ -204,6 +229,9 @@ public sealed partial class TemplateExerciseViewModel : ObservableObject
     public int ItemId { get; }
 
     public int ExerciseId { get; }
+
+    /// <summary>The exercise's own rest; 0 for the rest of the settings.</summary>
+    public int RestSeconds { get; }
 
     public string Name { get; }
 

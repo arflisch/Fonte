@@ -32,6 +32,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<WorkoutLauncher>();
         builder.Services.AddSingleton<DeviceAuthentication>();
         builder.Services.AddSingleton<PhotoStore>();
+        builder.Services.AddSingleton<ProService>();
+        builder.Services.AddSingleton<HealthService>();
+        builder.Services.AddSingleton<FinishedWorkouts>();
         builder.Services.AddSingleton<AppShell>();
 
         // Tabs
@@ -59,6 +62,8 @@ public static class MauiProgram
         builder.Services.AddTransient<PhotoPage>();
         builder.Services.AddTransient<ComparePhotosViewModel>();
         builder.Services.AddTransient<ComparePhotosPage>();
+        builder.Services.AddTransient<ProViewModel>();
+        builder.Services.AddTransient<ProPage>();
         builder.Services.AddTransient<WorkoutViewModel>();
         builder.Services.AddTransient<WorkoutPage>();
         builder.Services.AddTransient<ExercisePickerViewModel>();

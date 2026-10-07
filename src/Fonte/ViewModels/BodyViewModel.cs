@@ -21,21 +21,35 @@ public sealed partial class BodyViewModel : ReloadingViewModel
     private readonly IDialogService _dialogs;
     private readonly DeviceAuthentication _authentication;
     private readonly PhotoStore _photos;
+    private readonly ProService _pro;
+    private readonly HealthService _health;
     private IReadOnlyList<BodyWeight> _weights = [];
     private bool _isUnlocked;
+    private DateTime _healthReadAt;
 
-    public BodyViewModel(FonteStore store, AppSettings settings, IDialogService dialogs, DeviceAuthentication authentication, PhotoStore photos)
+    public BodyViewModel(
+        FonteStore store, AppSettings settings, IDialogService dialogs, DeviceAuthentication authentication,
+        PhotoStore photos, ProService pro, HealthService health)
     {
         _store = store;
         _settings = settings;
         _dialogs = dialogs;
         _authentication = authentication;
         _photos = photos;
+        _pro = pro;
+        _health = health;
         WeakReferenceMessenger.Default.Register<BodyViewModel, AppBackgroundedMessage>(this, static (vm, _) => vm.Lock());
     }
 
     [ObservableProperty]
     private string _weightText = "—";
+
+    /// <summary>The weight is free; its goal and curve, measurements and photos come with Fonte Pro.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsProLocked))]
+    private bool _isPro;
+
+    public bool IsProLocked => !IsPro;
 
     [ObservableProperty]
     private string _weightChangeText = string.Empty;
@@ -84,6 +98,13 @@ public sealed partial class BodyViewModel : ReloadingViewModel
 
     protected override async Task LoadCoreAsync()
     {
+        IsPro = _pro.IsUnlocked;
+        // A scale or another app may have weighed in Health since: at most once a minute.
+        if (_health.IsActive && DateTime.Now - _healthReadAt > TimeSpan.FromMinutes(1))
+        {
+            _healthReadAt = DateTime.Now;
+            await _health.ImportWeightsAsync();
+        }
         _weights = await _store.GetWeightsAsync();
         ShowWeights();
 
@@ -110,13 +131,13 @@ public sealed partial class BodyViewModel : ReloadingViewModel
     private void ShowWeights()
     {
         HasWeights = _weights.Count > 0;
-        var goal = _settings.GoalWeight;
+        var goal = _pro.IsUnlocked ? _settings.GoalWeight : 0;
         HasGoal = goal > 0;
         if (_weights.Count == 0)
         {
             WeightText = "—";
             WeightChangeText = Loc.Get("Body_NoWeight");
-            GoalText = HasGoal ? Loc.Format("Body_Goal", Loc.Weight(goal)) : Loc.Get("Body_SetGoal");
+            GoalText = HasGoal ? Loc.Format("Body_Goal", Loc.Weight(goal)) : GoalPrompt;
             WeightPoints = [];
             HasChart = false;
             Weighings = [];
@@ -143,14 +164,16 @@ public sealed partial class BodyViewModel : ReloadingViewModel
         }
         else
         {
-            GoalText = Loc.Get("Body_SetGoal");
+            GoalText = GoalPrompt;
         }
 
         // The last three months, one point per weighing.
         WeightPoints = _weights.Where(w => w.Date >= last.Date.AddDays(-90)).Select(w => w.Kilograms).ToList();
-        HasChart = WeightPoints.Count >= 2;
+        HasChart = WeightPoints.Count >= 2 && _pro.IsUnlocked;
         Weighings = _weights.Reverse().Take(RecentWeighings).Select(w => new WeighingItem(w, DeleteWeighingAsync)).ToList();
     }
+
+    private string GoalPrompt => _pro.IsUnlocked ? Loc.Get("Body_SetGoal") : Loc.Get("Body_GoalPro");
 
     /// <summary>"+1.5 kg", "−3 cm", "=".</summary>
     internal static string Signed(double value, string unit) =>
@@ -184,6 +207,8 @@ public sealed partial class BodyViewModel : ReloadingViewModel
     [RelayCommand]
     private async Task SetGoalAsync()
     {
+        if (!await OpenProUnlessUnlockedAsync())
+            return;
         var current = _settings.GoalWeight;
         var value = await _dialogs.PromptNumberAsync(Loc.Get("Body_GoalTitle"), Loc.Get("Body_GoalText"), current > 0 ? current : null);
         if (value is { } goal && goal is >= 20 and <= 400)
@@ -202,6 +227,8 @@ public sealed partial class BodyViewModel : ReloadingViewModel
 
     private async Task EditMeasurementAsync(MeasurementItem item)
     {
+        if (!await OpenProUnlessUnlockedAsync())
+            return;
         var title = Loc.Get($"Measure_{item.Kind}");
         var value = await _dialogs.PromptNumberAsync(title, Loc.Get("Body_MeasureText"), item.Value);
         if (value is not { } centimetres)
@@ -230,6 +257,8 @@ public sealed partial class BodyViewModel : ReloadingViewModel
     [RelayCommand]
     private async Task AddPhotoAsync()
     {
+        if (!await OpenProUnlessUnlockedAsync())
+            return;
         if (IsLocked)
         {
             await UnlockAsync();
@@ -263,6 +292,22 @@ public sealed partial class BodyViewModel : ReloadingViewModel
 
     [RelayCommand]
     private Task CompareAsync() => Shell.Current.GoToAsync(Routes.ComparePhotos);
+
+    [RelayCommand]
+    private async Task UnlockPhotosAsync()
+    {
+        if (await OpenProUnlessUnlockedAsync())
+            await UnlockAsync();
+    }
+
+    /// <summary>Opens the Fonte Pro page when it is locked; true when the feature can be used.</summary>
+    private async Task<bool> OpenProUnlessUnlockedAsync()
+    {
+        if (_pro.IsUnlocked)
+            return true;
+        await Shell.Current.GoToAsync(Routes.Pro);
+        return false;
+    }
 
     private Task OpenPhotoAsync(int photoId) => Shell.Current.GoToAsync($"{Routes.Photo}?id={photoId}");
 }

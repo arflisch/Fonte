@@ -33,6 +33,29 @@ Carnet de musculation hors ligne : on note chaque série pendant la séance, l'a
 - **Langues** : français, néerlandais et anglais (par défaut : la langue du téléphone), changement immédiat.
 - **Thème clair / sombre** automatique. La couleur d'accent vient de `Services/AccentTheme.cs` : les pages l'utilisent par des ressources dynamiques (`Accent`, `AccentSoft`, `HeroGradient`…), redéfinies quand on change de couleur ou de thème. L'icône et l'écran de lancement restent violets.
 
+## Fonte Pro
+
+Achat unique, sans abonnement (`com.arflisch.fonte.pro`, prix conseillé 7,99 €), via l'App Store ou Google Play avec `Plugin.InAppBilling`, comme Poches Pro. Le déblocage est gardé sur l'appareil et se restaure depuis le compte du Store.
+
+**Gratuit et illimité** : noter les séances, séries de la dernière fois, minuteur de repos, supersets, exercices et conseils, records, 1RM, historique et calendrier, objectif de la semaine, suivre un programme prêt à l'emploi, jusqu'à 3 séances à soi, le poids.
+
+**Fonte Pro** :
+- **progression automatique** : sans Pro, la fin de séance montre ce qui serait monté (« Tu as gagné une hausse »), sans modifier la séance type ;
+- programmes à soi et séances illimitées ;
+- progrès sur 3 mois, séries par muscle et alertes ;
+- objectif et courbe de poids, mensurations, photos ;
+- **séries avancées** : échauffement (« É »), dégressive (« D »), jusqu'à l'échec (« X »), RPE de 6 à 10, repos propre à chaque exercice (séance type et séance en cours). Les échauffements ne comptent ni dans le volume, ni dans les records, ni dans la progression ; les dégressives comptent dans le volume mais pas dans la progression ;
+- calculateur de disques et échauffement ;
+- **Apple Santé** (iPhone) : chaque séance terminée y est enregistrée (musculation), le poids des 12 derniers mois en est repris ;
+- **export CSV** de toutes les séries (séparateur et décimales de la langue, pour Excel ou Numbers) et **bilan du mois** en image à partager ;
+- les **couleurs de l'app** autres que le violet.
+
+Fonte Pro est proposé quand on touche une fonction Pro, dans les réglages, et une seule fois après la 3e séance.
+
+Les builds Debug, et ceux faits avec `-p:ProTesting=true`, permettent de débloquer et reverrouiller Pro sans le Store (jamais pour le Store).
+
+Apple Santé demande un identifiant d'app `com.arflisch.fonte` avec la capacité HealthKit, et un profil de signature qui la contient : le profil générique « * » ne peut pas l'avoir.
+
 ## Persistance
 
 **SQLite** local via `sqlite-net-pcl`, dans le dossier privé de l'app. Aucune connexion réseau.
@@ -93,5 +116,6 @@ Sur un vrai iPhone, un compte Apple Developer est nécessaire pour signer l'app.
 ## Idées pour la suite
 
 - Unité en livres.
-- Sauvegarde chiffrée et restauration (comme Poches), export CSV.
-- Repos propre à chaque exercice d'une séance type.
+- Sauvegarde chiffrée et restauration (comme Poches).
+- Minuteur de repos sur l'écran verrouillé (Live Activity, extension native en Swift).
+- Synchronisation iCloud entre iPhone et iPad.

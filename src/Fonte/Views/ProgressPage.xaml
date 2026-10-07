@@ -83,8 +83,32 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <!-- Sets per muscle group -->
-                <Border IsVisible="{Binding HasData}" Padding="16,14" Style="{StaticResource Card}">
+                <!-- Sets per muscle group: Fonte Pro -->
+                <Border Padding="16,14" c:Touch.Command="{Binding OpenProCommand}" Style="{StaticResource Card}">
+                    <Border.IsVisible>
+                        <MultiBinding Converter="{StaticResource AllTrue}">
+                            <Binding Path="HasData" />
+                            <Binding Path="IsLocked" />
+                        </MultiBinding>
+                    </Border.IsVisible>
+                    <VerticalStackLayout Spacing="6">
+                        <HorizontalStackLayout Spacing="8">
+                            <Label Style="{StaticResource Strong}" Text="{l:Tr Progress_Muscles}" VerticalOptions="Center" />
+                            <Border Style="{StaticResource ProBadge}">
+                                <Label Style="{StaticResource ProBadgeText}" />
+                            </Border>
+                        </HorizontalStackLayout>
+                        <Label Style="{StaticResource Caption}" Text="{l:Tr Progress_MusclesPro}" />
+                        <Label Margin="0,4,0,0" Style="{StaticResource LinkLabel}" Text="{l:Tr Summary_ProDiscover}" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Padding="16,14" Style="{StaticResource Card}">
+                    <Border.IsVisible>
+                        <MultiBinding Converter="{StaticResource AllTrue}">
+                            <Binding Path="HasData" />
+                            <Binding Path="IsPro" />
+                        </MultiBinding>
+                    </Border.IsVisible>
                     <VerticalStackLayout Spacing="12">
                         <VerticalStackLayout Spacing="0">
                             <Label Style="{StaticResource Strong}" Text="{l:Tr Progress_Muscles}" />

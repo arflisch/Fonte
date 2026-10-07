@@ -1410,4 +1410,271 @@
   <data name="Accent_Slate" xml:space="preserve">
     <value>Leisteen</value>
   </data>
+  <data name="Pro_Tagline" xml:space="preserve">
+    <value>Alles om sneller vooruit te gaan.</value>
+  </data>
+  <data name="Pro_OneTime" xml:space="preserve">
+    <value>Eenmalige aankoop · geen abonnement</value>
+  </data>
+  <data name="Pro_ProgressionTitle" xml:space="preserve">
+    <value>Automatische progressie</value>
+  </data>
+  <data name="Pro_ProgressionText" xml:space="preserve">
+    <value>Lukken alle sets, dan gaat het gewicht de volgende keer vanzelf omhoog.</value>
+  </data>
+  <data name="Pro_ProgramsTitle" xml:space="preserve">
+    <value>Onbeperkt programma's en trainingen</value>
+  </data>
+  <data name="Pro_ProgramsText" xml:space="preserve">
+    <value>Maak je eigen programma's en zoveel trainingen als je wilt.</value>
+  </data>
+  <data name="Pro_ProgressTitle" xml:space="preserve">
+    <value>Volledige voortgang</value>
+  </data>
+  <data name="Pro_ProgressText" xml:space="preserve">
+    <value>Drie maanden volume, sets per spiergroep en een melding als er een achterblijft.</value>
+  </data>
+  <data name="Pro_BodyTitle" xml:space="preserve">
+    <value>Lichaam volgen</value>
+  </data>
+  <data name="Pro_BodyText" xml:space="preserve">
+    <value>Gewichtsdoel en -curve, lichaamsmaten en voortgangsfoto's vergrendeld met Face ID.</value>
+  </data>
+  <data name="Pro_SetsTitle" xml:space="preserve">
+    <value>Geavanceerde sets</value>
+  </data>
+  <data name="Pro_SetsText" xml:space="preserve">
+    <value>Opwarm-, drop- en tot-falen-sets, RPE en een eigen rusttijd per oefening.</value>
+  </data>
+  <data name="Pro_PlatesTitle" xml:space="preserve">
+    <value>Schijven en opwarming</value>
+  </data>
+  <data name="Pro_PlatesText" xml:space="preserve">
+    <value>De schijven aan elke kant en de opwarming tot je werkgewicht.</value>
+  </data>
+  <data name="Pro_HealthTitle" xml:space="preserve">
+    <value>Apple Gezondheid</value>
+  </data>
+  <data name="Pro_HealthText" xml:space="preserve">
+    <value>Je trainingen bewaard in Gezondheid, je gewicht automatisch overgenomen.</value>
+  </data>
+  <data name="Pro_ExportTitle" xml:space="preserve">
+    <value>CSV-export en maandoverzicht</value>
+  </data>
+  <data name="Pro_ExportText" xml:space="preserve">
+    <value>Al je sets in Excel of Numbers, en een afbeelding van je maand om te delen.</value>
+  </data>
+  <data name="Pro_ColorsTitle" xml:space="preserve">
+    <value>Kleuren van de app</value>
+  </data>
+  <data name="Pro_ColorsText" xml:space="preserve">
+    <value>Blauw, groen, oranje, rood… geef Fonte de kleur die je mooi vindt.</value>
+  </data>
+  <data name="Pro_FreeStays" xml:space="preserve">
+    <value>Trainingen noteren, de rusttimer, records en geschiedenis blijven gratis en onbeperkt.</value>
+  </data>
+  <data name="Pro_Unlock" xml:space="preserve">
+    <value>Fonte Pro ontgrendelen</value>
+  </data>
+  <data name="Pro_UnlockFor" xml:space="preserve">
+    <value>Ontgrendelen voor {0}</value>
+  </data>
+  <data name="Pro_Restore" xml:space="preserve">
+    <value>Mijn aankopen herstellen</value>
+  </data>
+  <data name="Pro_TestUnlock" xml:space="preserve">
+    <value>Ontgrendelen (testmodus)</value>
+  </data>
+  <data name="Pro_TestLock" xml:space="preserve">
+    <value>Opnieuw vergrendelen (testmodus)</value>
+  </data>
+  <data name="Pro_UnlockedTitle" xml:space="preserve">
+    <value>Fonte Pro is ontgrendeld</value>
+  </data>
+  <data name="Pro_UnlockedText" xml:space="preserve">
+    <value>Bedankt voor je steun! Alles hierboven is van jou.</value>
+  </data>
+  <data name="Pro_Thanks" xml:space="preserve">
+    <value>Fonte Pro ontgrendeld</value>
+  </data>
+  <data name="Pro_Restored" xml:space="preserve">
+    <value>Aankopen hersteld</value>
+  </data>
+  <data name="Pro_UnavailableTitle" xml:space="preserve">
+    <value>Aankoop niet beschikbaar</value>
+  </data>
+  <data name="Pro_UnavailableText" xml:space="preserve">
+    <value>De store is niet bereikbaar of Fonte Pro is er nog niet beschikbaar. Probeer het later opnieuw.</value>
+  </data>
+  <data name="Pro_FailedTitle" xml:space="preserve">
+    <value>Aankoop mislukt</value>
+  </data>
+  <data name="Pro_FailedText" xml:space="preserve">
+    <value>Er werd niets aangerekend. Probeer het zo meteen opnieuw.</value>
+  </data>
+  <data name="Pro_NothingToRestoreTitle" xml:space="preserve">
+    <value>Niets om te herstellen</value>
+  </data>
+  <data name="Pro_NothingToRestoreText" xml:space="preserve">
+    <value>Er werd geen aankoop van Fonte Pro gevonden op deze account.</value>
+  </data>
+  <data name="Pro_StatusLocked" xml:space="preserve">
+    <value>Automatische progressie, Apple Gezondheid, kleuren…</value>
+  </data>
+  <data name="Pro_StatusUnlocked" xml:space="preserve">
+    <value>Ontgrendeld — bedankt!</value>
+  </data>
+  <data name="Pro_Discover" xml:space="preserve">
+    <value>Fonte Pro ontdekken</value>
+  </data>
+  <data name="Programs_LimitTitle" xml:space="preserve">
+    <value>Je eigen trainingen</value>
+  </data>
+  <data name="Programs_LimitText" xml:space="preserve">
+    <value>De gratis versie bewaart tot {0} eigen trainingen. Fonte Pro heeft geen limiet.</value>
+  </data>
+  <data name="Programs_OwnProgramPro" xml:space="preserve">
+    <value>Je eigen programma maken hoort bij Fonte Pro. Kant-en-klare programma's blijven gratis.</value>
+  </data>
+  <data name="Summary_ProTeaserTitle" xml:space="preserve">
+    <value>Je verdient een verhoging</value>
+  </data>
+  <data name="Summary_ProTeaserText" xml:space="preserve">
+    <value>Alle sets zijn gelukt: met Fonte Pro mikt de volgende training vanzelf hoger.</value>
+  </data>
+  <data name="Summary_ProDiscover" xml:space="preserve">
+    <value>Fonte Pro ontdekken</value>
+  </data>
+  <data name="Summary_ProHintTitle" xml:space="preserve">
+    <value>Al drie trainingen 💪</value>
+  </data>
+  <data name="Summary_ProHintText" xml:space="preserve">
+    <value>Fonte Pro verhoogt je gewichten vanzelf en voegt volledige voortgang en lichaamsopvolging toe.</value>
+  </data>
+  <data name="Progress_MusclesPro" xml:space="preserve">
+    <value>Zie hoeveel sets elke spiergroep deze week kreeg en welke je laat liggen.</value>
+  </data>
+  <data name="Body_GoalPro" xml:space="preserve">
+    <value>Gewichtsdoel en -curve · Fonte Pro</value>
+  </data>
+  <data name="Workout_SetKind" xml:space="preserve">
+    <value>Soort set</value>
+  </data>
+  <data name="Workout_SetRpe" xml:space="preserve">
+    <value>RPE (inspanning)</value>
+  </data>
+  <data name="Workout_RpeTitle" xml:space="preserve">
+    <value>Hoe zwaar? 10 = niets meer over</value>
+  </data>
+  <data name="Workout_RpeClear" xml:space="preserve">
+    <value>Geen RPE</value>
+  </data>
+  <data name="Workout_RestTime" xml:space="preserve">
+    <value>Rusttijd</value>
+  </data>
+  <data name="Workout_RestDefault" xml:space="preserve">
+    <value>Zoals in de instellingen ({0})</value>
+  </data>
+  <data name="Workout_RestFor" xml:space="preserve">
+    <value>Rust na elke set van {0}</value>
+  </data>
+  <data name="Workout_RestShort" xml:space="preserve">
+    <value>rust {0}</value>
+  </data>
+  <data name="SetKind_Normal" xml:space="preserve">
+    <value>Normaal</value>
+  </data>
+  <data name="SetKind_WarmUp" xml:space="preserve">
+    <value>Opwarming</value>
+  </data>
+  <data name="SetKind_Drop" xml:space="preserve">
+    <value>Dropset</value>
+  </data>
+  <data name="SetKind_Failure" xml:space="preserve">
+    <value>Tot falen</value>
+  </data>
+  <data name="SetKind_WarmUpLetter" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="SetKind_DropLetter" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="SetKind_FailureLetter" xml:space="preserve">
+    <value>F</value>
+  </data>
+  <data name="Settings_DataSection" xml:space="preserve">
+    <value>GEGEVENS</value>
+  </data>
+  <data name="Settings_Health" xml:space="preserve">
+    <value>Apple Gezondheid</value>
+  </data>
+  <data name="Settings_HealthHint" xml:space="preserve">
+    <value>Bewaart je trainingen, leest je gewicht</value>
+  </data>
+  <data name="Settings_HealthDenied" xml:space="preserve">
+    <value>Fonte heeft geen toegang tot Gezondheid. Je kunt dit toestaan in de app Gezondheid › Delen › Apps › Fonte.</value>
+  </data>
+  <data name="Settings_HealthImported" xml:space="preserve">
+    <value>{0} wegingen overgenomen uit Gezondheid</value>
+  </data>
+  <data name="Settings_Export" xml:space="preserve">
+    <value>Mijn trainingen exporteren (CSV)</value>
+  </data>
+  <data name="Settings_ExportHint" xml:space="preserve">
+    <value>Alle sets, voor Excel of Numbers</value>
+  </data>
+  <data name="Settings_ExportEmpty" xml:space="preserve">
+    <value>Nog geen afgeronde training om te exporteren.</value>
+  </data>
+  <data name="Csv_Date" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="Csv_Time" xml:space="preserve">
+    <value>Tijd</value>
+  </data>
+  <data name="Csv_Workout" xml:space="preserve">
+    <value>Training</value>
+  </data>
+  <data name="Csv_Exercise" xml:space="preserve">
+    <value>Oefening</value>
+  </data>
+  <data name="Csv_Muscle" xml:space="preserve">
+    <value>Spiergroep</value>
+  </data>
+  <data name="Csv_Set" xml:space="preserve">
+    <value>Set</value>
+  </data>
+  <data name="Csv_Kind" xml:space="preserve">
+    <value>Soort</value>
+  </data>
+  <data name="Csv_Weight" xml:space="preserve">
+    <value>Gewicht (kg)</value>
+  </data>
+  <data name="Csv_Reps" xml:space="preserve">
+    <value>Herhalingen</value>
+  </data>
+  <data name="Csv_Seconds" xml:space="preserve">
+    <value>Duur (s)</value>
+  </data>
+  <data name="Csv_Rpe" xml:space="preserve">
+    <value>RPE</value>
+  </data>
+  <data name="Csv_Note" xml:space="preserve">
+    <value>Notitie</value>
+  </data>
+  <data name="History_Share" xml:space="preserve">
+    <value>Mijn maand delen</value>
+  </data>
+  <data name="MonthCard_Subtitle" xml:space="preserve">
+    <value>Mijn trainingsmaand</value>
+  </data>
+  <data name="MonthCard_Streak" xml:space="preserve">
+    <value>{0} regelmatige weken op rij</value>
+  </data>
+  <data name="MonthCard_Footer" xml:space="preserve">
+    <value>Fonte · trainingslogboek</value>
+  </data>
+  <data name="Error_InvalidRpe" xml:space="preserve">
+    <value>De RPE gaat van 1 tot 10.</value>
+  </data>
 </root>

@@ -1410,4 +1410,271 @@
   <data name="Accent_Slate" xml:space="preserve">
     <value>Slate</value>
   </data>
+  <data name="Pro_Tagline" xml:space="preserve">
+    <value>Everything to progress faster.</value>
+  </data>
+  <data name="Pro_OneTime" xml:space="preserve">
+    <value>One-time purchase · no subscription</value>
+  </data>
+  <data name="Pro_ProgressionTitle" xml:space="preserve">
+    <value>Automatic progression</value>
+  </data>
+  <data name="Pro_ProgressionText" xml:space="preserve">
+    <value>When every set succeeds, the load goes up on its own next time.</value>
+  </data>
+  <data name="Pro_ProgramsTitle" xml:space="preserve">
+    <value>Unlimited programs and workouts</value>
+  </data>
+  <data name="Pro_ProgramsText" xml:space="preserve">
+    <value>Create your own programs and as many workouts as you like.</value>
+  </data>
+  <data name="Pro_ProgressTitle" xml:space="preserve">
+    <value>Full progress</value>
+  </data>
+  <data name="Pro_ProgressText" xml:space="preserve">
+    <value>Three months of volume, sets per muscle and an alert when one is left aside.</value>
+  </data>
+  <data name="Pro_BodyTitle" xml:space="preserve">
+    <value>Body tracking</value>
+  </data>
+  <data name="Pro_BodyText" xml:space="preserve">
+    <value>Weight goal and curve, measurements, and progress photos locked with Face ID.</value>
+  </data>
+  <data name="Pro_SetsTitle" xml:space="preserve">
+    <value>Advanced sets</value>
+  </data>
+  <data name="Pro_SetsText" xml:space="preserve">
+    <value>Warm-up, drop and to-failure sets, RPE, and a rest time for each exercise.</value>
+  </data>
+  <data name="Pro_PlatesTitle" xml:space="preserve">
+    <value>Plates and warm-up</value>
+  </data>
+  <data name="Pro_PlatesText" xml:space="preserve">
+    <value>The plates to load on each side, and the warm-up up to your working weight.</value>
+  </data>
+  <data name="Pro_HealthTitle" xml:space="preserve">
+    <value>Apple Health</value>
+  </data>
+  <data name="Pro_HealthText" xml:space="preserve">
+    <value>Your workouts saved to Health, your weight taken from it.</value>
+  </data>
+  <data name="Pro_ExportTitle" xml:space="preserve">
+    <value>CSV export and monthly recap</value>
+  </data>
+  <data name="Pro_ExportText" xml:space="preserve">
+    <value>Every set in Excel or Numbers, and an image of your month to share.</value>
+  </data>
+  <data name="Pro_ColorsTitle" xml:space="preserve">
+    <value>App colours</value>
+  </data>
+  <data name="Pro_ColorsText" xml:space="preserve">
+    <value>Blue, green, orange, red… give Fonte the colour you like.</value>
+  </data>
+  <data name="Pro_FreeStays" xml:space="preserve">
+    <value>Logging workouts, the rest timer, records and history stay free and unlimited.</value>
+  </data>
+  <data name="Pro_Unlock" xml:space="preserve">
+    <value>Unlock Fonte Pro</value>
+  </data>
+  <data name="Pro_UnlockFor" xml:space="preserve">
+    <value>Unlock for {0}</value>
+  </data>
+  <data name="Pro_Restore" xml:space="preserve">
+    <value>Restore my purchases</value>
+  </data>
+  <data name="Pro_TestUnlock" xml:space="preserve">
+    <value>Unlock (test mode)</value>
+  </data>
+  <data name="Pro_TestLock" xml:space="preserve">
+    <value>Lock again (test mode)</value>
+  </data>
+  <data name="Pro_UnlockedTitle" xml:space="preserve">
+    <value>Fonte Pro is unlocked</value>
+  </data>
+  <data name="Pro_UnlockedText" xml:space="preserve">
+    <value>Thanks for your support! Everything above is yours.</value>
+  </data>
+  <data name="Pro_Thanks" xml:space="preserve">
+    <value>Fonte Pro unlocked</value>
+  </data>
+  <data name="Pro_Restored" xml:space="preserve">
+    <value>Purchases restored</value>
+  </data>
+  <data name="Pro_UnavailableTitle" xml:space="preserve">
+    <value>Purchase unavailable</value>
+  </data>
+  <data name="Pro_UnavailableText" xml:space="preserve">
+    <value>The store can't be reached, or Fonte Pro isn't available there yet. Try again later.</value>
+  </data>
+  <data name="Pro_FailedTitle" xml:space="preserve">
+    <value>Purchase failed</value>
+  </data>
+  <data name="Pro_FailedText" xml:space="preserve">
+    <value>Nothing was charged. Try again in a moment.</value>
+  </data>
+  <data name="Pro_NothingToRestoreTitle" xml:space="preserve">
+    <value>Nothing to restore</value>
+  </data>
+  <data name="Pro_NothingToRestoreText" xml:space="preserve">
+    <value>No Fonte Pro purchase was found on this store account.</value>
+  </data>
+  <data name="Pro_StatusLocked" xml:space="preserve">
+    <value>Automatic progression, Apple Health, colours…</value>
+  </data>
+  <data name="Pro_StatusUnlocked" xml:space="preserve">
+    <value>Unlocked — thank you!</value>
+  </data>
+  <data name="Pro_Discover" xml:space="preserve">
+    <value>Discover Fonte Pro</value>
+  </data>
+  <data name="Programs_LimitTitle" xml:space="preserve">
+    <value>Your own workouts</value>
+  </data>
+  <data name="Programs_LimitText" xml:space="preserve">
+    <value>The free version keeps up to {0} workouts of your own. Fonte Pro has no limit.</value>
+  </data>
+  <data name="Programs_OwnProgramPro" xml:space="preserve">
+    <value>Building your own program comes with Fonte Pro. Ready-made programs stay free.</value>
+  </data>
+  <data name="Summary_ProTeaserTitle" xml:space="preserve">
+    <value>You earned a raise</value>
+  </data>
+  <data name="Summary_ProTeaserText" xml:space="preserve">
+    <value>Every set succeeded: with Fonte Pro, the next workout would aim higher on its own.</value>
+  </data>
+  <data name="Summary_ProDiscover" xml:space="preserve">
+    <value>Discover Fonte Pro</value>
+  </data>
+  <data name="Summary_ProHintTitle" xml:space="preserve">
+    <value>Three workouts already 💪</value>
+  </data>
+  <data name="Summary_ProHintText" xml:space="preserve">
+    <value>Fonte Pro raises your loads on its own, and adds full progress and body tracking.</value>
+  </data>
+  <data name="Progress_MusclesPro" xml:space="preserve">
+    <value>See how many sets each muscle got this week, and which ones you leave aside.</value>
+  </data>
+  <data name="Body_GoalPro" xml:space="preserve">
+    <value>Weight goal and curve · Fonte Pro</value>
+  </data>
+  <data name="Workout_SetKind" xml:space="preserve">
+    <value>Kind of set</value>
+  </data>
+  <data name="Workout_SetRpe" xml:space="preserve">
+    <value>RPE (effort)</value>
+  </data>
+  <data name="Workout_RpeTitle" xml:space="preserve">
+    <value>How hard was it? 10 = nothing left</value>
+  </data>
+  <data name="Workout_RpeClear" xml:space="preserve">
+    <value>No RPE</value>
+  </data>
+  <data name="Workout_RestTime" xml:space="preserve">
+    <value>Rest time</value>
+  </data>
+  <data name="Workout_RestDefault" xml:space="preserve">
+    <value>As in the settings ({0})</value>
+  </data>
+  <data name="Workout_RestFor" xml:space="preserve">
+    <value>Rest after each set of {0}</value>
+  </data>
+  <data name="Workout_RestShort" xml:space="preserve">
+    <value>rest {0}</value>
+  </data>
+  <data name="SetKind_Normal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="SetKind_WarmUp" xml:space="preserve">
+    <value>Warm-up</value>
+  </data>
+  <data name="SetKind_Drop" xml:space="preserve">
+    <value>Drop set</value>
+  </data>
+  <data name="SetKind_Failure" xml:space="preserve">
+    <value>To failure</value>
+  </data>
+  <data name="SetKind_WarmUpLetter" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="SetKind_DropLetter" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="SetKind_FailureLetter" xml:space="preserve">
+    <value>F</value>
+  </data>
+  <data name="Settings_DataSection" xml:space="preserve">
+    <value>DATA</value>
+  </data>
+  <data name="Settings_Health" xml:space="preserve">
+    <value>Apple Health</value>
+  </data>
+  <data name="Settings_HealthHint" xml:space="preserve">
+    <value>Saves your workouts, reads your weight</value>
+  </data>
+  <data name="Settings_HealthDenied" xml:space="preserve">
+    <value>Fonte isn't allowed to use Health. You can allow it in the Health app › Sharing › Apps › Fonte.</value>
+  </data>
+  <data name="Settings_HealthImported" xml:space="preserve">
+    <value>{0} weighings imported from Health</value>
+  </data>
+  <data name="Settings_Export" xml:space="preserve">
+    <value>Export my workouts (CSV)</value>
+  </data>
+  <data name="Settings_ExportHint" xml:space="preserve">
+    <value>Every set, for Excel or Numbers</value>
+  </data>
+  <data name="Settings_ExportEmpty" xml:space="preserve">
+    <value>No finished workout to export yet.</value>
+  </data>
+  <data name="Csv_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Csv_Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="Csv_Workout" xml:space="preserve">
+    <value>Workout</value>
+  </data>
+  <data name="Csv_Exercise" xml:space="preserve">
+    <value>Exercise</value>
+  </data>
+  <data name="Csv_Muscle" xml:space="preserve">
+    <value>Muscle group</value>
+  </data>
+  <data name="Csv_Set" xml:space="preserve">
+    <value>Set</value>
+  </data>
+  <data name="Csv_Kind" xml:space="preserve">
+    <value>Kind</value>
+  </data>
+  <data name="Csv_Weight" xml:space="preserve">
+    <value>Load (kg)</value>
+  </data>
+  <data name="Csv_Reps" xml:space="preserve">
+    <value>Reps</value>
+  </data>
+  <data name="Csv_Seconds" xml:space="preserve">
+    <value>Duration (s)</value>
+  </data>
+  <data name="Csv_Rpe" xml:space="preserve">
+    <value>RPE</value>
+  </data>
+  <data name="Csv_Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="History_Share" xml:space="preserve">
+    <value>Share my month</value>
+  </data>
+  <data name="MonthCard_Subtitle" xml:space="preserve">
+    <value>My month of training</value>
+  </data>
+  <data name="MonthCard_Streak" xml:space="preserve">
+    <value>{0} regular weeks in a row</value>
+  </data>
+  <data name="MonthCard_Footer" xml:space="preserve">
+    <value>Fonte · offline training log</value>
+  </data>
+  <data name="Error_InvalidRpe" xml:space="preserve">
+    <value>The RPE goes from 1 to 10.</value>
+  </data>
 </root>

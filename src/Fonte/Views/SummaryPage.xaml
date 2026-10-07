@@ -174,6 +174,53 @@
                     </VerticalStackLayout>
                 </Border>
 
+                <!-- What Fonte Pro would have raised -->
+                <Border IsVisible="{Binding HasProTeaser}" Padding="16,14" Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="12">
+                        <HorizontalStackLayout Spacing="8">
+                            <Border Style="{StaticResource ProBadge}">
+                                <Label Style="{StaticResource ProBadgeText}" />
+                            </Border>
+                            <Label Style="{StaticResource Strong}" Text="{l:Tr Summary_ProTeaserTitle}" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <Label Style="{StaticResource Caption}" Text="{l:Tr Summary_ProTeaserText}" />
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Progressions}" Spacing="8">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:ProgressionItem">
+                                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                        <Label FontFamily="OpenSansSemibold" Text="{Binding Name}" VerticalOptions="Center" />
+                                        <Label
+                                            Grid.Column="1"
+                                            FontFamily="OpenSansSemibold"
+                                            Text="{Binding Text}"
+                                            TextColor="{DynamicResource Accent}"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                        <Label c:Touch.Command="{Binding OpenProCommand}" Style="{StaticResource LinkLabel}" Text="{l:Tr Summary_ProDiscover}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- One-time suggestion of Fonte Pro -->
+                <Border IsVisible="{Binding HasProHint}" Padding="16,14" c:Touch.Command="{Binding OpenProCommand}" Style="{StaticResource Card}">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                        <Label FontSize="28" Text="🏆" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                            <Label Style="{StaticResource Strong}" Text="{l:Tr Summary_ProHintTitle}" />
+                            <Label Style="{StaticResource Caption}" Text="{l:Tr Summary_ProHintText}" />
+                        </VerticalStackLayout>
+                        <c:IconView
+                            Grid.Column="2"
+                            Color="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}"
+                            Data="{x:Static c:Icons.ChevronRight}"
+                            HeightRequest="16"
+                            VerticalOptions="Center"
+                            WidthRequest="16" />
+                    </Grid>
+                </Border>
+
                 <!-- Personal records -->
                 <Border IsVisible="{Binding HasRecords}" Padding="16,14" Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="12">

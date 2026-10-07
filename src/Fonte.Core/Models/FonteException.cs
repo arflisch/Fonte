@@ -12,6 +12,7 @@ public enum FonteError
     ProgramNotFound,
     TemplateNotFound,
     InvalidBodyValue,
+    InvalidRpe,
 }
 
 public sealed class FonteException(FonteError error, string message) : Exception(message)

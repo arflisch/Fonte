@@ -18,6 +18,8 @@ public sealed class AppSettings
     private const string BarKey = "bar_weight";
     private const string PlatesKey = "plates";
     private const string AccentKey = "accent";
+    private const string HealthKey = "health";
+    private const string ProHintKey = "pro_hint_shown";
 
     /// <summary>Rest durations offered, in seconds.</summary>
     public static readonly IReadOnlyList<int> RestChoices = [30, 45, 60, 90, 120, 150, 180, 240, 300];
@@ -122,6 +124,20 @@ public sealed class AppSettings
             _preferences.Set(AccentKey, value.Key);
             AccentTheme.Apply(value);
         });
+    }
+
+    /// <summary>Workouts saved to Apple Health and body weight read from it (Fonte Pro).</summary>
+    public bool HealthEnabled
+    {
+        get => _preferences.Get(HealthKey, false);
+        set => Update(() => _preferences.Set(HealthKey, value));
+    }
+
+    /// <summary>The one-time suggestion of Fonte Pro after a few workouts was shown.</summary>
+    public bool ProHintShown
+    {
+        get => _preferences.Get(ProHintKey, false);
+        set => _preferences.Set(ProHintKey, value);
     }
 
     private void Update(Action write)

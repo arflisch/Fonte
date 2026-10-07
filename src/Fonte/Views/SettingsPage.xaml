@@ -26,6 +26,28 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="20,14,20,32" Spacing="10">
 
+                <!-- Fonte Pro -->
+                <Border
+                    Background="{DynamicResource HeroGradient}"
+                    c:Touch.Command="{Binding OpenProCommand}"
+                    StrokeShape="RoundRectangle 22"
+                    StrokeThickness="0">
+                    <Grid Padding="16,14" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                        <Label FontSize="28" Text="🏆" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                            <Label FontFamily="OpenSansSemibold" FontSize="17" Text="Fonte Pro" TextColor="White" />
+                            <Label FontSize="13" Text="{Binding ProStatus}" TextColor="{StaticResource WhiteSoft}" />
+                        </VerticalStackLayout>
+                        <c:IconView
+                            Grid.Column="2"
+                            Color="White"
+                            Data="{x:Static c:Icons.ChevronRight}"
+                            HeightRequest="16"
+                            VerticalOptions="Center"
+                            WidthRequest="16" />
+                    </Grid>
+                </Border>
+
                 <!-- Training -->
                 <Label Margin="0,4,0,0" Style="{StaticResource FieldLabel}" Text="{l:Tr Settings_TrainingSection}" />
                 <Border Padding="16,0" Style="{StaticResource Card}">
@@ -109,6 +131,50 @@
                     </VerticalStackLayout>
                 </Border>
 
+                <!-- Data -->
+                <Label Margin="0,14,0,0" Style="{StaticResource FieldLabel}" Text="{l:Tr Settings_DataSection}" />
+                <Border Padding="16,0" Style="{StaticResource Card}">
+                    <VerticalStackLayout>
+                        <Grid IsVisible="{Binding IsHealthSupported}" Style="{StaticResource Row}">
+                            <Border BackgroundColor="#26E24B4A" Style="{StaticResource RowIcon}">
+                                <Label FontSize="17" HorizontalOptions="Center" Text="❤️" VerticalOptions="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                <HorizontalStackLayout Spacing="6">
+                                    <Label Style="{StaticResource RowTitle}" Text="{l:Tr Settings_Health}" VerticalOptions="Center" />
+                                    <Border IsVisible="{Binding IsLocked}" Style="{StaticResource ProBadge}">
+                                        <Label Style="{StaticResource ProBadgeText}" />
+                                    </Border>
+                                </HorizontalStackLayout>
+                                <Label Style="{StaticResource Caption}" Text="{l:Tr Settings_HealthHint}" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="2" IsToggled="{Binding IsHealthEnabled}" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView IsVisible="{Binding IsHealthSupported}" Style="{StaticResource Divider}" />
+                        <Grid c:Touch.Command="{Binding ExportCsvCommand}" Style="{StaticResource Row}">
+                            <Border BackgroundColor="#260891B2" Style="{StaticResource RowIcon}">
+                                <c:IconView Color="#0891B2" Data="{x:Static c:Icons.ArrowDown}" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                <HorizontalStackLayout Spacing="6">
+                                    <Label Style="{StaticResource RowTitle}" Text="{l:Tr Settings_Export}" VerticalOptions="Center" />
+                                    <Border IsVisible="{Binding IsLocked}" Style="{StaticResource ProBadge}">
+                                        <Label Style="{StaticResource ProBadgeText}" />
+                                    </Border>
+                                </HorizontalStackLayout>
+                                <Label Style="{StaticResource Caption}" Text="{l:Tr Settings_ExportHint}" />
+                            </VerticalStackLayout>
+                            <c:IconView
+                                Grid.Column="2"
+                                Color="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}"
+                                Data="{x:Static c:Icons.ChevronRight}"
+                                HeightRequest="16"
+                                VerticalOptions="Center"
+                                WidthRequest="16" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
                 <!-- Plates -->
                 <Label Margin="0,14,0,0" Style="{StaticResource FieldLabel}" Text="{l:Tr Settings_PlatesSection}" />
                 <Border Padding="16,14" Style="{StaticResource Card}">
@@ -146,6 +212,9 @@
                                 VerticalOptions="Center"
                                 WidthRequest="18" />
                             <Label Style="{StaticResource LinkLabel}" Text="{l:Tr Settings_OpenPlates}" />
+                            <Border IsVisible="{Binding IsLocked}" Style="{StaticResource ProBadge}">
+                                <Label Style="{StaticResource ProBadgeText}" />
+                            </Border>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Border>
@@ -159,7 +228,12 @@
                             <Border BackgroundColor="{DynamicResource AccentTint}" Style="{StaticResource RowIcon}">
                                 <c:IconView Color="{DynamicResource Primary}" Data="{x:Static c:Icons.Palette}" />
                             </Border>
-                            <Label Grid.Column="1" Style="{StaticResource RowTitle}" Text="{l:Tr Settings_Accent}" VerticalOptions="Center" />
+                            <HorizontalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
+                                <Label Style="{StaticResource RowTitle}" Text="{l:Tr Settings_Accent}" VerticalOptions="Center" />
+                                <Border IsVisible="{Binding IsLocked}" Style="{StaticResource ProBadge}">
+                                    <Label Style="{StaticResource ProBadgeText}" />
+                                </Border>
+                            </HorizontalStackLayout>
                             <Label Grid.Column="2" Style="{StaticResource Secondary}" Text="{Binding AccentName}" VerticalOptions="Center" />
                         </Grid>
                         <Grid

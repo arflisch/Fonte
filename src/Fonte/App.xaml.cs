@@ -10,10 +10,16 @@ public partial class App : Application
     private readonly AppShell _shell;
     private readonly IPreferences _preferences;
 
-    public App(AppShell shell, FonteStore store, AppSettings settings, IPreferences preferences)
+    public App(AppShell shell, FonteStore store, AppSettings settings, ProService pro, IPreferences preferences)
     {
         InitializeComponent();
-        AccentTheme.Apply(settings.Accent);
+        // The colours other than violet come with Fonte Pro.
+        AccentTheme.Apply(pro.IsUnlocked ? settings.Accent : AccentTheme.All[0]);
+        pro.Changed += (_, _) =>
+        {
+            AccentTheme.Apply(pro.IsUnlocked ? settings.Accent : AccentTheme.All[0]);
+            WeakReferenceMessenger.Default.Send(new DataChangedMessage());
+        };
         _shell = shell;
         _preferences = preferences;
 

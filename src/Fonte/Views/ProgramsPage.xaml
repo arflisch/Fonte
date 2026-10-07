@@ -79,14 +79,23 @@
                 <!-- Header -->
                 <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
                     <Label Style="{StaticResource LargeTitle}" Text="{l:Tr Tab_Programs}" VerticalOptions="Center" />
-                    <Border
-                        Grid.Column="1"
-                        c:Touch.Command="{Binding NewProgramCommand}"
-                        Style="{StaticResource IconButton}"
-                        VerticalOptions="Center"
-                        SemanticProperties.Description="{l:Tr Programs_NewProgram}">
-                        <c:IconView Color="{DynamicResource Accent}" Data="{x:Static c:Icons.Plus}" StrokeWidth="2.4" />
-                    </Border>
+                    <Grid Grid.Column="1" VerticalOptions="Center">
+                        <Border
+                            c:Touch.Command="{Binding NewProgramCommand}"
+                            Style="{StaticResource IconButton}"
+                            SemanticProperties.Description="{l:Tr Programs_NewProgram}">
+                            <c:IconView Color="{DynamicResource Accent}" Data="{x:Static c:Icons.Plus}" StrokeWidth="2.4" />
+                        </Border>
+                        <Border
+                            Margin="0,-6,-8,0"
+                            HorizontalOptions="End"
+                            InputTransparent="True"
+                            IsVisible="{Binding IsLocked}"
+                            Style="{StaticResource ProBadge}"
+                            VerticalOptions="Start">
+                            <Label Style="{StaticResource ProBadgeText}" />
+                        </Border>
+                    </Grid>
                 </Grid>
 
                 <!-- Program followed -->

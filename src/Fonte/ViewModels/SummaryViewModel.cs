@@ -14,15 +14,24 @@ public sealed partial class SummaryViewModel : ObservableObject, IQueryAttributa
     /// <summary>How the workout felt, from 1 (exhausting) to 5 (excellent).</summary>
     public static readonly IReadOnlyList<string> FeelingEmojis = ["😫", "😕", "😐", "🙂", "🤩"];
 
+    /// <summary>Finished workouts after which Fonte Pro is suggested once, when nothing better shows it.</summary>
+    private const int ProHintAfter = 3;
+
     private readonly FonteStore _store;
     private readonly IDialogService _dialogs;
+    private readonly FinishedWorkouts _finished;
+    private readonly ProService _pro;
+    private readonly AppSettings _settings;
     private int _workoutId;
     private int? _feeling;
 
-    public SummaryViewModel(FonteStore store, IDialogService dialogs)
+    public SummaryViewModel(FonteStore store, IDialogService dialogs, FinishedWorkouts finished, ProService pro, AppSettings settings)
     {
         _store = store;
         _dialogs = dialogs;
+        _finished = finished;
+        _pro = pro;
+        _settings = settings;
         Feelings = SelectableOption.Grid(FeelingEmojis, FeelingEmojis.Count, SelectFeeling);
     }
 
@@ -76,6 +85,14 @@ public sealed partial class SummaryViewModel : ObservableObject, IQueryAttributa
     [ObservableProperty]
     private bool _hasProgressions;
 
+    /// <summary>Targets this workout succeeded, that Fonte Pro would have raised.</summary>
+    [ObservableProperty]
+    private bool _hasProTeaser;
+
+    /// <summary>The one-time suggestion of Fonte Pro, after a few workouts.</summary>
+    [ObservableProperty]
+    private bool _hasProHint;
+
     [ObservableProperty]
     private string _feelingText = string.Empty;
 
@@ -119,8 +136,19 @@ public sealed partial class SummaryViewModel : ObservableObject, IQueryAttributa
             Subtitle = summary.TemplateName is null ? hours : $"{Loc.Day(workout.StartedAt)} · {hours}";
         }
         ShowComparison(summary);
-        Progressions = summary.Progressions.Select(p => new ProgressionItem(Loc.ExerciseName(p.Exercise), ProgressionText(p))).ToList();
-        HasProgressions = Progressions.Count > 0;
+        // Only finishing the workout tells which targets went up.
+        var finished = IsFresh ? _finished.Take(_workoutId) : null;
+        var steps = finished?.Progressions ?? [];
+        Progressions = steps.Select(p => new ProgressionItem(Loc.ExerciseName(p.Exercise), ProgressionText(p))).ToList();
+        HasProgressions = Progressions.Count > 0 && finished!.ProgressionsApplied;
+        HasProTeaser = Progressions.Count > 0 && !finished!.ProgressionsApplied;
+        HasProHint = false;
+        if (IsFresh && !_pro.IsUnlocked && !HasProTeaser && !_settings.ProHintShown
+            && (await _store.GetWorkoutDatesAsync()).Count >= ProHintAfter)
+        {
+            HasProHint = true;
+            _settings.ProHintShown = true;
+        }
         DurationText = Loc.Duration(summary.Duration);
         VolumeText = Loc.Volume(summary.Volume);
         SetsText = summary.SetCount.ToString(Loc.Culture);
@@ -237,6 +265,9 @@ public sealed partial class SummaryViewModel : ObservableObject, IQueryAttributa
 
     [RelayCommand]
     private Task CloseAsync() => Shell.Current.GoToAsync("..");
+
+    [RelayCommand]
+    private Task OpenProAsync() => Shell.Current.GoToAsync(Routes.Pro);
 }
 
 public sealed record RecordItem(string Name, string SetText, string Detail);

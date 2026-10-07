@@ -84,12 +84,12 @@ public sealed partial class FonteStore
             recaps.Add(new ExerciseRecap(exercise, sets));
 
             var before = done
-                .Where(r => r.ExerciseId == exercise.Id && r.StartedAt < workout.StartedAt)
+                .Where(r => r.ExerciseId == exercise.Id && r.StartedAt < workout.StartedAt && r.Kind != SetKind.WarmUp)
                 .Select(r => Performance.Score(exercise.Tracking, r.ToSet()))
                 .DefaultIfEmpty(0)
                 .Max();
-            var best = Performance.Best(exercise.Tracking, sets)!;
-            if (before > 0 && Performance.Score(exercise.Tracking, best) > before)
+            if (before > 0 && Performance.Best(exercise.Tracking, sets) is { } best
+                && Performance.Score(exercise.Tracking, best) > before)
                 records.Add(new PersonalRecord(exercise, best, before));
         }
         var template = workout.TemplateId is { } templateId ? await db.FindAsync<WorkoutTemplate>(templateId) : null;
@@ -113,7 +113,7 @@ public sealed partial class FonteStore
         if (previous is null)
             return null;
         var sets = done.Where(r => r.WorkoutId == previous.Id).Select(r => r.ToSet()).ToList();
-        return new WorkoutComparison(previous, Performance.Volume(sets), sets.Count);
+        return new WorkoutComparison(previous, Performance.Volume(sets), Performance.Working(sets).Count());
     }
 
     /// <summary>The finished workouts of a calendar month, most recent first.</summary>
@@ -147,7 +147,8 @@ public sealed partial class FonteStore
     public async Task<ProgressReport> GetProgressAsync(DateTime today, DayOfWeek firstDay, int weeks = 12)
     {
         var db = await GetConnectionAsync();
-        var done = await GetDoneSetsAsync(db);
+        var all = await GetDoneSetsAsync(db);
+        var done = all.Where(r => r.Kind != SetKind.WarmUp).ToList();
         var muscles = (await db.Table<Exercise>().ToListAsync()).ToDictionary(e => e.Id, e => e.Muscle);
 
         var thisWeek = Streaks.WeekStart(today, firstDay);
@@ -180,7 +181,7 @@ public sealed partial class FonteStore
             .ToListAsync();
         var records = new List<DatedRecord>();
         foreach (var workout in monthWorkouts)
-            records.AddRange((await BuildSummaryAsync(db, workout, done)).Records.Select(r => new DatedRecord(r, workout.StartedAt)));
+            records.AddRange((await BuildSummaryAsync(db, workout, all)).Records.Select(r => new DatedRecord(r, workout.StartedAt)));
 
         return new ProgressReport(stats, muscleSets, neglected, records);
     }

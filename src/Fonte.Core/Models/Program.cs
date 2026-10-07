@@ -44,6 +44,9 @@ public sealed class WorkoutTemplate
     /// <summary>Order within the program: templates are done in turn.</summary>
     public int Position { get; set; }
 
+    /// <summary>The ready-made workout it was created from; null for one the user created.</summary>
+    public string? CatalogKey { get; set; }
+
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 }
 
@@ -74,4 +77,7 @@ public sealed class TemplateExercise
 
     /// <summary>Done back to back with the next exercise, without resting in between (superset).</summary>
     public bool LinkedToNext { get; set; }
+
+    /// <summary>Rest after each set, in seconds; 0 for the rest chosen in the settings.</summary>
+    public int RestSeconds { get; set; }
 }

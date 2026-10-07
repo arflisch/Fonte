@@ -57,6 +57,7 @@ public sealed partial class FonteStore
                 var template = new WorkoutTemplate
                 {
                     ProgramId = program.Id,
+                    CatalogKey = catalog.Templates[t].Key,
                     Name = name($"Template_{catalog.Templates[t].Key}"),
                     Position = t,
                     CreatedAt = now,
@@ -250,6 +251,23 @@ public sealed partial class FonteStore
         }
     }
 
+    /// <summary>The rest after each set of this exercise; 0 for the rest of the settings.</summary>
+    public async Task SetTemplateExerciseRestAsync(int itemId, int seconds)
+    {
+        var db = await GetConnectionAsync();
+        var item = await FindTemplateExerciseAsync(db, itemId);
+        item.RestSeconds = Math.Clamp(seconds, 0, 3600);
+        await db.UpdateAsync(item);
+        OnChanged();
+    }
+
+    /// <summary>Workouts the user created (not the ones of ready-made programs).</summary>
+    public async Task<int> CountOwnTemplatesAsync()
+    {
+        var db = await GetConnectionAsync();
+        return await db.Table<WorkoutTemplate>().Where(t => t.CatalogKey == null).CountAsync();
+    }
+
     public async Task SetTemplateExerciseLinkAsync(int itemId, bool linkedToNext)
     {
         var db = await GetConnectionAsync();
@@ -290,10 +308,12 @@ public sealed partial class FonteStore
                     TargetReps = target.Reps > 0 ? target.Reps : null,
                     TargetWeight = target.Weight > 0 ? target.Weight : null,
                     TargetSeconds = target.Seconds > 0 ? target.Seconds : null,
+                    RestSeconds = target.RestSeconds > 0 ? target.RestSeconds : null,
                 };
                 conn.Insert(item);
 
-                var previous = PreviousSets(done, target.ExerciseId, workout);
+                // The working sets of last time; its warm-ups and drop sets don't match the planned sets.
+                var previous = PreviousSets(done, target.ExerciseId, workout).Where(Performance.IsPlanned).ToList();
                 for (var s = 0; s < Math.Max(1, target.Sets); s++)
                 {
                     var last = s < previous.Count ? previous[s] : previous.LastOrDefault();

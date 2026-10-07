@@ -80,6 +80,7 @@ public sealed partial class FonteStore
                     Weight = template[i].Weight,
                     Reps = template[i].Reps,
                     Seconds = template[i].Seconds,
+                    Kind = template[i].Kind,
                 });
             }
         });
@@ -139,6 +140,38 @@ public sealed partial class FonteStore
         return set;
     }
 
+    /// <summary>Marks a set as a warm-up, drop set or set to failure (or a normal one again).</summary>
+    public async Task SetSetKindAsync(int setId, SetKind kind)
+    {
+        if (!Enum.IsDefined(kind))
+            throw new ArgumentOutOfRangeException(nameof(kind));
+        var db = await GetConnectionAsync();
+        var set = await FindSetAsync(db, setId);
+        set.Kind = kind;
+        await db.UpdateAsync(set);
+    }
+
+    /// <summary>How hard the set felt, from 1 to 10 (half points allowed); null to clear it.</summary>
+    public async Task SetSetRpeAsync(int setId, double? rpe)
+    {
+        if (rpe is { } value && (value < 1 || value > 10 || Math.Abs(value * 2 - Math.Round(value * 2)) > 0.001))
+            throw new FonteException(FonteError.InvalidRpe, $"{value} is not an RPE.");
+        var db = await GetConnectionAsync();
+        var set = await FindSetAsync(db, setId);
+        set.Rpe = rpe;
+        await db.UpdateAsync(set);
+    }
+
+    /// <summary>The rest after each set of this exercise; null goes back to the rest of the settings.</summary>
+    public async Task SetWorkoutExerciseRestAsync(int workoutExerciseId, int? seconds)
+    {
+        var db = await GetConnectionAsync();
+        var item = await db.FindAsync<WorkoutExercise>(workoutExerciseId)
+            ?? throw new FonteException(FonteError.WorkoutNotFound, $"Workout exercise {workoutExerciseId} does not exist.");
+        item.RestSeconds = seconds is > 0 ? Math.Min(seconds.Value, 3600) : null;
+        await db.UpdateAsync(item);
+    }
+
     public async Task DeleteSetAsync(int setId)
     {
         var db = await GetConnectionAsync();
@@ -190,10 +223,11 @@ public sealed partial class FonteStore
 
     /// <summary>
     /// Ends the workout: sets left unticked are dropped, and so are exercises without any ticked set. A workout
-    /// where nothing was ticked is deleted and null is returned. A workout started from a template raises the
-    /// template's targets where every planned set succeeded (<see cref="WorkoutSummary.Progressions"/>).
+    /// where nothing was ticked is deleted and null is returned. For a workout started from a template, the
+    /// targets where every planned set succeeded are listed (<see cref="WorkoutSummary.Progressions"/>), and
+    /// raised in the template when <paramref name="applyProgression"/> is true.
     /// </summary>
-    public async Task<WorkoutSummary?> FinishWorkoutAsync(int workoutId, DateTime now)
+    public async Task<WorkoutSummary?> FinishWorkoutAsync(int workoutId, DateTime now, bool applyProgression = true)
     {
         var db = await GetConnectionAsync();
         var workout = await FindWorkoutAsync(db, workoutId);
@@ -222,12 +256,17 @@ public sealed partial class FonteStore
             return null;
         }
 
-        var progressions = workout.TemplateId is { } templateId ? await ApplyProgressionAsync(db, workoutId, templateId) : [];
+        var progressions = workout.TemplateId is { } templateId
+            ? await ApplyProgressionAsync(db, workoutId, templateId, applyProgression)
+            : [];
         OnChanged();
-        return await GetWorkoutSummaryAsync(workoutId) is { } summary ? summary with { Progressions = progressions } : null;
+        return await GetWorkoutSummaryAsync(workoutId) is { } summary
+            ? summary with { Progressions = progressions, ProgressionsApplied = applyProgression }
+            : null;
     }
 
-    private static async Task<IReadOnlyList<ProgressionStep>> ApplyProgressionAsync(SQLiteAsyncConnection db, int workoutId, int templateId)
+    /// <param name="save">False to only work out what would go up, leaving the template as it is.</param>
+    private static async Task<IReadOnlyList<ProgressionStep>> ApplyProgressionAsync(SQLiteAsyncConnection db, int workoutId, int templateId, bool save)
     {
         if (await db.FindAsync<WorkoutTemplate>(templateId) is null)
             return [];
@@ -245,9 +284,9 @@ public sealed partial class FonteStore
                 sets.AddRange(await db.Table<WorkoutSet>().Where(s => s.WorkoutExerciseId == item.Id && s.IsDone).ToListAsync());
 
             var before = (target.Weight, target.Reps, target.Seconds);
-            if (Progression.Apply(exercise, target, sets) is { } step)
+            if (Progression.Apply(exercise, target, sets.Where(Performance.IsPlanned).ToList()) is { } step)
                 steps.Add(step);
-            if ((target.Weight, target.Reps, target.Seconds) != before)
+            if (save && (target.Weight, target.Reps, target.Seconds) != before)
                 await db.UpdateAsync(target);
         }
         return steps;

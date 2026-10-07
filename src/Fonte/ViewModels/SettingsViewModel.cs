@@ -1,6 +1,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Fonte.Core.Catalog;
+using Fonte.Core.Data;
 using Fonte.Core.Training;
 using Fonte.Localization;
 using Fonte.Services;
@@ -11,11 +13,22 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
 {
     private readonly AppSettings _settings;
     private readonly IDialogService _dialogs;
+    private readonly FonteStore _store;
+    private readonly ProService _pro;
+    private readonly HealthService _health;
+    private bool _isRevertingHealth;
 
-    public SettingsViewModel(AppSettings settings, IDialogService dialogs)
+    public SettingsViewModel(AppSettings settings, IDialogService dialogs, FonteStore store, ProService pro, HealthService health)
     {
         _settings = settings;
         _dialogs = dialogs;
+        _store = store;
+        _pro = pro;
+        _health = health;
+        _isPro = pro.IsUnlocked;
+        _isHealthEnabled = settings.HealthEnabled && pro.IsUnlocked;
+        // Fonte Pro can be unlocked from this sheet (its page opens on top of it).
+        WeakReferenceMessenger.Default.Register<SettingsViewModel, DataChangedMessage>(this, static (vm, _) => vm.OnProChanged());
         _languageName = settings.Language.NativeName;
         _restText = Loc.Seconds(settings.RestSeconds);
         _isRestTimerEnabled = settings.RestTimerEnabled;
@@ -49,6 +62,20 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
 
     /// <summary>The colours the app can take, as swatches.</summary>
     public IReadOnlyList<SelectableOption> AccentOptions { get; }
+
+    public bool IsHealthSupported => HealthService.IsSupported;
+
+    /// <summary>Fonte Pro is unlocked; otherwise its features show a "PRO" badge.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsLocked), nameof(ProStatus))]
+    private bool _isPro;
+
+    public bool IsLocked => !IsPro;
+
+    public string ProStatus => IsPro ? Loc.Get("Pro_StatusUnlocked") : Loc.Get("Pro_StatusLocked");
+
+    [ObservableProperty]
+    private bool _isHealthEnabled;
 
     [ObservableProperty]
     private string _accentName;
@@ -148,8 +175,14 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
         SessionsText = Loc.Format("Settings_SessionsValue", sessions);
     }
 
-    private void SelectAccent(SelectableOption option)
+    private async void SelectAccent(SelectableOption option)
     {
+        // Violet is free, the other colours come with Fonte Pro.
+        if (option != AccentOptions[0] && !_pro.IsUnlocked)
+        {
+            await Shell.Current.GoToAsync(Routes.Pro);
+            return;
+        }
         foreach (var item in AccentOptions)
             item.IsSelected = item == option;
         var accent = AccentTheme.Find(option.Value);
@@ -172,7 +205,89 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
     }
 
     [RelayCommand]
-    private Task OpenPlatesAsync() => Shell.Current.GoToAsync(Routes.Plates);
+    private Task OpenPlatesAsync() => Shell.Current.GoToAsync(_pro.IsUnlocked ? Routes.Plates : Routes.Pro);
+
+    [RelayCommand]
+    private Task OpenProAsync() => Shell.Current.GoToAsync(Routes.Pro);
+
+    async partial void OnIsHealthEnabledChanged(bool value)
+    {
+        if (_isRevertingHealth)
+            return;
+        if (!value)
+        {
+            _settings.HealthEnabled = false;
+            return;
+        }
+        if (!_pro.IsUnlocked)
+        {
+            RevertHealth();
+            await Shell.Current.GoToAsync(Routes.Pro);
+            return;
+        }
+        if (!await _health.RequestAccessAsync())
+        {
+            RevertHealth();
+            await _dialogs.AlertAsync(Loc.Get("Settings_Health"), Loc.Get("Settings_HealthDenied"));
+            return;
+        }
+        _settings.HealthEnabled = true;
+        Palette.Haptic();
+        var added = await _health.ImportWeightsAsync();
+        if (added > 0)
+            SuccessToast.Show(Loc.Format("Settings_HealthImported", added));
+    }
+
+    private void OnProChanged()
+    {
+        IsPro = _pro.IsUnlocked;
+        // Health only works with Fonte Pro: the switch follows.
+        if (!IsPro && IsHealthEnabled)
+            RevertHealth();
+        else if (IsPro && _settings.HealthEnabled && !IsHealthEnabled)
+        {
+            _isRevertingHealth = true;
+            IsHealthEnabled = true;
+            _isRevertingHealth = false;
+        }
+    }
+
+    private void RevertHealth()
+    {
+        _isRevertingHealth = true;
+        IsHealthEnabled = false;
+        _isRevertingHealth = false;
+    }
+
+    /// <summary>Every set of every workout, as a CSV file for Excel or Numbers (Fonte Pro).</summary>
+    [RelayCommand]
+    private async Task ExportCsvAsync()
+    {
+        if (!_pro.IsUnlocked)
+        {
+            await Shell.Current.GoToAsync(Routes.Pro);
+            return;
+        }
+        var workouts = await _store.GetRecentWorkoutsAsync(int.MaxValue);
+        if (workouts.Count == 0)
+        {
+            await _dialogs.AlertAsync(Loc.Get("Settings_Export"), Loc.Get("Settings_ExportEmpty"));
+            return;
+        }
+        var texts = new CsvTexts(
+            Loc.Get("Csv_Date"), Loc.Get("Csv_Time"), Loc.Get("Csv_Workout"), Loc.Get("Csv_Exercise"), Loc.Get("Csv_Muscle"),
+            Loc.Get("Csv_Set"), Loc.Get("Csv_Kind"), Loc.Get("Csv_Weight"), Loc.Get("Csv_Reps"), Loc.Get("Csv_Seconds"),
+            Loc.Get("Csv_Rpe"), Loc.Get("Csv_Note"),
+            Loc.ExerciseName, Loc.Muscle, SetRowViewModel.KindName);
+        var path = Path.Combine(FileSystem.CacheDirectory, $"Fonte-{DateTime.Now:yyyy-MM-dd}.csv");
+        await File.WriteAllBytesAsync(path, WorkoutCsv.Write(workouts, texts, Loc.Culture));
+        await PresentationGuard.WaitUntilSettledAsync();
+        await Share.Default.RequestAsync(new ShareFileRequest
+        {
+            Title = Loc.Get("Settings_Export"),
+            File = new ShareFile(path, "text/csv"),
+        });
+    }
 
     [RelayCommand]
     private Task CloseAsync() => Shell.Current.GoToAsync("..");

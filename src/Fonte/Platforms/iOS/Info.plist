@@ -57,6 +57,11 @@
 	<string>Fonte lets you pick progress photos from your library. They are copied into the app and stay on your phone.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Fonte uses Face ID to keep your progress photos private.</string>
+	<!-- Apple Health (Fonte Pro). Nothing leaves the phone. -->
+	<key>NSHealthShareUsageDescription</key>
+	<string>Fonte reads your body weight from Health to follow it next to your training.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Fonte saves your strength workouts to Health, with their start and end time.</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>XSAppIconAssets</key>

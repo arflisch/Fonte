@@ -1410,4 +1410,271 @@
   <data name="Accent_Slate" xml:space="preserve">
     <value>Ardoise</value>
   </data>
+  <data name="Pro_Tagline" xml:space="preserve">
+    <value>Tout pour progresser plus vite.</value>
+  </data>
+  <data name="Pro_OneTime" xml:space="preserve">
+    <value>Achat unique · sans abonnement</value>
+  </data>
+  <data name="Pro_ProgressionTitle" xml:space="preserve">
+    <value>Progression automatique</value>
+  </data>
+  <data name="Pro_ProgressionText" xml:space="preserve">
+    <value>Quand toutes les séries sont réussies, la charge monte toute seule la fois suivante.</value>
+  </data>
+  <data name="Pro_ProgramsTitle" xml:space="preserve">
+    <value>Programmes et séances illimités</value>
+  </data>
+  <data name="Pro_ProgramsText" xml:space="preserve">
+    <value>Crée tes propres programmes et autant de séances que tu veux.</value>
+  </data>
+  <data name="Pro_ProgressTitle" xml:space="preserve">
+    <value>Progrès complets</value>
+  </data>
+  <data name="Pro_ProgressText" xml:space="preserve">
+    <value>Trois mois de volume, les séries par muscle et une alerte quand l'un est délaissé.</value>
+  </data>
+  <data name="Pro_BodyTitle" xml:space="preserve">
+    <value>Suivi du corps</value>
+  </data>
+  <data name="Pro_BodyText" xml:space="preserve">
+    <value>Objectif et courbe de poids, mensurations et photos de progression verrouillées par Face ID.</value>
+  </data>
+  <data name="Pro_SetsTitle" xml:space="preserve">
+    <value>Séries avancées</value>
+  </data>
+  <data name="Pro_SetsText" xml:space="preserve">
+    <value>Échauffement, dégressive, jusqu'à l'échec, RPE et temps de repos propre à chaque exercice.</value>
+  </data>
+  <data name="Pro_PlatesTitle" xml:space="preserve">
+    <value>Disques et échauffement</value>
+  </data>
+  <data name="Pro_PlatesText" xml:space="preserve">
+    <value>Les disques à mettre de chaque côté, et l'échauffement jusqu'à ta charge.</value>
+  </data>
+  <data name="Pro_HealthTitle" xml:space="preserve">
+    <value>Apple Santé</value>
+  </data>
+  <data name="Pro_HealthText" xml:space="preserve">
+    <value>Tes séances enregistrées dans Santé, ton poids repris automatiquement.</value>
+  </data>
+  <data name="Pro_ExportTitle" xml:space="preserve">
+    <value>Export CSV et bilan du mois</value>
+  </data>
+  <data name="Pro_ExportText" xml:space="preserve">
+    <value>Toutes tes séries dans Excel ou Numbers, et une image de ton mois à partager.</value>
+  </data>
+  <data name="Pro_ColorsTitle" xml:space="preserve">
+    <value>Couleurs de l'app</value>
+  </data>
+  <data name="Pro_ColorsText" xml:space="preserve">
+    <value>Bleu, vert, orange, rouge… donne à Fonte la couleur que tu aimes.</value>
+  </data>
+  <data name="Pro_FreeStays" xml:space="preserve">
+    <value>La saisie des séances, le minuteur, les records et l'historique restent gratuits et illimités.</value>
+  </data>
+  <data name="Pro_Unlock" xml:space="preserve">
+    <value>Débloquer Fonte Pro</value>
+  </data>
+  <data name="Pro_UnlockFor" xml:space="preserve">
+    <value>Débloquer pour {0}</value>
+  </data>
+  <data name="Pro_Restore" xml:space="preserve">
+    <value>Restaurer mes achats</value>
+  </data>
+  <data name="Pro_TestUnlock" xml:space="preserve">
+    <value>Débloquer (mode test)</value>
+  </data>
+  <data name="Pro_TestLock" xml:space="preserve">
+    <value>Reverrouiller (mode test)</value>
+  </data>
+  <data name="Pro_UnlockedTitle" xml:space="preserve">
+    <value>Fonte Pro est débloqué</value>
+  </data>
+  <data name="Pro_UnlockedText" xml:space="preserve">
+    <value>Merci pour ton soutien ! Tout ce qui est ci-dessus est à toi.</value>
+  </data>
+  <data name="Pro_Thanks" xml:space="preserve">
+    <value>Fonte Pro débloqué</value>
+  </data>
+  <data name="Pro_Restored" xml:space="preserve">
+    <value>Achats restaurés</value>
+  </data>
+  <data name="Pro_UnavailableTitle" xml:space="preserve">
+    <value>Achat indisponible</value>
+  </data>
+  <data name="Pro_UnavailableText" xml:space="preserve">
+    <value>Le Store est injoignable ou Fonte Pro n'y est pas encore disponible. Réessaie plus tard.</value>
+  </data>
+  <data name="Pro_FailedTitle" xml:space="preserve">
+    <value>L'achat a échoué</value>
+  </data>
+  <data name="Pro_FailedText" xml:space="preserve">
+    <value>Rien n'a été débité. Réessaie dans un instant.</value>
+  </data>
+  <data name="Pro_NothingToRestoreTitle" xml:space="preserve">
+    <value>Aucun achat à restaurer</value>
+  </data>
+  <data name="Pro_NothingToRestoreText" xml:space="preserve">
+    <value>Aucun achat de Fonte Pro n'a été trouvé sur ce compte.</value>
+  </data>
+  <data name="Pro_StatusLocked" xml:space="preserve">
+    <value>Progression automatique, Apple Santé, couleurs…</value>
+  </data>
+  <data name="Pro_StatusUnlocked" xml:space="preserve">
+    <value>Débloqué — merci !</value>
+  </data>
+  <data name="Pro_Discover" xml:space="preserve">
+    <value>Découvrir Fonte Pro</value>
+  </data>
+  <data name="Programs_LimitTitle" xml:space="preserve">
+    <value>Tes propres séances</value>
+  </data>
+  <data name="Programs_LimitText" xml:space="preserve">
+    <value>La version gratuite garde jusqu'à {0} séances à toi. Fonte Pro n'a pas de limite.</value>
+  </data>
+  <data name="Programs_OwnProgramPro" xml:space="preserve">
+    <value>Créer ton propre programme fait partie de Fonte Pro. Les programmes prêts à l'emploi restent gratuits.</value>
+  </data>
+  <data name="Summary_ProTeaserTitle" xml:space="preserve">
+    <value>Tu as gagné une hausse</value>
+  </data>
+  <data name="Summary_ProTeaserText" xml:space="preserve">
+    <value>Toutes les séries sont réussies : avec Fonte Pro, la prochaine séance viserait plus haut toute seule.</value>
+  </data>
+  <data name="Summary_ProDiscover" xml:space="preserve">
+    <value>Découvrir Fonte Pro</value>
+  </data>
+  <data name="Summary_ProHintTitle" xml:space="preserve">
+    <value>Déjà trois séances 💪</value>
+  </data>
+  <data name="Summary_ProHintText" xml:space="preserve">
+    <value>Fonte Pro fait monter tes charges tout seul, et ajoute les progrès complets et le suivi du corps.</value>
+  </data>
+  <data name="Progress_MusclesPro" xml:space="preserve">
+    <value>Vois combien de séries chaque muscle a reçues cette semaine, et ceux que tu délaisses.</value>
+  </data>
+  <data name="Body_GoalPro" xml:space="preserve">
+    <value>Objectif et courbe de poids · Fonte Pro</value>
+  </data>
+  <data name="Workout_SetKind" xml:space="preserve">
+    <value>Type de série</value>
+  </data>
+  <data name="Workout_SetRpe" xml:space="preserve">
+    <value>RPE (effort)</value>
+  </data>
+  <data name="Workout_RpeTitle" xml:space="preserve">
+    <value>Quel effort ? 10 = plus rien dans le réservoir</value>
+  </data>
+  <data name="Workout_RpeClear" xml:space="preserve">
+    <value>Sans RPE</value>
+  </data>
+  <data name="Workout_RestTime" xml:space="preserve">
+    <value>Temps de repos</value>
+  </data>
+  <data name="Workout_RestDefault" xml:space="preserve">
+    <value>Comme dans les réglages ({0})</value>
+  </data>
+  <data name="Workout_RestFor" xml:space="preserve">
+    <value>Repos après chaque série de {0}</value>
+  </data>
+  <data name="Workout_RestShort" xml:space="preserve">
+    <value>repos {0}</value>
+  </data>
+  <data name="SetKind_Normal" xml:space="preserve">
+    <value>Normale</value>
+  </data>
+  <data name="SetKind_WarmUp" xml:space="preserve">
+    <value>Échauffement</value>
+  </data>
+  <data name="SetKind_Drop" xml:space="preserve">
+    <value>Dégressive</value>
+  </data>
+  <data name="SetKind_Failure" xml:space="preserve">
+    <value>Jusqu'à l'échec</value>
+  </data>
+  <data name="SetKind_WarmUpLetter" xml:space="preserve">
+    <value>É</value>
+  </data>
+  <data name="SetKind_DropLetter" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="SetKind_FailureLetter" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="Settings_DataSection" xml:space="preserve">
+    <value>DONNÉES</value>
+  </data>
+  <data name="Settings_Health" xml:space="preserve">
+    <value>Apple Santé</value>
+  </data>
+  <data name="Settings_HealthHint" xml:space="preserve">
+    <value>Enregistre tes séances, lit ton poids</value>
+  </data>
+  <data name="Settings_HealthDenied" xml:space="preserve">
+    <value>Fonte n'a pas accès à Santé. Tu peux l'autoriser dans l'app Santé › Partage › Apps › Fonte.</value>
+  </data>
+  <data name="Settings_HealthImported" xml:space="preserve">
+    <value>{0} pesées reprises de Santé</value>
+  </data>
+  <data name="Settings_Export" xml:space="preserve">
+    <value>Exporter mes séances (CSV)</value>
+  </data>
+  <data name="Settings_ExportHint" xml:space="preserve">
+    <value>Toutes les séries, pour Excel ou Numbers</value>
+  </data>
+  <data name="Settings_ExportEmpty" xml:space="preserve">
+    <value>Aucune séance terminée à exporter pour l'instant.</value>
+  </data>
+  <data name="Csv_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Csv_Time" xml:space="preserve">
+    <value>Heure</value>
+  </data>
+  <data name="Csv_Workout" xml:space="preserve">
+    <value>Séance</value>
+  </data>
+  <data name="Csv_Exercise" xml:space="preserve">
+    <value>Exercice</value>
+  </data>
+  <data name="Csv_Muscle" xml:space="preserve">
+    <value>Groupe musculaire</value>
+  </data>
+  <data name="Csv_Set" xml:space="preserve">
+    <value>Série</value>
+  </data>
+  <data name="Csv_Kind" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Csv_Weight" xml:space="preserve">
+    <value>Charge (kg)</value>
+  </data>
+  <data name="Csv_Reps" xml:space="preserve">
+    <value>Répétitions</value>
+  </data>
+  <data name="Csv_Seconds" xml:space="preserve">
+    <value>Durée (s)</value>
+  </data>
+  <data name="Csv_Rpe" xml:space="preserve">
+    <value>RPE</value>
+  </data>
+  <data name="Csv_Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="History_Share" xml:space="preserve">
+    <value>Partager mon mois</value>
+  </data>
+  <data name="MonthCard_Subtitle" xml:space="preserve">
+    <value>Mon mois d'entraînement</value>
+  </data>
+  <data name="MonthCard_Streak" xml:space="preserve">
+    <value>{0} semaines régulières d'affilée</value>
+  </data>
+  <data name="MonthCard_Footer" xml:space="preserve">
+    <value>Fonte · carnet de musculation</value>
+  </data>
+  <data name="Error_InvalidRpe" xml:space="preserve">
+    <value>Le RPE va de 1 à 10.</value>
+  </data>
 </root>

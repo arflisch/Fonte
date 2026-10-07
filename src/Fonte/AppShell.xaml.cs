@@ -20,6 +20,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(Routes.Plates, typeof(PlatesPage));
         Routing.RegisterRoute(Routes.Photo, typeof(PhotoPage));
         Routing.RegisterRoute(Routes.ComparePhotos, typeof(ComparePhotosPage));
+        Routing.RegisterRoute(Routes.Pro, typeof(ProPage));
 
 #if ANDROID
         // Android draws an opaque bottom bar: match the app's surfaces and accent (iOS keeps its native glass bar).

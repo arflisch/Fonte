@@ -160,6 +160,22 @@
                     Style="{StaticResource Caption}"
                     Text="{Binding VolumeText}" />
 
+                <!-- Share the month (Fonte Pro) -->
+                <Border Padding="14" c:Touch.Command="{Binding ShareMonthCommand}" IsVisible="{Binding HasWorkouts}" Style="{StaticResource Card}">
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                        <c:IconView
+                            Color="{DynamicResource Accent}"
+                            Data="{x:Static c:Icons.Image}"
+                            HeightRequest="18"
+                            VerticalOptions="Center"
+                            WidthRequest="18" />
+                        <Label Style="{StaticResource LinkLabel}" Text="{l:Tr History_Share}" />
+                        <Border IsVisible="{Binding IsLocked}" Style="{StaticResource ProBadge}">
+                            <Label Style="{StaticResource ProBadgeText}" />
+                        </Border>
+                    </HorizontalStackLayout>
+                </Border>
+
                 <!-- The month's workouts -->
                 <Border Padding="22,24" IsVisible="{Binding HasWorkouts, Converter={StaticResource InvertBool}}" Style="{StaticResource Card}">
                     <Label HorizontalTextAlignment="Center" Style="{StaticResource Secondary}" Text="{l:Tr History_Empty}" />
