@@ -24,8 +24,8 @@ public sealed class BackupService(
     private static string StagingFolder => Path.Combine(FileSystem.CacheDirectory, "restore-photos");
 
     /// <summary>
-    /// Asks whether to include the photos, then for a password, writes the backup and hands it over. True once it
-    /// was saved or sent.
+    /// Asks whether to include the photos, then for a password, writes the backup and hands it over. True unless the
+    /// user cancelled; a confirmation shows once the file was saved or sent (Android's share menu does not say).
     /// </summary>
     public async Task<bool> BackUpAsync()
     {
@@ -58,10 +58,15 @@ public sealed class BackupService(
                     return Loc.Format("Backup_NotCreated", ex.Message);
                 }
             });
-            if (password is null || !await files.HandOverAsync(path, Loc.Get("Backup_ShareTitle")))
+            if (password is null)
+                return false;
+            var outcome = await files.HandOverAsync(path, Loc.Get("Backup_ShareTitle"));
+            if (outcome == BackupOutcome.Cancelled)
                 return false;
 
             settings.LastBackupAt = now;
+            if (outcome == BackupOutcome.Saved)
+                SuccessToast.Show(Loc.Get("Backup_Saved"));
             return true;
         }
         catch (Exception ex)

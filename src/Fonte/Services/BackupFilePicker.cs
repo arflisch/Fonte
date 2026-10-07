@@ -13,11 +13,8 @@ public sealed class BackupFilePicker(IFilePicker filePicker, IShare share)
     /// <summary>Each password attempt reads the file again: it is kept here, the app's own copy, until the restore ends.</summary>
     private static string RestorePath => Path.Combine(FileSystem.CacheDirectory, "restore" + BackupFile.Extension);
 
-    /// <summary>
-    /// Lets the user decide where the file goes: the share sheet, or the Save panel on a Mac. False when they
-    /// closed it without saving or sending the file.
-    /// </summary>
-    public async Task<bool> HandOverAsync(string path, string title)
+    /// <summary>Lets the user decide where the file goes: the share sheet, or the Save panel on a Mac.</summary>
+    public async Task<BackupOutcome> HandOverAsync(string path, string title)
     {
         await PresentationGuard.WaitUntilSettledAsync();
 #if MACCATALYST
@@ -28,7 +25,7 @@ public sealed class BackupFilePicker(IFilePicker filePicker, IShare share)
         picker.DidPickDocumentAtUrls += (_, _) => result.TrySetResult(true);
         picker.WasCancelled += (_, _) => result.TrySetResult(false);
         Present(picker);
-        return await result.Task;
+        return await result.Task ? BackupOutcome.Saved : BackupOutcome.Cancelled;
 #elif IOS
         // Unlike MAUI's share, the native sheet says whether the file was saved or sent, or the sheet closed.
         _ = (share, title);
@@ -45,11 +42,11 @@ public sealed class BackupFilePicker(IFilePicker filePicker, IShare share)
             popover.PermittedArrowDirections = 0;
         }
         Present(sheet);
-        return await result.Task;
+        return await result.Task ? BackupOutcome.Saved : BackupOutcome.Cancelled;
 #else
         await share.RequestAsync(new ShareFileRequest { Title = title, File = new ShareFile(path, "application/octet-stream") });
         // Android does not tell whether the file actually went anywhere.
-        return true;
+        return BackupOutcome.HandedOver;
 #endif
     }
 
@@ -114,4 +111,16 @@ public sealed class BackupFilePicker(IFilePicker filePicker, IShare share)
         public override void DidDismiss(UIPresentationController presentationController) => onDismissed();
     }
 #endif
+}
+
+public enum BackupOutcome
+{
+    /// <summary>The user closed the share sheet or the Save panel.</summary>
+    Cancelled,
+
+    /// <summary>The file was saved or sent.</summary>
+    Saved,
+
+    /// <summary>The file was handed to the system share menu, which does not report what happened next.</summary>
+    HandedOver,
 }

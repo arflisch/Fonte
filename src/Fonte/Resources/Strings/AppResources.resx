@@ -1537,4 +1537,7 @@ Everything on this device will be replaced, except the photos, which are kept.</
   <data name="Welcome_Restore" xml:space="preserve">
     <value>I already have a backup</value>
   </data>
+  <data name="Backup_Saved" xml:space="preserve">
+    <value>Backup saved</value>
+  </data>
 </root>

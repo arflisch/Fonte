@@ -1537,4 +1537,7 @@ Tout ce qui est sur cet appareil sera remplacé, sauf les photos, qui sont gard�
   <data name="Welcome_Restore" xml:space="preserve">
     <value>J'ai déjà une sauvegarde</value>
   </data>
+  <data name="Backup_Saved" xml:space="preserve">
+    <value>Sauvegarde enregistrée</value>
+  </data>
 </root>

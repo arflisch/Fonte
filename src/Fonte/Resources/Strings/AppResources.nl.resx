@@ -1537,4 +1537,7 @@ Alles op dit apparaat wordt vervangen, behalve de foto's: die blijven bewaard.</
   <data name="Welcome_Restore" xml:space="preserve">
     <value>Ik heb al een back-up</value>
   </data>
+  <data name="Backup_Saved" xml:space="preserve">
+    <value>Back-up bewaard</value>
+  </data>
 </root>
