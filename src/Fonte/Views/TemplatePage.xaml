@@ -218,24 +218,23 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Start -->
-        <Border
-            Grid.Row="2"
-            Margin="16,8,16,12"
-            c:Touch.Command="{Binding StartCommand}"
-            IsVisible="{Binding CanStart}"
-            SafeAreaEdges="Container"
-            Style="{StaticResource PrimaryButton}">
-            <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
-                <c:IconView
-                    Color="White"
-                    Data="{x:Static c:Icons.Play}"
-                    HeightRequest="18"
-                    StrokeWidth="2.4"
-                    VerticalOptions="Center"
-                    WidthRequest="18" />
-                <Label Style="{StaticResource PrimaryButtonText}" Text="{l:Tr Template_Start}" />
-            </HorizontalStackLayout>
-        </Border>
+        <!-- Start: the grid keeps clear of the home indicator, so the button's text stays centred -->
+        <Grid Grid.Row="2" IsVisible="{Binding CanStart}" SafeAreaEdges="Container">
+            <Border
+                Margin="16,8,16,12"
+                c:Touch.Command="{Binding StartCommand}"
+                Style="{StaticResource PrimaryButton}">
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="8" VerticalOptions="Center">
+                    <c:IconView
+                        Color="White"
+                        Data="{x:Static c:Icons.Play}"
+                        HeightRequest="18"
+                        StrokeWidth="2.4"
+                        VerticalOptions="Center"
+                        WidthRequest="18" />
+                    <Label Style="{StaticResource PrimaryButtonText}" Text="{l:Tr Template_Start}" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </Border>
+        </Grid>
     </Grid>
 </ContentPage>
