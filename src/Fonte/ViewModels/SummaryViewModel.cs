@@ -137,7 +137,7 @@ public sealed partial class SummaryViewModel : ObservableObject, IQueryAttributa
         }
         ShowComparison(summary);
         // Only finishing the workout tells which targets went up.
-        var finished = IsFresh ? _finished.Take(_workoutId) : null;
+        var finished = IsFresh ? _finished.Find(_workoutId) : null;
         var steps = finished?.Progressions ?? [];
         Progressions = steps.Select(p => new ProgressionItem(Loc.ExerciseName(p.Exercise), ProgressionText(p))).ToList();
         HasProgressions = Progressions.Count > 0 && finished!.ProgressionsApplied;

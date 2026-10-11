@@ -12,13 +12,9 @@ public sealed class FinishedWorkouts
 
     public void Remember(WorkoutSummary summary) => _last = summary;
 
-    /// <summary>The summary of that workout if it was just finished, once.</summary>
-    public WorkoutSummary? Take(int workoutId)
-    {
-        var last = _last;
-        if (last?.Workout.Id != workoutId)
-            return null;
-        _last = null;
-        return last;
-    }
+    /// <summary>
+    /// The summary of that workout if it is the one just finished. It is not consumed: Shell may deliver the
+    /// summary page's query more than once, and each load must find it.
+    /// </summary>
+    public WorkoutSummary? Find(int workoutId) => _last?.Workout.Id == workoutId ? _last : null;
 }
