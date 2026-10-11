@@ -154,7 +154,7 @@ public sealed partial class FonteStore(string databasePath) : IAsyncDisposable
         db.QueryAsync<DoneSetRow>(
             """
             SELECT we.ExerciseId, w.Id AS WorkoutId, w.StartedAt, s.Id AS SetId, s.WorkoutExerciseId,
-                   s.Position, s.Weight, s.Reps, s.Seconds
+                   s.Position, s.Weight, s.Reps, s.Seconds, s.Kind, s.Rpe
             FROM workout_sets s
             JOIN workout_exercises we ON we.Id = s.WorkoutExerciseId
             JOIN workouts w ON w.Id = we.WorkoutId
@@ -175,6 +175,8 @@ public sealed partial class FonteStore(string databasePath) : IAsyncDisposable
         public double Weight { get; set; }
         public int Reps { get; set; }
         public int Seconds { get; set; }
+        public SetKind Kind { get; set; }
+        public double? Rpe { get; set; }
 
         public WorkoutSet ToSet() => new()
         {
@@ -184,6 +186,8 @@ public sealed partial class FonteStore(string databasePath) : IAsyncDisposable
             Weight = Weight,
             Reps = Reps,
             Seconds = Seconds,
+            Kind = Kind,
+            Rpe = Rpe,
             IsDone = true,
         };
     }

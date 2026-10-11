@@ -8,10 +8,14 @@ using Fonte.Services;
 namespace Fonte.ViewModels;
 
 /// <summary>Every workout month by month: a calendar, the month's totals, the streak, and the list.</summary>
-public sealed partial class HistoryViewModel(FonteStore store, AppSettings settings) : ReloadingViewModel
+public sealed partial class HistoryViewModel(FonteStore store, AppSettings settings, ProService pro) : ReloadingViewModel
 {
     private DateTime _month = new(DateTime.Today.Year, DateTime.Today.Month, 1);
     private MonthReport? _report;
+    private int _regularWeeks;
+
+    [ObservableProperty]
+    private bool _isLocked;
 
     [ObservableProperty]
     private string _monthTitle = string.Empty;
@@ -72,7 +76,9 @@ public sealed partial class HistoryViewModel(FonteStore store, AppSettings setti
         HoursText = _report.Workouts.Count == 0 ? "0" : Loc.Duration(_report.Duration);
         VolumeText = _report.Volume > 0 ? Loc.Format("History_Volume", Loc.Volume(_report.Volume)) : string.Empty;
         var dates = await store.GetWorkoutDatesAsync();
-        StreakText = Loc.Format("History_Weeks", Streaks.RegularWeeks(dates, settings.SessionsPerWeek, today, firstDay));
+        _regularWeeks = Streaks.RegularWeeks(dates, settings.SessionsPerWeek, today, firstDay);
+        StreakText = Loc.Format("History_Weeks", _regularWeeks);
+        IsLocked = !pro.IsUnlocked;
 
         Workouts = _report.Workouts.Select(w => new WorkoutItemViewModel(w, OpenWorkoutAsync)).ToList();
         HasWorkouts = Workouts.Count > 0;
@@ -107,6 +113,33 @@ public sealed partial class HistoryViewModel(FonteStore store, AppSettings setti
 
     [RelayCommand]
     private Task GoBackAsync() => Shell.Current.GoToAsync("..");
+
+    /// <summary>The month as an image, to send or post (Fonte Pro).</summary>
+    [RelayCommand]
+    private async Task ShareMonthAsync()
+    {
+        if (!pro.IsUnlocked)
+        {
+            await Shell.Current.GoToAsync(Routes.Pro);
+            return;
+        }
+        if (_report is not { } report)
+            return;
+        try
+        {
+            var path = await MonthCard.RenderAsync(report, _regularWeeks);
+            await PresentationGuard.WaitUntilSettledAsync();
+            await Share.Default.RequestAsync(new ShareFileRequest
+            {
+                Title = MonthTitle,
+                File = new ShareFile(path, "image/png"),
+            });
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Month card not shared: {ex}");
+        }
+    }
 }
 
 public sealed record CalendarDayHeader(int Column, string Letter);

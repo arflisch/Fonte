@@ -27,10 +27,18 @@ public static class Performance
         _ => set.Reps,
     };
 
-    /// <summary>Kilograms lifted: load × repetitions, summed over loaded sets.</summary>
-    public static double Volume(IEnumerable<WorkoutSet> sets) => sets.Sum(s => s.Weight * s.Reps);
+    /// <summary>Warm-up sets prepare the work: they never count in volume, set counts or records.</summary>
+    public static bool IsWorking(WorkoutSet set) => set.Kind != SetKind.WarmUp;
 
-    /// <summary>The set that scores highest, or null when there is none.</summary>
+    /// <summary>The sets a template's targets are about: drop and warm-up sets are extras.</summary>
+    public static bool IsPlanned(WorkoutSet set) => set.Kind is SetKind.Normal or SetKind.Failure;
+
+    public static IEnumerable<WorkoutSet> Working(IEnumerable<WorkoutSet> sets) => sets.Where(IsWorking);
+
+    /// <summary>Kilograms lifted: load × repetitions, summed over loaded working sets.</summary>
+    public static double Volume(IEnumerable<WorkoutSet> sets) => Working(sets).Sum(s => s.Weight * s.Reps);
+
+    /// <summary>The working set that scores highest, or null when there is none.</summary>
     public static WorkoutSet? Best(Tracking tracking, IEnumerable<WorkoutSet> sets) =>
-        sets.OrderByDescending(s => Score(tracking, s)).ThenByDescending(s => s.Weight).FirstOrDefault();
+        Working(sets).OrderByDescending(s => Score(tracking, s)).ThenByDescending(s => s.Weight).FirstOrDefault();
 }

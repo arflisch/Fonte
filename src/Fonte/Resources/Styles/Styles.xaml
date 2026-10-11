@@ -134,6 +134,23 @@
         <Setter Property="Padding" Value="14,7" />
     </Style>
 
+    <!-- "PRO" pill next to a feature of Fonte Pro, while it is locked -->
+    <Style x:Key="ProBadge" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource AccentGradient}" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 7" />
+        <Setter Property="Padding" Value="6,1" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+    </Style>
+    <Style x:Key="ProBadgeText" TargetType="Label">
+        <Setter Property="FontFamily" Value="OpenSansSemibold" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="CharacterSpacing" Value="0.8" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="Text" Value="PRO" />
+    </Style>
+
     <!-- ============ Containers ============ -->
     <Style x:Key="Card" TargetType="Border">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}" />

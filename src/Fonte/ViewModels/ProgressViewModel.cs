@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Fonte.Core.Data;
 using Fonte.Core.Models;
 using Fonte.Core.Training;
@@ -16,12 +17,14 @@ public sealed partial class ProgressViewModel : ReloadingViewModel
     private static readonly int[] Periods = [4, 12];
 
     private readonly FonteStore _store;
+    private readonly ProService _pro;
     private ProgressReport? _report;
     private int _weeks = Periods[0];
 
-    public ProgressViewModel(FonteStore store)
+    public ProgressViewModel(FonteStore store, ProService pro)
     {
         _store = store;
+        _pro = pro;
         PeriodChips =
         [
             new SelectableOption("4", 0, 2, SelectPeriod) { Label = Loc.Get("Progress_Month"), IsSelected = true },
@@ -33,6 +36,13 @@ public sealed partial class ProgressViewModel : ReloadingViewModel
 
     [ObservableProperty]
     private bool _isEmpty;
+
+    /// <summary>Three months and the muscle groups come with Fonte Pro.</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsLocked))]
+    private bool _isPro;
+
+    public bool IsLocked => !IsPro;
 
     [ObservableProperty]
     private bool _hasData;
@@ -66,6 +76,9 @@ public sealed partial class ProgressViewModel : ReloadingViewModel
 
     protected override async Task LoadCoreAsync()
     {
+        IsPro = _pro.IsUnlocked;
+        if (!IsPro && _weeks != Periods[0])
+            SelectPeriod(PeriodChips[0]);
         _report = await _store.GetProgressAsync(DateTime.Today, Loc.Culture.DateTimeFormat.FirstDayOfWeek, Periods[^1]);
         var everDone = (await _store.GetWorkoutDatesAsync()).Count > 0;
         IsEmpty = !everDone;
@@ -95,8 +108,13 @@ public sealed partial class ProgressViewModel : ReloadingViewModel
 
     private static string Join(IEnumerable<MuscleGroup> muscles) => string.Join(", ", muscles.Select(Loc.Muscle));
 
-    private void SelectPeriod(SelectableOption chip)
+    private async void SelectPeriod(SelectableOption chip)
     {
+        if (chip != PeriodChips[0] && !_pro.IsUnlocked)
+        {
+            await Shell.Current.GoToAsync(Routes.Pro);
+            return;
+        }
         foreach (var option in PeriodChips)
             option.IsSelected = option == chip;
         _weeks = int.Parse(chip.Value, Loc.Culture);
@@ -122,6 +140,9 @@ public sealed partial class ProgressViewModel : ReloadingViewModel
             Loc.Count(weeks.Sum(w => w.Sets), "Set"),
             Tonnes(weeks.Sum(w => w.Volume)));
     }
+
+    [RelayCommand]
+    private Task OpenProAsync() => Shell.Current.GoToAsync(Routes.Pro);
 
     private static string Tonnes(double kilograms) => $"{Loc.Number(Math.Round(kilograms / 1000, 1))} t";
 }

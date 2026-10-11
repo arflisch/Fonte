@@ -16,6 +16,7 @@ public enum FonteError
     BackupFromNewerVersion,
     BackupWrongPassword,
     BackupDamaged,
+    InvalidRpe,
 }
 
 public sealed class FonteException(FonteError error, string message) : Exception(message)

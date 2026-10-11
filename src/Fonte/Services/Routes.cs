@@ -14,4 +14,5 @@ public static class Routes
     public const string Plates = "plates";
     public const string Photo = "photo";
     public const string ComparePhotos = "comparephotos";
+    public const string Pro = "pro";
 }

@@ -23,7 +23,8 @@ public sealed record WorkoutSummary(
 {
     public TimeSpan Duration => Workout.Duration;
 
-    public int SetCount => Exercises.Sum(e => e.Sets.Count);
+    /// <summary>Working sets (warm-ups left out).</summary>
+    public int SetCount => Exercises.Sum(e => Performance.Working(e.Sets).Count());
 
     public double Volume => Performance.Volume(Exercises.SelectMany(e => e.Sets));
 
@@ -33,8 +34,14 @@ public sealed record WorkoutSummary(
     /// <summary>The previous workout of the same template (or the previous one at all, for a free workout).</summary>
     public WorkoutComparison? Previous { get; init; }
 
-    /// <summary>Template targets raised by this workout (only when it has just been finished).</summary>
+    /// <summary>Template targets this workout succeeded (only when it has just been finished).</summary>
     public IReadOnlyList<ProgressionStep> Progressions { get; init; } = [];
+
+    /// <summary>
+    /// Whether <see cref="Progressions"/> were saved to the template, or only worked out (automatic progression
+    /// is part of Fonte Pro).
+    /// </summary>
+    public bool ProgressionsApplied { get; init; }
 }
 
 public sealed record WorkoutComparison(Workout Workout, double Volume, int SetCount)

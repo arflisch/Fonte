@@ -10,7 +10,8 @@ using Fonte.Services;
 namespace Fonte.ViewModels;
 
 /// <summary>"Programs" tab: the program followed and its workouts, the user's own workouts, ready-made programs.</summary>
-public sealed partial class ProgramsViewModel(FonteStore store, AppSettings settings, IDialogService dialogs, WorkoutLauncher launcher)
+public sealed partial class ProgramsViewModel(
+    FonteStore store, AppSettings settings, IDialogService dialogs, WorkoutLauncher launcher, ProService pro)
     : ReloadingViewModel
 {
     private ProgramOverview? _active;
@@ -51,6 +52,10 @@ public sealed partial class ProgramsViewModel(FonteStore store, AppSettings sett
     [ObservableProperty]
     private IReadOnlyList<CatalogItemViewModel> _catalog = [];
 
+    /// <summary>"PRO" next to creating a program, while Fonte Pro is locked.</summary>
+    [ObservableProperty]
+    private bool _isLocked;
+
     protected override async Task LoadCoreAsync()
     {
         var today = DateTime.Today;
@@ -82,7 +87,14 @@ public sealed partial class ProgramsViewModel(FonteStore store, AppSettings sett
         HasTemplates = Templates.Count > 0;
 
         Catalog = ProgramCatalog.All.Select(p => new CatalogItemViewModel(p, FollowCatalogAsync)).ToList();
+        IsLocked = !pro.IsUnlocked;
     }
+
+    /// <summary>Free users can create a few workouts of their own; Fonte Pro has no limit.</summary>
+    private async Task<bool> CanCreateTemplateAsync() =>
+        pro.IsUnlocked
+        || await store.CountOwnTemplatesAsync() < ProService.FreeOwnTemplates
+        || await pro.EnsureUnlockedAsync(dialogs, Loc.Get("Programs_LimitTitle"), Loc.Format("Programs_LimitText", ProService.FreeOwnTemplates));
 
     private static string Letter(int index) => ((char)('A' + index % 26)).ToString();
 
@@ -105,6 +117,8 @@ public sealed partial class ProgramsViewModel(FonteStore store, AppSettings sett
     [RelayCommand]
     private async Task NewProgramAsync()
     {
+        if (!await pro.EnsureUnlockedAsync(dialogs, Loc.Get("Programs_NewProgram"), Loc.Get("Programs_OwnProgramPro")))
+            return;
         var name = await dialogs.PromptAsync(Loc.Get("Programs_NewProgram"), Loc.Get("Programs_NamePlaceholder"), string.Empty, 60);
         if (string.IsNullOrWhiteSpace(name))
             return;
@@ -116,6 +130,8 @@ public sealed partial class ProgramsViewModel(FonteStore store, AppSettings sett
     [RelayCommand]
     private async Task NewTemplateAsync()
     {
+        if (!await CanCreateTemplateAsync())
+            return;
         var name = await dialogs.PromptAsync(Loc.Get("Programs_NewTemplate"), Loc.Get("Programs_TemplatePlaceholder"), string.Empty, 60);
         if (string.IsNullOrWhiteSpace(name))
             return;
@@ -136,6 +152,8 @@ public sealed partial class ProgramsViewModel(FonteStore store, AppSettings sett
         var choice = await dialogs.ChooseAsync(active.Program.Name, delete, add, rename, restart, stop);
         if (choice == add)
         {
+            if (!await CanCreateTemplateAsync())
+                return;
             var letter = Letter(active.Templates.Count);
             var name = await dialogs.PromptAsync(add, Loc.Get("Programs_TemplatePlaceholder"), Loc.Format("Programs_DefaultTemplate", letter), 60);
             if (!string.IsNullOrWhiteSpace(name))

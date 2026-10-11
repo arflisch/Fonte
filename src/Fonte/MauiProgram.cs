@@ -37,6 +37,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<BackupFilePicker>();
         builder.Services.AddSingleton<PasswordPrompt>();
         builder.Services.AddSingleton<BackupService>();
+        builder.Services.AddSingleton<ProService>();
+        builder.Services.AddSingleton<HealthService>();
+        builder.Services.AddSingleton<FinishedWorkouts>();
         builder.Services.AddSingleton<AppShell>();
 
         // Tabs
@@ -64,6 +67,8 @@ public static class MauiProgram
         builder.Services.AddTransient<PhotoPage>();
         builder.Services.AddTransient<ComparePhotosViewModel>();
         builder.Services.AddTransient<ComparePhotosPage>();
+        builder.Services.AddTransient<ProViewModel>();
+        builder.Services.AddTransient<ProPage>();
         builder.Services.AddTransient<WorkoutViewModel>();
         builder.Services.AddTransient<WorkoutPage>();
         builder.Services.AddTransient<ExercisePickerViewModel>();

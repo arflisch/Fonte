@@ -142,6 +142,15 @@
                                                     WidthRequest="8" />
                                                 <Label Style="{StaticResource Caption}" Text="{Binding MuscleText}" />
                                             </HorizontalStackLayout>
+                                            <HorizontalStackLayout IsVisible="{Binding HasRest}" Spacing="4">
+                                                <c:IconView
+                                                    Color="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"
+                                                    Data="{x:Static c:Icons.Timer}"
+                                                    HeightRequest="13"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="13" />
+                                                <Label FontSize="12" Style="{StaticResource Caption}" Text="{Binding RestText}" VerticalOptions="Center" />
+                                            </HorizontalStackLayout>
                                             <Border
                                                 Margin="0,6,0,0"
                                                 Padding="8,3"
@@ -222,14 +231,29 @@
                                                         </DataTrigger>
                                                     </Border.Triggers>
                                                     <Grid ColumnDefinitions="34,*,76,68,40" ColumnSpacing="8">
-                                                        <Label
-                                                            c:Touch.Command="{Binding MenuCommand}"
-                                                            FontFamily="OpenSansSemibold"
-                                                            FontSize="16"
-                                                            HeightRequest="40"
-                                                            HorizontalTextAlignment="Center"
-                                                            Text="{Binding Number}"
-                                                            VerticalTextAlignment="Center" />
+                                                        <Grid c:Touch.Command="{Binding MenuCommand}" HeightRequest="40">
+                                                            <Label
+                                                                FontFamily="OpenSansSemibold"
+                                                                FontSize="16"
+                                                                HorizontalTextAlignment="Center"
+                                                                Text="{Binding NumberText}"
+                                                                VerticalTextAlignment="Center">
+                                                                <Label.Triggers>
+                                                                    <DataTrigger Binding="{Binding HasKind}" TargetType="Label" Value="True">
+                                                                        <Setter Property="TextColor" Value="{Binding KindColor}" />
+                                                                    </DataTrigger>
+                                                                </Label.Triggers>
+                                                            </Label>
+                                                            <Label
+                                                                Margin="0,0,0,-2"
+                                                                FontFamily="OpenSansSemibold"
+                                                                FontSize="9"
+                                                                HorizontalTextAlignment="Center"
+                                                                IsVisible="{Binding HasRpe}"
+                                                                Style="{StaticResource Caption}"
+                                                                Text="{Binding RpeText}"
+                                                                VerticalOptions="End" />
+                                                        </Grid>
                                                         <Label
                                                             Grid.Column="1"
                                                             Grid.ColumnSpan="{Binding PreviousSpan}"

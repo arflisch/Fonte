@@ -130,7 +130,12 @@
 
                 <!-- Measurements -->
                 <VerticalStackLayout Spacing="12">
-                    <Label Style="{StaticResource SectionTitle}" Text="{l:Tr Body_Measurements}" />
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Style="{StaticResource SectionTitle}" Text="{l:Tr Body_Measurements}" VerticalOptions="Center" />
+                        <Border IsVisible="{Binding IsProLocked}" Style="{StaticResource ProBadge}">
+                            <Label Style="{StaticResource ProBadgeText}" />
+                        </Border>
+                    </HorizontalStackLayout>
                     <Grid
                         x:Name="MeasurementsGrid"
                         BindableLayout.ItemsSource="{Binding Measurements}"
@@ -163,7 +168,12 @@
                 <!-- Progress photos -->
                 <VerticalStackLayout Spacing="12">
                     <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="14">
-                        <Label Style="{StaticResource SectionTitle}" Text="{l:Tr Body_Photos}" VerticalOptions="Center" />
+                        <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                            <Label Style="{StaticResource SectionTitle}" Text="{l:Tr Body_Photos}" VerticalOptions="Center" />
+                            <Border IsVisible="{Binding IsProLocked}" Style="{StaticResource ProBadge}">
+                                <Label Style="{StaticResource ProBadgeText}" />
+                            </Border>
+                        </HorizontalStackLayout>
                         <Label
                             Grid.Column="1"
                             c:Touch.Command="{Binding CompareCommand}"
@@ -188,7 +198,7 @@
                     <!-- Locked -->
                     <Border
                         Padding="20,22"
-                        c:Touch.Command="{Binding UnlockCommand}"
+                        c:Touch.Command="{Binding UnlockPhotosCommand}"
                         IsVisible="{Binding IsLocked}"
                         Style="{StaticResource Card}">
                         <VerticalStackLayout Spacing="8">

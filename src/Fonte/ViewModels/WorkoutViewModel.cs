@@ -18,6 +18,9 @@ public sealed partial class WorkoutViewModel : ReloadingViewModel
     private readonly AppSettings _settings;
     private readonly RestTimer _rest;
     private readonly IDialogService _dialogs;
+    private readonly ProService _pro;
+    private readonly HealthService _health;
+    private readonly FinishedWorkouts _finished;
 
     // Every write goes through this queue, so a set is never ticked before its last typed value is saved.
     private readonly SerialQueue _queue = new();
@@ -28,13 +31,20 @@ public sealed partial class WorkoutViewModel : ReloadingViewModel
     private bool _isLeaving;
     private bool _permissionAsked;
 
-    public WorkoutViewModel(FonteStore store, AppSettings settings, RestTimer rest, IDialogService dialogs)
+    public WorkoutViewModel(
+        FonteStore store, AppSettings settings, RestTimer rest, IDialogService dialogs, ProService pro,
+        HealthService health, FinishedWorkouts finished)
     {
         _store = store;
         _settings = settings;
         _rest = rest;
         _dialogs = dialogs;
+        _pro = pro;
+        _health = health;
+        _finished = finished;
     }
+
+    internal bool IsPro => _pro.IsUnlocked;
 
     public ObservableCollection<WorkoutExerciseViewModel> Exercises { get; } = [];
 
@@ -163,7 +173,7 @@ public sealed partial class WorkoutViewModel : ReloadingViewModel
         // In a superset, the rest comes after the last exercise of the chain.
         if (done && _settings.RestTimerEnabled && !row.Exercise.IsLinkedToNext)
         {
-            _rest.Start(_settings.RestSeconds);
+            _rest.Start(row.Exercise.RestSeconds ?? _settings.RestSeconds);
             _restOverUntil = null;
             Tick();
         }
@@ -187,7 +197,20 @@ public sealed partial class WorkoutViewModel : ReloadingViewModel
     internal async Task SetMenuAsync(SetRowViewModel row)
     {
         var delete = Loc.Get("Workout_DeleteSet");
-        if (await _dialogs.ChooseAsync(Loc.Format("Workout_SetNumber", row.Number), delete) != delete)
+        var kind = ProLabel(Loc.Get("Workout_SetKind"));
+        var rpe = ProLabel(Loc.Get("Workout_SetRpe"));
+        var choice = await _dialogs.ChooseAsync(Loc.Format("Workout_SetNumber", row.NumberText), delete, kind, rpe);
+        if (choice == kind)
+        {
+            await ChooseSetKindAsync(row);
+            return;
+        }
+        if (choice == rpe)
+        {
+            await ChooseRpeAsync(row);
+            return;
+        }
+        if (choice != delete)
             return;
 
         try
@@ -203,16 +226,86 @@ public sealed partial class WorkoutViewModel : ReloadingViewModel
         }
     }
 
+    /// <summary>Marks the options of the menus that need Fonte Pro, while it is locked.</summary>
+    private string ProLabel(string option) => _pro.IsUnlocked ? option : $"{option} · PRO";
+
+    /// <summary>Opens the Fonte Pro page when it is locked; true when the feature can be used.</summary>
+    private async Task<bool> OpenProUnlessUnlockedAsync()
+    {
+        if (_pro.IsUnlocked)
+            return true;
+        await Shell.Current.GoToAsync(Routes.Pro);
+        return false;
+    }
+
+    private async Task ChooseSetKindAsync(SetRowViewModel row)
+    {
+        if (!await OpenProUnlessUnlockedAsync())
+            return;
+        var kinds = Enum.GetValues<SetKind>();
+        var options = kinds.Select(k => SetRowViewModel.KindOption(k) + (k == row.Kind ? "  ✓" : string.Empty)).ToArray();
+        var choice = await _dialogs.ChooseAsync(Loc.Get("Workout_SetKind"), null, options);
+        if (choice is null)
+            return;
+        var kind = kinds[Array.IndexOf(options, choice)];
+        await _queue.Enqueue(() => _store.SetSetKindAsync(row.Id, kind));
+        row.Kind = kind;
+        row.Exercise.Renumber();
+        Palette.Haptic();
+    }
+
+    private async Task ChooseRpeAsync(SetRowViewModel row)
+    {
+        if (!await OpenProUnlessUnlockedAsync())
+            return;
+        double[] values = [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10];
+        var options = values.Select(v => Loc.Number(v) + (v == row.Rpe ? "  ✓" : string.Empty)).ToArray();
+        var clear = Loc.Get("Workout_RpeClear");
+        var choice = await _dialogs.ChooseAsync(Loc.Get("Workout_RpeTitle"), row.Rpe is null ? null : clear, options);
+        if (choice is null)
+            return;
+        double? rpe = choice == clear ? null : values[Array.IndexOf(options, choice)];
+        try
+        {
+            await _queue.Enqueue(() => _store.SetSetRpeAsync(row.Id, rpe));
+            row.Rpe = rpe;
+            Palette.Haptic();
+        }
+        catch (FonteException ex)
+        {
+            await _dialogs.AlertAsync(Loc.Get("Common_Oops"), Loc.Error(ex));
+        }
+    }
+
+    private async Task ChooseRestAsync(WorkoutExerciseViewModel exercise)
+    {
+        if (!await OpenProUnlessUnlockedAsync())
+            return;
+        var standard = Loc.Format("Workout_RestDefault", Loc.Seconds(_settings.RestSeconds));
+        var options = new[] { standard }
+            .Concat(AppSettings.RestChoices.Select(s => Loc.Seconds(s) + (s == exercise.RestSeconds ? "  ✓" : string.Empty)))
+            .ToArray();
+        var choice = await _dialogs.ChooseAsync(Loc.Format("Workout_RestFor", exercise.Name), null, options);
+        if (choice is null)
+            return;
+        int? seconds = choice == standard ? null : AppSettings.RestChoices[Array.IndexOf(options, choice) - 1];
+        await _queue.Enqueue(() => _store.SetWorkoutExerciseRestAsync(exercise.ItemId, seconds));
+        Palette.Haptic();
+        RequestReload();
+    }
+
     internal async Task ExerciseMenuAsync(WorkoutExerciseViewModel exercise)
     {
         var index = Exercises.IndexOf(exercise);
-        var plates = Loc.Get("Workout_Plates");
+        var plates = ProLabel(Loc.Get("Workout_Plates"));
+        var rest = ProLabel(Loc.Get("Workout_RestTime"));
         var up = Loc.Get("Template_MoveUp");
         var down = Loc.Get("Template_MoveDown");
         var link = exercise.IsLinkedToNext ? Loc.Get("Template_Unlink") : Loc.Get("Template_Link");
         var history = Loc.Get("Workout_History");
         var remove = Loc.Get("Workout_RemoveExercise");
         var options = new List<string>();
+        options.Add(rest);
         if (exercise.Exercise.Equipment == Equipment.Barbell && exercise.ShowWeight)
             options.Add(plates);
         if (index > 0)
@@ -225,8 +318,14 @@ public sealed partial class WorkoutViewModel : ReloadingViewModel
         options.Add(history);
 
         var choice = await _dialogs.ChooseAsync(exercise.Name, remove, [.. options]);
-        if (choice == plates)
+        if (choice == rest)
         {
+            await ChooseRestAsync(exercise);
+        }
+        else if (choice == plates)
+        {
+            if (!await OpenProUnlessUnlockedAsync())
+                return;
             var weight = exercise.Sets.FirstOrDefault(s => !s.IsDone)?.Weight ?? exercise.Sets.LastOrDefault()?.Weight ?? 0;
             await Shell.Current.GoToAsync($"{Routes.Plates}?weight={weight.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
         }
@@ -303,7 +402,16 @@ public sealed partial class WorkoutViewModel : ReloadingViewModel
             Loc.Get("Workout_Finish"),
             Loc.Get("Workout_KeepGoing"));
         if (confirmed)
-            await LeaveAsync(() => _store.FinishWorkoutAsync(workout.Id, DateTime.Now), $"../{Routes.Summary}?id={workout.Id}&fresh=1");
+            await LeaveAsync(() => FinishWorkoutAsync(workout), $"../{Routes.Summary}?id={workout.Id}&fresh=1");
+    }
+
+    /// <summary>Automatic progression raises the template's targets with Fonte Pro; otherwise it is only shown.</summary>
+    private async Task FinishWorkoutAsync(Workout workout)
+    {
+        if (await _store.FinishWorkoutAsync(workout.Id, DateTime.Now, applyProgression: _pro.IsUnlocked) is not { } summary)
+            return;
+        _finished.Remember(summary);
+        _ = _health.SaveWorkoutAsync(summary.Workout.StartedAt, summary.Workout.FinishedAt ?? DateTime.Now);
     }
 
     [RelayCommand]
@@ -426,6 +534,8 @@ public sealed class WorkoutExerciseViewModel
         IsLinkedToNext = entry.Item.LinkedToNext && !isLast;
         IsLinkedFromPrevious = linkedFromPrevious;
         TargetText = Target(exercise, entry.Item);
+        RestSeconds = entry.Item.RestSeconds;
+        RestText = RestSeconds is { } rest ? Loc.Format("Workout_RestShort", Loc.Seconds(rest)) : string.Empty;
         ItemId = entry.Item.Id;
         Exercise = exercise;
         _previous = entry.PreviousSets;
@@ -458,6 +568,13 @@ public sealed class WorkoutExerciseViewModel
     public string TargetText { get; }
 
     public bool HasTarget => TargetText.Length > 0;
+
+    /// <summary>The exercise's own rest (Fonte Pro); null for the rest of the settings.</summary>
+    public int? RestSeconds { get; }
+
+    public string RestText { get; }
+
+    public bool HasRest => RestText.Length > 0;
 
     public string Name { get; }
 
@@ -509,9 +626,13 @@ public sealed class WorkoutExerciseViewModel
     /// <summary>Numbers the sets and shows, next to each, the set done at the same place last time.</summary>
     public void Renumber()
     {
+        // Warm-ups are not numbered: "W 1 2 3".
+        var number = 0;
         for (var i = 0; i < Sets.Count; i++)
         {
-            Sets[i].Number = i + 1;
+            if (Sets[i].Kind != SetKind.WarmUp)
+                number++;
+            Sets[i].Number = number;
             Sets[i].PreviousText = i < _previous.Count ? Loc.SetShort(Exercise, _previous[i]) : "—";
         }
     }
@@ -528,6 +649,8 @@ public sealed partial class SetRowViewModel : ObservableObject
         Id = set.Id;
         Exercise = exercise;
         _isDone = set.IsDone;
+        _kind = set.Kind;
+        _rpe = set.Rpe;
         _weightText = set.Weight > 0 ? Loc.Number(set.Weight) : string.Empty;
         _valueText = exercise.Exercise.Tracking switch
         {
@@ -551,7 +674,54 @@ public sealed partial class SetRowViewModel : ObservableObject
     internal bool IsSavePending { get; set; }
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(NumberText))]
     private int _number;
+
+    /// <summary>Warm-up, drop set, to failure (Fonte Pro).</summary>
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(NumberText), nameof(KindColor), nameof(HasKind))]
+    private SetKind _kind;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(RpeText), nameof(HasRpe))]
+    private double? _rpe;
+
+    /// <summary>The set's number, or its kind's letter ("W", "D", "F").</summary>
+    public string NumberText => Kind == SetKind.Normal ? Number.ToString(Loc.Culture) : KindLetter(Kind);
+
+    public bool HasKind => Kind != SetKind.Normal;
+
+    public Color KindColor => Kind switch
+    {
+        SetKind.WarmUp => Color.FromArgb("#BA7517"),
+        SetKind.Drop => Color.FromArgb("#D4537E"),
+        SetKind.Failure => Color.FromArgb("#E24B4A"),
+        _ => Colors.Transparent,
+    };
+
+    public string RpeText => Rpe is { } rpe ? $"@{Loc.Number(rpe)}" : string.Empty;
+
+    public bool HasRpe => Rpe is not null;
+
+    public static string KindLetter(SetKind kind) => kind switch
+    {
+        SetKind.WarmUp => Loc.Get("SetKind_WarmUpLetter"),
+        SetKind.Drop => Loc.Get("SetKind_DropLetter"),
+        SetKind.Failure => Loc.Get("SetKind_FailureLetter"),
+        _ => string.Empty,
+    };
+
+    public static string KindName(SetKind kind) => kind switch
+    {
+        SetKind.WarmUp => Loc.Get("SetKind_WarmUp"),
+        SetKind.Drop => Loc.Get("SetKind_Drop"),
+        SetKind.Failure => Loc.Get("SetKind_Failure"),
+        _ => Loc.Get("SetKind_Normal"),
+    };
+
+    /// <summary>"W — Warm-up" in the menu that changes it.</summary>
+    public static string KindOption(SetKind kind) =>
+        kind == SetKind.Normal ? KindName(kind) : $"{KindLetter(kind)} — {KindName(kind)}";
 
     [ObservableProperty]
     private string _previousText = string.Empty;
