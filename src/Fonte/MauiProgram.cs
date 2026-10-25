@@ -40,6 +40,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<ProService>();
         builder.Services.AddSingleton<HealthService>();
         builder.Services.AddSingleton<FinishedWorkouts>();
+        builder.Services.AddSingleton<ProductLookup>();
+        builder.Services.AddSingleton<BarcodeScanner>();
         builder.Services.AddSingleton<AppShell>();
 
         // Tabs
@@ -51,10 +53,22 @@ public static class MauiProgram
         builder.Services.AddSingleton<ProgressPage>();
         builder.Services.AddSingleton<BodyViewModel>();
         builder.Services.AddSingleton<BodyPage>();
-        builder.Services.AddSingleton<ExercisesViewModel>();
-        builder.Services.AddSingleton<ExercisesPage>();
+        builder.Services.AddSingleton<NutritionViewModel>();
+        builder.Services.AddSingleton<NutritionPage>();
 
         // Pages opened from the tabs
+        builder.Services.AddSingleton<ExercisesViewModel>();
+        builder.Services.AddTransient<ExercisesPage>();
+        builder.Services.AddTransient<NutritionGoalViewModel>();
+        builder.Services.AddTransient<NutritionGoalPage>();
+        builder.Services.AddTransient<FoodSearchViewModel>();
+        builder.Services.AddTransient<FoodSearchPage>();
+        builder.Services.AddTransient<FoodEntryViewModel>();
+        builder.Services.AddTransient<FoodEntryPage>();
+        builder.Services.AddTransient<CustomFoodViewModel>();
+        builder.Services.AddTransient<CustomFoodPage>();
+        builder.Services.AddTransient<RecipeViewModel>();
+        builder.Services.AddTransient<RecipePage>();
         builder.Services.AddTransient<WelcomeViewModel>();
         builder.Services.AddTransient<WelcomePage>();
         builder.Services.AddTransient<TemplateViewModel>();

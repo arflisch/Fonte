@@ -16,7 +16,9 @@ public sealed record BackupSettings(
     double GoalWeight,
     double BarWeight,
     IReadOnlyList<double> Plates,
-    string Accent);
+    string Accent,
+    Nutrition.NutritionProfile? NutritionProfile = null,
+    int WaterGoalMl = 0);
 
 /// <summary>Every row of the database. <see cref="Photos"/> is null when the backup was made without the photos.</summary>
 public sealed class BackupData
@@ -40,6 +42,15 @@ public sealed class BackupData
     public List<BodyMeasurement> Measurements { get; set; } = [];
 
     public List<BodyPhoto>? Photos { get; set; }
+
+    /// <summary>Every food, the CIQUAL table included, so the meals logged point at the same ids.</summary>
+    public List<Food> Foods { get; set; } = [];
+
+    public List<FoodEntry> FoodEntries { get; set; } = [];
+
+    public List<RecipeIngredient> RecipeIngredients { get; set; } = [];
+
+    public List<WaterEntry> Water { get; set; } = [];
 }
 
 public sealed record BackupContent(DateTimeOffset ExportedAt, BackupData Data, BackupSettings Settings)
@@ -173,6 +184,10 @@ public static class BackupFile
         BodyWeights = data.BodyWeights,
         Measurements = data.Measurements,
         Photos = photos,
+        Foods = data.Foods,
+        FoodEntries = data.FoodEntries,
+        RecipeIngredients = data.RecipeIngredients,
+        Water = data.Water,
     };
 
     private static UstarTarEntry Entry(string name, Stream content, DateTimeOffset time) =>

@@ -14,4 +14,9 @@
     <InternalsVisibleTo Include="Fonte.Core.Tests" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- ANSES CIQUAL 2020 food composition table (Licence Ouverte), built by tools/ciqual_to_csv.py. -->
+    <EmbeddedResource Include="Nutrition/ciqual.csv" LogicalName="Fonte.Core.ciqual.csv" />
+  </ItemGroup>
+
 </Project>

@@ -38,6 +38,10 @@ public static class Icons
     public const string Flame = "M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-4 2.5-5 0.3 2 1.3 3 2.5 3.5C12 9 11 6 12 3z";
     public const string Warning = "M12 4l9 16H3zM12 10v4M12 17h0.01";
     public const string Palette = "M12 3a9 9 0 1 0 0 18c1 0 1.5-0.8 1.5-1.5 0-0.4-0.2-0.8-0.4-1.1-0.3-0.3-0.4-0.6-0.4-1.1 0-0.8 0.7-1.5 1.5-1.5H16a5 5 0 0 0 5-5c0-4.4-4-7.8-9-7.8zM7.5 12.5h0.01M9.5 8h0.01M14.5 8h0.01M17 11.5h0.01";
+    public const string Barcode = "M4 6v12M7 6v12M10 6v12M14 6v12M16 6v12M20 6v12M2 4h3M19 4h3M2 20h3M19 20h3";
+    public const string Star = "M12 3.5l2.6 5.3 5.9 0.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-0.9z";
+    public const string Drop = "M12 3c3 4 6 7.2 6 10.5a6 6 0 0 1-12 0C6 10.2 9 7 12 3z";
+    public const string Apple = "M12 7c-1.5-1.5-6-1.8-7 2.5-0.8 3.6 1.4 9.5 4.2 10.4 1.1 0.4 1.9-0.4 2.8-0.4s1.7 0.8 2.8 0.4c2.8-0.9 5-6.8 4.2-10.4C18 5.2 13.5 5.5 12 7zM12 7c0-2 1-3.5 3-4";
     public const string Trophy = "M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v6M8 20h8";
 
     // Equipment

@@ -40,8 +40,10 @@ public sealed class HealthService(FonteStore store, AppSettings settings, ProSer
 #if IOS
         if (!IsSupported)
             return false;
-        var share = new NSSet(HKObjectType.WorkoutType);
-        var read = new NSSet(BodyMass);
+        var share = new NSSet(HKObjectType.WorkoutType, Type(HKQuantityTypeIdentifier.DietaryEnergyConsumed),
+            Type(HKQuantityTypeIdentifier.DietaryProtein), Type(HKQuantityTypeIdentifier.DietaryCarbohydrates),
+            Type(HKQuantityTypeIdentifier.DietaryFatTotal), Type(HKQuantityTypeIdentifier.DietaryWater));
+        var read = new NSSet(BodyMass, Type(HKQuantityTypeIdentifier.ActiveEnergyBurned));
         var (success, _) = await _health.RequestAuthorizationToShareAsync(share, read);
         return success;
 #else
@@ -110,7 +112,169 @@ public sealed class HealthService(FonteStore store, AppSettings settings, ProSer
 #endif
     }
 
+    /// <summary>
+    /// Writes what was eaten (calories, protein, carbohydrates, fat) to Health. Each entry has its own sync
+    /// identifier: saving it again (new quantity) replaces it rather than adding to it.
+    /// </summary>
+    public async Task SaveFoodAsync(Core.Models.FoodEntry entry, string name)
+    {
+        if (!IsActive)
+            return;
 #if IOS
+        try
+        {
+            var at = MealTime(entry);
+            var version = new NSNumber(entry.UpdatedAt.Ticks / TimeSpan.TicksPerSecond);
+            HKQuantitySample Sample(HKQuantityTypeIdentifier type, HKUnit unit, double value, string part)
+            {
+                var metadata = new HKMetadata { FoodType = name };
+                var dictionary = new NSMutableDictionary(metadata.Dictionary)
+                {
+                    [HKMetadataKey.SyncIdentifier] = new NSString($"fonte-food-{entry.Id}-{part}"),
+                    [HKMetadataKey.SyncVersion] = version,
+                };
+                return HKQuantitySample.FromType(Type(type), HKQuantity.FromQuantity(unit, value), at, at, new HKMetadata(dictionary));
+            }
+            await _health.SaveObjectsAsync(
+            [
+                Sample(HKQuantityTypeIdentifier.DietaryEnergyConsumed, HKUnit.Kilocalorie, entry.Kcal, "kcal"),
+                Sample(HKQuantityTypeIdentifier.DietaryProtein, HKUnit.Gram, entry.Protein, "protein"),
+                Sample(HKQuantityTypeIdentifier.DietaryCarbohydrates, HKUnit.Gram, entry.Carbs, "carbs"),
+                Sample(HKQuantityTypeIdentifier.DietaryFatTotal, HKUnit.Gram, entry.Fat, "fat"),
+            ]);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Food not saved to Health: {ex}");
+        }
+#else
+        await Task.CompletedTask;
+#endif
+    }
+
+    /// <summary>Removes from Health what Fonte wrote for these entries (deleted from the journal).</summary>
+    public async Task DeleteFoodsAsync(IEnumerable<Core.Models.FoodEntry> entries)
+    {
+        if (!IsActive)
+            return;
+#if IOS
+        var ids = entries.SelectMany(e => new[] { "kcal", "protein", "carbs", "fat" }.Select(p => (NSObject)new NSString($"fonte-food-{e.Id}-{p}"))).ToArray();
+        if (ids.Length == 0)
+            return;
+        try
+        {
+            var predicate = HKQuery.GetPredicateForMetadataKey(HKMetadataKey.SyncIdentifier, ids);
+            foreach (var type in new[] { HKQuantityTypeIdentifier.DietaryEnergyConsumed, HKQuantityTypeIdentifier.DietaryProtein,
+                         HKQuantityTypeIdentifier.DietaryCarbohydrates, HKQuantityTypeIdentifier.DietaryFatTotal })
+            {
+                var samples = await QuerySamplesAsync(Type(type), predicate);
+                if (samples.Length > 0)
+                    await _health.DeleteObjectsAsync(samples);
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Food not removed from Health: {ex}");
+        }
+#else
+        await Task.CompletedTask;
+#endif
+    }
+
+    public async Task SaveWaterAsync(Core.Models.WaterEntry water)
+    {
+        if (!IsActive)
+            return;
+#if IOS
+        try
+        {
+            var dictionary = new NSMutableDictionary { [HKMetadataKey.SyncIdentifier] = new NSString($"fonte-water-{water.Id}"), [HKMetadataKey.SyncVersion] = new NSNumber(1) };
+            var at = ToDate(water.At);
+            await _health.SaveObjectAsync(HKQuantitySample.FromType(Type(HKQuantityTypeIdentifier.DietaryWater),
+                HKQuantity.FromQuantity(HKUnit.Liter, water.Milliliters / 1000.0), at, at, new HKMetadata(dictionary)));
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Water not saved to Health: {ex}");
+        }
+#else
+        await Task.CompletedTask;
+#endif
+    }
+
+    public async Task DeleteWaterAsync(Core.Models.WaterEntry water)
+    {
+        if (!IsActive)
+            return;
+#if IOS
+        try
+        {
+            var predicate = HKQuery.GetPredicateForMetadataKey(HKMetadataKey.SyncIdentifier, [new NSString($"fonte-water-{water.Id}")]);
+            var samples = await QuerySamplesAsync(Type(HKQuantityTypeIdentifier.DietaryWater), predicate);
+            if (samples.Length > 0)
+                await _health.DeleteObjectsAsync(samples);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Water not removed from Health: {ex}");
+        }
+#else
+        await Task.CompletedTask;
+#endif
+    }
+
+    /// <summary>Calories burnt in activities on a day (watch, phone, other apps); 0 when unknown.</summary>
+    public async Task<double> GetActiveEnergyAsync(DateTime day)
+    {
+        if (!IsActive)
+            return 0;
+#if IOS
+        var result = new TaskCompletionSource<double>();
+        try
+        {
+            var predicate = HKQuery.GetPredicateForSamples(ToDate(day.Date), ToDate(day.Date.AddDays(1)), HKQueryOptions.StrictStartDate);
+            var query = new HKStatisticsQuery(Type(HKQuantityTypeIdentifier.ActiveEnergyBurned), predicate, HKStatisticsOptions.CumulativeSum,
+                (_, statistics, _) => result.TrySetResult(statistics?.SumQuantity()?.GetDoubleValue(HKUnit.Kilocalorie) ?? 0));
+            _health.ExecuteQuery(query);
+            return Math.Round(await result.Task.WaitAsync(TimeSpan.FromSeconds(10)));
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Active energy not read from Health: {ex}");
+            return 0;
+        }
+#else
+        await Task.CompletedTask;
+        return 0;
+#endif
+    }
+
+#if IOS
+    private static HKQuantityType Type(HKQuantityTypeIdentifier identifier) => HKQuantityType.Create(identifier)!;
+
+    /// <summary>Entries of today are dated when they were logged; those of another day at a usual time of the meal.</summary>
+    private static NSDate MealTime(Core.Models.FoodEntry entry)
+    {
+        if (entry.CreatedAt.Date == entry.Date)
+            return ToDate(entry.CreatedAt);
+        var hour = entry.Meal switch
+        {
+            Core.Models.Meal.Breakfast => 8,
+            Core.Models.Meal.Lunch => 12.5,
+            Core.Models.Meal.Dinner => 19.5,
+            _ => 16,
+        };
+        return ToDate(entry.Date.AddHours(hour));
+    }
+
+    private Task<HKObject[]> QuerySamplesAsync(HKSampleType type, NSPredicate predicate)
+    {
+        var result = new TaskCompletionSource<HKObject[]>();
+        var query = new HKSampleQuery(type, predicate, 0, [], (_, samples, _) => result.TrySetResult(samples?.Cast<HKObject>().ToArray() ?? []));
+        _health.ExecuteQuery(query);
+        return result.Task;
+    }
+
     private static HKQuantityType BodyMass => HKQuantityType.Create(HKQuantityTypeIdentifier.BodyMass)!;
 
     private static NSDate ToDate(DateTime date) =>

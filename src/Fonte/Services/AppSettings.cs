@@ -20,6 +20,9 @@ public sealed class AppSettings
     private const string AccentKey = "accent";
     private const string LastBackupKey = "last_backup";
     private const string HealthKey = "health";
+    private const string NutritionKey = "nutrition_profile";
+    private const string WaterGoalKey = "water_goal";
+    private const string ActiveEnergyKey = "count_active_energy";
     private const string ProHintKey = "pro_hint_shown";
 
     /// <summary>Rest durations offered, in seconds.</summary>
@@ -139,6 +142,40 @@ public sealed class AppSettings
     {
         get => _preferences.Get(HealthKey, false);
         set => Update(() => _preferences.Set(HealthKey, value));
+    }
+
+    /// <summary>What the calorie target is computed from; null until the user set it up.</summary>
+    public Core.Nutrition.NutritionProfile? NutritionProfile
+    {
+        get
+        {
+            var stored = _preferences.Get<string?>(NutritionKey, null);
+            if (string.IsNullOrEmpty(stored))
+                return null;
+            try
+            {
+                return System.Text.Json.JsonSerializer.Deserialize<Core.Nutrition.NutritionProfile>(stored);
+            }
+            catch (System.Text.Json.JsonException)
+            {
+                return null;
+            }
+        }
+        set => Update(() => _preferences.Set(NutritionKey, value is null ? null : System.Text.Json.JsonSerializer.Serialize(value)));
+    }
+
+    /// <summary>Water to drink each day, in millilitres.</summary>
+    public int WaterGoalMl
+    {
+        get => _preferences.Get(WaterGoalKey, 2000);
+        set => Update(() => _preferences.Set(WaterGoalKey, Math.Clamp(value, 500, 6000)));
+    }
+
+    /// <summary>The calories burnt in activities (from Apple Health) are added to the day's budget.</summary>
+    public bool CountActiveEnergy
+    {
+        get => _preferences.Get(ActiveEnergyKey, false);
+        set => Update(() => _preferences.Set(ActiveEnergyKey, value));
     }
 
     /// <summary>The one-time suggestion of Fonte Pro after a few workouts was shown.</summary>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fonte.Views.NutritionGoalPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Fonte.Controls"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:vm="clr-namespace:Fonte.ViewModels"
+    x:DataType="vm:NutritionGoalViewModel"
+    ios:Page.ModalPresentationStyle="PageSheet"
+    Shell.NavBarIsVisible="False"
+    SafeAreaEdges="All"
+    Shell.PresentationMode="ModalAnimated">
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="ChipTemplate" x:DataType="vm:SelectableOption">
+            <Border
+                Margin="0,0,8,8"
+                c:Touch.Command="{Binding SelectCommand}"
+                Style="{StaticResource Chip}">
+                <Border.Triggers>
+                    <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource AccentGradient}" />
+                        <Setter Property="Stroke" Value="Transparent" />
+                    </DataTrigger>
+                </Border.Triggers>
+                <Label FontFamily="OpenSansSemibold" FontSize="14" Text="{Binding Label}">
+                    <Label.Triggers>
+                        <DataTrigger Binding="{Binding IsSelected}" TargetType="Label" Value="True">
+                            <Setter Property="TextColor" Value="White" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </Border>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Sheet header -->
+        <Grid Padding="20,18,20,6" ColumnDefinitions="100,*,100">
+            <Label
+                c:Touch.Command="{Binding CancelCommand}"
+                Style="{StaticResource LinkLabel}"
+                Text="{l:Tr Common_Cancel}" />
+            <Label Grid.Column="1" Style="{StaticResource PageTitle}" Text="{l:Tr Nutrition_Goal}" />
+            <Label
+                Grid.Column="2"
+                c:Touch.Command="{Binding SaveCommand}"
+                HorizontalTextAlignment="End"
+                Style="{StaticResource LinkLabel}"
+                Text="{l:Tr Common_Save}" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,12,20,32" Spacing="22">
+
+                <!-- Result -->
+                <Border Background="{DynamicResource HeroGradient}" StrokeShape="RoundRectangle 22" StrokeThickness="0">
+                    <VerticalStackLayout Padding="20,16" Spacing="4">
+                        <Label
+                            FontFamily="OpenSansSemibold"
+                            FontSize="13"
+                            Text="{l:Tr Nutrition_DailyTarget}"
+                            TextColor="{StaticResource WhiteSoft}" />
+                        <!-- Shown until the answers are complete, so the form below doesn't move when they are -->
+                        <Label
+                            FontSize="15"
+                            IsVisible="{Binding HasResult, Converter={StaticResource InvertBool}}"
+                            Text="{l:Tr Nutrition_GoalIncomplete}"
+                            TextColor="White" />
+                        <Label
+                            FontFamily="OpenSansSemibold"
+                            FontSize="32"
+                            IsVisible="{Binding HasResult}"
+                            Text="{Binding KcalText}"
+                            TextColor="White" />
+                        <Label FontSize="14" IsVisible="{Binding HasResult}" Text="{Binding MacrosText}" TextColor="White" />
+                        <Label
+                            FontSize="13"
+                            IsVisible="{Binding HasResult}"
+                            Text="{Binding DetailText}"
+                            TextColor="{StaticResource WhiteSoft}" />
+                        <Label
+                            FontSize="13"
+                            IsVisible="{Binding HasGoalDate}"
+                            Text="{Binding GoalDateText}"
+                            TextColor="White" />
+                        <Label
+                            Margin="0,4,0,0"
+                            FontSize="13"
+                            IsVisible="{Binding IsFloored}"
+                            Text="{l:Tr Nutrition_Floored}"
+                            TextColor="White" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Goal -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Nutrition_GoalQuestion}" />
+                    <FlexLayout BindableLayout.ItemTemplate="{StaticResource ChipTemplate}" BindableLayout.ItemsSource="{Binding Goals}" Wrap="Wrap" />
+                    <FlexLayout
+                        BindableLayout.ItemTemplate="{StaticResource ChipTemplate}"
+                        BindableLayout.ItemsSource="{Binding Rates}"
+                        IsVisible="{Binding HasRate}"
+                        Wrap="Wrap" />
+                </VerticalStackLayout>
+
+                <!-- About you -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Nutrition_Sex}" />
+                    <FlexLayout BindableLayout.ItemTemplate="{StaticResource ChipTemplate}" BindableLayout.ItemsSource="{Binding Sexes}" Wrap="Wrap" />
+                </VerticalStackLayout>
+
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Nutrition_BirthYear}" />
+                        <Border Style="{StaticResource InputField}">
+                            <Entry Keyboard="Numeric" MaxLength="4" Placeholder="1990" Text="{Binding BirthYear}" />
+                        </Border>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1" Spacing="10">
+                        <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Nutrition_Height}" />
+                        <Border Style="{StaticResource InputField}">
+                            <Entry Keyboard="Numeric" MaxLength="5" Placeholder="170" Text="{Binding Height}" />
+                        </Border>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="2" Spacing="10">
+                        <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Nutrition_Weight}" />
+                        <Border Style="{StaticResource InputField}">
+                            <Entry Keyboard="Numeric" MaxLength="5" Placeholder="70" Text="{Binding Weight}" />
+                        </Border>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <!-- Activity -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Nutrition_Activity}" />
+                    <Border Padding="16,4" Style="{StaticResource Card}">
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Activities}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:SelectableOption">
+                                    <Grid Padding="0,12" c:Touch.Command="{Binding SelectCommand}" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                        <Label Text="{Binding Label}" VerticalOptions="Center" />
+                                        <c:IconView
+                                            Grid.Column="1"
+                                            Color="{DynamicResource Accent}"
+                                            Data="{x:Static c:Icons.Check}"
+                                            HeightRequest="18"
+                                            IsVisible="{Binding IsSelected}"
+                                            StrokeWidth="2.6"
+                                            VerticalOptions="Center"
+                                            WidthRequest="18" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Protein -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Nutrition_ProteinQuestion}" />
+                    <FlexLayout BindableLayout.ItemTemplate="{StaticResource ChipTemplate}" BindableLayout.ItemsSource="{Binding Proteins}" Wrap="Wrap" />
+                    <Label Style="{StaticResource Caption}" Text="{l:Tr Nutrition_ProteinHint}" />
+                </VerticalStackLayout>
+
+                <!-- Water -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Nutrition_WaterGoal}" />
+                    <FlexLayout BindableLayout.ItemTemplate="{StaticResource ChipTemplate}" BindableLayout.ItemsSource="{Binding Waters}" Wrap="Wrap" />
+                </VerticalStackLayout>
+
+                <!-- Apple Health -->
+                <Border Padding="16,12" IsVisible="{Binding ShowsHealth}" Style="{StaticResource Card}">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                        <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                            <Label Style="{StaticResource RowTitle}" Text="{l:Tr Nutrition_CountActive}" />
+                            <Label Style="{StaticResource Caption}" Text="{l:Tr Nutrition_CountActiveHint}" />
+                        </VerticalStackLayout>
+                        <Switch Grid.Column="1" IsToggled="{Binding CountActive}" VerticalOptions="Center" />
+                    </Grid>
+                </Border>
+
+                <Label IsVisible="{Binding HasError}" Style="{StaticResource ErrorLabel}" Text="{Binding ErrorMessage}" />
+                <Label FontSize="12" Style="{StaticResource Caption}" Text="{l:Tr Nutrition_Disclaimer}" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

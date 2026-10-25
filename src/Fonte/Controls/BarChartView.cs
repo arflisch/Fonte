@@ -1,6 +1,6 @@
 namespace Fonte.Controls;
 
-/// <summary>Rounded bars around a zero line, with a short label under each: net savings per month.</summary>
+/// <summary>Rounded bars around a zero line, with a short label under each, and an optional dashed target line.</summary>
 public sealed class BarChartView : GraphicsView
 {
     public static readonly BindableProperty ValuesProperty =
@@ -17,6 +17,9 @@ public sealed class BarChartView : GraphicsView
 
     public static readonly BindableProperty LabelColorProperty =
         BindableProperty.Create(nameof(LabelColor), typeof(Color), typeof(BarChartView), Colors.Gray, propertyChanged: Redraw);
+
+    public static readonly BindableProperty TargetProperty =
+        BindableProperty.Create(nameof(Target), typeof(double), typeof(BarChartView), 0.0, propertyChanged: Redraw);
 
     public BarChartView()
     {
@@ -55,6 +58,13 @@ public sealed class BarChartView : GraphicsView
         set => SetValue(LabelColorProperty, value);
     }
 
+    /// <summary>Value drawn as a dashed line (a daily calorie target); none when 0.</summary>
+    public double Target
+    {
+        get => (double)GetValue(TargetProperty);
+        set => SetValue(TargetProperty, value);
+    }
+
     private static void Redraw(BindableObject bindable, object oldValue, object newValue) =>
         ((BarChartView)bindable).Invalidate();
 
@@ -69,7 +79,7 @@ public sealed class BarChartView : GraphicsView
                 return;
 
             var chart = new RectF(rect.X, rect.Y + 4, rect.Width, rect.Height - LabelHeight - 8);
-            var max = Math.Max(values.Max(), 0);
+            var max = Math.Max(Math.Max(values.Max(), owner.Target * 1.1), 0);
             var min = Math.Min(values.Min(), 0);
             var span = max - min < 0.005 ? 1 : max - min;
             float Y(double v) => chart.Top + chart.Height * (float)((max - v) / span);
@@ -81,6 +91,12 @@ public sealed class BarChartView : GraphicsView
             canvas.StrokeColor = owner.LabelColor.WithAlpha(0.35f);
             canvas.StrokeSize = 1;
             canvas.DrawLine(chart.Left, zero, chart.Right, zero);
+            if (owner.Target > 0)
+            {
+                canvas.StrokeDashPattern = [4, 4];
+                canvas.DrawLine(chart.Left, Y(owner.Target), chart.Right, Y(owner.Target));
+                canvas.StrokeDashPattern = null;
+            }
 
             for (var i = 0; i < values.Count; i++)
             {

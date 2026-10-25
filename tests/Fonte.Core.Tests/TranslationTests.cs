@@ -15,7 +15,7 @@ public sealed partial class TranslationTests
     private static readonly string[] DynamicPrefixes =
     [
         "Error_", "Ex_", "Tip_", "Muscle_", "Equipment_", "Tracking_", "Goal_", "GoalText_", "Measure_",
-        "Program_", "ProgramText_", "Template_",
+        "Program_", "ProgramText_", "Template_", "Meal_", "Sex_", "Activity_", "WeightGoal_", "FoodShelf_",
     ];
 
     public static TheoryData<string> Languages => new() { "fr", "nl" };
@@ -109,6 +109,18 @@ public sealed partial class TranslationTests
         var expected = Enum.GetNames<MuscleGroup>().Select(n => $"Muscle_{n}")
             .Concat(Enum.GetNames<Equipment>().Select(n => $"Equipment_{n}"))
             .Concat(Enum.GetNames<Tracking>().Select(n => $"Tracking_{n}"));
+
+        Assert.Empty(expected.Except(keys));
+    }
+
+    [Fact]
+    public void Every_meal_and_nutrition_answer_is_translated()
+    {
+        var keys = Load("AppResources.resx").Keys.ToHashSet();
+        var expected = Enum.GetNames<Meal>().Select(n => $"Meal_{n}")
+            .Concat(Enum.GetNames<Nutrition.Sex>().Select(n => $"Sex_{n}"))
+            .Concat(Enum.GetNames<Nutrition.ActivityLevel>().Select(n => $"Activity_{n}"))
+            .Concat(Enum.GetNames<Nutrition.WeightGoal>().Select(n => $"WeightGoal_{n}"));
 
         Assert.Empty(expected.Except(keys));
     }

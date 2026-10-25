@@ -15,4 +15,10 @@ public static class Routes
     public const string Photo = "photo";
     public const string ComparePhotos = "comparephotos";
     public const string Pro = "pro";
+    public const string Library = "library";
+    public const string NutritionGoal = "nutritiongoal";
+    public const string FoodSearch = "foodsearch";
+    public const string FoodEntry = "foodentry";
+    public const string CustomFood = "customfood";
+    public const string Recipe = "recipe";
 }

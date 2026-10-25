@@ -31,6 +31,21 @@ public static class Loc
 
     public static string Tracking(Tracking tracking) => L[$"Tracking_{tracking}"];
 
+    public static string Meal(Meal meal) => L[$"Meal_{meal}"];
+
+    /// <summary>CIQUAL foods have a French and an English name: French in French, English otherwise.</summary>
+    public static string FoodName(Food food) =>
+        food.Source == FoodSource.Catalog && L.Language.Code != "fr" && !string.IsNullOrEmpty(food.NameEn) ? food.NameEn : food.Name;
+
+    /// <summary>"1,234 kcal".</summary>
+    public static string Kcal(double kcal) => $"{Whole(kcal)} kcal";
+
+    /// <summary>A rounded count with the thousands separator: "1,570", "1 570".</summary>
+    public static string Whole(double value) => Math.Round(value).ToString("N0", L.Culture);
+
+    /// <summary>"150 g", "12.5 g".</summary>
+    public static string Grams(double grams) => $"{Number(Math.Round(grams, grams < 10 ? 1 : 0))} g";
+
     /// <summary>"62.5" or "62,5" depending on the language, without useless decimals.</summary>
     public static string Number(double value) => value.ToString("0.##", L.Culture);
 

@@ -77,9 +77,17 @@
             <VerticalStackLayout Padding="20,12,20,40" Spacing="22">
 
                 <!-- Header -->
-                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
                     <Label Style="{StaticResource LargeTitle}" Text="{l:Tr Tab_Programs}" VerticalOptions="Center" />
-                    <Grid Grid.Column="1" VerticalOptions="Center">
+                    <Border
+                        Grid.Column="1"
+                        c:Touch.Command="{Binding OpenLibraryCommand}"
+                        Style="{StaticResource IconButton}"
+                        VerticalOptions="Center"
+                        SemanticProperties.Description="{l:Tr Tab_Exercises}">
+                        <c:IconView Color="{DynamicResource Accent}" Data="{x:Static c:Icons.Dumbbell}" />
+                    </Border>
+                    <Grid Grid.Column="2" VerticalOptions="Center">
                         <Border
                             c:Touch.Command="{Binding NewProgramCommand}"
                             Style="{StaticResource IconButton}"

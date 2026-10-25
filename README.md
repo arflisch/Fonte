@@ -1,6 +1,6 @@
 # Fonte
 
-Carnet de musculation hors ligne : on note chaque série pendant la séance, l'app retrouve ce qui a été fait la fois d'avant, décompte le repos et repère les records ; elle propose des programmes dont les charges montent toutes seules, montre les progrès semaine après semaine et suit le poids, les mensurations et les photos. En **.NET MAUI 10** pour **iPhone, Android et Mac**.
+Carnet de musculation hors ligne : on note chaque série pendant la séance, l'app retrouve ce qui a été fait la fois d'avant, décompte le repos et repère les records ; elle propose des programmes dont les charges montent toutes seules, montre les progrès semaine après semaine, suit le poids, les mensurations et les photos, et (Fonte Pro) les calories et macros mangées face à un objectif. En **.NET MAUI 10** pour **iPhone, Android et Mac**.
 
 | Accueil | Séance en cours | Fin de séance | Fiche exercice | Bibliothèque | Mode sombre |
 |---|---|---|---|---|---|
@@ -14,6 +14,7 @@ Carnet de musculation hors ligne : on note chaque série pendant la séance, l'a
   - la semaine en cours face à l'**objectif hebdomadaire** (« 2 / 4 séances ») et la **série de semaines** réussies d'affilée ;
   - les dernières séances, et l'**historique** : calendrier du mois, nombre de séances, durée totale, volume, semaines régulières.
 - **Programmes** (second onglet) :
+  - la **bibliothèque d'exercices**, ouverte par le bouton haltère de l'en-tête ;
   - le programme suivi : semaine en cours, ses séances dans l'ordre (A, B, C…), la prochaine, celles faites et quand ;
   - **programmes prêts à l'emploi** : Full body (3×/sem.), 5×5 (force), Haut / Bas (4×/sem.), Push Pull Legs (6×/sem.), adaptés à l'objectif ;
   - ses propres programmes et séances (« Bras », « Cardio »…) ;
@@ -27,10 +28,17 @@ Carnet de musculation hors ligne : on note chaque série pendant la séance, l'a
 - **Fin de séance** : durée, volume, séries, **comparaison avec la dernière fois** (« +4 % de volume »), **records personnels**, **objectifs relevés** pour la prochaine fois, ressenti et note.
 - **Progrès** (troisième onglet) : volume par semaine sur 1 ou 3 mois (graphique et moyenne), **séries par groupe musculaire** sur 7 jours face à une cible de 10, alerte quand un groupe est délaissé depuis deux semaines ou sous la cible, **records du mois**.
 - **Corps** (quatrième onglet) : **poids** et courbe sur 3 mois, évolution sur 8 semaines, **objectif de poids** avec progression ; **mensurations** (taille, poitrine, bras, cuisse, hanches) avec l'écart depuis la mesure précédente ; **photos de progression** prises ou choisies, gardées dans l'app (pas dans la photothèque), **verrouillées par Face ID**, à comparer avant / après.
-- **Exercices** (cinquième onglet) : 51 exercices intégrés avec **conseils d'exécution**, filtres par groupe musculaire et par **matériel**, recherche sans accents ; chaque fiche montre le record, le **1RM estimé**, la progression sur 3 mois, 1 an ou tout, et l'historique avec le volume de chaque séance. On peut créer ses propres exercices.
+- **Nutrition** (cinquième onglet, Fonte Pro) :
+  - **objectif calculé** : sexe, année de naissance, taille, poids (repris de l'onglet Corps), activité, et perdre (0,25 à 1 kg/sem.), maintenir ou prendre (0,25 ou 0,5 kg/sem.) du poids. Métabolisme de base de Mifflin-St Jeor × facteur d'activité (1,2 à 1,9), ± 7 700 kcal par kg ; jamais sous 1 200 kcal (femme) ou 1 500 kcal (homme). Protéines de 1,2 à 2 g/kg, lipides 25 % des calories, glucides le reste. Date prévue pour l'objectif de poids de l'onglet Corps ;
+  - **journal du jour** : calories restantes (objectif − mangé, + calories actives d'Apple Santé si on le veut), protéines, glucides et lipides, petit-déjeuner, déjeuner, dîner et collations ; jours précédents ; un repas se **recopie depuis la veille** ou se vide ;
+  - **3 055 aliments hors ligne** (table Ciqual 2020 de l'ANSES, noms français et anglais), recherche sans accents ni pluriels ; **scan du code-barres** (iPhone et Mac) puis **Open Food Facts**, et recherche en ligne sur Open Food Facts ; un produit trouvé est gardé sur l'appareil ;
+  - quantité en grammes ou en portions, repas, calories et macros calculées en direct ; **favoris**, **récents**, **aliments à soi** (étiquette pour 100 g ; énergie déduite des macros si vide) et **plats** composés d'ingrédients, avec le poids cuit et le nombre de parts ;
+  - **eau** par verre de 250 ml face à un objectif (1,5 à 3 L) ; les **7 derniers jours** face à l'objectif ;
+  - **Apple Santé** : chaque aliment (énergie, protéines, glucides, lipides) et chaque verre d'eau y sont écrits, modifiés ou retirés avec le journal.
+- **Exercices** (depuis Programmes) : 51 exercices intégrés avec **conseils d'exécution**, filtres par groupe musculaire et par **matériel**, recherche sans accents ; chaque fiche montre le record, le **1RM estimé**, la progression sur 3 mois, 1 an ou tout, et l'historique avec le volume de chaque séance. On peut créer ses propres exercices.
 - **Calculateur de disques** : disques à mettre de chaque côté pour une charge, barre de 20, 15 ou 10 kg, **échauffement proposé** (barre, puis environ 40, 60 et 80 %) ; les disques disponibles se règlent dans les réglages.
 - **Réglages** : objectif, séances par semaine, minuteur et durée du repos, disques disponibles, **couleur de l'app** (violet, bleu, turquoise, vert, orange, rouge, rose ou ardoise, appliquée aussitôt, en clair comme en sombre), langue, **sauvegarde**.
-- **Sauvegarde / restauration** : toutes les données (séances, programmes, exercices, poids, mensurations) et les réglages dans un fichier `fonte-AAAA-MM-JJ.fontebackup` **chiffré par un mot de passe** choisi à chaque sauvegarde, remis à la feuille de partage (iCloud Drive, mail, AirDrop…) ou au panneau Enregistrer sur Mac. Les **photos de progression** sont incluses au choix (Face ID demandé, comme pour les voir). La restauration, depuis les réglages ou l'écran de bienvenue, lit et vérifie tout le fichier avant de remplacer quoi que ce soit ; une sauvegarde sans photos garde celles de l'appareil. La langue n'est pas restaurée : elle suit le nouvel appareil.
+- **Sauvegarde / restauration** : toutes les données (séances, programmes, exercices, poids, mensurations, aliments, repas, plats, eau) et les réglages (dont l'objectif nutritionnel) dans un fichier `fonte-AAAA-MM-JJ.fontebackup` **chiffré par un mot de passe** choisi à chaque sauvegarde, remis à la feuille de partage (iCloud Drive, mail, AirDrop…) ou au panneau Enregistrer sur Mac. Les **photos de progression** sont incluses au choix (Face ID demandé, comme pour les voir). La restauration, depuis les réglages ou l'écran de bienvenue, lit et vérifie tout le fichier avant de remplacer quoi que ce soit ; une sauvegarde sans photos garde celles de l'appareil. La langue n'est pas restaurée : elle suit le nouvel appareil.
 - **Langues** : français, néerlandais et anglais (par défaut : la langue du téléphone), changement immédiat.
 - **Thème clair / sombre** automatique. La couleur d'accent vient de `Services/AccentTheme.cs` : les pages l'utilisent par des ressources dynamiques (`Accent`, `AccentSoft`, `HeroGradient`…), redéfinies quand on change de couleur ou de thème. L'icône et l'écran de lancement restent violets.
 
@@ -45,9 +53,10 @@ Achat unique, sans abonnement (`com.arflisch.fonte.pro`, prix conseillé 7,99 �
 - programmes à soi et séances illimitées ;
 - progrès sur 3 mois, séries par muscle et alertes ;
 - objectif et courbe de poids, mensurations, photos ;
+- **nutrition** : objectif de calories et de macros, journal des repas, aliments, scan, plats, eau ;
 - **séries avancées** : échauffement (« É »), dégressive (« D »), jusqu'à l'échec (« X »), RPE de 6 à 10, repos propre à chaque exercice (séance type et séance en cours). Les échauffements ne comptent ni dans le volume, ni dans les records, ni dans la progression ; les dégressives comptent dans le volume mais pas dans la progression ;
 - calculateur de disques et échauffement ;
-- **Apple Santé** (iPhone) : chaque séance terminée y est enregistrée (musculation), le poids des 12 derniers mois en est repris ;
+- **Apple Santé** (iPhone) : chaque séance terminée y est enregistrée (musculation), le poids des 12 derniers mois en est repris ; les repas et l'eau y sont écrits, les calories actives en sont lues ;
 - **export CSV** de toutes les séries (séparateur et décimales de la langue, pour Excel ou Numbers) et **bilan du mois** en image à partager ;
 - les **couleurs de l'app** autres que le violet.
 
@@ -59,12 +68,14 @@ Apple Santé demande un identifiant d'app `com.arflisch.fonte` avec la capacité
 
 ## Persistance
 
-**SQLite** local via `sqlite-net-pcl`, dans le dossier privé de l'app. Aucune connexion réseau.
+**SQLite** local via `sqlite-net-pcl`, dans le dossier privé de l'app. La seule connexion réseau est celle d'Open Food Facts, quand on scanne un produit inconnu ou qu'on cherche en ligne (rien n'est envoyé d'autre que le code-barres ou les mots cherchés).
 
-- Tables `exercises`, `workouts`, `workout_exercises`, `workout_sets` ; `programs`, `templates`, `template_exercises` (programmes et séances types) ; `body_weights`, `measurements`, `body_photos`. Les exercices et programmes intégrés sont stockés par clé (`bench_press`, `full_body`…) et traduits à l'affichage ; les nouveaux exercices d'une mise à jour sont ajoutés au démarrage, et les colonnes nouvelles ajoutées aux tables existantes.
+- Tables `exercises`, `workouts`, `workout_exercises`, `workout_sets` ; `programs`, `templates`, `template_exercises` (programmes et séances types) ; `body_weights`, `measurements`, `body_photos` ; `foods` (table Ciqual, produits scannés, aliments à soi et plats, avec les nutriments pour 100 g), `food_entries` (ce qui a été mangé, nutriments copiés au moment de la saisie), `recipe_ingredients`, `water`. Les exercices et programmes intégrés sont stockés par clé (`bench_press`, `full_body`…) et traduits à l'affichage ; les nouveaux exercices d'une mise à jour sont ajoutés au démarrage, et les colonnes nouvelles ajoutées aux tables existantes.
 - Une séance lancée depuis un programme garde le lien vers sa séance type (`TemplateId`) et copie ses objectifs : la prochaine séance du programme est celle qui suit la dernière faite, et la progression automatique relève les objectifs de la séance type quand la séance est terminée.
 - Les photos de progression sont des fichiers dans le dossier privé de l'app (`photos/`), jamais dans la photothèque.
 - Il y a au plus une séance en cours (`FinishedAt` nul). Les records, la dernière fois et les statistiques sont **toujours recalculés** à partir des séries validées des séances terminées : rien ne peut se désynchroniser.
+- La table Ciqual (`Fonte.Core/Nutrition/ciqual.csv`, ressource incorporée) est copiée dans `foods` à la première recherche. Elle est produite par `tools/ciqual_to_csv.py` depuis le fichier officiel de l'ANSES (Ciqual 2020, Licence Ouverte Etalab 2.0) : aliments pour bébés retirés, énergie manquante calculée avec les coefficients du règlement UE 1169/2011.
+- Un aliment ou un plat déjà mangé n'est jamais effacé, seulement masqué : les repas passés le montrent encore.
 - Un exercice déjà utilisé n'est jamais effacé, seulement masqué de la bibliothèque, pour que les anciennes séances le montrent encore.
 - Comparaison des séries : 1RM estimé pour les séries chargées (plafonné à 12 répétitions), répétitions sinon, durée pour les exercices chronométrés.
 - **Format de sauvegarde** (`Fonte.Core/Backup`) : une archive tar (`data.json`, puis `photos/<fichier>`) chiffrée en flux, pour que les photos ne passent jamais entièrement en mémoire. Clé dérivée du mot de passe par PBKDF2-HMAC-SHA256 (600 000 itérations, sel aléatoire de 16 octets, mot de passe normalisé NFC), puis morceaux de 64 Kio scellés chacun par AES-256-GCM, avec l'en-tête en données associées et le numéro du morceau dans le nonce ; le dernier est marqué et plus court (construction STREAM). Un morceau modifié, déplacé, ajouté ou retiré est refusé. Un mauvais mot de passe échoue dès le premier morceau ; un fichier abîmé plus loin est signalé comme tel. Le mot de passe n'est stocké nulle part : perdu, la sauvegarde est irrécupérable. Les dates restent à l'heure locale où elles ont été notées, sans fuseau. La restauration garde les identifiants des lignes. Le chiffrement passe uniquement par les fonctions cryptographiques du système (CryptoKit et CommonCrypto sur iPhone et Mac) : l'Info.plist iOS garde `ITSAppUsesNonExemptEncryption = false`.
@@ -90,7 +101,7 @@ La base technique (contrôles, feuilles sur Mac, localisation, raccourcis clavie
 
 Les textes sont dans `src/Fonte/Resources/Strings/` : `AppResources.resx` (anglais, langue par défaut), `AppResources.fr.resx` et `AppResources.nl.resx`.
 - En XAML : `Text="{l:Tr Home_Start}"` ; en C# : `Loc.Get("Home_Start")` ou `Loc.Format("Picker_Add", n)`.
-- Noms construits à l'exécution : exercices intégrés `Ex_<clé>` et leurs conseils `Tip_<clé>`, programmes `Program_*` / `ProgramText_*`, séances types `Template_*`, objectifs `Goal_*` / `GoalText_*`, mensurations `Measure_*`, groupes `Muscle_*`, matériel `Equipment_*`, saisie `Tracking_*`, erreurs `Error_*` (codes `FonteError` de `Fonte.Core`).
+- Noms construits à l'exécution : exercices intégrés `Ex_<clé>` et leurs conseils `Tip_<clé>`, programmes `Program_*` / `ProgramText_*`, séances types `Template_*`, objectifs `Goal_*` / `GoalText_*`, mensurations `Measure_*`, groupes `Muscle_*`, matériel `Equipment_*`, saisie `Tracking_*`, erreurs `Error_*` (codes `FonteError` de `Fonte.Core`), repas `Meal_*`, sexe `Sex_*`, activité `Activity_*`, objectif de poids `WeightGoal_*`, listes d'aliments `FoodShelf_*`.
 - Les tests `TranslationTests` échouent si une langue n'a pas les mêmes clés ou les mêmes `{0}`, si une clé utilisée n'existe pas, si une clé n'est plus utilisée, ou s'il manque le nom ou le conseil d'un exercice, le nom d'un programme, d'une séance type, d'un objectif, d'une mensuration, d'un groupe, d'un matériel ou d'une erreur.
 
 ## Lancer l'app
@@ -114,6 +125,12 @@ dotnet build src/Fonte -t:Run -f net10.0-maccatalyst
 ```
 
 Sur un vrai iPhone, un compte Apple Developer est nécessaire pour signer l'app. Avec Xcode 27, tant que le SDK .NET pour iOS ne le reconnaît pas officiellement, ajouter `-p:ValidateXcodeVersion=false` aux commandes iOS et Mac. Sur Mac, les feuilles s'affichent en carte centrée et `Échap` les ferme, comme dans Poches.
+
+## Données nutritionnelles
+
+- **Ciqual 2020**, ANSES, Table de composition nutritionnelle des aliments, sous Licence Ouverte / Open Licence 2.0 (Etalab).
+- **Open Food Facts** (openfoodfacts.org), base collaborative sous Open Database License (ODbL) ; requêtes envoyées avec l'agent `Fonte/<version>`.
+- Les objectifs sont des estimations (Mifflin-St Jeor) et l'app le dit ; ce n'est pas un avis médical.
 
 ## Idées pour la suite
 

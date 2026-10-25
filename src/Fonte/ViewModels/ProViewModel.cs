@@ -20,6 +20,7 @@ public sealed partial class ProViewModel : ObservableObject, ISheetViewModel
         Features =
         [
             new("📈", "#261D9E75", Loc.Get("Pro_ProgressionTitle"), Loc.Get("Pro_ProgressionText")),
+            new("🥗", "#26639922", Loc.Get("Pro_NutritionTitle"), Loc.Get("Pro_NutritionText")),
             new("🗓️", "#26534AB7", Loc.Get("Pro_ProgramsTitle"), Loc.Get("Pro_ProgramsText")),
             new("📊", "#26378ADD", Loc.Get("Pro_ProgressTitle"), Loc.Get("Pro_ProgressText")),
             new("📏", "#26D4537E", Loc.Get("Pro_BodyTitle"), Loc.Get("Pro_BodyText")),

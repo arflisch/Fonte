@@ -115,6 +115,9 @@ public sealed partial class ProgramsViewModel(
     }
 
     [RelayCommand]
+    private Task OpenLibraryAsync() => Shell.Current.GoToAsync(Routes.Library);
+
+    [RelayCommand]
     private async Task NewProgramAsync()
     {
         if (!await pro.EnsureUnlockedAsync(dialogs, Loc.Get("Programs_NewProgram"), Loc.Get("Programs_OwnProgramPro")))

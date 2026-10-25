@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true" android:label="Fonte"></application>
-	<!-- Everything stays on the device: no network permission is needed. -->
+	<!-- Only to look up a scanned barcode on Open Food Facts; everything else stays on the device. -->
+	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.VIBRATE" />
 	<!-- "Rest is over" alert while the phone is locked (asked at runtime on Android 13+). -->
 	<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />

@@ -1807,4 +1807,457 @@ Alles op dit apparaat wordt vervangen, behalve de foto's: die blijven bewaard.</
   <data name="Error_InvalidRpe" xml:space="preserve">
     <value>De RPE gaat van 1 tot 10.</value>
   </data>
+  <data name="Tab_Nutrition" xml:space="preserve">
+    <value>Voeding</value>
+  </data>
+  <data name="Common_More" xml:space="preserve">
+    <value>Meer</value>
+  </data>
+  <data name="Meal_Breakfast" xml:space="preserve">
+    <value>Ontbijt</value>
+  </data>
+  <data name="Meal_Lunch" xml:space="preserve">
+    <value>Lunch</value>
+  </data>
+  <data name="Meal_Dinner" xml:space="preserve">
+    <value>Avondeten</value>
+  </data>
+  <data name="Meal_Snack" xml:space="preserve">
+    <value>Tussendoortjes</value>
+  </data>
+  <data name="Sex_Female" xml:space="preserve">
+    <value>Vrouw</value>
+  </data>
+  <data name="Sex_Male" xml:space="preserve">
+    <value>Man</value>
+  </data>
+  <data name="Activity_Sedentary" xml:space="preserve">
+    <value>Zittend · bureauwerk, weinig wandelen</value>
+  </data>
+  <data name="Activity_Light" xml:space="preserve">
+    <value>Licht actief · 1–3 trainingen per week</value>
+  </data>
+  <data name="Activity_Moderate" xml:space="preserve">
+    <value>Actief · 3–5 trainingen per week</value>
+  </data>
+  <data name="Activity_Active" xml:space="preserve">
+    <value>Zeer actief · 6–7 trainingen per week</value>
+  </data>
+  <data name="Activity_VeryActive" xml:space="preserve">
+    <value>Atleet · fysiek werk en dagelijkse training</value>
+  </data>
+  <data name="WeightGoal_Lose" xml:space="preserve">
+    <value>Afvallen</value>
+  </data>
+  <data name="WeightGoal_Maintain" xml:space="preserve">
+    <value>Behouden</value>
+  </data>
+  <data name="WeightGoal_Gain" xml:space="preserve">
+    <value>Aankomen</value>
+  </data>
+  <data name="FoodShelf_Recent" xml:space="preserve">
+    <value>Recent</value>
+  </data>
+  <data name="FoodShelf_Favorites" xml:space="preserve">
+    <value>Favorieten</value>
+  </data>
+  <data name="FoodShelf_Own" xml:space="preserve">
+    <value>Mijn voeding</value>
+  </data>
+  <data name="FoodShelf_RecentEmpty" xml:space="preserve">
+    <value>Wat je eet, verschijnt hier. Zoek hierboven tussen meer dan 3.000 voedingsmiddelen, of scan een barcode.</value>
+  </data>
+  <data name="FoodShelf_FavoritesEmpty" xml:space="preserve">
+    <value>Tik op de ster van een voedingsmiddel om het hier terug te vinden.</value>
+  </data>
+  <data name="FoodShelf_OwnEmpty" xml:space="preserve">
+    <value>Je eigen voeding, gescande producten en gerechten verschijnen hier.</value>
+  </data>
+  <data name="Error_FoodNotFound" xml:space="preserve">
+    <value>Dit voedingsmiddel bestaat niet meer.</value>
+  </data>
+  <data name="Error_InvalidFood" xml:space="preserve">
+    <value>Deze waarden lijken niet te kloppen: hoogstens 950 kcal en 100 g voedingsstoffen per 100 g.</value>
+  </data>
+  <data name="Error_InvalidQuantity" xml:space="preserve">
+    <value>Geef een hoeveelheid tussen 1 g en 5 kg.</value>
+  </data>
+  <data name="Error_EmptyRecipe" xml:space="preserve">
+    <value>Voeg minstens één ingrediënt toe.</value>
+  </data>
+  <data name="Scan_Hint" xml:space="preserve">
+    <value>Richt de camera op de barcode</value>
+  </data>
+  <data name="Nutrition_Goal" xml:space="preserve">
+    <value>Mijn doelen</value>
+  </data>
+  <data name="Nutrition_LockedTitle" xml:space="preserve">
+    <value>Volg wat je eet</value>
+  </data>
+  <data name="Nutrition_LockedText" xml:space="preserve">
+    <value>Calorieën en macro's afgestemd op je doel, met Fonte Pro.</value>
+  </data>
+  <data name="Nutrition_LockedPoint1" xml:space="preserve">
+    <value>🎯  Een dagdoel berekend op je profiel, om af te vallen, op gewicht te blijven of aan te komen</value>
+  </data>
+  <data name="Nutrition_LockedPoint2" xml:space="preserve">
+    <value>🥗  Meer dan 3.000 voedingsmiddelen offline, plus barcodes scannen</value>
+  </data>
+  <data name="Nutrition_LockedPoint3" xml:space="preserve">
+    <value>🍲  Je eigen voeding, gerechten en favorieten; kopieer de maaltijd van gisteren met één tik</value>
+  </data>
+  <data name="Nutrition_LockedPoint4" xml:space="preserve">
+    <value>💧  Water, eiwitten, koolhydraten en vetten, gesynchroniseerd met Apple Gezondheid</value>
+  </data>
+  <data name="Nutrition_PreviousDay" xml:space="preserve">
+    <value>Vorige dag</value>
+  </data>
+  <data name="Nutrition_NextDay" xml:space="preserve">
+    <value>Volgende dag</value>
+  </data>
+  <data name="Nutrition_BackToToday" xml:space="preserve">
+    <value>Terug naar vandaag</value>
+  </data>
+  <data name="Nutrition_Remaining" xml:space="preserve">
+    <value>Resterend</value>
+  </data>
+  <data name="Nutrition_Over" xml:space="preserve">
+    <value>Boven je doel</value>
+  </data>
+  <data name="Nutrition_Eaten" xml:space="preserve">
+    <value>Gegeten</value>
+  </data>
+  <data name="Nutrition_Target" xml:space="preserve">
+    <value>Doel</value>
+  </data>
+  <data name="Nutrition_Active" xml:space="preserve">
+    <value>Activiteit</value>
+  </data>
+  <data name="Nutrition_SetUp" xml:space="preserve">
+    <value>Mijn caloriedoel instellen</value>
+  </data>
+  <data name="Nutrition_Protein" xml:space="preserve">
+    <value>Eiwitten</value>
+  </data>
+  <data name="Nutrition_Carbs" xml:space="preserve">
+    <value>Koolhydraten</value>
+  </data>
+  <data name="Nutrition_Fat" xml:space="preserve">
+    <value>Vetten</value>
+  </data>
+  <data name="Nutrition_MealEmpty" xml:space="preserve">
+    <value>Nog niets</value>
+  </data>
+  <data name="Nutrition_MacrosShort" xml:space="preserve">
+    <value>E {0} g · K {1} g · V {2} g</value>
+  </data>
+  <data name="Nutrition_AddFood" xml:space="preserve">
+    <value>Voeding toevoegen</value>
+  </data>
+  <data name="Nutrition_CopyYesterday" xml:space="preserve">
+    <value>Die van gisteren kopiëren</value>
+  </data>
+  <data name="Nutrition_ClearMeal" xml:space="preserve">
+    <value>Deze maaltijd leegmaken</value>
+  </data>
+  <data name="Nutrition_NothingYesterday" xml:space="preserve">
+    <value>Er werd de dag ervoor niets genoteerd voor deze maaltijd.</value>
+  </data>
+  <data name="Nutrition_Water" xml:space="preserve">
+    <value>Water</value>
+  </data>
+  <data name="Nutrition_WaterValue" xml:space="preserve">
+    <value>{0} L van {1} L</value>
+  </data>
+  <data name="Nutrition_AddWater" xml:space="preserve">
+    <value>Een glas water toevoegen</value>
+  </data>
+  <data name="Nutrition_RemoveWater" xml:space="preserve">
+    <value>Laatste glas verwijderen</value>
+  </data>
+  <data name="Nutrition_Week" xml:space="preserve">
+    <value>Laatste 7 dagen</value>
+  </data>
+  <data name="Nutrition_WeekEmpty" xml:space="preserve">
+    <value>Deze week nog niets genoteerd.</value>
+  </data>
+  <data name="Nutrition_WeekAverage" xml:space="preserve">
+    <value>Gemiddelde van de genoteerde dagen: {0} · doel {1}</value>
+  </data>
+  <data name="Nutrition_Sources" xml:space="preserve">
+    <value>Voeding: Ciqual 2020-tabel van ANSES (Licence Ouverte) en Open Food Facts (ODbL). Schattingen, geen medisch advies.</value>
+  </data>
+  <data name="Nutrition_DailyTarget" xml:space="preserve">
+    <value>Dagdoel</value>
+  </data>
+  <data name="Nutrition_GoalDetail" xml:space="preserve">
+    <value>Basaal metabolisme {0} · onderhoud {1}</value>
+  </data>
+  <data name="Nutrition_GoalMacros" xml:space="preserve">
+    <value>Eiwitten {0} g · Koolhydraten {1} g · Vetten {2} g</value>
+  </data>
+  <data name="Nutrition_GoalDate" xml:space="preserve">
+    <value>{0} rond {1}</value>
+  </data>
+  <data name="Nutrition_Floored" xml:space="preserve">
+    <value>Op een veilig minimum gehouden: voor een sneller tempo, praat met een professional.</value>
+  </data>
+  <data name="Nutrition_GoalQuestion" xml:space="preserve">
+    <value>Je doel</value>
+  </data>
+  <data name="Nutrition_PerWeek" xml:space="preserve">
+    <value>{0} / week</value>
+  </data>
+  <data name="Nutrition_Sex" xml:space="preserve">
+    <value>Geslacht (voor de energieformule)</value>
+  </data>
+  <data name="Nutrition_BirthYear" xml:space="preserve">
+    <value>Geboren in</value>
+  </data>
+  <data name="Nutrition_Height" xml:space="preserve">
+    <value>Lengte (cm)</value>
+  </data>
+  <data name="Nutrition_Weight" xml:space="preserve">
+    <value>Gewicht (kg)</value>
+  </data>
+  <data name="Nutrition_Activity" xml:space="preserve">
+    <value>Activiteit</value>
+  </data>
+  <data name="Nutrition_ProteinQuestion" xml:space="preserve">
+    <value>Eiwitten</value>
+  </data>
+  <data name="Nutrition_ProteinRate" xml:space="preserve">
+    <value>{0} g/kg</value>
+  </data>
+  <data name="Nutrition_ProteinHint" xml:space="preserve">
+    <value>1,6 g per kg lichaamsgewicht past bij de meeste sporters; 2 g helpt spieren te behouden tijdens het afvallen.</value>
+  </data>
+  <data name="Nutrition_WaterGoal" xml:space="preserve">
+    <value>Water per dag</value>
+  </data>
+  <data name="Nutrition_CountActive" xml:space="preserve">
+    <value>Mijn activiteit optellen</value>
+  </data>
+  <data name="Nutrition_CountActiveHint" xml:space="preserve">
+    <value>De actieve calorieën uit Apple Gezondheid verhogen het dagbudget.</value>
+  </data>
+  <data name="Nutrition_GoalIncomplete" xml:space="preserve">
+    <value>Vul je geboortejaar, lengte en gewicht in.</value>
+  </data>
+  <data name="Nutrition_GoalSaved" xml:space="preserve">
+    <value>Doelen opgeslagen</value>
+  </data>
+  <data name="Nutrition_Disclaimer" xml:space="preserve">
+    <value>Schattingen volgens de formule van Mifflin-St Jeor. Zwanger, borstvoeding of onder medische begeleiding? Vraag eerst raad aan een professional.</value>
+  </data>
+  <data name="FoodSearch_Placeholder" xml:space="preserve">
+    <value>Zoek een voedingsmiddel</value>
+  </data>
+  <data name="FoodSearch_Scan" xml:space="preserve">
+    <value>Barcode scannen</value>
+  </data>
+  <data name="FoodSearch_CreateFood" xml:space="preserve">
+    <value>Voeding aanmaken</value>
+  </data>
+  <data name="FoodSearch_CreateDish" xml:space="preserve">
+    <value>Gerecht aanmaken</value>
+  </data>
+  <data name="FoodSearch_NoResult" xml:space="preserve">
+    <value>Niets gevonden. Probeer hieronder online te zoeken, of maak het voedingsmiddel aan.</value>
+  </data>
+  <data name="FoodSearch_Online" xml:space="preserve">
+    <value>“{0}” zoeken op Open Food Facts</value>
+  </data>
+  <data name="FoodSearch_OffCredit" xml:space="preserve">
+    <value>Producten van Open Food Facts, een gezamenlijke databank (ODbL): controleer de waarden op de verpakking.</value>
+  </data>
+  <data name="FoodSearch_OfflineTitle" xml:space="preserve">
+    <value>Geen verbinding</value>
+  </data>
+  <data name="FoodSearch_OfflineText" xml:space="preserve">
+    <value>Online zoeken heeft internet nodig. De 3.000 voedingsmiddelen van de ingebouwde tabel werken ook offline.</value>
+  </data>
+  <data name="FoodSearch_ScanTitle" xml:space="preserve">
+    <value>Product niet gevonden</value>
+  </data>
+  <data name="FoodSearch_ScanUnknown" xml:space="preserve">
+    <value>Deze barcode staat nog niet op Open Food Facts. Maak het voedingsmiddel aan met het etiket: de volgende keer vindt de scan het.</value>
+  </data>
+  <data name="FoodSearch_ScanOffline" xml:space="preserve">
+    <value>Geen verbinding om de barcode op te zoeken. Maak het voedingsmiddel aan met het etiket, of probeer later opnieuw.</value>
+  </data>
+  <data name="FoodSearch_Dish" xml:space="preserve">
+    <value>Gerecht</value>
+  </data>
+  <data name="FoodSearch_Per100" xml:space="preserve">
+    <value>{0} per 100 g</value>
+  </data>
+  <data name="FoodSearch_Portion" xml:space="preserve">
+    <value>portie {0}</value>
+  </data>
+  <data name="FoodEntry_Quantity" xml:space="preserve">
+    <value>Hoeveelheid</value>
+  </data>
+  <data name="FoodEntry_Serving" xml:space="preserve">
+    <value>portie</value>
+  </data>
+  <data name="FoodEntry_Portion" xml:space="preserve">
+    <value>portie</value>
+  </data>
+  <data name="FoodEntry_Meal" xml:space="preserve">
+    <value>Maaltijd</value>
+  </data>
+  <data name="FoodEntry_Add" xml:space="preserve">
+    <value>Toevoegen</value>
+  </data>
+  <data name="FoodEntry_AddToDish" xml:space="preserve">
+    <value>Aan het gerecht toevoegen</value>
+  </data>
+  <data name="FoodEntry_Added" xml:space="preserve">
+    <value>Toegevoegd aan {0}</value>
+  </data>
+  <data name="FoodEntry_Favorite" xml:space="preserve">
+    <value>Favoriet</value>
+  </data>
+  <data name="FoodEntry_Sugars" xml:space="preserve">
+    <value>suikers {0}</value>
+  </data>
+  <data name="FoodEntry_Fiber" xml:space="preserve">
+    <value>vezels {0}</value>
+  </data>
+  <data name="FoodEntry_Salt" xml:space="preserve">
+    <value>zout {0}</value>
+  </data>
+  <data name="FoodEntry_Delete" xml:space="preserve">
+    <value>Verwijderen</value>
+  </data>
+  <data name="FoodEntry_DeleteConfirm" xml:space="preserve">
+    <value>Dit voedingsmiddel uit de maaltijd verwijderen?</value>
+  </data>
+  <data name="FoodEntry_EditFood" xml:space="preserve">
+    <value>Voeding bewerken</value>
+  </data>
+  <data name="FoodEntry_EditDish" xml:space="preserve">
+    <value>Gerecht bewerken</value>
+  </data>
+  <data name="CustomFood_New" xml:space="preserve">
+    <value>Nieuwe voeding</value>
+  </data>
+  <data name="CustomFood_Edit" xml:space="preserve">
+    <value>Voeding bewerken</value>
+  </data>
+  <data name="CustomFood_Name" xml:space="preserve">
+    <value>Naam</value>
+  </data>
+  <data name="CustomFood_NamePlaceholder" xml:space="preserve">
+    <value>bv. Eiwityoghurt</value>
+  </data>
+  <data name="CustomFood_Brand" xml:space="preserve">
+    <value>Merk</value>
+  </data>
+  <data name="CustomFood_Optional" xml:space="preserve">
+    <value>Optioneel</value>
+  </data>
+  <data name="CustomFood_Barcode" xml:space="preserve">
+    <value>Barcode {0}</value>
+  </data>
+  <data name="CustomFood_Per100" xml:space="preserve">
+    <value>Per 100 g</value>
+  </data>
+  <data name="CustomFood_Kcal" xml:space="preserve">
+    <value>Energie (kcal)</value>
+  </data>
+  <data name="CustomFood_Sugars" xml:space="preserve">
+    <value>Suikers</value>
+  </data>
+  <data name="CustomFood_Fiber" xml:space="preserve">
+    <value>Vezels</value>
+  </data>
+  <data name="CustomFood_Salt" xml:space="preserve">
+    <value>Zout</value>
+  </data>
+  <data name="CustomFood_KcalHint" xml:space="preserve">
+    <value>Neem de waarden per 100 g over van het etiket. Leeg gelaten, wordt de energie berekend uit de macro's.</value>
+  </data>
+  <data name="CustomFood_Serving" xml:space="preserve">
+    <value>Gebruikelijke portie</value>
+  </data>
+  <data name="CustomFood_ServingName" xml:space="preserve">
+    <value>Naam</value>
+  </data>
+  <data name="CustomFood_ServingNamePlaceholder" xml:space="preserve">
+    <value>bv. potje</value>
+  </data>
+  <data name="CustomFood_ServingGrams" xml:space="preserve">
+    <value>Gewicht (g)</value>
+  </data>
+  <data name="CustomFood_NeedsEnergy" xml:space="preserve">
+    <value>Geef de energie in, of de eiwitten, koolhydraten en vetten.</value>
+  </data>
+  <data name="CustomFood_Saved" xml:space="preserve">
+    <value>Voeding opgeslagen</value>
+  </data>
+  <data name="CustomFood_Remove" xml:space="preserve">
+    <value>Verwijderen</value>
+  </data>
+  <data name="CustomFood_RemoveConfirm" xml:space="preserve">
+    <value>Het verdwijnt uit de zoekresultaten; eerdere maaltijden behouden het.</value>
+  </data>
+  <data name="Recipe_New" xml:space="preserve">
+    <value>Nieuw gerecht</value>
+  </data>
+  <data name="Recipe_Edit" xml:space="preserve">
+    <value>Gerecht bewerken</value>
+  </data>
+  <data name="Recipe_Name" xml:space="preserve">
+    <value>Naam</value>
+  </data>
+  <data name="Recipe_NamePlaceholder" xml:space="preserve">
+    <value>bv. Kipcurry</value>
+  </data>
+  <data name="Recipe_Ingredients" xml:space="preserve">
+    <value>Ingrediënten (rauw gewicht)</value>
+  </data>
+  <data name="Recipe_AddIngredient" xml:space="preserve">
+    <value>Ingrediënt toevoegen</value>
+  </data>
+  <data name="Recipe_ChangeQuantity" xml:space="preserve">
+    <value>Hoeveelheid wijzigen</value>
+  </data>
+  <data name="Recipe_RemoveIngredient" xml:space="preserve">
+    <value>Verwijderen</value>
+  </data>
+  <data name="Recipe_QuantityPrompt" xml:space="preserve">
+    <value>Hoeveelheid in gram</value>
+  </data>
+  <data name="Recipe_Servings" xml:space="preserve">
+    <value>{0} porties</value>
+  </data>
+  <data name="Recipe_Cooked" xml:space="preserve">
+    <value>Gewicht na het koken (g)</value>
+  </data>
+  <data name="Recipe_CookedHint" xml:space="preserve">
+    <value>Optioneel: weeg de inhoud van de pan zonder de pan, zodat een later gewogen portie klopt.</value>
+  </data>
+  <data name="Recipe_Total" xml:space="preserve">
+    <value>Totaal {0} voor {1}</value>
+  </data>
+  <data name="Recipe_Portion" xml:space="preserve">
+    <value>Eén portie: {0} · {1}</value>
+  </data>
+  <data name="Recipe_RawWeight" xml:space="preserve">
+    <value>Rauwe ingrediënten: {0}</value>
+  </data>
+  <data name="Recipe_Saved" xml:space="preserve">
+    <value>Gerecht opgeslagen</value>
+  </data>
+  <data name="Recipe_Remove" xml:space="preserve">
+    <value>Gerecht verwijderen</value>
+  </data>
+  <data name="Pro_NutritionTitle" xml:space="preserve">
+    <value>Voeding</value>
+  </data>
+  <data name="Pro_NutritionText" xml:space="preserve">
+    <value>Calorieën en macro's voor je doel, 3.000 voedingsmiddelen offline, barcodes scannen, gerechten en water</value>
+  </data>
 </root>

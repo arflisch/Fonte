@@ -104,6 +104,7 @@ public sealed partial class FonteStore(string databasePath) : IAsyncDisposable
             _connection = null;
         }
         _initLock.Dispose();
+        _catalogLock.Dispose();
     }
 
     private async Task<SQLiteAsyncConnection> GetConnectionAsync()
@@ -124,6 +125,7 @@ public sealed partial class FonteStore(string databasePath) : IAsyncDisposable
                 await connection.CreateTablesAsync<Exercise, Workout, WorkoutExercise, WorkoutSet>();
                 await connection.CreateTablesAsync<TrainingProgram, WorkoutTemplate, TemplateExercise>();
                 await connection.CreateTablesAsync<BodyWeight, BodyMeasurement, BodyPhoto>();
+                await connection.CreateTablesAsync<Food, FoodEntry, RecipeIngredient, WaterEntry>();
                 await AddMissingCatalogExercisesAsync(connection);
                 _connection = connection;
             }

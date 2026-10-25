@@ -3,6 +3,7 @@ using System.Text;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Fonte.Controls;
+using Fonte.Core;
 using Fonte.Core.Models;
 using Fonte.Core.Training;
 using Fonte.Localization;
@@ -136,21 +137,5 @@ public sealed class ExerciseFilter
         Equipment = selected && Enum.TryParse<Equipment>(chip.Value, out var equipment) ? equipment : null;
         Palette.Haptic();
         _changed();
-    }
-}
-
-internal static class TextSearch
-{
-    /// <summary>Lower case without accents, so "developpe" finds "Développé couché".</summary>
-    public static string Normalize(string text)
-    {
-        var decomposed = text.ToLowerInvariant().Normalize(NormalizationForm.FormD);
-        var builder = new StringBuilder(decomposed.Length);
-        foreach (var c in decomposed)
-        {
-            if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
-                builder.Append(c);
-        }
-        return builder.ToString().Normalize(NormalizationForm.FormC);
     }
 }

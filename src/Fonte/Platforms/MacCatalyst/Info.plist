@@ -25,7 +25,7 @@
 		<string>nl</string>
 	</array>
 	<key>NSCameraUsageDescription</key>
-	<string>Fonte uses the camera to take your progress photos. They stay on your Mac.</string>
+	<string>Fonte uses the camera to take your progress photos, which stay on your Mac, and to scan the barcode of a food.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Fonte lets you pick progress photos from your library. They are copied into the app and stay on your Mac.</string>
 	<key>NSFaceIDUsageDescription</key>

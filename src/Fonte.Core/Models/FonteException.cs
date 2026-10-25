@@ -17,6 +17,10 @@ public enum FonteError
     BackupWrongPassword,
     BackupDamaged,
     InvalidRpe,
+    FoodNotFound,
+    InvalidFood,
+    InvalidQuantity,
+    EmptyRecipe,
 }
 
 public sealed class FonteException(FonteError error, string message) : Exception(message)

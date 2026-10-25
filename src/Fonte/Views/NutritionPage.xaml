@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fonte.Views.NutritionPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Fonte.Controls"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:vm="clr-namespace:Fonte.ViewModels"
+    x:DataType="vm:NutritionViewModel"
+    Shell.NavBarIsVisible="False"
+    SafeAreaEdges="None">
+
+    <ContentPage.Resources>
+        <Style x:Key="HeroValue" TargetType="Label">
+            <Setter Property="FontFamily" Value="OpenSansSemibold" />
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="TextColor" Value="White" />
+        </Style>
+        <Style x:Key="HeroLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="TextColor" Value="{StaticResource WhiteSoft}" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid SafeAreaEdges="Container,Container,Container,None" Style="{StaticResource PageColumn}">
+        <ScrollView SafeAreaEdges="None">
+            <VerticalStackLayout Padding="20,12,20,40" Spacing="18">
+
+                <!-- Header -->
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                    <Label Style="{StaticResource LargeTitle}" Text="{l:Tr Tab_Nutrition}" VerticalOptions="Center" />
+                    <Border
+                        Grid.Column="1"
+                        c:Touch.Command="{Binding OpenGoalCommand}"
+                        IsVisible="{Binding IsPro}"
+                        Style="{StaticResource IconButton}"
+                        VerticalOptions="Center"
+                        SemanticProperties.Description="{l:Tr Nutrition_Goal}">
+                        <c:IconView Color="{DynamicResource Accent}" Data="{x:Static c:Icons.Target}" />
+                    </Border>
+                </Grid>
+
+                <!-- Locked: what Fonte Pro brings -->
+                <VerticalStackLayout IsVisible="{Binding IsLocked}" Spacing="16">
+                    <Border
+                        Background="{DynamicResource HeroGradient}"
+                        Shadow="{DynamicResource FloatingShadow}"
+                        StrokeShape="RoundRectangle 26"
+                        StrokeThickness="0">
+                        <VerticalStackLayout Padding="22,24" Spacing="10">
+                            <Label FontSize="44" HorizontalOptions="Center" Text="🥗" />
+                            <Label
+                                FontFamily="OpenSansSemibold"
+                                FontSize="22"
+                                HorizontalTextAlignment="Center"
+                                Text="{l:Tr Nutrition_LockedTitle}"
+                                TextColor="White" />
+                            <Label
+                                FontSize="15"
+                                HorizontalTextAlignment="Center"
+                                Text="{l:Tr Nutrition_LockedText}"
+                                TextColor="{StaticResource WhiteSoft}" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Padding="18,16" Style="{StaticResource Card}">
+                        <VerticalStackLayout Spacing="12">
+                            <Label Text="{l:Tr Nutrition_LockedPoint1}" />
+                            <Label Text="{l:Tr Nutrition_LockedPoint2}" />
+                            <Label Text="{l:Tr Nutrition_LockedPoint3}" />
+                            <Label Text="{l:Tr Nutrition_LockedPoint4}" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border c:Touch.Command="{Binding OpenProCommand}" Style="{StaticResource PrimaryButton}">
+                        <Label Style="{StaticResource PrimaryButtonText}" Text="{l:Tr Pro_Discover}" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Unlocked -->
+                <VerticalStackLayout IsVisible="{Binding IsPro}" Spacing="18">
+
+                    <!-- Day -->
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                        <Border
+                            c:Touch.Command="{Binding PreviousDayCommand}"
+                            Style="{StaticResource IconButton}"
+                            SemanticProperties.Description="{l:Tr Nutrition_PreviousDay}">
+                            <c:IconView Color="{DynamicResource Accent}" Data="{x:Static c:Icons.ChevronLeft}" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                            <Label
+                                HorizontalTextAlignment="Center"
+                                Style="{StaticResource Strong}"
+                                Text="{Binding DateText}" />
+                            <Label
+                                c:Touch.Command="{Binding GoToTodayCommand}"
+                                FontSize="13"
+                                HorizontalTextAlignment="Center"
+                                IsVisible="{Binding IsToday, Converter={StaticResource InvertBool}}"
+                                Style="{StaticResource LinkLabel}"
+                                Text="{l:Tr Nutrition_BackToToday}" />
+                        </VerticalStackLayout>
+                        <Border
+                            Grid.Column="2"
+                            c:Touch.Command="{Binding NextDayCommand}"
+                            Opacity="0.3"
+                            Style="{StaticResource IconButton}"
+                            SemanticProperties.Description="{l:Tr Nutrition_NextDay}">
+                            <Border.Triggers>
+                                <DataTrigger Binding="{Binding CanGoNext}" TargetType="Border" Value="True">
+                                    <Setter Property="Opacity" Value="1" />
+                                </DataTrigger>
+                            </Border.Triggers>
+                            <c:IconView Color="{DynamicResource Accent}" Data="{x:Static c:Icons.ChevronRight}" />
+                        </Border>
+                    </Grid>
+
+                    <!-- Calories -->
+                    <Border
+                        Background="{DynamicResource HeroGradient}"
+                        Shadow="{DynamicResource FloatingShadow}"
+                        StrokeShape="RoundRectangle 26"
+                        StrokeThickness="0">
+                        <VerticalStackLayout Padding="22,20,22,18" Spacing="4">
+                            <Label
+                                FontFamily="OpenSansSemibold"
+                                FontSize="13"
+                                Text="{Binding RemainingLabel}"
+                                TextColor="{StaticResource WhiteSoft}" />
+                            <HorizontalStackLayout Spacing="6">
+                                <Label
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="40"
+                                    Text="{Binding RemainingText}"
+                                    TextColor="White" />
+                                <Label
+                                    Margin="0,0,0,9"
+                                    FontSize="16"
+                                    Text="kcal"
+                                    TextColor="{StaticResource WhiteSoft}"
+                                    VerticalOptions="End" />
+                            </HorizontalStackLayout>
+                            <c:ProgressPill
+                                Margin="0,6,0,10"
+                                FillColor="White"
+                                HeightRequest="8"
+                                Progress="{Binding CalorieProgress}"
+                                TrackColor="{StaticResource WhiteGlass}" />
+                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                                <VerticalStackLayout>
+                                    <Label Style="{StaticResource HeroValue}" Text="{Binding GoalText}" />
+                                    <Label Style="{StaticResource HeroLabel}" Text="{l:Tr Nutrition_Target}" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Grid.Column="1">
+                                    <Label Style="{StaticResource HeroValue}" Text="{Binding EatenText}" />
+                                    <Label Style="{StaticResource HeroLabel}" Text="{l:Tr Nutrition_Eaten}" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Grid.Column="2" IsVisible="{Binding ShowActive}">
+                                    <Label Style="{StaticResource HeroValue}" Text="{Binding ActiveText, StringFormat='+{0}'}" />
+                                    <Label Style="{StaticResource HeroLabel}" Text="{l:Tr Nutrition_Active}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                            <!-- No target yet -->
+                            <Border
+                                Margin="0,12,0,0"
+                                Padding="14,10"
+                                c:Touch.Command="{Binding OpenGoalCommand}"
+                                BackgroundColor="{StaticResource WhiteGlass}"
+                                IsVisible="{Binding HasProfile, Converter={StaticResource InvertBool}}"
+                                StrokeShape="RoundRectangle 14"
+                                StrokeThickness="0">
+                                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                                    <c:IconView
+                                        Color="White"
+                                        Data="{x:Static c:Icons.Target}"
+                                        HeightRequest="18"
+                                        VerticalOptions="Center"
+                                        WidthRequest="18" />
+                                    <Label
+                                        Grid.Column="1"
+                                        FontFamily="OpenSansSemibold"
+                                        FontSize="14"
+                                        Text="{l:Tr Nutrition_SetUp}"
+                                        TextColor="White"
+                                        VerticalOptions="Center" />
+                                    <c:IconView
+                                        Grid.Column="2"
+                                        Color="White"
+                                        Data="{x:Static c:Icons.ChevronRight}"
+                                        HeightRequest="16"
+                                        VerticalOptions="Center"
+                                        WidthRequest="16" />
+                                </Grid>
+                            </Border>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Macros -->
+                    <Border Padding="16,14" Style="{StaticResource Card}">
+                        <Grid
+                            BindableLayout.ItemsSource="{Binding Macros}"
+                            ColumnDefinitions="*,*,*"
+                            ColumnSpacing="14"
+                            x:Name="MacrosGrid">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:MacroItem">
+                                    <VerticalStackLayout Spacing="6">
+                                        <Label Style="{StaticResource Caption}" Text="{Binding Name}" />
+                                        <c:ProgressPill
+                                            FillColor="{Binding Color}"
+                                            HeightRequest="6"
+                                            Progress="{Binding Progress}"
+                                            TrackColor="{Binding TrackColor}" />
+                                        <Label
+                                            FontFamily="OpenSansSemibold"
+                                            FontSize="13"
+                                            LineBreakMode="NoWrap"
+                                            Text="{Binding ValueText}" />
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </Grid>
+                    </Border>
+
+                    <!-- Meals -->
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Meals}" Spacing="12">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:MealCardViewModel">
+                                <Border Padding="16,12,16,8" Style="{StaticResource Card}">
+                                    <VerticalStackLayout Spacing="2">
+                                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10">
+                                            <Label FontSize="22" Text="{Binding Emoji}" VerticalOptions="Center" />
+                                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                                <Label Style="{StaticResource Strong}" Text="{Binding Name}" />
+                                                <Label Style="{StaticResource Caption}" Text="{Binding MacrosText}" />
+                                            </VerticalStackLayout>
+                                            <Label
+                                                Grid.Column="2"
+                                                FontFamily="OpenSansSemibold"
+                                                Text="{Binding KcalText}"
+                                                VerticalOptions="Center" />
+                                            <Border
+                                                Grid.Column="3"
+                                                Padding="8"
+                                                c:Touch.Command="{Binding MenuCommand}"
+                                                HeightRequest="36"
+                                                StrokeThickness="0"
+                                                VerticalOptions="Center"
+                                                WidthRequest="36"
+                                                SemanticProperties.Description="{l:Tr Common_More}">
+                                                <c:IconView
+                                                    Color="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"
+                                                    Data="{x:Static c:Icons.More}" />
+                                            </Border>
+                                        </Grid>
+                                        <VerticalStackLayout
+                                            Margin="0,6,0,0"
+                                            BindableLayout.ItemsSource="{Binding Foods}"
+                                            IsVisible="{Binding HasFoods}">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate x:DataType="vm:LoggedFoodItem">
+                                                    <Grid Padding="0,8" c:Touch.Command="{Binding OpenCommand}" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                                        <VerticalStackLayout VerticalOptions="Center">
+                                                            <Label LineBreakMode="TailTruncation" Text="{Binding Name}" />
+                                                            <Label LineBreakMode="TailTruncation" Style="{StaticResource Caption}" Text="{Binding Detail}" />
+                                                        </VerticalStackLayout>
+                                                        <Label
+                                                            Grid.Column="1"
+                                                            Style="{StaticResource Secondary}"
+                                                            Text="{Binding KcalText}"
+                                                            VerticalOptions="Center" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </VerticalStackLayout>
+                                        <HorizontalStackLayout
+                                            Padding="0,8,0,6"
+                                            c:Touch.Command="{Binding AddCommand}"
+                                            Spacing="6">
+                                            <c:IconView
+                                                Color="{DynamicResource Accent}"
+                                                Data="{x:Static c:Icons.Plus}"
+                                                HeightRequest="16"
+                                                StrokeWidth="2.4"
+                                                VerticalOptions="Center"
+                                                WidthRequest="16" />
+                                            <Label Style="{StaticResource LinkLabel}" Text="{l:Tr Nutrition_AddFood}" VerticalOptions="Center" />
+                                        </HorizontalStackLayout>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+
+                    <!-- Water -->
+                    <Border Padding="16,14" Style="{StaticResource Card}">
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="12">
+                            <Border
+                                Padding="10"
+                                BackgroundColor="#26378ADD"
+                                HeightRequest="44"
+                                StrokeShape="RoundRectangle 14"
+                                StrokeThickness="0"
+                                VerticalOptions="Center"
+                                WidthRequest="44">
+                                <c:IconView Color="#378ADD" Data="{x:Static c:Icons.Drop}" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
+                                <Label Style="{StaticResource Strong}" Text="{l:Tr Nutrition_Water}" />
+                                <Label Style="{StaticResource Caption}" Text="{Binding WaterText}" />
+                                <c:ProgressPill
+                                    FillColor="#378ADD"
+                                    HeightRequest="5"
+                                    Progress="{Binding WaterProgress}"
+                                    TrackColor="#26378ADD" />
+                            </VerticalStackLayout>
+                            <Border
+                                Grid.Column="2"
+                                Padding="10"
+                                c:Touch.Command="{Binding RemoveWaterCommand}"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceMutedLight}, Dark={StaticResource SurfaceMutedDark}}"
+                                HeightRequest="40"
+                                StrokeShape="RoundRectangle 20"
+                                StrokeThickness="0"
+                                VerticalOptions="Center"
+                                WidthRequest="40"
+                                SemanticProperties.Description="{l:Tr Nutrition_RemoveWater}">
+                                <Label
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="20"
+                                    HorizontalOptions="Center"
+                                    Text="−"
+                                    VerticalOptions="Center" />
+                            </Border>
+                            <Border
+                                Grid.Column="3"
+                                Padding="0,0"
+                                c:Touch.Command="{Binding AddWaterCommand}"
+                                BackgroundColor="#378ADD"
+                                HeightRequest="40"
+                                StrokeShape="RoundRectangle 20"
+                                StrokeThickness="0"
+                                VerticalOptions="Center"
+                                WidthRequest="76"
+                                SemanticProperties.Description="{l:Tr Nutrition_AddWater}">
+                                <Label
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="14"
+                                    HorizontalOptions="Center"
+                                    Text="+250 ml"
+                                    TextColor="White"
+                                    VerticalOptions="Center" />
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <!-- Last 7 days -->
+                    <VerticalStackLayout Spacing="12">
+                        <Label Style="{StaticResource SectionTitle}" Text="{l:Tr Nutrition_Week}" />
+                        <Border Padding="16,14" Style="{StaticResource Card}">
+                            <VerticalStackLayout Spacing="10">
+                                <c:BarChartView
+                                    HeightRequest="120"
+                                    LabelColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"
+                                    Labels="{Binding WeekLabels}"
+                                    PositiveColor="{DynamicResource Accent}"
+                                    Target="{Binding WeekTarget}"
+                                    Values="{Binding Week}" />
+                                <Label Style="{StaticResource Caption}" Text="{Binding WeekText}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <Label FontSize="12" Style="{StaticResource Caption}" Text="{l:Tr Nutrition_Sources}" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

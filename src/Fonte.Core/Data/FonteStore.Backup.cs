@@ -23,6 +23,10 @@ public sealed partial class FonteStore
             BodyWeights = conn.Table<BodyWeight>().ToList(),
             Measurements = conn.Table<BodyMeasurement>().ToList(),
             Photos = includePhotos ? conn.Table<BodyPhoto>().ToList() : null,
+            Foods = conn.Table<Food>().ToList(),
+            FoodEntries = conn.Table<FoodEntry>().ToList(),
+            RecipeIngredients = conn.Table<RecipeIngredient>().ToList(),
+            Water = conn.Table<WaterEntry>().ToList(),
         });
         return data!;
     }
@@ -47,6 +51,10 @@ public sealed partial class FonteStore
             conn.DeleteAll<BodyMeasurement>();
             if (data.Photos is not null)
                 conn.DeleteAll<BodyPhoto>();
+            conn.DeleteAll<WaterEntry>();
+            conn.DeleteAll<FoodEntry>();
+            conn.DeleteAll<RecipeIngredient>();
+            conn.DeleteAll<Food>();
 
             Insert(conn, data.Exercises);
             Insert(conn, data.Workouts);
@@ -59,7 +67,13 @@ public sealed partial class FonteStore
             Insert(conn, data.Measurements);
             if (data.Photos is not null)
                 Insert(conn, data.Photos);
+            Insert(conn, data.Foods);
+            Insert(conn, data.FoodEntries);
+            Insert(conn, data.RecipeIngredients);
+            Insert(conn, data.Water);
         });
+        // A backup made before nutrition tracking has no foods: the CIQUAL table is loaded again when needed.
+        _catalogReady = false;
 
         // A backup made by an older version lacks the exercises added to the catalog since.
         await AddMissingCatalogExercisesAsync(db);

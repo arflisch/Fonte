@@ -6,7 +6,7 @@ using Fonte.Services;
 
 namespace Fonte.ViewModels;
 
-/// <summary>The exercise library: every exercise with its record, searchable and filtered by muscle group.</summary>
+/// <summary>The exercise library (opened from the programs): every exercise with its record, searchable and filtered by muscle group.</summary>
 public sealed partial class ExercisesViewModel : ReloadingViewModel
 {
     private readonly FonteStore _store;
@@ -66,4 +66,7 @@ public sealed partial class ExercisesViewModel : ReloadingViewModel
 
     [RelayCommand]
     private Task NewExerciseAsync() => Shell.Current.GoToAsync(Routes.EditExercise);
+
+    [RelayCommand]
+    private Task GoBackAsync() => Shell.Current.GoToAsync("..");
 }

@@ -52,16 +52,16 @@
 	</dict>
 	<!-- Progress photos: taken with the camera or picked from the library, kept in the app, behind Face ID. -->
 	<key>NSCameraUsageDescription</key>
-	<string>Fonte uses the camera to take your progress photos. They stay on your phone.</string>
+	<string>Fonte uses the camera to take your progress photos, which stay on your phone, and to scan the barcode of a food.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Fonte lets you pick progress photos from your library. They are copied into the app and stay on your phone.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Fonte uses Face ID to keep your progress photos private.</string>
 	<!-- Apple Health (Fonte Pro). Nothing leaves the phone. -->
 	<key>NSHealthShareUsageDescription</key>
-	<string>Fonte reads your body weight from Health to follow it next to your training.</string>
+	<string>Fonte reads your body weight and the calories burnt in your activities from Health, to follow them next to your training and meals.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Fonte saves your strength workouts to Health, with their start and end time.</string>
+	<string>Fonte saves your strength workouts, the calories and nutrients of your meals, and the water you drink to Health.</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>XSAppIconAssets</key>

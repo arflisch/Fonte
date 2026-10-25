@@ -207,7 +207,9 @@ public sealed class BackupService(
         settings.GoalWeight,
         settings.BarWeight,
         settings.Plates.ToList(),
-        settings.Accent.Key);
+        settings.Accent.Key,
+        settings.NutritionProfile,
+        settings.WaterGoalMl);
 
     /// <summary>The backup's preferences, except values this version would not understand. The language stays.</summary>
     private void Apply(BackupSettings saved)
@@ -224,6 +226,10 @@ public sealed class BackupService(
         if (saved.Plates?.Where(p => p > 0).ToList() is { Count: > 0 } plates)
             settings.Plates = plates;
         settings.Accent = AccentTheme.Find(saved.Accent);
+        if (saved.NutritionProfile is { } profile && Enum.IsDefined(profile.Sex) && Enum.IsDefined(profile.Activity) && Enum.IsDefined(profile.Goal))
+            settings.NutritionProfile = profile;
+        if (saved.WaterGoalMl > 0)
+            settings.WaterGoalMl = saved.WaterGoalMl;
     }
 
     /// <summary>

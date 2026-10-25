@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fonte.Views.FoodEntryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Fonte.Controls"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:vm="clr-namespace:Fonte.ViewModels"
+    x:DataType="vm:FoodEntryViewModel"
+    ios:Page.ModalPresentationStyle="PageSheet"
+    Shell.NavBarIsVisible="False"
+    SafeAreaEdges="All"
+    Shell.PresentationMode="ModalAnimated">
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="ChipTemplate" x:DataType="vm:SelectableOption">
+            <Border
+                Margin="0,0,8,8"
+                c:Touch.Command="{Binding SelectCommand}"
+                Style="{StaticResource Chip}">
+                <Border.Triggers>
+                    <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource AccentGradient}" />
+                        <Setter Property="Stroke" Value="Transparent" />
+                    </DataTrigger>
+                </Border.Triggers>
+                <Label FontFamily="OpenSansSemibold" FontSize="14" Text="{Binding Label}">
+                    <Label.Triggers>
+                        <DataTrigger Binding="{Binding IsSelected}" TargetType="Label" Value="True">
+                            <Setter Property="TextColor" Value="White" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </Border>
+        </DataTemplate>
+        <Style x:Key="MacroValue" TargetType="Label">
+            <Setter Property="FontFamily" Value="OpenSansSemibold" />
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="MacroLabel" TargetType="Label" BasedOn="{StaticResource Caption}">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Sheet header -->
+        <Grid Padding="20,18,20,6" ColumnDefinitions="100,*,100">
+            <Label
+                c:Touch.Command="{Binding CancelCommand}"
+                Style="{StaticResource LinkLabel}"
+                Text="{l:Tr Common_Cancel}" />
+            <Border
+                Grid.Column="2"
+                Padding="8"
+                c:Touch.Command="{Binding ToggleFavoriteCommand}"
+                HeightRequest="38"
+                HorizontalOptions="End"
+                StrokeThickness="0"
+                WidthRequest="38"
+                SemanticProperties.Description="{l:Tr FoodEntry_Favorite}">
+                <Grid>
+                    <c:IconView
+                        Color="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}"
+                        Data="{x:Static c:Icons.Star}"
+                        IsVisible="{Binding IsFavorite, Converter={StaticResource InvertBool}}" />
+                    <c:IconView Color="#E8B22C" Data="{x:Static c:Icons.Star}" IsVisible="{Binding IsFavorite}" StrokeWidth="3.2" />
+                </Grid>
+            </Border>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,4,20,24" Spacing="22">
+
+                <VerticalStackLayout Spacing="2">
+                    <Label FontFamily="OpenSansSemibold" FontSize="22" Text="{Binding Name}" />
+                    <Label Style="{StaticResource Secondary}" Text="{Binding Caption}" />
+                </VerticalStackLayout>
+
+                <!-- Quantity -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr FoodEntry_Quantity}" />
+                    <Border Style="{StaticResource InputField}">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Entry
+                                FontFamily="OpenSansSemibold"
+                                FontSize="20"
+                                Keyboard="Numeric"
+                                MaxLength="6"
+                                Text="{Binding Quantity}" />
+                            <Label
+                                Grid.Column="1"
+                                Margin="0,0,4,0"
+                                Style="{StaticResource Secondary}"
+                                Text="g"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+                    <FlexLayout BindableLayout.ItemTemplate="{StaticResource ChipTemplate}" BindableLayout.ItemsSource="{Binding Portions}" Wrap="Wrap" />
+                    <Label IsVisible="{Binding HasError}" Style="{StaticResource ErrorLabel}" Text="{Binding ErrorMessage}" />
+                </VerticalStackLayout>
+
+                <!-- Nutrition of the quantity -->
+                <Border Padding="16,14" Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="12">
+                        <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="6">
+                            <VerticalStackLayout>
+                                <Label Style="{StaticResource MacroValue}" Text="{Binding KcalText}" TextColor="{DynamicResource Accent}" />
+                                <Label Style="{StaticResource MacroLabel}" Text="kcal" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label Style="{StaticResource MacroValue}" Text="{Binding ProteinText}" TextColor="#E24B4A" />
+                                <Label Style="{StaticResource MacroLabel}" Text="{l:Tr Nutrition_Protein}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="2">
+                                <Label Style="{StaticResource MacroValue}" Text="{Binding CarbsText}" TextColor="#378ADD" />
+                                <Label Style="{StaticResource MacroLabel}" Text="{l:Tr Nutrition_Carbs}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="3">
+                                <Label Style="{StaticResource MacroValue}" Text="{Binding FatText}" TextColor="#E8B22C" />
+                                <Label Style="{StaticResource MacroLabel}" Text="{l:Tr Nutrition_Fat}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            IsVisible="{Binding HasDetails}"
+                            Style="{StaticResource Caption}"
+                            Text="{Binding DetailsText}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Meal -->
+                <VerticalStackLayout IsVisible="{Binding ShowsMeals}" Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr FoodEntry_Meal}" />
+                    <FlexLayout BindableLayout.ItemTemplate="{StaticResource ChipTemplate}" BindableLayout.ItemsSource="{Binding Meals}" Wrap="Wrap" />
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="24">
+                    <Label
+                        c:Touch.Command="{Binding EditFoodCommand}"
+                        IsVisible="{Binding CanEditFood}"
+                        Style="{StaticResource LinkLabel}"
+                        Text="{Binding EditFoodText}" />
+                    <Label
+                        c:Touch.Command="{Binding DeleteCommand}"
+                        IsVisible="{Binding CanDelete}"
+                        Style="{StaticResource LinkLabel}"
+                        Text="{l:Tr FoodEntry_Delete}"
+                        TextColor="{AppThemeBinding Light={StaticResource NegativeLight}, Dark={StaticResource NegativeDark}}" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Border
+            Grid.Row="2"
+            Margin="20,8,20,12"
+            c:Touch.Command="{Binding SaveCommand}"
+            Style="{StaticResource PrimaryButton}">
+            <Label Style="{StaticResource PrimaryButtonText}" Text="{Binding ActionText}" />
+        </Border>
+    </Grid>
+</ContentPage>

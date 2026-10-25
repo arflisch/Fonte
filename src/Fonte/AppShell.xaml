@@ -30,10 +30,10 @@
             Icon="tab_body.png"
             Route="body" />
         <ShellContent
-            Title="{l:Tr Tab_Exercises}"
-            ContentTemplate="{DataTemplate views:ExercisesPage}"
-            Icon="tab_exercises.png"
-            Route="exercises" />
+            Title="{l:Tr Tab_Nutrition}"
+            ContentTemplate="{DataTemplate views:NutritionPage}"
+            Icon="tab_nutrition.png"
+            Route="nutrition" />
     </TabBar>
 
 </Shell>

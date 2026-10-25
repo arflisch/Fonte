@@ -1807,4 +1807,457 @@ Everything on this device will be replaced, except the photos, which are kept.</
   <data name="Error_InvalidRpe" xml:space="preserve">
     <value>The RPE goes from 1 to 10.</value>
   </data>
+  <data name="Tab_Nutrition" xml:space="preserve">
+    <value>Nutrition</value>
+  </data>
+  <data name="Common_More" xml:space="preserve">
+    <value>More</value>
+  </data>
+  <data name="Meal_Breakfast" xml:space="preserve">
+    <value>Breakfast</value>
+  </data>
+  <data name="Meal_Lunch" xml:space="preserve">
+    <value>Lunch</value>
+  </data>
+  <data name="Meal_Dinner" xml:space="preserve">
+    <value>Dinner</value>
+  </data>
+  <data name="Meal_Snack" xml:space="preserve">
+    <value>Snacks</value>
+  </data>
+  <data name="Sex_Female" xml:space="preserve">
+    <value>Woman</value>
+  </data>
+  <data name="Sex_Male" xml:space="preserve">
+    <value>Man</value>
+  </data>
+  <data name="Activity_Sedentary" xml:space="preserve">
+    <value>Sedentary · desk job, little walking</value>
+  </data>
+  <data name="Activity_Light" xml:space="preserve">
+    <value>Lightly active · 1–3 workouts a week</value>
+  </data>
+  <data name="Activity_Moderate" xml:space="preserve">
+    <value>Active · 3–5 workouts a week</value>
+  </data>
+  <data name="Activity_Active" xml:space="preserve">
+    <value>Very active · 6–7 workouts a week</value>
+  </data>
+  <data name="Activity_VeryActive" xml:space="preserve">
+    <value>Athlete · physical job and daily training</value>
+  </data>
+  <data name="WeightGoal_Lose" xml:space="preserve">
+    <value>Lose weight</value>
+  </data>
+  <data name="WeightGoal_Maintain" xml:space="preserve">
+    <value>Maintain</value>
+  </data>
+  <data name="WeightGoal_Gain" xml:space="preserve">
+    <value>Gain weight</value>
+  </data>
+  <data name="FoodShelf_Recent" xml:space="preserve">
+    <value>Recent</value>
+  </data>
+  <data name="FoodShelf_Favorites" xml:space="preserve">
+    <value>Favourites</value>
+  </data>
+  <data name="FoodShelf_Own" xml:space="preserve">
+    <value>My foods</value>
+  </data>
+  <data name="FoodShelf_RecentEmpty" xml:space="preserve">
+    <value>What you eat will show up here. Search over 3,000 foods above, or scan a barcode.</value>
+  </data>
+  <data name="FoodShelf_FavoritesEmpty" xml:space="preserve">
+    <value>Tap the star of a food to find it here.</value>
+  </data>
+  <data name="FoodShelf_OwnEmpty" xml:space="preserve">
+    <value>Your foods, scanned products and dishes will show up here.</value>
+  </data>
+  <data name="Error_FoodNotFound" xml:space="preserve">
+    <value>This food no longer exists.</value>
+  </data>
+  <data name="Error_InvalidFood" xml:space="preserve">
+    <value>These values look wrong: at most 950 kcal and 100 g of nutrients per 100 g.</value>
+  </data>
+  <data name="Error_InvalidQuantity" xml:space="preserve">
+    <value>Enter a quantity between 1 g and 5 kg.</value>
+  </data>
+  <data name="Error_EmptyRecipe" xml:space="preserve">
+    <value>Add at least one ingredient.</value>
+  </data>
+  <data name="Scan_Hint" xml:space="preserve">
+    <value>Point the camera at the barcode</value>
+  </data>
+  <data name="Nutrition_Goal" xml:space="preserve">
+    <value>My targets</value>
+  </data>
+  <data name="Nutrition_LockedTitle" xml:space="preserve">
+    <value>Track what you eat</value>
+  </data>
+  <data name="Nutrition_LockedText" xml:space="preserve">
+    <value>Calories and macros adjusted to your goal, with Fonte Pro.</value>
+  </data>
+  <data name="Nutrition_LockedPoint1" xml:space="preserve">
+    <value>🎯  A daily target computed from your profile, to lose, keep or gain weight</value>
+  </data>
+  <data name="Nutrition_LockedPoint2" xml:space="preserve">
+    <value>🥗  Over 3,000 foods offline, plus barcode scanning</value>
+  </data>
+  <data name="Nutrition_LockedPoint3" xml:space="preserve">
+    <value>🍲  Your own foods, dishes and favourites; copy yesterday's meal in a tap</value>
+  </data>
+  <data name="Nutrition_LockedPoint4" xml:space="preserve">
+    <value>💧  Water, protein, carbs and fat, synced with Apple Health</value>
+  </data>
+  <data name="Nutrition_PreviousDay" xml:space="preserve">
+    <value>Previous day</value>
+  </data>
+  <data name="Nutrition_NextDay" xml:space="preserve">
+    <value>Next day</value>
+  </data>
+  <data name="Nutrition_BackToToday" xml:space="preserve">
+    <value>Back to today</value>
+  </data>
+  <data name="Nutrition_Remaining" xml:space="preserve">
+    <value>Remaining</value>
+  </data>
+  <data name="Nutrition_Over" xml:space="preserve">
+    <value>Over target</value>
+  </data>
+  <data name="Nutrition_Eaten" xml:space="preserve">
+    <value>Eaten</value>
+  </data>
+  <data name="Nutrition_Target" xml:space="preserve">
+    <value>Target</value>
+  </data>
+  <data name="Nutrition_Active" xml:space="preserve">
+    <value>Activity</value>
+  </data>
+  <data name="Nutrition_SetUp" xml:space="preserve">
+    <value>Set up my calorie target</value>
+  </data>
+  <data name="Nutrition_Protein" xml:space="preserve">
+    <value>Protein</value>
+  </data>
+  <data name="Nutrition_Carbs" xml:space="preserve">
+    <value>Carbs</value>
+  </data>
+  <data name="Nutrition_Fat" xml:space="preserve">
+    <value>Fat</value>
+  </data>
+  <data name="Nutrition_MealEmpty" xml:space="preserve">
+    <value>Nothing yet</value>
+  </data>
+  <data name="Nutrition_MacrosShort" xml:space="preserve">
+    <value>P {0} g · C {1} g · F {2} g</value>
+  </data>
+  <data name="Nutrition_AddFood" xml:space="preserve">
+    <value>Add food</value>
+  </data>
+  <data name="Nutrition_CopyYesterday" xml:space="preserve">
+    <value>Copy yesterday's</value>
+  </data>
+  <data name="Nutrition_ClearMeal" xml:space="preserve">
+    <value>Clear this meal</value>
+  </data>
+  <data name="Nutrition_NothingYesterday" xml:space="preserve">
+    <value>Nothing was logged for this meal the day before.</value>
+  </data>
+  <data name="Nutrition_Water" xml:space="preserve">
+    <value>Water</value>
+  </data>
+  <data name="Nutrition_WaterValue" xml:space="preserve">
+    <value>{0} L of {1} L</value>
+  </data>
+  <data name="Nutrition_AddWater" xml:space="preserve">
+    <value>Add a glass of water</value>
+  </data>
+  <data name="Nutrition_RemoveWater" xml:space="preserve">
+    <value>Remove the last glass</value>
+  </data>
+  <data name="Nutrition_Week" xml:space="preserve">
+    <value>Last 7 days</value>
+  </data>
+  <data name="Nutrition_WeekEmpty" xml:space="preserve">
+    <value>Nothing logged this week yet.</value>
+  </data>
+  <data name="Nutrition_WeekAverage" xml:space="preserve">
+    <value>Average of the days logged: {0} · target {1}</value>
+  </data>
+  <data name="Nutrition_Sources" xml:space="preserve">
+    <value>Foods: ANSES Ciqual 2020 table (Licence Ouverte) and Open Food Facts (ODbL). Estimates only, not medical advice.</value>
+  </data>
+  <data name="Nutrition_DailyTarget" xml:space="preserve">
+    <value>Daily target</value>
+  </data>
+  <data name="Nutrition_GoalDetail" xml:space="preserve">
+    <value>Basal metabolism {0} · maintenance {1}</value>
+  </data>
+  <data name="Nutrition_GoalMacros" xml:space="preserve">
+    <value>Protein {0} g · Carbs {1} g · Fat {2} g</value>
+  </data>
+  <data name="Nutrition_GoalDate" xml:space="preserve">
+    <value>{0} around {1}</value>
+  </data>
+  <data name="Nutrition_Floored" xml:space="preserve">
+    <value>Held at a safe minimum: for a faster pace, talk to a professional.</value>
+  </data>
+  <data name="Nutrition_GoalQuestion" xml:space="preserve">
+    <value>Your goal</value>
+  </data>
+  <data name="Nutrition_PerWeek" xml:space="preserve">
+    <value>{0} / week</value>
+  </data>
+  <data name="Nutrition_Sex" xml:space="preserve">
+    <value>Sex (for the energy formula)</value>
+  </data>
+  <data name="Nutrition_BirthYear" xml:space="preserve">
+    <value>Born in</value>
+  </data>
+  <data name="Nutrition_Height" xml:space="preserve">
+    <value>Height (cm)</value>
+  </data>
+  <data name="Nutrition_Weight" xml:space="preserve">
+    <value>Weight (kg)</value>
+  </data>
+  <data name="Nutrition_Activity" xml:space="preserve">
+    <value>Activity</value>
+  </data>
+  <data name="Nutrition_ProteinQuestion" xml:space="preserve">
+    <value>Protein</value>
+  </data>
+  <data name="Nutrition_ProteinRate" xml:space="preserve">
+    <value>{0} g/kg</value>
+  </data>
+  <data name="Nutrition_ProteinHint" xml:space="preserve">
+    <value>1.6 g per kg of body weight suits most people who train; 2 g helps keep muscle while losing weight.</value>
+  </data>
+  <data name="Nutrition_WaterGoal" xml:space="preserve">
+    <value>Water each day</value>
+  </data>
+  <data name="Nutrition_CountActive" xml:space="preserve">
+    <value>Add my activity</value>
+  </data>
+  <data name="Nutrition_CountActiveHint" xml:space="preserve">
+    <value>The active calories from Apple Health raise the day's budget.</value>
+  </data>
+  <data name="Nutrition_GoalIncomplete" xml:space="preserve">
+    <value>Fill in your year of birth, height and weight.</value>
+  </data>
+  <data name="Nutrition_GoalSaved" xml:space="preserve">
+    <value>Targets saved</value>
+  </data>
+  <data name="Nutrition_Disclaimer" xml:space="preserve">
+    <value>Estimates from the Mifflin-St Jeor formula. Pregnant, breastfeeding or under medical care? Ask a professional first.</value>
+  </data>
+  <data name="FoodSearch_Placeholder" xml:space="preserve">
+    <value>Search a food</value>
+  </data>
+  <data name="FoodSearch_Scan" xml:space="preserve">
+    <value>Scan a barcode</value>
+  </data>
+  <data name="FoodSearch_CreateFood" xml:space="preserve">
+    <value>Create a food</value>
+  </data>
+  <data name="FoodSearch_CreateDish" xml:space="preserve">
+    <value>Create a dish</value>
+  </data>
+  <data name="FoodSearch_NoResult" xml:space="preserve">
+    <value>Nothing found here. Try the online search below, or create the food.</value>
+  </data>
+  <data name="FoodSearch_Online" xml:space="preserve">
+    <value>Search “{0}” on Open Food Facts</value>
+  </data>
+  <data name="FoodSearch_OffCredit" xml:space="preserve">
+    <value>Products from Open Food Facts, a collaborative database (ODbL): check the values on the pack.</value>
+  </data>
+  <data name="FoodSearch_OfflineTitle" xml:space="preserve">
+    <value>No connection</value>
+  </data>
+  <data name="FoodSearch_OfflineText" xml:space="preserve">
+    <value>The online search needs the internet. The 3,000 foods of the built-in table still work offline.</value>
+  </data>
+  <data name="FoodSearch_ScanTitle" xml:space="preserve">
+    <value>Product not found</value>
+  </data>
+  <data name="FoodSearch_ScanUnknown" xml:space="preserve">
+    <value>This barcode isn't on Open Food Facts yet. Create the food from its label: next time, the scan will find it.</value>
+  </data>
+  <data name="FoodSearch_ScanOffline" xml:space="preserve">
+    <value>No connection to look the barcode up. Create the food from its label, or try again later.</value>
+  </data>
+  <data name="FoodSearch_Dish" xml:space="preserve">
+    <value>Dish</value>
+  </data>
+  <data name="FoodSearch_Per100" xml:space="preserve">
+    <value>{0} per 100 g</value>
+  </data>
+  <data name="FoodSearch_Portion" xml:space="preserve">
+    <value>portion {0}</value>
+  </data>
+  <data name="FoodEntry_Quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="FoodEntry_Serving" xml:space="preserve">
+    <value>serving</value>
+  </data>
+  <data name="FoodEntry_Portion" xml:space="preserve">
+    <value>portion</value>
+  </data>
+  <data name="FoodEntry_Meal" xml:space="preserve">
+    <value>Meal</value>
+  </data>
+  <data name="FoodEntry_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="FoodEntry_AddToDish" xml:space="preserve">
+    <value>Add to the dish</value>
+  </data>
+  <data name="FoodEntry_Added" xml:space="preserve">
+    <value>Added to {0}</value>
+  </data>
+  <data name="FoodEntry_Favorite" xml:space="preserve">
+    <value>Favourite</value>
+  </data>
+  <data name="FoodEntry_Sugars" xml:space="preserve">
+    <value>sugars {0}</value>
+  </data>
+  <data name="FoodEntry_Fiber" xml:space="preserve">
+    <value>fibre {0}</value>
+  </data>
+  <data name="FoodEntry_Salt" xml:space="preserve">
+    <value>salt {0}</value>
+  </data>
+  <data name="FoodEntry_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="FoodEntry_DeleteConfirm" xml:space="preserve">
+    <value>Remove this food from the meal?</value>
+  </data>
+  <data name="FoodEntry_EditFood" xml:space="preserve">
+    <value>Edit the food</value>
+  </data>
+  <data name="FoodEntry_EditDish" xml:space="preserve">
+    <value>Edit the dish</value>
+  </data>
+  <data name="CustomFood_New" xml:space="preserve">
+    <value>New food</value>
+  </data>
+  <data name="CustomFood_Edit" xml:space="preserve">
+    <value>Edit food</value>
+  </data>
+  <data name="CustomFood_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="CustomFood_NamePlaceholder" xml:space="preserve">
+    <value>e.g. Protein yogurt</value>
+  </data>
+  <data name="CustomFood_Brand" xml:space="preserve">
+    <value>Brand</value>
+  </data>
+  <data name="CustomFood_Optional" xml:space="preserve">
+    <value>Optional</value>
+  </data>
+  <data name="CustomFood_Barcode" xml:space="preserve">
+    <value>Barcode {0}</value>
+  </data>
+  <data name="CustomFood_Per100" xml:space="preserve">
+    <value>Per 100 g</value>
+  </data>
+  <data name="CustomFood_Kcal" xml:space="preserve">
+    <value>Energy (kcal)</value>
+  </data>
+  <data name="CustomFood_Sugars" xml:space="preserve">
+    <value>Sugars</value>
+  </data>
+  <data name="CustomFood_Fiber" xml:space="preserve">
+    <value>Fibre</value>
+  </data>
+  <data name="CustomFood_Salt" xml:space="preserve">
+    <value>Salt</value>
+  </data>
+  <data name="CustomFood_KcalHint" xml:space="preserve">
+    <value>Copy the label's values per 100 g. Left empty, the energy is worked out from the macros.</value>
+  </data>
+  <data name="CustomFood_Serving" xml:space="preserve">
+    <value>Usual serving</value>
+  </data>
+  <data name="CustomFood_ServingName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="CustomFood_ServingNamePlaceholder" xml:space="preserve">
+    <value>e.g. pot</value>
+  </data>
+  <data name="CustomFood_ServingGrams" xml:space="preserve">
+    <value>Weight (g)</value>
+  </data>
+  <data name="CustomFood_NeedsEnergy" xml:space="preserve">
+    <value>Enter the energy, or the protein, carbs and fat.</value>
+  </data>
+  <data name="CustomFood_Saved" xml:space="preserve">
+    <value>Food saved</value>
+  </data>
+  <data name="CustomFood_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="CustomFood_RemoveConfirm" xml:space="preserve">
+    <value>It disappears from the search; past meals keep it.</value>
+  </data>
+  <data name="Recipe_New" xml:space="preserve">
+    <value>New dish</value>
+  </data>
+  <data name="Recipe_Edit" xml:space="preserve">
+    <value>Edit dish</value>
+  </data>
+  <data name="Recipe_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Recipe_NamePlaceholder" xml:space="preserve">
+    <value>e.g. Chicken curry</value>
+  </data>
+  <data name="Recipe_Ingredients" xml:space="preserve">
+    <value>Ingredients (raw weight)</value>
+  </data>
+  <data name="Recipe_AddIngredient" xml:space="preserve">
+    <value>Add an ingredient</value>
+  </data>
+  <data name="Recipe_ChangeQuantity" xml:space="preserve">
+    <value>Change the quantity</value>
+  </data>
+  <data name="Recipe_RemoveIngredient" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Recipe_QuantityPrompt" xml:space="preserve">
+    <value>Quantity in grams</value>
+  </data>
+  <data name="Recipe_Servings" xml:space="preserve">
+    <value>{0} portions</value>
+  </data>
+  <data name="Recipe_Cooked" xml:space="preserve">
+    <value>Weight once cooked (g)</value>
+  </data>
+  <data name="Recipe_CookedHint" xml:space="preserve">
+    <value>Optional: weigh the pot's content without the pot, so a portion weighed later is accurate.</value>
+  </data>
+  <data name="Recipe_Total" xml:space="preserve">
+    <value>Total {0} for {1}</value>
+  </data>
+  <data name="Recipe_Portion" xml:space="preserve">
+    <value>A portion: {0} · {1}</value>
+  </data>
+  <data name="Recipe_RawWeight" xml:space="preserve">
+    <value>Raw ingredients: {0}</value>
+  </data>
+  <data name="Recipe_Saved" xml:space="preserve">
+    <value>Dish saved</value>
+  </data>
+  <data name="Recipe_Remove" xml:space="preserve">
+    <value>Remove the dish</value>
+  </data>
+  <data name="Pro_NutritionTitle" xml:space="preserve">
+    <value>Nutrition</value>
+  </data>
+  <data name="Pro_NutritionText" xml:space="preserve">
+    <value>Calories and macros for your goal, 3,000 foods offline, barcode scanning, dishes and water</value>
+  </data>
 </root>
