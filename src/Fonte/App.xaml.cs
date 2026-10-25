@@ -25,7 +25,12 @@ public partial class App : Application
 
         // Every screen listens (weakly) to this single message instead of holding on to the store.
         store.Changed += (_, _) => WeakReferenceMessenger.Default.Send(new DataChangedMessage());
-        settings.Changed += (_, _) => WeakReferenceMessenger.Default.Send(new DataChangedMessage());
+        store.UsesPounds = settings.UsesPounds;
+        settings.Changed += (_, _) =>
+        {
+            store.UsesPounds = settings.UsesPounds;
+            WeakReferenceMessenger.Default.Send(new DataChangedMessage());
+        };
     }
 
     protected override Window CreateWindow(IActivationState? activationState)

@@ -5,6 +5,7 @@ namespace Fonte.Views;
 public partial class NutritionPage : ContentPage
 {
     private readonly NutritionViewModel _viewModel;
+    private IDispatcherTimer? _clock;
 
     public NutritionPage(NutritionViewModel viewModel)
     {
@@ -22,5 +23,22 @@ public partial class NutritionPage : ContentPage
     {
         base.OnAppearing();
         _viewModel.RequestReload();
+        // The fasting card counts the hours as they go.
+        _clock ??= Dispatcher.CreateTimer();
+        _clock.Interval = TimeSpan.FromMinutes(1);
+        _clock.Tick += OnTick;
+        _clock.Start();
     }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        if (_clock is not null)
+        {
+            _clock.Stop();
+            _clock.Tick -= OnTick;
+        }
+    }
+
+    private void OnTick(object? sender, EventArgs e) => _viewModel.UpdateFasting();
 }

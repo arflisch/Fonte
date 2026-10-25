@@ -40,19 +40,43 @@ public static class Loc
     /// <summary>"1,234 kcal".</summary>
     public static string Kcal(double kcal) => $"{Whole(kcal)} kcal";
 
-    /// <summary>A rounded count with the thousands separator: "1,570", "1 570".</summary>
-    public static string Whole(double value) => Math.Round(value).ToString("N0", L.Culture);
+    /// <summary>A rounded count with the thousands separator: "1,570", "1 570". Halves go up, as on a label.</summary>
+    public static string Whole(double value) => Round(value).ToString("N0", L.Culture);
+
+    /// <summary>Rounded to a whole number, halves away from zero (2.5 g → 3 g, not 2).</summary>
+    public static double Round(double value) => Math.Round(value, MidpointRounding.AwayFromZero);
 
     /// <summary>"150 g", "12.5 g".</summary>
-    public static string Grams(double grams) => $"{Number(Math.Round(grams, grams < 10 ? 1 : 0))} g";
+    public static string Grams(double grams) => $"{Number(Math.Round(grams, grams < 10 ? 1 : 0, MidpointRounding.AwayFromZero))} g";
 
     /// <summary>"62.5" or "62,5" depending on the language, without useless decimals.</summary>
     public static string Number(double value) => value.ToString("0.##", L.Culture);
 
-    public static string Weight(double kilograms) => $"{Number(kilograms)} kg";
+    /// <summary>Loads and body weight are shown and typed in pounds (they are always stored in kilograms).</summary>
+    public static bool Pounds { get; set; }
+
+    /// <summary>Head of the load column of a workout: "KG", "LB".</summary>
+    public static string WeightHeader => Pounds ? L["Workout_ColLb"] : L["Workout_ColKg"];
+
+    /// <summary>"kg" or "lb".</summary>
+    public static string WeightUnit => Pounds ? "lb" : "kg";
+
+    /// <summary>A weight in the unit shown: kilograms, or pounds to the tenth.</summary>
+    public static double ShownWeight(double kilograms) =>
+        Pounds ? Math.Round(Core.Training.Units.ToPounds(kilograms), 1) : kilograms;
+
+    /// <summary>A weight typed in the unit shown, back in kilograms.</summary>
+    public static double TypedWeight(double value) => Pounds ? Core.Training.Units.ToKilograms(value) : value;
+
+    /// <summary>"62.5 kg", "137.8 lb".</summary>
+    public static string Weight(double kilograms) => $"{Number(ShownWeight(kilograms))} {WeightUnit}";
+
+    /// <summary>A weight in the unit shown, without the unit: "62.5", "137.8".</summary>
+    public static string WeightNumber(double kilograms) => Number(ShownWeight(kilograms));
 
     /// <summary>Total load lifted, "12,450 kg".</summary>
-    public static string Volume(double kilograms) => $"{kilograms.ToString("N0", L.Culture)} kg";
+    public static string Volume(double kilograms) =>
+        $"{(Pounds ? Core.Training.Units.ToPounds(kilograms) : kilograms).ToString("N0", L.Culture)} {WeightUnit}";
 
     /// <summary>A set as it reads in a history: "60 kg × 10", "12 reps", "1 min 30".</summary>
     public static string Set(Exercise exercise, WorkoutSet set) => exercise.Tracking switch
@@ -66,7 +90,7 @@ public static class Loc
     public static string SetShort(Exercise exercise, WorkoutSet set) => exercise.Tracking switch
     {
         Core.Models.Tracking.Time => Seconds(set.Seconds),
-        Core.Models.Tracking.WeightAndReps when set.Weight > 0 => $"{Number(set.Weight)} × {set.Reps}",
+        Core.Models.Tracking.WeightAndReps when set.Weight > 0 => $"{WeightNumber(set.Weight)} × {set.Reps}",
         _ => set.Reps.ToString(L.Culture),
     };
 

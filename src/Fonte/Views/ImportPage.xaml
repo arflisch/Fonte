@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fonte.Views.ImportPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Fonte.Controls"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:vm="clr-namespace:Fonte.ViewModels"
+    x:DataType="vm:ImportViewModel"
+    ios:Page.ModalPresentationStyle="PageSheet"
+    Shell.NavBarIsVisible="False"
+    SafeAreaEdges="All"
+    Shell.PresentationMode="ModalAnimated">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Sheet header -->
+        <Grid Padding="20,18,20,6" ColumnDefinitions="100,*,100">
+            <Label
+                c:Touch.Command="{Binding CloseCommand}"
+                Style="{StaticResource LinkLabel}"
+                Text="{l:Tr Common_Cancel}" />
+            <Label Grid.Column="1" Style="{StaticResource PageTitle}" Text="{l:Tr Import_Title}" />
+            <ActivityIndicator
+                Grid.Column="2"
+                HeightRequest="22"
+                HorizontalOptions="End"
+                IsRunning="{Binding IsWorking}"
+                IsVisible="{Binding IsWorking}"
+                WidthRequest="22"
+                Color="{DynamicResource Accent}" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,12,20,24" Spacing="18">
+
+                <!-- How to export -->
+                <VerticalStackLayout IsVisible="{Binding IsChoosing}" Spacing="18">
+                    <Label Style="{StaticResource Secondary}" Text="{l:Tr Import_Intro}" />
+                    <Border Padding="16,14" Style="{StaticResource Card}">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Style="{StaticResource Strong}" Text="Strong" />
+                            <Label Style="{StaticResource Secondary}" Text="{l:Tr Import_StrongHow}" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Padding="16,14" Style="{StaticResource Card}">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Style="{StaticResource Strong}" Text="Hevy" />
+                            <Label Style="{StaticResource Secondary}" Text="{l:Tr Import_HevyHow}" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Label Style="{StaticResource Caption}" Text="{l:Tr Import_Safe}" />
+                </VerticalStackLayout>
+
+                <!-- What the file holds -->
+                <VerticalStackLayout IsVisible="{Binding HasPreview}" Spacing="16">
+                    <Border
+                        Background="{DynamicResource HeroGradient}"
+                        StrokeShape="RoundRectangle 22"
+                        StrokeThickness="0">
+                        <VerticalStackLayout Padding="20,16" Spacing="4">
+                            <Label
+                                FontFamily="OpenSansSemibold"
+                                FontSize="13"
+                                Text="{Binding SourceText}"
+                                TextColor="{StaticResource WhiteSoft}" />
+                            <Label FontFamily="OpenSansSemibold" FontSize="20" Text="{Binding WorkoutsText}" TextColor="White" />
+                            <Label FontSize="14" Text="{Binding PeriodText}" TextColor="{StaticResource WhiteSoft}" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Border Padding="16,14" Style="{StaticResource Card}">
+                        <VerticalStackLayout Spacing="12">
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                <Label Text="{Binding UnitText}" VerticalOptions="Center" />
+                                <Label
+                                    Grid.Column="1"
+                                    c:Touch.Command="{Binding ChangeUnitCommand}"
+                                    IsVisible="{Binding CanChangeUnit}"
+                                    Style="{StaticResource LinkLabel}"
+                                    Text="{l:Tr Import_ChangeUnit}"
+                                    VerticalOptions="Center" />
+                            </Grid>
+                            <BoxView Style="{StaticResource Divider}" />
+                            <Label Style="{StaticResource Secondary}" Text="{Binding ExercisesText}" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <Label
+                        c:Touch.Command="{Binding StartOverCommand}"
+                        HorizontalOptions="Center"
+                        Style="{StaticResource LinkLabel}"
+                        Text="{l:Tr Import_OtherFile}" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Border
+            Grid.Row="2"
+            Margin="20,8,20,12"
+            c:Touch.Command="{Binding ChooseFileCommand}"
+            IsVisible="{Binding IsChoosing}"
+            Style="{StaticResource PrimaryButton}">
+            <Label Style="{StaticResource PrimaryButtonText}" Text="{l:Tr Import_Choose}" />
+        </Border>
+        <Border
+            Grid.Row="2"
+            Margin="20,8,20,12"
+            c:Touch.Command="{Binding ImportCommand}"
+            IsVisible="{Binding CanImport}"
+            Style="{StaticResource PrimaryButton}">
+            <Label Style="{StaticResource PrimaryButtonText}" Text="{l:Tr Import_Confirm}" />
+        </Border>
+    </Grid>
+</ContentPage>

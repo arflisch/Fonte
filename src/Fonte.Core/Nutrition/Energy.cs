@@ -34,14 +34,26 @@ public enum WeightGoal
 
 /// <param name="WeeklyChangeKg">How fast to lose or gain, in kilograms per week (ignored when maintaining).</param>
 /// <param name="ProteinPerKg">Grams of protein per kilogram of body weight (1.6 to 2.2 for strength training).</param>
+/// <param name="Adaptive">Each week, maintenance is measured from what was eaten and how the weight moved.</param>
+/// <param name="MeasuredMaintenance">The last maintenance measured, used instead of the formula when adaptive.</param>
+/// <param name="AdaptedOn">When it was measured.</param>
+/// <param name="TrainingDays">More calories on training days, fewer on rest days, the same over the week.</param>
 public sealed record NutritionProfile(
-    Sex Sex, int BirthYear, double HeightCm, ActivityLevel Activity, WeightGoal Goal, double WeeklyChangeKg, double ProteinPerKg);
+    Sex Sex, int BirthYear, double HeightCm, ActivityLevel Activity, WeightGoal Goal, double WeeklyChangeKg, double ProteinPerKg,
+    bool Adaptive = false, double? MeasuredMaintenance = null, DateTime? AdaptedOn = null, bool TrainingDays = false);
+
+/// <summary>Maintenance worked out from real life: calories eaten, minus the energy of the weight gained.</summary>
+/// <param name="LoggedDays">Days of the window whose meals were logged.</param>
+/// <param name="KgPerWeek">The weight trend over the window.</param>
+public sealed record MaintenanceEstimate(double Kcal, int LoggedDays, double KgPerWeek);
 
 /// <param name="Bmr">Resting metabolism (Mifflin-St Jeor).</param>
 /// <param name="Maintenance">Calories that keep the weight stable.</param>
 /// <param name="Kcal">Daily calories to aim for.</param>
 /// <param name="IsFloored">The deficit asked for would go under the safe minimum: the target was raised to it.</param>
-public sealed record NutritionTargets(double Bmr, double Maintenance, double Kcal, double Protein, double Carbs, double Fat, bool IsFloored)
+/// <param name="IsMeasured">Maintenance comes from the weeks logged rather than from the formula.</param>
+public sealed record NutritionTargets(
+    double Bmr, double Maintenance, double Kcal, double Protein, double Carbs, double Fat, bool IsFloored, bool IsMeasured = false)
 {
     /// <summary>Calories below (negative) or above maintenance.</summary>
     public double Balance => Kcal - Maintenance;
@@ -80,7 +92,10 @@ public static class Energy
     public static NutritionTargets Targets(NutritionProfile profile, double weightKg, DateTime today)
     {
         var bmr = Bmr(profile.Sex, Age(profile.BirthYear, today), profile.HeightCm, weightKg);
-        var maintenance = bmr * ActivityFactor(profile.Activity);
+        var formula = bmr * ActivityFactor(profile.Activity);
+        // A measure far off the formula is more likely a logging gap than a metabolism: keep it within 25 %.
+        var measured = profile.Adaptive && profile.MeasuredMaintenance is { } m ? Math.Clamp(m, formula * 0.75, formula * 1.25) : (double?)null;
+        var maintenance = measured ?? formula;
         var daily = profile.Goal switch
         {
             WeightGoal.Lose => -Math.Clamp(profile.WeeklyChangeKg, 0, MaxLossPerWeek) * KcalPerKg / 7,
@@ -96,10 +111,57 @@ public static class Energy
         var protein = Math.Round(Math.Clamp(profile.ProteinPerKg, 0.8, 3) * weightKg);
         var fat = Math.Round(kcal * FatShare / 9);
         var carbs = Math.Max(0, Math.Round((kcal - protein * 4 - fat * 9) / 4));
-        return new NutritionTargets(Math.Round(bmr), Math.Round(maintenance), kcal, protein, carbs, fat, floored);
+        return new NutritionTargets(Math.Round(bmr), Math.Round(maintenance), kcal, protein, carbs, fat, floored, measured is not null);
     }
 
     /// <summary>When the goal weight would be reached at this pace; null when going the other way or not moving.</summary>
+    /// <summary>Share of the day's calories added on a training day (and taken back over the rest days).</summary>
+    public const double TrainingDayShare = 0.1;
+
+    /// <summary>
+    /// The targets of one day when training days get more: +10 % of calories on a training day, as carbohydrates,
+    /// and less on rest days so the week stays the same for <paramref name="sessionsPerWeek"/> workouts.
+    /// </summary>
+    public static NutritionTargets ForDay(NutritionProfile profile, NutritionTargets targets, bool training, int sessionsPerWeek)
+    {
+        if (!profile.TrainingDays)
+            return targets;
+        var sessions = Math.Clamp(sessionsPerWeek, 1, 6);
+        var boost = Math.Round(targets.Kcal * TrainingDayShare / 10) * 10;
+        var change = training ? boost : -Math.Round(boost * sessions / (7 - sessions) / 10) * 10;
+        var kcal = Math.Max(targets.Kcal + change, MinimumKcal(profile.Sex));
+        return targets with { Kcal = kcal, Carbs = Math.Max(0, Math.Round(targets.Carbs + (kcal - targets.Kcal) / 4)) };
+    }
+
+    /// <summary>Days looked back on to measure maintenance, and how many of them must have their meals logged.</summary>
+    public const int AdaptiveWindowDays = 21, AdaptiveLoggedDays = 10;
+
+    /// <summary>A day under this many calories is taken as partly logged and left out of the measure.</summary>
+    public const double LoggedDayMinimum = 800;
+
+    /// <summary>
+    /// Measures maintenance over the 21 days before <paramref name="today"/>: the calories eaten on the days fully
+    /// logged, corrected by the weight trend (least squares over the weighings, 7,700 kcal per kg). Null until there
+    /// are 10 logged days and 3 weighings at least 10 days apart.
+    /// </summary>
+    public static MaintenanceEstimate? MeasureMaintenance(
+        IReadOnlyList<DailyIntake> days, IReadOnlyList<(DateTime Date, double Kilograms)> weights, DateTime today)
+    {
+        var from = today.Date.AddDays(-AdaptiveWindowDays);
+        var to = today.Date.AddDays(-1);
+        var logged = days.Where(d => d.Date >= from && d.Date <= to && d.Kcal >= LoggedDayMinimum).ToList();
+        var weighed = weights.Where(w => w.Date >= from && w.Date <= today.Date).OrderBy(w => w.Date).ToList();
+        if (logged.Count < AdaptiveLoggedDays || weighed.Count < 3 || (weighed[^1].Date - weighed[0].Date).TotalDays < 10)
+            return null;
+
+        var xs = weighed.Select(w => (w.Date - from).TotalDays).ToList();
+        var meanX = xs.Average();
+        var meanY = weighed.Average(w => w.Kilograms);
+        var slope = xs.Zip(weighed).Sum(p => (p.First - meanX) * (p.Second.Kilograms - meanY)) / xs.Sum(x => (x - meanX) * (x - meanX));
+        var kcal = logged.Average(d => d.Kcal) - slope * KcalPerKg;
+        return new MaintenanceEstimate(Math.Round(Math.Clamp(kcal, 1000, 6000) / 10) * 10, logged.Count, Math.Round(slope * 7, 2));
+    }
+
     public static DateTime? GoalDate(double weightKg, double goalKg, double weeklyChangeKg, DateTime today)
     {
         var gap = goalKg - weightKg;

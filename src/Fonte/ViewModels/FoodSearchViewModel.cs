@@ -15,6 +15,7 @@ public enum FoodShelf
     Recent,
     Favorites,
     Own,
+    Templates,
 }
 
 /// <summary>
@@ -23,7 +24,7 @@ public enum FoodShelf
 /// the dish being composed (<c>mode=ingredient</c>).
 /// </summary>
 public sealed partial class FoodSearchViewModel(
-    FonteStore store, ProductLookup lookup, BarcodeScanner scanner, IDialogService dialogs)
+    FonteStore store, ProductLookup lookup, BarcodeScanner scanner, IDialogService dialogs, HealthService health)
     : ObservableObject, IQueryAttributable, ISheetViewModel
 {
     private DateTime _date = DateTime.Today;
@@ -84,7 +85,9 @@ public sealed partial class FoodSearchViewModel(
         _isIngredient = query.TryGetValue("mode", out var mode) && mode?.ToString() == "ingredient";
         CanCreateDish = !_isIngredient;
         Title = _isIngredient ? Loc.Get("Recipe_AddIngredient") : Loc.Meal(_meal);
+        // A dish is made of foods, not of whole meals.
         Shelves = Enum.GetValues<FoodShelf>()
+            .Where(s => !_isIngredient || s != FoodShelf.Templates)
             .Select((s, i) => new SelectableOption(s.ToString(), i, 3, o => ShowShelf(Enum.Parse<FoodShelf>(o.Value)))
             {
                 Label = Loc.Get($"FoodShelf_{s}"),
@@ -117,6 +120,15 @@ public sealed partial class FoodSearchViewModel(
     private async Task RefreshAsync(string query, CancellationToken cancellation = default)
     {
         IsSearching = !string.IsNullOrWhiteSpace(query);
+        if (!IsSearching && _shelf == FoodShelf.Templates)
+        {
+            var templates = await store.GetMealTemplatesAsync(_meal);
+            cancellation.ThrowIfCancellationRequested();
+            Foods = templates.Select(t => new FoodItemViewModel(t, AddTemplateAsync, DeleteTemplateAsync)).ToList();
+            HasNoFood = Foods.Count == 0;
+            EmptyText = Loc.Get("FoodShelf_TemplatesEmpty");
+            return;
+        }
         IReadOnlyList<Food> foods = IsSearching
             ? await store.SearchFoodsAsync(query)
             : _shelf switch
@@ -150,6 +162,39 @@ public sealed partial class FoodSearchViewModel(
     }
 
     private Task OpenFoodAsync(Food food) => OpenAsync(food.Id);
+
+    /// <summary>One tap logs the whole meal template and closes the search.</summary>
+    private async Task AddTemplateAsync(MealTemplateView template)
+    {
+        if (_isBusy)
+            return;
+        _isBusy = true;
+        try
+        {
+            var entries = await store.AddMealTemplateAsync(template.Template.Id, _date, _meal, DateTime.Now);
+            Palette.Haptic();
+            foreach (var entry in entries)
+            {
+                if (template.Items.FirstOrDefault(i => i.Food.Id == entry.FoodId)?.Food is { } food)
+                    await health.SaveFoodAsync(entry, Loc.FoodName(food));
+            }
+            SuccessToast.Show(Loc.Format("FoodEntry_Added", Loc.Meal(_meal)));
+            await Shell.Current.GoToAsync("..");
+        }
+        finally
+        {
+            _isBusy = false;
+        }
+    }
+
+    private async Task DeleteTemplateAsync(MealTemplateView template)
+    {
+        var delete = Loc.Get("MealTemplate_Delete");
+        if (await dialogs.ChooseAsync(template.Template.Name, delete) != delete)
+            return;
+        await store.DeleteMealTemplateAsync(template.Template.Id);
+        Reload();
+    }
 
     private Task OpenAsync(int foodId) => Shell.Current.GoToAsync($"{Routes.FoodEntry}?food={foodId}&{Destination}");
 
@@ -248,6 +293,15 @@ public sealed class FoodItemViewModel
         OpenCommand = new AsyncRelayCommand(() => open(food));
     }
 
+    public FoodItemViewModel(MealTemplateView template, Func<MealTemplateView, Task> add, Func<MealTemplateView, Task> delete)
+    {
+        Name = template.Template.Name;
+        Caption = $"{string.Join(", ", template.Items.Take(3).Select(i => Loc.FoodName(i.Food)))}{(template.Items.Count > 3 ? "…" : string.Empty)} · {Loc.Kcal(template.Totals.Kcal)}";
+        IsTemplate = true;
+        OpenCommand = new AsyncRelayCommand(() => add(template));
+        DeleteCommand = new AsyncRelayCommand(() => delete(template));
+    }
+
     public FoodItemViewModel(Product product, Func<Product, Task> open)
     {
         Name = product.Name;
@@ -261,7 +315,12 @@ public sealed class FoodItemViewModel
 
     public bool IsFavorite { get; }
 
+    /// <summary>A meal template: a tap logs it, a button deletes it.</summary>
+    public bool IsTemplate { get; }
+
     public IAsyncRelayCommand OpenCommand { get; }
+
+    public IAsyncRelayCommand? DeleteCommand { get; }
 
     private static string Describe(string? brand, double kcal, double? servingGrams, string? servingName, FoodSource source)
     {

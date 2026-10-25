@@ -18,7 +18,10 @@ public sealed record BackupSettings(
     IReadOnlyList<double> Plates,
     string Accent,
     Nutrition.NutritionProfile? NutritionProfile = null,
-    int WaterGoalMl = 0);
+    int WaterGoalMl = 0,
+    bool? Pounds = null,
+    int FastingHours = 0,
+    int EatingStartHour = 12);
 
 /// <summary>Every row of the database. <see cref="Photos"/> is null when the backup was made without the photos.</summary>
 public sealed class BackupData
@@ -51,6 +54,10 @@ public sealed class BackupData
     public List<RecipeIngredient> RecipeIngredients { get; set; } = [];
 
     public List<WaterEntry> Water { get; set; } = [];
+
+    public List<MealTemplate> MealTemplates { get; set; } = [];
+
+    public List<MealTemplateItem> MealTemplateItems { get; set; } = [];
 }
 
 public sealed record BackupContent(DateTimeOffset ExportedAt, BackupData Data, BackupSettings Settings)
@@ -188,6 +195,8 @@ public static class BackupFile
         FoodEntries = data.FoodEntries,
         RecipeIngredients = data.RecipeIngredients,
         Water = data.Water,
+        MealTemplates = data.MealTemplates,
+        MealTemplateItems = data.MealTemplateItems,
     };
 
     private static UstarTarEntry Entry(string name, Stream content, DateTimeOffset time) =>

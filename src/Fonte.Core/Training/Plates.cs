@@ -18,6 +18,11 @@ public static class Plates
 
     public static readonly IReadOnlyList<double> Bars = [20, 15, 10];
 
+    /// <summary>The plates of a gym in pounds; the calculator then works in pounds throughout.</summary>
+    public static readonly IReadOnlyList<double> StandardPounds = [45, 35, 25, 10, 5, 2.5];
+
+    public static readonly IReadOnlyList<double> BarsPounds = [45, 35, 25];
+
     /// <summary>Heaviest plates first, as many pairs as needed; never more than the target.</summary>
     public static PlateLoad Load(double target, double bar, IReadOnlyList<double>? plates = null)
     {

@@ -10,8 +10,6 @@ namespace Fonte.ViewModels;
 /// <summary>Which plates to put on each side of the bar for a load, and the warm-up sets that lead to it.</summary>
 public sealed partial class PlatesViewModel : ObservableObject, IQueryAttributable, ISheetViewModel
 {
-    private const double Step = 2.5;
-
     private readonly AppSettings _settings;
     private double _bar;
 
@@ -19,20 +17,26 @@ public sealed partial class PlatesViewModel : ObservableObject, IQueryAttributab
     {
         _settings = settings;
         _bar = settings.BarWeight;
-        Bars = Plates.Bars
-            .Select((b, i) => new SelectableOption(b.ToString(CultureInfo.InvariantCulture), i, Plates.Bars.Count, SelectBar)
+        var bars = Loc.Pounds ? Plates.BarsPounds : Plates.Bars;
+        Bars = bars
+            .Select((b, i) => new SelectableOption(b.ToString(CultureInfo.InvariantCulture), i, bars.Count, SelectBar)
             {
-                Label = Loc.Weight(b),
+                Label = Amount(b),
                 IsSelected = Math.Abs(b - _bar) < 0.01,
             })
             .ToList();
-        _targetText = Loc.Number(Math.Max(_bar, 60));
+        _targetText = Loc.Number(Math.Max(_bar, Loc.Pounds ? 135 : 60));
         Update();
     }
 
     public System.Windows.Input.ICommand DismissCommand => CloseCommand;
 
     public IReadOnlyList<SelectableOption> Bars { get; }
+
+    /// <summary>The calculator works in the unit shown: a gym in pounds has pound plates.</summary>
+    private static double Step => Loc.Pounds ? 5 : 2.5;
+
+    public string Unit { get; } = Loc.WeightUnit;
 
     public string RemoveText { get; } = $"−{Loc.Number(Step)}";
 
@@ -67,7 +71,7 @@ public sealed partial class PlatesViewModel : ObservableObject, IQueryAttributab
         if (query.TryGetValue("weight", out var raw)
             && double.TryParse(raw?.ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out var weight)
             && weight > 0)
-            TargetText = Loc.Number(weight);
+            TargetText = Loc.WeightNumber(weight);
     }
 
     partial void OnTargetTextChanged(string value) => Update();
@@ -91,20 +95,26 @@ public sealed partial class PlatesViewModel : ObservableObject, IQueryAttributab
         var plates = _settings.Plates;
         var target = Target;
         var load = Plates.Load(target, _bar, plates);
-        PerSide = load.PerSide.Select(p => new PlateItem(p)).ToList();
-        Rows = load.PerSide.GroupBy(p => p).Select(g => new PlateRow($"{Loc.Weight(g.Key)} × {g.Count()}", PlateItem.ColorOf(g.Key))).ToList();
+        PerSide = load.PerSide.Select(p => new PlateItem(Kilograms(p))).ToList();
+        Rows = load.PerSide.GroupBy(p => p).Select(g => new PlateRow($"{Amount(g.Key)} × {g.Count()}", PlateItem.ColorOf(Kilograms(g.Key)))).ToList();
         HasPlates = PerSide.Count > 0;
         ResultText = target <= _bar
             ? Loc.Get("Plates_BarOnly")
             : load.Missing(target) > 0
-                ? Loc.Format("Plates_Closest", Loc.Weight(load.Achieved))
-                : Loc.Format("Plates_PerSide", Loc.Weight(load.PerSide.Sum()));
+                ? Loc.Format("Plates_Closest", Amount(load.Achieved))
+                : Loc.Format("Plates_PerSide", Amount(load.PerSide.Sum()));
         var warmUp = Plates.WarmUp(load.Achieved, _bar, plates);
         HasWarmUp = warmUp.Count > 0;
         WarmUpText = string.Join("  ·  ", warmUp.Select((s, i) =>
             $"{(i == 0 ? Loc.Get("Plates_Bar") : Loc.Number(s.Weight))} × {s.Reps}"));
-        PlatesText = Loc.Format("Plates_Available", string.Join(" · ", plates.Select(Loc.Number)));
+        PlatesText = Loc.Format("Plates_Available", string.Join(" · ", plates.Select(Loc.Number)), Loc.WeightUnit);
     }
+
+    /// <summary>A weight already in the unit shown: "20 kg", "45 lb".</summary>
+    private static string Amount(double value) => $"{Loc.Number(value)} {Loc.WeightUnit}";
+
+    /// <summary>A plate's weight in kilograms, which sets its size and colour (a 45 lb plate looks like a 20 kg one).</summary>
+    private static double Kilograms(double value) => Loc.TypedWeight(value);
 
     [RelayCommand]
     private void Add() => Change(Step);

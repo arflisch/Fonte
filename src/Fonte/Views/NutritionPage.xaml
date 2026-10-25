@@ -22,6 +22,16 @@
             <Setter Property="HorizontalTextAlignment" Value="Center" />
             <Setter Property="TextColor" Value="{StaticResource WhiteSoft}" />
         </Style>
+        <Style x:Key="WeekValue" TargetType="Label">
+            <Setter Property="FontFamily" Value="OpenSansSemibold" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="LineBreakMode" Value="NoWrap" />
+        </Style>
+        <Style x:Key="WeekLabel" TargetType="Label" BasedOn="{StaticResource Caption}">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
     </ContentPage.Resources>
 
     <Grid SafeAreaEdges="Container,Container,Container,None" Style="{StaticResource PageColumn}">
@@ -123,11 +133,28 @@
                         StrokeShape="RoundRectangle 26"
                         StrokeThickness="0">
                         <VerticalStackLayout Padding="22,20,22,18" Spacing="4">
-                            <Label
-                                FontFamily="OpenSansSemibold"
-                                FontSize="13"
-                                Text="{Binding RemainingLabel}"
-                                TextColor="{StaticResource WhiteSoft}" />
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label
+                                    FontFamily="OpenSansSemibold"
+                                    FontSize="13"
+                                    Text="{Binding RemainingLabel}"
+                                    TextColor="{StaticResource WhiteSoft}"
+                                    VerticalOptions="Center" />
+                                <Border
+                                    Grid.Column="1"
+                                    Padding="12,5"
+                                    c:Touch.Command="{Binding ToggleDayKindCommand}"
+                                    BackgroundColor="{StaticResource WhiteGlass}"
+                                    IsVisible="{Binding ShowsDayKind}"
+                                    StrokeShape="RoundRectangle 13"
+                                    StrokeThickness="0">
+                                    <Label
+                                        FontFamily="OpenSansSemibold"
+                                        FontSize="12"
+                                        Text="{Binding DayKindText}"
+                                        TextColor="White" />
+                                </Border>
+                            </Grid>
                             <HorizontalStackLayout Spacing="6">
                                 <Label
                                     FontFamily="OpenSansSemibold"
@@ -194,6 +221,44 @@
                                 </Grid>
                             </Border>
                         </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Intermittent fasting -->
+                    <Border Padding="16,14" IsVisible="{Binding ShowsFasting}" Style="{StaticResource Card}">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <Label FontSize="26" Text="⏳" VerticalOptions="Center">
+                                <Label.Triggers>
+                                    <DataTrigger Binding="{Binding IsEatingWindow}" TargetType="Label" Value="True">
+                                        <Setter Property="Text" Value="🍽️" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <VerticalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
+                                <Label Style="{StaticResource Strong}" Text="{Binding FastingTitle}" />
+                                <c:ProgressPill
+                                    FillColor="{DynamicResource Accent}"
+                                    HeightRequest="6"
+                                    Progress="{Binding FastingProgress}"
+                                    TrackColor="{DynamicResource AccentSoft}" />
+                                <Label Style="{StaticResource Caption}" Text="{Binding FastingDetail}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+
+                    <!-- Adaptive target -->
+                    <Border
+                        Padding="16,12"
+                        c:Touch.Command="{Binding OpenGoalCommand}"
+                        IsVisible="{Binding ShowsAdaptive}"
+                        Style="{StaticResource Card}">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <Label FontSize="22" Text="📈" VerticalOptions="Center" />
+                            <Label
+                                Grid.Column="1"
+                                Style="{StaticResource Secondary}"
+                                Text="{Binding AdaptiveText}"
+                                VerticalOptions="Center" />
+                        </Grid>
                     </Border>
 
                     <!-- Macros -->
@@ -368,6 +433,27 @@
                                     Target="{Binding WeekTarget}"
                                     Values="{Binding Week}" />
                                 <Label Style="{StaticResource Caption}" Text="{Binding WeekText}" />
+                                <Grid
+                                    ColumnDefinitions="*,*,*,*"
+                                    ColumnSpacing="6"
+                                    IsVisible="{Binding HasWeek}">
+                                    <VerticalStackLayout>
+                                        <Label Style="{StaticResource WeekValue}" Text="{Binding WeekKcalText}" />
+                                        <Label Style="{StaticResource WeekLabel}" Text="{l:Tr Nutrition_WeekKcal}" />
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout Grid.Column="1">
+                                        <Label Style="{StaticResource WeekValue}" Text="{Binding WeekProteinText}" />
+                                        <Label Style="{StaticResource WeekLabel}" Text="{l:Tr Nutrition_WeekProtein}" />
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout Grid.Column="2">
+                                        <Label Style="{StaticResource WeekValue}" Text="{Binding WeekOnTargetText}" />
+                                        <Label Style="{StaticResource WeekLabel}" Text="{l:Tr Nutrition_WeekOnTarget}" />
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout Grid.Column="3">
+                                        <Label Style="{StaticResource WeekValue}" Text="{Binding WeekWeightText}" />
+                                        <Label Style="{StaticResource WeekLabel}" Text="{l:Tr Nutrition_WeekWeight}" />
+                                    </VerticalStackLayout>
+                                </Grid>
                             </VerticalStackLayout>
                         </Border>
                     </VerticalStackLayout>

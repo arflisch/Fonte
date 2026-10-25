@@ -84,6 +84,51 @@ public sealed partial class NutritionViewModel(
     [ObservableProperty]
     private string _weekText = string.Empty;
 
+    [ObservableProperty]
+    private bool _hasWeek;
+
+    [ObservableProperty]
+    private string _weekKcalText = "—";
+
+    [ObservableProperty]
+    private string _weekProteinText = "—";
+
+    [ObservableProperty]
+    private string _weekOnTargetText = "—";
+
+    [ObservableProperty]
+    private string _weekWeightText = "—";
+
+    [ObservableProperty]
+    private bool _showsAdaptive;
+
+    [ObservableProperty]
+    private string _adaptiveText = string.Empty;
+
+    private bool _isTrainingDay;
+    private bool _workedOut;
+
+    [ObservableProperty]
+    private bool _showsDayKind;
+
+    [ObservableProperty]
+    private string _dayKindText = string.Empty;
+
+    [ObservableProperty]
+    private bool _showsFasting;
+
+    [ObservableProperty]
+    private bool _isEatingWindow;
+
+    [ObservableProperty]
+    private string _fastingTitle = string.Empty;
+
+    [ObservableProperty]
+    private string _fastingDetail = string.Empty;
+
+    [ObservableProperty]
+    private double _fastingProgress;
+
     protected override async Task LoadCoreAsync()
     {
         IsPro = pro.IsUnlocked;
@@ -103,7 +148,24 @@ public sealed partial class NutritionViewModel(
         HasProfile = profile is not null;
         var weights = await store.GetWeightsAsync();
         var weight = weights.LastOrDefault(w => w.Date <= _date)?.Kilograms ?? weights.LastOrDefault()?.Kilograms ?? 75;
-        var targets = profile is null ? null : Energy.Targets(profile, weight, _date);
+        if (profile is not null)
+            profile = await AdaptAsync(profile, weights);
+        var baseTargets = profile is null ? null : Energy.Targets(profile, weight, _date);
+
+        // Training days get more when the user asked for it; a workout makes it one, unless the user said otherwise.
+        var workedOut = (await store.GetWorkoutDaysAsync(_date, _date)).Count > 0;
+        var isTraining = settings.DayKinds.TryGetValue(_date, out var said) ? said : workedOut;
+        _isTrainingDay = isTraining;
+        _workedOut = workedOut;
+        ShowsDayKind = profile is { TrainingDays: true } && baseTargets is not null;
+        var targets = profile is null || baseTargets is null ? null : Energy.ForDay(profile, baseTargets, isTraining, settings.SessionsPerWeek);
+        if (ShowsDayKind && targets is not null && baseTargets is not null)
+        {
+            var change = targets.Kcal - baseTargets.Kcal;
+            DayKindText = isTraining
+                ? Loc.Format("Nutrition_TrainingDay", $"+{Loc.Whole(change)}")
+                : Loc.Format("Nutrition_RestDay", $"−{Loc.Whole(-change)}");
+        }
 
         var active = settings.CountActiveEnergy ? await health.GetActiveEnergyAsync(_date) : 0;
         ShowActive = settings.CountActiveEnergy && health.IsActive;
@@ -141,12 +203,101 @@ public sealed partial class NutritionViewModel(
 
         var week = await store.GetDailyIntakeAsync(_date.AddDays(-6), _date);
         Week = week.Select(d => d.Kcal).ToList();
-        WeekTarget = targets?.Kcal ?? 0;
+        WeekTarget = baseTargets?.Kcal ?? 0;
         WeekLabels = week.Select(d => Loc.Capitalize(Loc.Culture.DateTimeFormat.GetShortestDayName(d.Date.DayOfWeek))[..1]).ToList();
-        var logged = week.Where(d => d.Kcal > 0).ToList();
-        WeekText = logged.Count == 0
-            ? Loc.Get("Nutrition_WeekEmpty")
-            : Loc.Format("Nutrition_WeekAverage", Loc.Kcal(logged.Average(d => d.Kcal)), targets is null ? "—" : Loc.Kcal(targets.Kcal));
+        ShowWeekSummary(week, baseTargets, weights);
+        UpdateFasting();
+    }
+
+    /// <summary>The week in four figures: calories and protein on the days logged, days on target, weight change.</summary>
+    private void ShowWeekSummary(IReadOnlyList<DailyIntake> week, NutritionTargets? targets, IReadOnlyList<BodyWeight> weights)
+    {
+        var logged = week.Where(d => d.IsLogged).ToList();
+        HasWeek = logged.Count > 0;
+        WeekText = HasWeek ? Loc.Format("Nutrition_WeekLogged", logged.Count) : Loc.Get("Nutrition_WeekEmpty");
+        WeekKcalText = HasWeek ? Loc.Whole(logged.Average(d => d.Kcal)) : "—";
+        WeekProteinText = HasWeek ? Loc.Grams(logged.Average(d => d.Protein)) : "—";
+        WeekOnTargetText = HasWeek && targets is not null
+            ? $"{logged.Count(d => Math.Abs(d.Kcal - targets.Kcal) <= targets.Kcal * 0.1)}/{logged.Count}"
+            : "—";
+        var end = weights.LastOrDefault(w => w.Date <= _date);
+        var start = weights.LastOrDefault(w => w.Date <= _date.AddDays(-7)) ?? weights.FirstOrDefault(w => w.Date >= _date.AddDays(-7));
+        WeekWeightText = end is not null && start is not null && end != start
+            ? BodyViewModel.Signed(Loc.ShownWeight(end.Kilograms - start.Kilograms), Loc.WeightUnit)
+            : "—";
+    }
+
+    /// <summary>
+    /// Once a week, measures maintenance from the last three weeks and keeps it in the profile, so the target
+    /// follows what really happens. Says what is still missing until there is enough to measure.
+    /// </summary>
+    private async Task<NutritionProfile> AdaptAsync(NutritionProfile profile, IReadOnlyList<BodyWeight> weights)
+    {
+        ShowsAdaptive = profile.Adaptive;
+        if (!profile.Adaptive)
+            return profile;
+        var today = DateTime.Today;
+        if (profile.AdaptedOn is { } on && (today - on).TotalDays < 7 && profile.MeasuredMaintenance is { } kept)
+        {
+            AdaptiveText = Loc.Format("Nutrition_AdaptedOn", Loc.Kcal(kept), Loc.Date(on, "d MMMM"));
+            return profile;
+        }
+
+        var days = await store.GetDailyIntakeAsync(today.AddDays(-Energy.AdaptiveWindowDays), today.AddDays(-1));
+        var pairs = weights.Select(w => (w.Date, w.Kilograms)).ToList();
+        if (Energy.MeasureMaintenance(days, pairs, today) is { } estimate)
+        {
+            profile = profile with { MeasuredMaintenance = estimate.Kcal, AdaptedOn = today };
+            settings.NutritionProfile = profile;
+            AdaptiveText = Loc.Format("Nutrition_AdaptedNow", Loc.Kcal(estimate.Kcal), estimate.LoggedDays,
+                BodyViewModel.Signed(Loc.ShownWeight(estimate.KgPerWeek), Loc.WeightUnit));
+            return profile;
+        }
+
+        var logged = days.Count(d => d.Kcal >= Energy.LoggedDayMinimum);
+        var weighed = weights.Count(w => w.Date >= today.AddDays(-Energy.AdaptiveWindowDays));
+        AdaptiveText = Loc.Format("Nutrition_AdaptiveWaiting",
+            Math.Min(logged, Energy.AdaptiveLoggedDays), Energy.AdaptiveLoggedDays, Math.Min(weighed, 3));
+        return profile;
+    }
+
+    /// <summary>Where the day is in the fasting plan: fasting since when, or eating until when. Refreshed every minute.</summary>
+    public void UpdateFasting()
+    {
+        var hours = settings.FastingHours;
+        ShowsFasting = IsPro && hours > 0 && IsToday;
+        if (!ShowsFasting)
+            return;
+        var now = DateTime.Now;
+        var opens = DateTime.Today.AddHours(settings.EatingStartHour);
+        var window = TimeSpan.FromHours(24 - hours);
+        // The window that started last: today's, or yesterday's when it hasn't opened yet.
+        if (now < opens)
+            opens = opens.AddDays(-1);
+        var closes = opens + window;
+        IsEatingWindow = now < closes;
+        if (IsEatingWindow)
+        {
+            FastingTitle = Loc.Get("Fasting_Eating");
+            FastingDetail = Loc.Format("Fasting_ClosesAt", Loc.Time(closes), Loc.Duration(closes - now));
+            FastingProgress = (now - opens) / window;
+        }
+        else
+        {
+            var fasted = now - closes;
+            FastingTitle = Loc.Format("Fasting_Fasting", Loc.Duration(fasted), hours);
+            FastingDetail = Loc.Format("Fasting_OpensAt", Loc.Time(opens.AddDays(1)));
+            FastingProgress = Math.Min(1, fasted.TotalHours / hours);
+        }
+    }
+
+    [RelayCommand]
+    private void ToggleDayKind()
+    {
+        var training = !_isTrainingDay;
+        // Back to what the workouts say: nothing to remember.
+        settings.SetDayKind(_date, training == _workedOut ? null : training);
+        Palette.Haptic();
     }
 
     internal static string Iso(DateTime date) => date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
@@ -159,9 +310,19 @@ public sealed partial class NutritionViewModel(
     {
         var copy = Loc.Get("Nutrition_CopyYesterday");
         var clear = Loc.Get("Nutrition_ClearMeal");
+        var save = Loc.Get("Nutrition_SaveTemplate");
         var hasFoods = _day?.Meals.Single(m => m.Meal == meal).Foods.Count > 0;
-        var choice = await dialogs.ChooseAsync(Loc.Meal(meal), hasFoods ? clear : null, copy);
-        if (choice == copy)
+        var choice = await dialogs.ChooseAsync(Loc.Meal(meal), hasFoods ? clear : null, hasFoods ? [copy, save] : [copy]);
+        if (choice == save)
+        {
+            var name = await dialogs.PromptAsync(save, Loc.Get("Nutrition_TemplateName"), Loc.Meal(meal), 60);
+            if (string.IsNullOrWhiteSpace(name))
+                return;
+            await store.SaveMealTemplateAsync(name, _date, meal, DateTime.Now);
+            Palette.Haptic();
+            SuccessToast.Show(Loc.Get("Nutrition_TemplateSaved"));
+        }
+        else if (choice == copy)
         {
             var copies = await store.CopyMealAsync(_date.AddDays(-1), _date, meal, DateTime.Now);
             if (copies.Count == 0)
@@ -239,7 +400,7 @@ public sealed class MacroItem(string name, double eaten, double? goal, Color col
 {
     public string Name { get; } = name;
 
-    public string ValueText { get; } = goal is { } g ? $"{Loc.Number(Math.Round(eaten))} / {Loc.Number(g)} g" : Loc.Grams(eaten);
+    public string ValueText { get; } = goal is { } g ? $"{Loc.Whole(eaten)} / {Loc.Whole(g)} g" : Loc.Grams(eaten);
 
     public double Progress { get; } = goal is > 0 ? Math.Min(1, eaten / goal.Value) : 0;
 
@@ -265,7 +426,7 @@ public sealed class MealCardViewModel
         KcalText = log.Foods.Count == 0 ? string.Empty : Loc.Kcal(totals.Kcal);
         MacrosText = log.Foods.Count == 0
             ? Loc.Get("Nutrition_MealEmpty")
-            : Loc.Format("Nutrition_MacrosShort", Loc.Number(Math.Round(totals.Protein)), Loc.Number(Math.Round(totals.Carbs)), Loc.Number(Math.Round(totals.Fat)));
+            : Loc.Format("Nutrition_MacrosShort", Loc.Whole(totals.Protein), Loc.Whole(totals.Carbs), Loc.Whole(totals.Fat));
         Foods = log.Foods.Select(f => new LoggedFoodItem(f, open)).ToList();
         HasFoods = Foods.Count > 0;
         AddCommand = new AsyncRelayCommand(() => add(log.Meal));

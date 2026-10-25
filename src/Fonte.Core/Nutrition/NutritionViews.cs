@@ -33,6 +33,16 @@ public sealed record NutritionDay(DateTime Date, IReadOnlyList<MealLog> Meals, i
     public Macros Totals => Macros.Sum(Meals.SelectMany(m => m.Foods).Select(f => f.Entry));
 }
 
-public sealed record DailyIntake(DateTime Date, double Kcal);
+/// <summary>What was eaten on a day; nothing logged reads 0.</summary>
+public sealed record DailyIntake(DateTime Date, double Kcal, double Protein = 0)
+{
+    public bool IsLogged => Kcal > 0;
+}
+
+/// <summary>A meal template and what it holds, ready to show.</summary>
+public sealed record MealTemplateView(MealTemplate Template, IReadOnlyList<LoggedFood> Items)
+{
+    public Macros Totals => Macros.Sum(Items.Select(i => i.Entry));
+}
 
 public sealed record RecipePart(Food Food, double Grams);

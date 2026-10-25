@@ -27,6 +27,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(Routes.FoodEntry, typeof(FoodEntryPage));
         Routing.RegisterRoute(Routes.CustomFood, typeof(CustomFoodPage));
         Routing.RegisterRoute(Routes.Recipe, typeof(RecipePage));
+        Routing.RegisterRoute(Routes.Import, typeof(ImportPage));
 
 #if ANDROID
         // Android draws an opaque bottom bar: match the app's surfaces and accent (iOS keeps its native glass bar).

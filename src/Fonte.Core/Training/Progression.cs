@@ -26,12 +26,15 @@ public static class Progression
     /// <summary>Seconds added to a timed exercise once every set was held long enough.</summary>
     public const int SecondsStep = 5;
 
-    /// <summary>Kilograms added to the load, by equipment (0 when the exercise is not loaded).</summary>
-    public static double Increment(Equipment equipment) => equipment switch
+    /// <summary>
+    /// Kilograms added to the load, by equipment (0 when the exercise is not loaded). Who lifts in pounds goes up
+    /// by the usual 5 lb (10 lb for a kettlebell), so the new load is one they can put on the bar.
+    /// </summary>
+    public static double Increment(Equipment equipment, bool pounds = false) => equipment switch
     {
-        Equipment.Barbell or Equipment.Machine or Equipment.Cable => 2.5,
-        Equipment.Dumbbell => 2,
-        Equipment.Kettlebell => 4,
+        Equipment.Barbell or Equipment.Machine or Equipment.Cable => pounds ? 5 * Units.KgPerLb : 2.5,
+        Equipment.Dumbbell => pounds ? 5 * Units.KgPerLb : 2,
+        Equipment.Kettlebell => pounds ? 10 * Units.KgPerLb : 4,
         _ => 0,
     };
 
@@ -39,7 +42,7 @@ public static class Progression
     /// Updates <paramref name="target"/> from the sets done in a workout and returns the raise, if any. Fewer sets
     /// than planned never raise the target. A target load still unknown (0) takes the load that was used.
     /// </summary>
-    public static ProgressionStep? Apply(Exercise exercise, TemplateExercise target, IReadOnlyList<WorkoutSet> done)
+    public static ProgressionStep? Apply(Exercise exercise, TemplateExercise target, IReadOnlyList<WorkoutSet> done, bool pounds = false)
     {
         if (done.Count == 0 || done.Count < target.Sets)
             return null;
@@ -63,10 +66,11 @@ public static class Progression
                     target.Weight = used;
                     return null;
                 }
-                if (done.All(s => s.Reps >= target.Reps && s.Weight >= target.Weight))
+                // A load typed in pounds comes back a hair under the target once converted and rounded.
+                if (done.All(s => s.Reps >= target.Reps && s.Weight >= target.Weight - 0.05))
                 {
                     var from = target.Weight;
-                    target.Weight = Math.Round(from + Increment(exercise.Equipment), 2);
+                    target.Weight = Math.Round(from + Increment(exercise.Equipment, pounds), 3);
                     return new ProgressionStep(exercise, ProgressionKind.Weight, from, target.Weight);
                 }
                 return null;

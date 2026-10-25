@@ -17,6 +17,9 @@ public sealed partial class FonteStore(string databasePath) : IAsyncDisposable
     /// </summary>
     public event EventHandler? Changed;
 
+    /// <summary>The user lifts in pounds: the automatic progression then raises loads by 5 lb.</summary>
+    public bool UsesPounds { get; set; }
+
     public async Task<IReadOnlyList<Exercise>> GetExercisesAsync()
     {
         var db = await GetConnectionAsync();
@@ -126,6 +129,7 @@ public sealed partial class FonteStore(string databasePath) : IAsyncDisposable
                 await connection.CreateTablesAsync<TrainingProgram, WorkoutTemplate, TemplateExercise>();
                 await connection.CreateTablesAsync<BodyWeight, BodyMeasurement, BodyPhoto>();
                 await connection.CreateTablesAsync<Food, FoodEntry, RecipeIngredient, WaterEntry>();
+                await connection.CreateTablesAsync<MealTemplate, MealTemplateItem>();
                 await AddMissingCatalogExercisesAsync(connection);
                 _connection = connection;
             }

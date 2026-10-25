@@ -49,8 +49,15 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
                 IsSelected = a == accent,
             })
             .ToList();
-        var available = settings.Plates;
-        PlateOptions = Plates.Standard
+        _unitName = UnitNameOf(settings.UsesPounds);
+        _plateOptions = BuildPlateOptions();
+    }
+
+    /// <summary>The plates offered: those of a gym in kilograms, or in pounds.</summary>
+    private IReadOnlyList<SelectableOption> BuildPlateOptions()
+    {
+        var available = _settings.Plates;
+        return (_settings.UsesPounds ? Plates.StandardPounds : Plates.Standard)
             .Select((p, i) => new SelectableOption(p.ToString(System.Globalization.CultureInfo.InvariantCulture), i, int.MaxValue, TogglePlate)
             {
                 Label = Loc.Number(p),
@@ -63,7 +70,14 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
 
     public string AppVersion => $"Fonte {AppInfo.Current.VersionString}";
 
-    public IReadOnlyList<SelectableOption> PlateOptions { get; }
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(PlatesHint))]
+    private IReadOnlyList<SelectableOption> _plateOptions;
+
+    public string PlatesHint => Loc.Format("Settings_PlatesHint", Loc.WeightUnit);
+
+    [ObservableProperty]
+    private string _unitName;
 
     /// <summary>The colours the app can take, as swatches.</summary>
     public IReadOnlyList<SelectableOption> AccentOptions { get; }
@@ -118,6 +132,27 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
     }
 
     private static string NameOf(TrainingGoal goal) => Loc.Get($"Goal_{goal}");
+
+    private static string UnitNameOf(bool pounds) => pounds ? Loc.Get("Settings_UnitPounds") : Loc.Get("Settings_UnitKilograms");
+
+    [RelayCommand]
+    private async Task ChooseUnitAsync()
+    {
+        var kilograms = Loc.Get("Settings_UnitKilograms");
+        var pounds = Loc.Get("Settings_UnitPounds");
+        var current = _settings.UsesPounds ? pounds : kilograms;
+        var choice = await _dialogs.ChooseAsync(Loc.Get("Settings_Unit"), null,
+            [.. new[] { kilograms, pounds }.Select(o => o == current ? $"{o}  ✓" : o)]);
+        if (choice is null || choice.StartsWith(current, StringComparison.Ordinal))
+            return;
+        _settings.UsesPounds = choice == pounds;
+        UnitName = UnitNameOf(_settings.UsesPounds);
+        PlateOptions = BuildPlateOptions();
+        Palette.Haptic();
+    }
+
+    [RelayCommand]
+    private Task ImportAsync() => Shell.Current.GoToAsync(Routes.Import);
 
     private static string LastBackupOf(DateTimeOffset? date) => date is { } last
         ? Loc.Format("Settings_LastBackup", Loc.Date(last.LocalDateTime, "d MMMM yyyy"))

@@ -27,6 +27,8 @@ public sealed partial class FonteStore
             FoodEntries = conn.Table<FoodEntry>().ToList(),
             RecipeIngredients = conn.Table<RecipeIngredient>().ToList(),
             Water = conn.Table<WaterEntry>().ToList(),
+            MealTemplates = conn.Table<MealTemplate>().ToList(),
+            MealTemplateItems = conn.Table<MealTemplateItem>().ToList(),
         });
         return data!;
     }
@@ -51,6 +53,8 @@ public sealed partial class FonteStore
             conn.DeleteAll<BodyMeasurement>();
             if (data.Photos is not null)
                 conn.DeleteAll<BodyPhoto>();
+            conn.DeleteAll<MealTemplateItem>();
+            conn.DeleteAll<MealTemplate>();
             conn.DeleteAll<WaterEntry>();
             conn.DeleteAll<FoodEntry>();
             conn.DeleteAll<RecipeIngredient>();
@@ -71,6 +75,8 @@ public sealed partial class FonteStore
             Insert(conn, data.FoodEntries);
             Insert(conn, data.RecipeIngredients);
             Insert(conn, data.Water);
+            Insert(conn, data.MealTemplates);
+            Insert(conn, data.MealTemplateItems);
         });
         // A backup made before nutrition tracking has no foods: the CIQUAL table is loaded again when needed.
         _catalogReady = false;

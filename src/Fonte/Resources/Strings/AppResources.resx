@@ -886,7 +886,7 @@
     <value>Automatic progression</value>
   </data>
   <data name="Template_ProgressionText" xml:space="preserve">
-    <value>When every set reaches its reps, the load goes up next time: +2.5 kg on a barbell or machine, +2 kg with dumbbells, one more rep or 5 more seconds without a load. An empty load is taken from your first workout.</value>
+    <value>When every set reaches its reps, the load goes up next time: +2.5 kg on a barbell or machine, +2 kg with dumbbells, one more rep or 5 more seconds without a load. An empty load is taken from your first workout. In pounds, +5 lb.</value>
   </data>
   <data name="Template_MoveUp" xml:space="preserve">
     <value>Move up</value>
@@ -1057,13 +1057,13 @@
     <value>Weight goal</value>
   </data>
   <data name="Body_GoalText" xml:space="preserve">
-    <value>In kilograms</value>
+    <value>In {0}</value>
   </data>
   <data name="Body_AddWeight" xml:space="preserve">
     <value>Today's weight</value>
   </data>
   <data name="Body_AddWeightText" xml:space="preserve">
-    <value>In kilograms; it replaces today's earlier weighing.</value>
+    <value>In {0}; it replaces today's earlier weighing.</value>
   </data>
   <data name="Body_DeleteWeighing" xml:space="preserve">
     <value>Delete this weighing</value>
@@ -1183,7 +1183,7 @@
     <value>Suggested warm-up</value>
   </data>
   <data name="Plates_Available" xml:space="preserve">
-    <value>Plates: {0} kg · change them in the settings</value>
+    <value>Plates: {0} {1} · change them in the settings</value>
   </data>
   <data name="Settings_TrainingSection" xml:space="preserve">
     <value>TRAINING</value>
@@ -1207,7 +1207,7 @@
     <value>PLATES</value>
   </data>
   <data name="Settings_PlatesHint" xml:space="preserve">
-    <value>The plates your gym has, in kg: the calculator only uses these.</value>
+    <value>The plates your gym has, in {0}: the calculator only uses these.</value>
   </data>
   <data name="Settings_OpenPlates" xml:space="preserve">
     <value>Open the plate calculator</value>
@@ -1981,9 +1981,6 @@ Everything on this device will be replaced, except the photos, which are kept.</
   <data name="Nutrition_WeekEmpty" xml:space="preserve">
     <value>Nothing logged this week yet.</value>
   </data>
-  <data name="Nutrition_WeekAverage" xml:space="preserve">
-    <value>Average of the days logged: {0} · target {1}</value>
-  </data>
   <data name="Nutrition_Sources" xml:space="preserve">
     <value>Foods: ANSES Ciqual 2020 table (Licence Ouverte) and Open Food Facts (ODbL). Estimates only, not medical advice.</value>
   </data>
@@ -2018,7 +2015,7 @@ Everything on this device will be replaced, except the photos, which are kept.</
     <value>Height (cm)</value>
   </data>
   <data name="Nutrition_Weight" xml:space="preserve">
-    <value>Weight (kg)</value>
+    <value>Weight ({0})</value>
   </data>
   <data name="Nutrition_Activity" xml:space="preserve">
     <value>Activity</value>
@@ -2258,6 +2255,237 @@ Everything on this device will be replaced, except the photos, which are kept.</
     <value>Nutrition</value>
   </data>
   <data name="Pro_NutritionText" xml:space="preserve">
-    <value>Calories and macros for your goal, 3,000 foods offline, barcode scanning, dishes and water</value>
+    <value>Calories and macros for your goal, adjusted every week, 3,000 foods offline, barcode scanning, dishes, usual meals, fasting and water</value>
+  </data>
+  <data name="Workout_ColLb" xml:space="preserve">
+    <value>LB</value>
+  </data>
+  <data name="Unit_Kilograms" xml:space="preserve">
+    <value>kilograms</value>
+  </data>
+  <data name="Unit_Pounds" xml:space="preserve">
+    <value>pounds</value>
+  </data>
+  <data name="Settings_Unit" xml:space="preserve">
+    <value>Weight unit</value>
+  </data>
+  <data name="Settings_UnitKilograms" xml:space="preserve">
+    <value>Kilograms (kg)</value>
+  </data>
+  <data name="Settings_UnitPounds" xml:space="preserve">
+    <value>Pounds (lb)</value>
+  </data>
+  <data name="Settings_Import" xml:space="preserve">
+    <value>Import from Strong or Hevy</value>
+  </data>
+  <data name="Settings_ImportHint" xml:space="preserve">
+    <value>Bring your workout history into Fonte</value>
+  </data>
+  <data name="Import_Title" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="Import_Intro" xml:space="preserve">
+    <value>Coming from another app? Export your history there as a CSV file, then choose it here: your workouts, sets and records come with you.</value>
+  </data>
+  <data name="Import_StrongHow" xml:space="preserve">
+    <value>Profile › Settings (gear) › Export Strong Data, then save the file to Files.</value>
+  </data>
+  <data name="Import_HevyHow" xml:space="preserve">
+    <value>Profile › Settings › Export &amp; Import Data › Export Workouts, then save the file to Files.</value>
+  </data>
+  <data name="Import_Safe" xml:space="preserve">
+    <value>Nothing is replaced: workouts already in Fonte are skipped, so importing twice is harmless.</value>
+  </data>
+  <data name="Import_Choose" xml:space="preserve">
+    <value>Choose the file</value>
+  </data>
+  <data name="Import_Confirm" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="Import_UnknownTitle" xml:space="preserve">
+    <value>File not recognized</value>
+  </data>
+  <data name="Import_UnknownText" xml:space="preserve">
+    <value>This isn't a workout export from Strong or Hevy, or it holds no workout.</value>
+  </data>
+  <data name="Import_UnitQuestion" xml:space="preserve">
+    <value>Are the loads in this file in kilograms or in pounds?</value>
+  </data>
+  <data name="Import_From" xml:space="preserve">
+    <value>From {0}</value>
+  </data>
+  <data name="Import_Workouts" xml:space="preserve">
+    <value>{0} · {1}</value>
+  </data>
+  <data name="Import_WorkoutsSome" xml:space="preserve">
+    <value>{0} · {1} ({2} already in Fonte)</value>
+  </data>
+  <data name="Import_Period" xml:space="preserve">
+    <value>From {0} to {1}</value>
+  </data>
+  <data name="Import_Unit" xml:space="preserve">
+    <value>Loads in {0}</value>
+  </data>
+  <data name="Import_ChangeUnit" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="Import_AllExercisesKnown" xml:space="preserve">
+    <value>Every exercise already exists in Fonte.</value>
+  </data>
+  <data name="Import_NewExercises" xml:space="preserve">
+    <value>New exercises ({0}): {1}</value>
+  </data>
+  <data name="Import_OtherFile" xml:space="preserve">
+    <value>Choose another file</value>
+  </data>
+  <data name="Import_DoneTitle" xml:space="preserve">
+    <value>Imported</value>
+  </data>
+  <data name="Import_DoneText" xml:space="preserve">
+    <value>Added: {0}, {1}. Created: {2}.</value>
+  </data>
+  <data name="Error_EmptyMeal" xml:space="preserve">
+    <value>Nothing was eaten at this meal yet.</value>
+  </data>
+  <data name="FoodShelf_Templates" xml:space="preserve">
+    <value>Usual meals</value>
+  </data>
+  <data name="FoodShelf_TemplatesEmpty" xml:space="preserve">
+    <value>Save a meal you often eat with “⋯ › Save as a usual meal”: it then comes back here in one tap.</value>
+  </data>
+  <data name="MealTemplate_Delete" xml:space="preserve">
+    <value>Delete this usual meal</value>
+  </data>
+  <data name="Nutrition_SaveTemplate" xml:space="preserve">
+    <value>Save as a usual meal</value>
+  </data>
+  <data name="Nutrition_TemplateName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Nutrition_TemplateSaved" xml:space="preserve">
+    <value>Usual meal saved</value>
+  </data>
+  <data name="Nutrition_TrainingDay" xml:space="preserve">
+    <value>🏋️ Training day · {0}</value>
+  </data>
+  <data name="Nutrition_RestDay" xml:space="preserve">
+    <value>😴 Rest day · {0}</value>
+  </data>
+  <data name="Nutrition_WeekLogged" xml:space="preserve">
+    <value>Days logged: {0}</value>
+  </data>
+  <data name="Nutrition_WeekKcal" xml:space="preserve">
+    <value>kcal / day</value>
+  </data>
+  <data name="Nutrition_WeekProtein" xml:space="preserve">
+    <value>protein / day</value>
+  </data>
+  <data name="Nutrition_WeekOnTarget" xml:space="preserve">
+    <value>on target</value>
+  </data>
+  <data name="Nutrition_WeekWeight" xml:space="preserve">
+    <value>weight</value>
+  </data>
+  <data name="Nutrition_AdaptedOn" xml:space="preserve">
+    <value>Target adjusted on {1}: your real maintenance is {0}.</value>
+  </data>
+  <data name="Nutrition_AdaptedNow" xml:space="preserve">
+    <value>Target adjusted: your real maintenance is {0} ({1} days logged, weight {2} a week).</value>
+  </data>
+  <data name="Nutrition_AdaptiveWaiting" xml:space="preserve">
+    <value>Weekly adjustment: {0}/{1} days fully logged and {2}/3 weighings over the last 3 weeks.</value>
+  </data>
+  <data name="Nutrition_GoalDetailMeasured" xml:space="preserve">
+    <value>Basal metabolism {0} · measured maintenance {1}</value>
+  </data>
+  <data name="Nutrition_Options" xml:space="preserve">
+    <value>Adjustments</value>
+  </data>
+  <data name="Nutrition_Adaptive" xml:space="preserve">
+    <value>Adjust every week</value>
+  </data>
+  <data name="Nutrition_AdaptiveHint" xml:space="preserve">
+    <value>Measures your real maintenance from your meals and weighings, and updates the target.</value>
+  </data>
+  <data name="Nutrition_AdaptiveMeasured" xml:space="preserve">
+    <value>Maintenance measured: {0} (on {1}).</value>
+  </data>
+  <data name="Nutrition_TrainingDays" xml:space="preserve">
+    <value>More on training days</value>
+  </data>
+  <data name="Nutrition_TrainingDaysHint" xml:space="preserve">
+    <value>+10 % on workout days, a little less on the others: the same week for {0} workouts.</value>
+  </data>
+  <data name="Fasting_Title" xml:space="preserve">
+    <value>Intermittent fasting</value>
+  </data>
+  <data name="Fasting_Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="Fasting_Start" xml:space="preserve">
+    <value>Eating window opens at</value>
+  </data>
+  <data name="Fasting_Window" xml:space="preserve">
+    <value>Eat from {0} to {1}</value>
+  </data>
+  <data name="Fasting_Eating" xml:space="preserve">
+    <value>Eating window open</value>
+  </data>
+  <data name="Fasting_ClosesAt" xml:space="preserve">
+    <value>Closes at {0} · {1} left</value>
+  </data>
+  <data name="Fasting_Fasting" xml:space="preserve">
+    <value>Fasting for {0} of {1} h</value>
+  </data>
+  <data name="Fasting_OpensAt" xml:space="preserve">
+    <value>You can eat from {0}</value>
+  </data>
+  <data name="Reminder_Section" xml:space="preserve">
+    <value>Reminders</value>
+  </data>
+  <data name="Reminder_Meals" xml:space="preserve">
+    <value>Log my meals</value>
+  </data>
+  <data name="Reminder_MealsHint" xml:space="preserve">
+    <value>At 9:30, 13:30 and 20:30</value>
+  </data>
+  <data name="Reminder_Water" xml:space="preserve">
+    <value>Drink water</value>
+  </data>
+  <data name="Reminder_WaterHint" xml:space="preserve">
+    <value>Every 2 hours from 10:00 to 20:00</value>
+  </data>
+  <data name="Reminder_Fasting" xml:space="preserve">
+    <value>Fasting window</value>
+  </data>
+  <data name="Reminder_FastingHint" xml:space="preserve">
+    <value>When it opens, and an hour before it closes</value>
+  </data>
+  <data name="Reminder_MealTitle" xml:space="preserve">
+    <value>Fonte</value>
+  </data>
+  <data name="Reminder_Breakfast" xml:space="preserve">
+    <value>Breakfast logged? It takes ten seconds 🥐</value>
+  </data>
+  <data name="Reminder_Lunch" xml:space="preserve">
+    <value>Don't forget to log your lunch 🥗</value>
+  </data>
+  <data name="Reminder_Dinner" xml:space="preserve">
+    <value>Log your dinner to close the day 🍽️</value>
+  </data>
+  <data name="Reminder_WaterTitle" xml:space="preserve">
+    <value>A glass of water? 💧</value>
+  </data>
+  <data name="Reminder_WaterText" xml:space="preserve">
+    <value>Tap + 250 ml in Fonte once it's drunk.</value>
+  </data>
+  <data name="Reminder_FastingTitle" xml:space="preserve">
+    <value>Intermittent fasting</value>
+  </data>
+  <data name="Reminder_FastingOpens" xml:space="preserve">
+    <value>Your eating window is open.</value>
+  </data>
+  <data name="Reminder_FastingCloses" xml:space="preserve">
+    <value>Your eating window closes in an hour.</value>
   </data>
 </root>

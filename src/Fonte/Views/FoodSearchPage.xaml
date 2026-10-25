@@ -69,27 +69,33 @@
                 </Border>
             </Grid>
 
-            <HorizontalStackLayout BindableLayout.ItemsSource="{Binding Shelves}" IsVisible="{Binding IsShelfVisible}" Spacing="8">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate x:DataType="vm:SelectableOption">
-                        <Border c:Touch.Command="{Binding SelectCommand}" Style="{StaticResource Chip}">
-                            <Border.Triggers>
-                                <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
-                                    <Setter Property="Background" Value="{DynamicResource AccentGradient}" />
-                                    <Setter Property="Stroke" Value="Transparent" />
-                                </DataTrigger>
-                            </Border.Triggers>
-                            <Label FontFamily="OpenSansSemibold" FontSize="14" Text="{Binding Label}">
-                                <Label.Triggers>
-                                    <DataTrigger Binding="{Binding IsSelected}" TargetType="Label" Value="True">
-                                        <Setter Property="TextColor" Value="White" />
+            <ScrollView
+                Margin="-20,0"
+                HorizontalScrollBarVisibility="Never"
+                IsVisible="{Binding IsShelfVisible}"
+                Orientation="Horizontal">
+                <HorizontalStackLayout Padding="20,0" BindableLayout.ItemsSource="{Binding Shelves}" Spacing="8">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="vm:SelectableOption">
+                            <Border c:Touch.Command="{Binding SelectCommand}" Style="{StaticResource Chip}">
+                                <Border.Triggers>
+                                    <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource AccentGradient}" />
+                                        <Setter Property="Stroke" Value="Transparent" />
                                     </DataTrigger>
-                                </Label.Triggers>
-                            </Label>
-                        </Border>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </HorizontalStackLayout>
+                                </Border.Triggers>
+                                <Label FontFamily="OpenSansSemibold" FontSize="14" Text="{Binding Label}">
+                                    <Label.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected}" TargetType="Label" Value="True">
+                                            <Setter Property="TextColor" Value="White" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </HorizontalStackLayout>
+            </ScrollView>
         </VerticalStackLayout>
 
         <CollectionView
@@ -156,6 +162,20 @@
                                 IsVisible="{Binding IsFavorite}"
                                 VerticalOptions="Center"
                                 WidthRequest="16" />
+                            <Border
+                                Grid.Column="1"
+                                Padding="8"
+                                c:Touch.Command="{Binding DeleteCommand}"
+                                HeightRequest="34"
+                                IsVisible="{Binding IsTemplate}"
+                                StrokeThickness="0"
+                                VerticalOptions="Center"
+                                WidthRequest="34"
+                                SemanticProperties.Description="{l:Tr Common_More}">
+                                <c:IconView
+                                    Color="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}"
+                                    Data="{x:Static c:Icons.More}" />
+                            </Border>
                         </Grid>
                     </Border>
                 </DataTemplate>

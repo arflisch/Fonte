@@ -208,7 +208,7 @@
                                             Grid.Column="2"
                                             IsVisible="{Binding ShowWeight}"
                                             Style="{StaticResource ColumnHeader}"
-                                            Text="{l:Tr Workout_ColKg}" />
+                                            Text="{x:Static l:Loc.WeightHeader}" />
                                         <Label
                                             Grid.Column="3"
                                             Style="{StaticResource ColumnHeader}"

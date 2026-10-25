@@ -209,7 +209,10 @@ public sealed class BackupService(
         settings.Plates.ToList(),
         settings.Accent.Key,
         settings.NutritionProfile,
-        settings.WaterGoalMl);
+        settings.WaterGoalMl,
+        settings.UsesPounds,
+        settings.FastingHours,
+        settings.EatingStartHour);
 
     /// <summary>The backup's preferences, except values this version would not understand. The language stays.</summary>
     private void Apply(BackupSettings saved)
@@ -221,6 +224,11 @@ public sealed class BackupService(
             settings.Goal = saved.Goal;
         settings.SessionsPerWeek = saved.SessionsPerWeek;
         settings.GoalWeight = saved.GoalWeight;
+        // The bar and the plates are those of the unit: set it first.
+        if (saved.Pounds is { } pounds)
+            settings.UsesPounds = pounds;
+        settings.FastingHours = saved.FastingHours;
+        settings.EatingStartHour = saved.EatingStartHour;
         if (saved.BarWeight > 0)
             settings.BarWeight = saved.BarWeight;
         if (saved.Plates?.Where(p => p > 0).ToList() is { Count: > 0 } plates)

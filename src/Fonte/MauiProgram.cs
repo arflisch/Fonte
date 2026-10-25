@@ -42,6 +42,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<FinishedWorkouts>();
         builder.Services.AddSingleton<ProductLookup>();
         builder.Services.AddSingleton<BarcodeScanner>();
+        builder.Services.AddSingleton<NutritionReminders>();
         builder.Services.AddSingleton<AppShell>();
 
         // Tabs
@@ -69,6 +70,8 @@ public static class MauiProgram
         builder.Services.AddTransient<CustomFoodPage>();
         builder.Services.AddTransient<RecipeViewModel>();
         builder.Services.AddTransient<RecipePage>();
+        builder.Services.AddTransient<ImportViewModel>();
+        builder.Services.AddTransient<ImportPage>();
         builder.Services.AddTransient<WelcomeViewModel>();
         builder.Services.AddTransient<WelcomePage>();
         builder.Services.AddTransient<TemplateViewModel>();

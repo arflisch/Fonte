@@ -212,4 +212,77 @@ public sealed class NutritionTests : StoreTestBase
 
         Assert.Equal(44, Assert.Single(products).Kcal);
     }
+
+    [Fact]
+    public void Training_days_get_more_and_rest_days_less_with_the_same_week()
+    {
+        var profile = new NutritionProfile(Sex.Male, 1992, 180, ActivityLevel.Moderate, WeightGoal.Maintain, 0, 1.8, TrainingDays: true);
+        var targets = Energy.Targets(profile, 80, Today);
+
+        var training = Energy.ForDay(profile, targets, training: true, sessionsPerWeek: 3);
+        var rest = Energy.ForDay(profile, targets, training: false, sessionsPerWeek: 3);
+
+        Assert.True(training.Kcal > targets.Kcal && rest.Kcal < targets.Kcal);
+        Assert.InRange(3 * training.Kcal + 4 * rest.Kcal - 7 * targets.Kcal, -40, 40);
+        Assert.Equal(targets.Protein, training.Protein);
+        Assert.Equal(Math.Round(targets.Carbs + (training.Kcal - targets.Kcal) / 4), training.Carbs);
+        Assert.Equal(targets, Energy.ForDay(profile with { TrainingDays = false }, targets, true, 3));
+    }
+
+    [Fact]
+    public void Maintenance_is_measured_from_the_meals_logged_and_the_weight_trend()
+    {
+        // 2,500 kcal a day while losing 0.5 kg a week: maintenance is 2,500 + 550.
+        var days = Enumerable.Range(1, 21).Select(i => new DailyIntake(Today.Date.AddDays(-i), 2500)).ToList();
+        var weights = Enumerable.Range(0, 4).Select(i => (Today.Date.AddDays(-21 + i * 7), 80 - i * 0.5)).ToList();
+
+        var estimate = Energy.MeasureMaintenance(days, weights, Today)!;
+
+        Assert.Equal(3050, estimate.Kcal);
+        Assert.Equal((21, -0.5), (estimate.LoggedDays, estimate.KgPerWeek));
+        Assert.Null(Energy.MeasureMaintenance(days.Take(8).ToList(), weights, Today));
+        Assert.Null(Energy.MeasureMaintenance(days, weights.Take(2).ToList(), Today));
+
+        // Used instead of the formula when adaptive, but kept within 25 % of it.
+        var profile = new NutritionProfile(Sex.Male, 1992, 180, ActivityLevel.Moderate, WeightGoal.Maintain, 0, 1.8,
+            Adaptive: true, MeasuredMaintenance: 3050);
+        var formula = Energy.Targets(profile with { Adaptive = false }, 80, Today);
+        var adapted = Energy.Targets(profile, 80, Today);
+        Assert.True(adapted.IsMeasured && !formula.IsMeasured);
+        Assert.Equal(Math.Round(Math.Min(3050, formula.Maintenance * 1.25)), adapted.Maintenance, 0);
+    }
+
+    [Fact]
+    public async Task A_meal_saved_as_a_template_is_logged_again_in_one_go()
+    {
+        var oats = (await Store.SearchFoodsAsync("flocon avoine")).First();
+        var milk = (await Store.SearchFoodsAsync("lait demi ecreme")).First();
+        await Store.AddFoodEntryAsync(Today, Meal.Breakfast, oats.Id, 60, Today);
+        await Store.AddFoodEntryAsync(Today, Meal.Breakfast, milk.Id, 250, Today);
+
+        var template = await Store.SaveMealTemplateAsync("Porridge", Today, Meal.Breakfast, Today);
+        var view = Assert.Single(await Store.GetMealTemplatesAsync(Meal.Breakfast));
+        Assert.Equal(("Porridge", 2), (view.Template.Name, view.Items.Count));
+
+        var tomorrow = Today.AddDays(1);
+        var added = await Store.AddMealTemplateAsync(template.Id, tomorrow, Meal.Breakfast, tomorrow);
+        Assert.Equal(2, added.Count);
+        var day = await Store.GetNutritionDayAsync(tomorrow);
+        Assert.Equal(view.Totals.Kcal, day.Totals.Kcal);
+
+        await Assert.ThrowsAsync<FonteException>(() => Store.SaveMealTemplateAsync("Nothing", Today, Meal.Dinner, Today));
+        await Store.DeleteMealTemplateAsync(template.Id);
+        Assert.Empty(await Store.GetMealTemplatesAsync());
+    }
+
+    [Fact]
+    public async Task Daily_intake_counts_the_protein_too()
+    {
+        var chicken = (await Store.SearchFoodsAsync("poulet filet sans peau cru")).First();
+        await Store.AddFoodEntryAsync(Today, Meal.Lunch, chicken.Id, 200, Today);
+
+        var day = Assert.Single(await Store.GetDailyIntakeAsync(Today, Today));
+        Assert.Equal(Energy.Scale(chicken.Protein, 200), day.Protein, 1);
+        Assert.True(day.IsLogged);
+    }
 }

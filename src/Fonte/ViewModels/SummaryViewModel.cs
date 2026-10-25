@@ -192,7 +192,7 @@ public sealed partial class SummaryViewModel : ObservableObject, IQueryAttributa
     /// <summary>"60 → 62.5 kg", "8 → 9 reps", "45 s → 50 s".</summary>
     private static string ProgressionText(ProgressionStep step) => step.Kind switch
     {
-        ProgressionKind.Weight => $"{Loc.Number(step.From)} → {Loc.Weight(step.To)}",
+        ProgressionKind.Weight => $"{Loc.WeightNumber(step.From)} → {Loc.Weight(step.To)}",
         ProgressionKind.Seconds => $"{Loc.Seconds((int)step.From)} → {Loc.Seconds((int)step.To)}",
         _ => $"{Loc.Number(step.From)} → {Loc.Number(step.To)} {Loc.Get("Unit_Reps")}",
     };
@@ -203,7 +203,7 @@ public sealed partial class SummaryViewModel : ObservableObject, IQueryAttributa
         if (record.Exercise.Tracking == Tracking.WeightAndReps && record.Set.Weight > 0)
         {
             var oneRepMax = Performance.EstimatedOneRepMax(record.Set.Weight, record.Set.Reps);
-            return Loc.Format("Summary_RecordOneRepMax", Loc.Weight(Math.Round(oneRepMax, 1)), Loc.Number(Math.Round(oneRepMax - record.PreviousBest, 1)));
+            return Loc.Format("Summary_RecordOneRepMax", Loc.Weight(Math.Round(oneRepMax, 1)), Loc.WeightNumber(Math.Round(oneRepMax - record.PreviousBest, 1)));
         }
         var before = record.Exercise.Tracking == Tracking.Time
             ? Loc.Seconds((int)record.PreviousBest)

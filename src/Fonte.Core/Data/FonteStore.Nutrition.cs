@@ -252,11 +252,103 @@ public sealed partial class FonteStore
         var start = from.Date;
         var end = to.Date;
         var entries = await db.Table<FoodEntry>().Where(e => e.Date >= start && e.Date <= end).ToListAsync();
-        var byDay = entries.GroupBy(e => e.Date.Date).ToDictionary(g => g.Key, g => g.Sum(e => e.Kcal));
+        var byDay = entries.GroupBy(e => e.Date.Date).ToDictionary(g => g.Key, g => (Kcal: g.Sum(e => e.Kcal), Protein: g.Sum(e => e.Protein)));
         return Enumerable.Range(0, (end - start).Days + 1)
             .Select(i => start.AddDays(i))
-            .Select(d => new DailyIntake(d, Math.Round(byDay.GetValueOrDefault(d))))
+            .Select(d => byDay.TryGetValue(d, out var day)
+                ? new DailyIntake(d, Math.Round(day.Kcal), Math.Round(day.Protein, 1))
+                : new DailyIntake(d, 0))
             .ToList();
+    }
+
+    // Meal templates
+
+    /// <summary>Saves what was eaten at a meal of a day as a template, to log it again in one tap.</summary>
+    public async Task<MealTemplate> SaveMealTemplateAsync(string name, DateTime date, Meal meal, DateTime now)
+    {
+        name = name.Trim();
+        if (name.Length == 0)
+            throw new FonteException(FonteError.EmptyName, "A meal template needs a name.");
+        var db = await GetFoodsConnectionAsync();
+        var day = date.Date;
+        var entries = await db.Table<FoodEntry>().Where(e => e.Date == day && e.Meal == meal).OrderBy(e => e.CreatedAt).ToListAsync();
+        if (entries.Count == 0)
+            throw new FonteException(FonteError.EmptyMeal, "Nothing was eaten at this meal.");
+        var template = new MealTemplate { Name = Trim(name, 60), Meal = meal, CreatedAt = now };
+        await db.RunInTransactionAsync(conn =>
+        {
+            conn.Insert(template);
+            conn.InsertAll(entries.Select((e, i) => new MealTemplateItem { TemplateId = template.Id, FoodId = e.FoodId, Grams = e.Grams, Position = i }));
+        });
+        OnChanged();
+        return template;
+    }
+
+    /// <summary>The meal templates with their foods; those of <paramref name="meal"/> first, then the most used.</summary>
+    public async Task<IReadOnlyList<MealTemplateView>> GetMealTemplatesAsync(Meal? meal = null)
+    {
+        var db = await GetFoodsConnectionAsync();
+        var templates = await db.Table<MealTemplate>().ToListAsync();
+        var items = await db.Table<MealTemplateItem>().ToListAsync();
+        var views = new List<MealTemplateView>();
+        foreach (var template in templates
+            .OrderByDescending(t => t.Meal == meal)
+            .ThenByDescending(t => t.LastUsedAt ?? t.CreatedAt))
+        {
+            var logged = new List<LoggedFood>();
+            foreach (var item in items.Where(i => i.TemplateId == template.Id).OrderBy(i => i.Position))
+            {
+                if (await db.FindAsync<Food>(item.FoodId) is not { } food)
+                    continue;
+                var entry = new FoodEntry { FoodId = food.Id };
+                Fill(entry, food, item.Grams);
+                logged.Add(new LoggedFood(entry, food));
+            }
+            views.Add(new MealTemplateView(template, logged));
+        }
+        return views;
+    }
+
+    /// <summary>Logs every food of a template at a meal of a day, with the foods' current nutrients.</summary>
+    public async Task<IReadOnlyList<FoodEntry>> AddMealTemplateAsync(int templateId, DateTime date, Meal meal, DateTime now)
+    {
+        var db = await GetFoodsConnectionAsync();
+        var template = await db.FindAsync<MealTemplate>(templateId)
+            ?? throw new FonteException(FonteError.FoodNotFound, $"Meal template {templateId} not found.");
+        var items = await db.Table<MealTemplateItem>().Where(i => i.TemplateId == templateId).OrderBy(i => i.Position).ToListAsync();
+        var entries = new List<FoodEntry>();
+        var foods = new List<Food>();
+        foreach (var item in items)
+        {
+            if (await db.FindAsync<Food>(item.FoodId) is not { } food)
+                continue;
+            var entry = new FoodEntry { Date = date.Date, Meal = meal, FoodId = food.Id, CreatedAt = now, UpdatedAt = now };
+            Fill(entry, food, item.Grams);
+            entries.Add(entry);
+            food.LastUsedAt = now;
+            foods.Add(food);
+        }
+        template.LastUsedAt = now;
+        await db.RunInTransactionAsync(conn =>
+        {
+            conn.InsertAll(entries);
+            foreach (var food in foods)
+                conn.Update(food);
+            conn.Update(template);
+        });
+        OnChanged();
+        return entries;
+    }
+
+    public async Task DeleteMealTemplateAsync(int templateId)
+    {
+        var db = await GetFoodsConnectionAsync();
+        await db.RunInTransactionAsync(conn =>
+        {
+            conn.Execute("DELETE FROM meal_template_items WHERE TemplateId = ?", templateId);
+            conn.Execute("DELETE FROM meal_templates WHERE Id = ?", templateId);
+        });
+        OnChanged();
     }
 
     // Recipes

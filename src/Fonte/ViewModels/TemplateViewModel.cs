@@ -222,7 +222,7 @@ public sealed partial class TemplateExerciseViewModel : ObservableObject
         _valueText = IsTime
             ? item.Seconds > 0 ? Loc.Number(UsesMinutes ? Math.Round(item.Seconds / 60.0, 2) : item.Seconds) : string.Empty
             : item.Reps > 0 ? Loc.Number(item.Reps) : string.Empty;
-        _weightText = item.Weight > 0 ? Loc.Number(item.Weight) : string.Empty;
+        _weightText = item.Weight > 0 ? Loc.WeightNumber(item.Weight) : string.Empty;
         MenuCommand = new AsyncRelayCommand(() => owner.ExerciseMenuAsync(this));
     }
 
@@ -272,7 +272,8 @@ public sealed partial class TemplateExerciseViewModel : ObservableObject
 
     public int Seconds => IsTime ? (int)Math.Round(Parse(ValueText) * (UsesMinutes ? 60 : 1)) : 0;
 
-    public double Weight => ShowWeight ? Parse(WeightText) : 0;
+    /// <summary>The load typed, in kilograms.</summary>
+    public double Weight => ShowWeight ? Loc.TypedWeight(Parse(WeightText)) : 0;
 
     public IAsyncRelayCommand MenuCommand { get; }
 

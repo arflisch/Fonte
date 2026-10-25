@@ -86,4 +86,18 @@ public sealed class TrainingTests
         Assert.Equal(0, Streaks.RegularWeeks(dates, 3, today, DayOfWeek.Monday)); // the week of the 21st breaks it
         Assert.Equal(new DateTime(2026, 9, 27), Streaks.WeekStart(today, DayOfWeek.Sunday));
     }
+
+    [Fact]
+    public void Who_lifts_in_pounds_goes_up_by_five_pounds()
+    {
+        Assert.Equal(5, Units.ToPounds(Progression.Increment(Equipment.Barbell, pounds: true)), 6);
+        Assert.Equal(10, Units.ToPounds(Progression.Increment(Equipment.Kettlebell, pounds: true)), 6);
+
+        var squat = new Exercise { CatalogKey = "squat", Equipment = Equipment.Barbell, Tracking = Tracking.WeightAndReps };
+        var target = new TemplateExercise { Sets = 2, Reps = 5, Weight = Math.Round(Units.ToKilograms(225), 3) };
+        // 225 lb typed comes back a hair under the rounded target: it still counts.
+        var typed = Units.ToKilograms(225) - 0.0004;
+        var step = Progression.Apply(squat, target, [new() { Weight = typed, Reps = 5 }, new() { Weight = typed, Reps = 5 }], pounds: true)!;
+        Assert.Equal(230, Math.Round(Units.ToPounds(step.To), 1));
+    }
 }

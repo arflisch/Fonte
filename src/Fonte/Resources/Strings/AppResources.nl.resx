@@ -886,7 +886,7 @@
     <value>Automatische progressie</value>
   </data>
   <data name="Template_ProgressionText" xml:space="preserve">
-    <value>Halen alle sets hun herhalingen, dan gaat het gewicht de volgende keer omhoog: +2,5 kg met een stang of machine, +2 kg met dumbbells, één herhaling of 5 seconden meer zonder gewicht. Een leeg gewicht wordt overgenomen van je eerste training.</value>
+    <value>Halen alle sets hun herhalingen, dan gaat het gewicht de volgende keer omhoog: +2,5 kg met een stang of machine, +2 kg met dumbbells, één herhaling of 5 seconden meer zonder gewicht. Een leeg gewicht wordt overgenomen van je eerste training. In pond, +5 lb.</value>
   </data>
   <data name="Template_MoveUp" xml:space="preserve">
     <value>Omhoog</value>
@@ -1057,13 +1057,13 @@
     <value>Gewichtsdoel</value>
   </data>
   <data name="Body_GoalText" xml:space="preserve">
-    <value>In kilogram</value>
+    <value>In {0}</value>
   </data>
   <data name="Body_AddWeight" xml:space="preserve">
     <value>Gewicht van vandaag</value>
   </data>
   <data name="Body_AddWeightText" xml:space="preserve">
-    <value>In kilogram; vervangt de eerdere weging van vandaag.</value>
+    <value>In {0}; vervangt de eerdere weging van vandaag.</value>
   </data>
   <data name="Body_DeleteWeighing" xml:space="preserve">
     <value>Deze weging verwijderen</value>
@@ -1183,7 +1183,7 @@
     <value>Voorgestelde opwarming</value>
   </data>
   <data name="Plates_Available" xml:space="preserve">
-    <value>Schijven: {0} kg · aan te passen in de instellingen</value>
+    <value>Schijven: {0} {1} · aan te passen in de instellingen</value>
   </data>
   <data name="Settings_TrainingSection" xml:space="preserve">
     <value>TRAINING</value>
@@ -1207,7 +1207,7 @@
     <value>SCHIJVEN</value>
   </data>
   <data name="Settings_PlatesHint" xml:space="preserve">
-    <value>De schijven van je sportschool, in kg: de calculator gebruikt alleen deze.</value>
+    <value>De schijven van je sportschool, in {0}: de calculator gebruikt alleen deze.</value>
   </data>
   <data name="Settings_OpenPlates" xml:space="preserve">
     <value>Schijvencalculator openen</value>
@@ -1981,9 +1981,6 @@ Alles op dit apparaat wordt vervangen, behalve de foto's: die blijven bewaard.</
   <data name="Nutrition_WeekEmpty" xml:space="preserve">
     <value>Deze week nog niets genoteerd.</value>
   </data>
-  <data name="Nutrition_WeekAverage" xml:space="preserve">
-    <value>Gemiddelde van de genoteerde dagen: {0} · doel {1}</value>
-  </data>
   <data name="Nutrition_Sources" xml:space="preserve">
     <value>Voeding: Ciqual 2020-tabel van ANSES (Licence Ouverte) en Open Food Facts (ODbL). Schattingen, geen medisch advies.</value>
   </data>
@@ -2018,7 +2015,7 @@ Alles op dit apparaat wordt vervangen, behalve de foto's: die blijven bewaard.</
     <value>Lengte (cm)</value>
   </data>
   <data name="Nutrition_Weight" xml:space="preserve">
-    <value>Gewicht (kg)</value>
+    <value>Gewicht ({0})</value>
   </data>
   <data name="Nutrition_Activity" xml:space="preserve">
     <value>Activiteit</value>
@@ -2258,6 +2255,237 @@ Alles op dit apparaat wordt vervangen, behalve de foto's: die blijven bewaard.</
     <value>Voeding</value>
   </data>
   <data name="Pro_NutritionText" xml:space="preserve">
-    <value>Calorieën en macro's voor je doel, 3.000 voedingsmiddelen offline, barcodes scannen, gerechten en water</value>
+    <value>Calorieën en macro's voor je doel, elke week aangepast, 3.000 voedingsmiddelen offline, scannen, gerechten, vaste maaltijden, vasten en water</value>
+  </data>
+  <data name="Workout_ColLb" xml:space="preserve">
+    <value>LB</value>
+  </data>
+  <data name="Unit_Kilograms" xml:space="preserve">
+    <value>kilogram</value>
+  </data>
+  <data name="Unit_Pounds" xml:space="preserve">
+    <value>pond</value>
+  </data>
+  <data name="Settings_Unit" xml:space="preserve">
+    <value>Gewichtseenheid</value>
+  </data>
+  <data name="Settings_UnitKilograms" xml:space="preserve">
+    <value>Kilogram (kg)</value>
+  </data>
+  <data name="Settings_UnitPounds" xml:space="preserve">
+    <value>Pond (lb)</value>
+  </data>
+  <data name="Settings_Import" xml:space="preserve">
+    <value>Importeren uit Strong of Hevy</value>
+  </data>
+  <data name="Settings_ImportHint" xml:space="preserve">
+    <value>Haal je trainingsgeschiedenis op</value>
+  </data>
+  <data name="Import_Title" xml:space="preserve">
+    <value>Importeren</value>
+  </data>
+  <data name="Import_Intro" xml:space="preserve">
+    <value>Kom je van een andere app? Exporteer daar je geschiedenis als CSV-bestand en kies het hier: je trainingen, sets en records gaan mee.</value>
+  </data>
+  <data name="Import_StrongHow" xml:space="preserve">
+    <value>Profiel › Instellingen (tandwiel) › Export Strong Data, en bewaar het bestand in Bestanden.</value>
+  </data>
+  <data name="Import_HevyHow" xml:space="preserve">
+    <value>Profiel › Instellingen › Export &amp; Import Data › Export Workouts, en bewaar het bestand in Bestanden.</value>
+  </data>
+  <data name="Import_Safe" xml:space="preserve">
+    <value>Er wordt niets vervangen: trainingen die al in Fonte staan, worden overgeslagen, dus twee keer importeren kan geen kwaad.</value>
+  </data>
+  <data name="Import_Choose" xml:space="preserve">
+    <value>Bestand kiezen</value>
+  </data>
+  <data name="Import_Confirm" xml:space="preserve">
+    <value>Importeren</value>
+  </data>
+  <data name="Import_UnknownTitle" xml:space="preserve">
+    <value>Bestand niet herkend</value>
+  </data>
+  <data name="Import_UnknownText" xml:space="preserve">
+    <value>Dit is geen trainingsexport van Strong of Hevy, of er staat geen training in.</value>
+  </data>
+  <data name="Import_UnitQuestion" xml:space="preserve">
+    <value>Staan de gewichten in dit bestand in kilogram of in pond?</value>
+  </data>
+  <data name="Import_From" xml:space="preserve">
+    <value>Uit {0}</value>
+  </data>
+  <data name="Import_Workouts" xml:space="preserve">
+    <value>{0} · {1}</value>
+  </data>
+  <data name="Import_WorkoutsSome" xml:space="preserve">
+    <value>{0} · {1} ({2} al in Fonte)</value>
+  </data>
+  <data name="Import_Period" xml:space="preserve">
+    <value>Van {0} tot {1}</value>
+  </data>
+  <data name="Import_Unit" xml:space="preserve">
+    <value>Gewichten in {0}</value>
+  </data>
+  <data name="Import_ChangeUnit" xml:space="preserve">
+    <value>Wijzigen</value>
+  </data>
+  <data name="Import_AllExercisesKnown" xml:space="preserve">
+    <value>Alle oefeningen bestaan al in Fonte.</value>
+  </data>
+  <data name="Import_NewExercises" xml:space="preserve">
+    <value>Nieuwe oefeningen ({0}): {1}</value>
+  </data>
+  <data name="Import_OtherFile" xml:space="preserve">
+    <value>Ander bestand kiezen</value>
+  </data>
+  <data name="Import_DoneTitle" xml:space="preserve">
+    <value>Geïmporteerd</value>
+  </data>
+  <data name="Import_DoneText" xml:space="preserve">
+    <value>Toegevoegd: {0}, {1}. Aangemaakt: {2}.</value>
+  </data>
+  <data name="Error_EmptyMeal" xml:space="preserve">
+    <value>Bij deze maaltijd is nog niets gegeten.</value>
+  </data>
+  <data name="FoodShelf_Templates" xml:space="preserve">
+    <value>Vaste maaltijden</value>
+  </data>
+  <data name="FoodShelf_TemplatesEmpty" xml:space="preserve">
+    <value>Bewaar een maaltijd die je vaak eet via “⋯ › Bewaren als vaste maaltijd”: daarna voeg je hem hier met één tik toe.</value>
+  </data>
+  <data name="MealTemplate_Delete" xml:space="preserve">
+    <value>Deze vaste maaltijd verwijderen</value>
+  </data>
+  <data name="Nutrition_SaveTemplate" xml:space="preserve">
+    <value>Bewaren als vaste maaltijd</value>
+  </data>
+  <data name="Nutrition_TemplateName" xml:space="preserve">
+    <value>Naam</value>
+  </data>
+  <data name="Nutrition_TemplateSaved" xml:space="preserve">
+    <value>Vaste maaltijd bewaard</value>
+  </data>
+  <data name="Nutrition_TrainingDay" xml:space="preserve">
+    <value>🏋️ Trainingsdag · {0}</value>
+  </data>
+  <data name="Nutrition_RestDay" xml:space="preserve">
+    <value>😴 Rustdag · {0}</value>
+  </data>
+  <data name="Nutrition_WeekLogged" xml:space="preserve">
+    <value>Genoteerde dagen: {0}</value>
+  </data>
+  <data name="Nutrition_WeekKcal" xml:space="preserve">
+    <value>kcal / dag</value>
+  </data>
+  <data name="Nutrition_WeekProtein" xml:space="preserve">
+    <value>eiwit / dag</value>
+  </data>
+  <data name="Nutrition_WeekOnTarget" xml:space="preserve">
+    <value>binnen doel</value>
+  </data>
+  <data name="Nutrition_WeekWeight" xml:space="preserve">
+    <value>gewicht</value>
+  </data>
+  <data name="Nutrition_AdaptedOn" xml:space="preserve">
+    <value>Doel aangepast op {1}: je echte onderhoud is {0}.</value>
+  </data>
+  <data name="Nutrition_AdaptedNow" xml:space="preserve">
+    <value>Doel aangepast: je echte onderhoud is {0} ({1} dagen genoteerd, gewicht {2} per week).</value>
+  </data>
+  <data name="Nutrition_AdaptiveWaiting" xml:space="preserve">
+    <value>Wekelijkse aanpassing: {0}/{1} volledig genoteerde dagen en {2}/3 wegingen in de laatste 3 weken.</value>
+  </data>
+  <data name="Nutrition_GoalDetailMeasured" xml:space="preserve">
+    <value>Basaal metabolisme {0} · gemeten onderhoud {1}</value>
+  </data>
+  <data name="Nutrition_Options" xml:space="preserve">
+    <value>Aanpassingen</value>
+  </data>
+  <data name="Nutrition_Adaptive" xml:space="preserve">
+    <value>Elke week aanpassen</value>
+  </data>
+  <data name="Nutrition_AdaptiveHint" xml:space="preserve">
+    <value>Meet je echte onderhoud aan de hand van je maaltijden en wegingen en past het doel aan.</value>
+  </data>
+  <data name="Nutrition_AdaptiveMeasured" xml:space="preserve">
+    <value>Gemeten onderhoud: {0} (op {1}).</value>
+  </data>
+  <data name="Nutrition_TrainingDays" xml:space="preserve">
+    <value>Meer op trainingsdagen</value>
+  </data>
+  <data name="Nutrition_TrainingDaysHint" xml:space="preserve">
+    <value>+10 % op trainingsdagen, iets minder op de andere: dezelfde week voor {0} trainingen.</value>
+  </data>
+  <data name="Fasting_Title" xml:space="preserve">
+    <value>Intermittent vasten</value>
+  </data>
+  <data name="Fasting_Off" xml:space="preserve">
+    <value>Uit</value>
+  </data>
+  <data name="Fasting_Start" xml:space="preserve">
+    <value>Eetvenster gaat open om</value>
+  </data>
+  <data name="Fasting_Window" xml:space="preserve">
+    <value>Eten van {0} tot {1}</value>
+  </data>
+  <data name="Fasting_Eating" xml:space="preserve">
+    <value>Eetvenster open</value>
+  </data>
+  <data name="Fasting_ClosesAt" xml:space="preserve">
+    <value>Sluit om {0} · nog {1}</value>
+  </data>
+  <data name="Fasting_Fasting" xml:space="preserve">
+    <value>Aan het vasten: {0} van {1} u</value>
+  </data>
+  <data name="Fasting_OpensAt" xml:space="preserve">
+    <value>Je mag eten vanaf {0}</value>
+  </data>
+  <data name="Reminder_Section" xml:space="preserve">
+    <value>Herinneringen</value>
+  </data>
+  <data name="Reminder_Meals" xml:space="preserve">
+    <value>Mijn maaltijden noteren</value>
+  </data>
+  <data name="Reminder_MealsHint" xml:space="preserve">
+    <value>Om 9.30, 13.30 en 20.30 uur</value>
+  </data>
+  <data name="Reminder_Water" xml:space="preserve">
+    <value>Water drinken</value>
+  </data>
+  <data name="Reminder_WaterHint" xml:space="preserve">
+    <value>Elke 2 uur van 10 tot 20 uur</value>
+  </data>
+  <data name="Reminder_Fasting" xml:space="preserve">
+    <value>Vastenvenster</value>
+  </data>
+  <data name="Reminder_FastingHint" xml:space="preserve">
+    <value>Bij het openen, en een uur voor het sluiten</value>
+  </data>
+  <data name="Reminder_MealTitle" xml:space="preserve">
+    <value>Fonte</value>
+  </data>
+  <data name="Reminder_Breakfast" xml:space="preserve">
+    <value>Ontbijt genoteerd? Het duurt tien seconden 🥐</value>
+  </data>
+  <data name="Reminder_Lunch" xml:space="preserve">
+    <value>Vergeet je lunch niet te noteren 🥗</value>
+  </data>
+  <data name="Reminder_Dinner" xml:space="preserve">
+    <value>Noteer je avondeten om de dag af te sluiten 🍽️</value>
+  </data>
+  <data name="Reminder_WaterTitle" xml:space="preserve">
+    <value>Een glas water? 💧</value>
+  </data>
+  <data name="Reminder_WaterText" xml:space="preserve">
+    <value>Tik op + 250 ml in Fonte als je het gedronken hebt.</value>
+  </data>
+  <data name="Reminder_FastingTitle" xml:space="preserve">
+    <value>Intermittent vasten</value>
+  </data>
+  <data name="Reminder_FastingOpens" xml:space="preserve">
+    <value>Je eetvenster is open.</value>
+  </data>
+  <data name="Reminder_FastingCloses" xml:space="preserve">
+    <value>Je eetvenster sluit over een uur.</value>
   </data>
 </root>

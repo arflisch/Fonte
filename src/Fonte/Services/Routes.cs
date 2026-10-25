@@ -21,4 +21,5 @@ public static class Routes
     public const string FoodEntry = "foodentry";
     public const string CustomFood = "customfood";
     public const string Recipe = "recipe";
+    public const string Import = "import";
 }

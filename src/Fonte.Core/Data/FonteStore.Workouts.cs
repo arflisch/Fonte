@@ -257,7 +257,7 @@ public sealed partial class FonteStore
         }
 
         var progressions = workout.TemplateId is { } templateId
-            ? await ApplyProgressionAsync(db, workoutId, templateId, applyProgression)
+            ? await ApplyProgressionAsync(db, workoutId, templateId, applyProgression, UsesPounds)
             : [];
         OnChanged();
         return await GetWorkoutSummaryAsync(workoutId) is { } summary
@@ -266,7 +266,8 @@ public sealed partial class FonteStore
     }
 
     /// <param name="save">False to only work out what would go up, leaving the template as it is.</param>
-    private static async Task<IReadOnlyList<ProgressionStep>> ApplyProgressionAsync(SQLiteAsyncConnection db, int workoutId, int templateId, bool save)
+    private static async Task<IReadOnlyList<ProgressionStep>> ApplyProgressionAsync(
+        SQLiteAsyncConnection db, int workoutId, int templateId, bool save, bool pounds)
     {
         if (await db.FindAsync<WorkoutTemplate>(templateId) is null)
             return [];
@@ -284,7 +285,7 @@ public sealed partial class FonteStore
                 sets.AddRange(await db.Table<WorkoutSet>().Where(s => s.WorkoutExerciseId == item.Id && s.IsDone).ToListAsync());
 
             var before = (target.Weight, target.Reps, target.Seconds);
-            if (Progression.Apply(exercise, target, sets.Where(Performance.IsPlanned).ToList()) is { } step)
+            if (Progression.Apply(exercise, target, sets.Where(Performance.IsPlanned).ToList(), pounds) is { } step)
                 steps.Add(step);
             if (save && (target.Weight, target.Reps, target.Seconds) != before)
                 await db.UpdateAsync(target);

@@ -126,7 +126,7 @@
                         </Border>
                     </VerticalStackLayout>
                     <VerticalStackLayout Grid.Column="2" Spacing="10">
-                        <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Nutrition_Weight}" />
+                        <Label Style="{StaticResource FieldLabel}" Text="{Binding WeightLabel}" />
                         <Border Style="{StaticResource InputField}">
                             <Entry Keyboard="Numeric" MaxLength="5" Placeholder="70" Text="{Binding Weight}" />
                         </Border>
@@ -169,6 +169,73 @@
                 <VerticalStackLayout Spacing="10">
                     <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Nutrition_WaterGoal}" />
                     <FlexLayout BindableLayout.ItemTemplate="{StaticResource ChipTemplate}" BindableLayout.ItemsSource="{Binding Waters}" Wrap="Wrap" />
+                </VerticalStackLayout>
+
+                <!-- How the target follows real life -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Nutrition_Options}" />
+                    <Border Padding="16,0" Style="{StaticResource Card}">
+                        <VerticalStackLayout>
+                        <Grid Padding="0,12" ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                                <Label Style="{StaticResource RowTitle}" Text="{l:Tr Nutrition_Adaptive}" />
+                                <Label Style="{StaticResource Caption}" Text="{Binding AdaptiveHint}" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1" IsToggled="{Binding Adaptive}" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView Style="{StaticResource Divider}" />
+                        <Grid Padding="0,12" ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                                <Label Style="{StaticResource RowTitle}" Text="{l:Tr Nutrition_TrainingDays}" />
+                                <Label Style="{StaticResource Caption}" Text="{Binding TrainingDaysHint}" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1" IsToggled="{Binding TrainingDays}" VerticalOptions="Center" />
+                        </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Intermittent fasting -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Fasting_Title}" />
+                    <FlexLayout BindableLayout.ItemTemplate="{StaticResource ChipTemplate}" BindableLayout.ItemsSource="{Binding FastingOptions}" Wrap="Wrap" />
+                    <VerticalStackLayout IsVisible="{Binding IsFasting}" Spacing="10">
+                        <Label Style="{StaticResource Caption}" Text="{l:Tr Fasting_Start}" />
+                        <FlexLayout BindableLayout.ItemTemplate="{StaticResource ChipTemplate}" BindableLayout.ItemsSource="{Binding EatingStartOptions}" Wrap="Wrap" />
+                        <Label Style="{StaticResource Caption}" Text="{Binding FastingText}" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+
+                <!-- Reminders -->
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Reminder_Section}" />
+                    <Border Padding="16,0" Style="{StaticResource Card}">
+                        <VerticalStackLayout>
+                        <Grid Padding="0,12" ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                                <Label Style="{StaticResource RowTitle}" Text="{l:Tr Reminder_Meals}" />
+                                <Label Style="{StaticResource Caption}" Text="{l:Tr Reminder_MealsHint}" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1" IsToggled="{Binding MealReminders}" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView Style="{StaticResource Divider}" />
+                        <Grid Padding="0,12" ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                                <Label Style="{StaticResource RowTitle}" Text="{l:Tr Reminder_Water}" />
+                                <Label Style="{StaticResource Caption}" Text="{l:Tr Reminder_WaterHint}" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1" IsToggled="{Binding WaterReminders}" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView IsVisible="{Binding IsFasting}" Style="{StaticResource Divider}" />
+                        <Grid Padding="0,12" ColumnDefinitions="*,Auto" ColumnSpacing="12" IsVisible="{Binding IsFasting}">
+                            <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                                <Label Style="{StaticResource RowTitle}" Text="{l:Tr Reminder_Fasting}" />
+                                <Label Style="{StaticResource Caption}" Text="{l:Tr Reminder_FastingHint}" />
+                            </VerticalStackLayout>
+                            <Switch Grid.Column="1" IsToggled="{Binding FastingReminders}" VerticalOptions="Center" />
+                        </Grid>
+                        </VerticalStackLayout>
+                    </Border>
                 </VerticalStackLayout>
 
                 <!-- Apple Health -->

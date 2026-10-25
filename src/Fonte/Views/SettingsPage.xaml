@@ -172,6 +172,23 @@
                                 VerticalOptions="Center"
                                 WidthRequest="16" />
                         </Grid>
+                        <BoxView Style="{StaticResource Divider}" />
+                        <Grid c:Touch.Command="{Binding ImportCommand}" Style="{StaticResource Row}">
+                            <Border BackgroundColor="#26534AB7" Style="{StaticResource RowIcon}">
+                                <c:IconView Color="#534AB7" Data="{x:Static c:Icons.Upload}" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                <Label Style="{StaticResource RowTitle}" Text="{l:Tr Settings_Import}" VerticalOptions="Center" />
+                                <Label Style="{StaticResource Caption}" Text="{l:Tr Settings_ImportHint}" />
+                            </VerticalStackLayout>
+                            <c:IconView
+                                Grid.Column="2"
+                                Color="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}"
+                                Data="{x:Static c:Icons.ChevronRight}"
+                                HeightRequest="16"
+                                VerticalOptions="Center"
+                                WidthRequest="16" />
+                        </Grid>
                     </VerticalStackLayout>
                 </Border>
 
@@ -179,7 +196,7 @@
                 <Label Margin="0,14,0,0" Style="{StaticResource FieldLabel}" Text="{l:Tr Settings_PlatesSection}" />
                 <Border Padding="16,14" Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="12">
-                        <Label Style="{StaticResource Caption}" Text="{l:Tr Settings_PlatesHint}" />
+                        <Label Style="{StaticResource Caption}" Text="{Binding PlatesHint}" />
                         <FlexLayout BindableLayout.ItemsSource="{Binding PlateOptions}" Wrap="Wrap">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate x:DataType="vm:SelectableOption">
@@ -273,6 +290,22 @@
                                     </Grid>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
+                        </Grid>
+                        <BoxView Style="{StaticResource Divider}" />
+                        <Grid c:Touch.Command="{Binding ChooseUnitCommand}" Style="{StaticResource Row}">
+                            <Border BackgroundColor="#26BA7517" Style="{StaticResource RowIcon}">
+                                <c:IconView Color="#BA7517" Data="{x:Static c:Icons.Scale}" />
+                            </Border>
+                            <Label Grid.Column="1" Style="{StaticResource RowTitle}" Text="{l:Tr Settings_Unit}" VerticalOptions="Center" />
+                            <HorizontalStackLayout Grid.Column="2" Spacing="6" VerticalOptions="Center">
+                                <Label Style="{StaticResource Secondary}" Text="{Binding UnitName}" VerticalOptions="Center" />
+                                <c:IconView
+                                    Color="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}"
+                                    Data="{x:Static c:Icons.ChevronRight}"
+                                    HeightRequest="16"
+                                    VerticalOptions="Center"
+                                    WidthRequest="16" />
+                            </HorizontalStackLayout>
                         </Grid>
                         <BoxView Style="{StaticResource Divider}" />
                         <Grid c:Touch.Command="{Binding ChooseLanguageCommand}" Style="{StaticResource Row}">

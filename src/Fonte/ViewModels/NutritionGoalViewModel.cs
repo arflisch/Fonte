@@ -18,9 +18,14 @@ public sealed partial class NutritionGoalViewModel : ObservableObject, ISheetVie
     private static readonly double[] GainRates = [0.25, 0.5];
     private static readonly double[] ProteinRates = [1.2, 1.6, 2.0];
     private static readonly int[] WaterGoals = [1500, 2000, 2500, 3000];
+    private static readonly int[] FastingPlans = [0, 12, 14, 16, 18, 20];
+    private static readonly int[] EatingStarts = [8, 10, 12, 14];
 
     private readonly FonteStore _store;
     private readonly AppSettings _settings;
+    private readonly NutritionReminders _reminders;
+    private int _fasting;
+    private int _eatingStart;
     private double? _storedWeight;
     private Sex _sex = Sex.Female;
     private ActivityLevel _activity = ActivityLevel.Light;
@@ -30,10 +35,29 @@ public sealed partial class NutritionGoalViewModel : ObservableObject, ISheetVie
     private int _water;
     private bool _isSaving;
 
-    public NutritionGoalViewModel(FonteStore store, AppSettings settings)
+    public NutritionGoalViewModel(FonteStore store, AppSettings settings, NutritionReminders reminders)
     {
         _store = store;
         _settings = settings;
+        _reminders = reminders;
+        _fasting = settings.FastingHours;
+        _eatingStart = settings.EatingStartHour;
+        FastingOptions = FastingPlans
+            .Select((h, i) => new SelectableOption(h.ToString(CultureInfo.InvariantCulture), i, int.MaxValue, o => { _fasting = int.Parse(o.Value, CultureInfo.InvariantCulture); Refresh(); })
+            {
+                Label = h == 0 ? Loc.Get("Fasting_Off") : $"{h}:{24 - h}",
+            })
+            .ToList();
+        EatingStartOptions = EatingStarts
+            .Select((h, i) => new SelectableOption(h.ToString(CultureInfo.InvariantCulture), i, int.MaxValue, o => { _eatingStart = int.Parse(o.Value, CultureInfo.InvariantCulture); Refresh(); })
+            {
+                Label = Loc.Time(DateTime.Today.AddHours(h)),
+            })
+            .ToList();
+        MealReminders = settings.MealReminders;
+        WaterReminders = settings.WaterReminders;
+        FastingReminders = settings.FastingReminders;
+        TrainingDaysHint = Loc.Format("Nutrition_TrainingDaysHint", settings.SessionsPerWeek);
         Sexes = Options([Sex.Female, Sex.Male], 2, s => Loc.Get($"Sex_{s}"), o => { _sex = Enum.Parse<Sex>(o.Value); Refresh(); });
         Activities = Options(Enum.GetValues<ActivityLevel>(), 1, a => Loc.Get($"Activity_{a}"), o => { _activity = Enum.Parse<ActivityLevel>(o.Value); Refresh(); });
         Goals = Options(Enum.GetValues<WeightGoal>(), 3, g => Loc.Get($"WeightGoal_{g}"), o => { _goal = Enum.Parse<WeightGoal>(o.Value); FitRate(); Refresh(); });
@@ -63,6 +87,11 @@ public sealed partial class NutritionGoalViewModel : ObservableObject, ISheetVie
             Height = Loc.Number(profile.HeightCm);
         }
         _water = settings.WaterGoalMl;
+        Adaptive = profile?.Adaptive ?? true;
+        TrainingDays = profile?.TrainingDays ?? false;
+        AdaptiveHint = profile is { MeasuredMaintenance: { } measured, AdaptedOn: { } on }
+            ? Loc.Format("Nutrition_AdaptiveMeasured", Loc.Kcal(measured), Loc.Date(on, "d MMMM"))
+            : Loc.Get("Nutrition_AdaptiveHint");
         CountActive = settings.CountActiveEnergy;
         FitRate();
         _ = LoadWeightAsync();
@@ -81,6 +110,38 @@ public sealed partial class NutritionGoalViewModel : ObservableObject, ISheetVie
     public IReadOnlyList<SelectableOption> Waters { get; }
 
     public bool ShowsHealth { get; }
+
+    public IReadOnlyList<SelectableOption> FastingOptions { get; }
+
+    public IReadOnlyList<SelectableOption> EatingStartOptions { get; }
+
+    public string TrainingDaysHint { get; }
+
+    [ObservableProperty]
+    private string _adaptiveHint = string.Empty;
+
+    [ObservableProperty]
+    private bool _adaptive;
+
+    [ObservableProperty]
+    private bool _trainingDays;
+
+    [ObservableProperty]
+    private bool _isFasting;
+
+    [ObservableProperty]
+    private string _fastingText = string.Empty;
+
+    [ObservableProperty]
+    private bool _mealReminders;
+
+    [ObservableProperty]
+    private bool _waterReminders;
+
+    [ObservableProperty]
+    private bool _fastingReminders;
+
+    public string WeightLabel { get; } = Loc.Format("Nutrition_Weight", Loc.WeightUnit);
 
     [ObservableProperty]
     private IReadOnlyList<SelectableOption> _rates = [];
@@ -133,12 +194,16 @@ public sealed partial class NutritionGoalViewModel : ObservableObject, ISheetVie
 
     partial void OnWeightChanged(string value) => Refresh();
 
+    partial void OnAdaptiveChanged(bool value) => Refresh();
+
+    partial void OnTrainingDaysChanged(bool value) => Refresh();
+
     private async Task LoadWeightAsync()
     {
         var weights = await _store.GetWeightsAsync();
         _storedWeight = weights.LastOrDefault()?.Kilograms;
         if (_storedWeight is { } kg)
-            Weight = Loc.Number(kg);
+            Weight = Loc.WeightNumber(kg);
         Refresh();
     }
 
@@ -148,11 +213,14 @@ public sealed partial class NutritionGoalViewModel : ObservableObject, ISheetVie
         if (!int.TryParse(BirthYear.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out var year)
             || year < DateTime.Today.Year - 100 || year > DateTime.Today.Year - 14)
             return null;
-        if (TryNumber(Height) is not (>= 120 and <= 230) || TryNumber(Weight) is not (>= 30 and <= 300) )
+        var kilograms = TryNumber(Weight) is { } typed ? Loc.TypedWeight(typed) : 0;
+        if (TryNumber(Height) is not (>= 120 and <= 230) || kilograms is not (>= 30 and <= 300))
             return null;
+        var previous = _settings.NutritionProfile;
         var profile = new NutritionProfile(_sex, year, TryNumber(Height)!.Value, _activity, _goal,
-            _goal == WeightGoal.Maintain ? 0 : _rate, _protein);
-        return (profile, TryNumber(Weight)!.Value);
+            _goal == WeightGoal.Maintain ? 0 : _rate, _protein,
+            Adaptive, previous?.MeasuredMaintenance, previous?.AdaptedOn, TrainingDays);
+        return (profile, kilograms);
     }
 
     private void Refresh()
@@ -170,6 +238,14 @@ public sealed partial class NutritionGoalViewModel : ObservableObject, ISheetVie
             option.IsSelected = Parse(option.Value) == _protein;
         foreach (var option in Waters)
             option.IsSelected = option.Value == _water.ToString(CultureInfo.InvariantCulture);
+        foreach (var option in FastingOptions)
+            option.IsSelected = option.Value == _fasting.ToString(CultureInfo.InvariantCulture);
+        foreach (var option in EatingStartOptions)
+            option.IsSelected = option.Value == _eatingStart.ToString(CultureInfo.InvariantCulture);
+        IsFasting = _fasting > 0;
+        FastingText = IsFasting
+            ? Loc.Format("Fasting_Window", Loc.Time(DateTime.Today.AddHours(_eatingStart)), Loc.Time(DateTime.Today.AddHours(_eatingStart + 24 - _fasting)))
+            : string.Empty;
 
         if (Read() is not var (profile, weight))
         {
@@ -179,7 +255,9 @@ public sealed partial class NutritionGoalViewModel : ObservableObject, ISheetVie
         var targets = Energy.Targets(profile, weight, DateTime.Today);
         HasResult = true;
         KcalText = Loc.Kcal(targets.Kcal);
-        DetailText = Loc.Format("Nutrition_GoalDetail", Loc.Kcal(targets.Bmr), Loc.Kcal(targets.Maintenance));
+        DetailText = targets.IsMeasured
+            ? Loc.Format("Nutrition_GoalDetailMeasured", Loc.Kcal(targets.Bmr), Loc.Kcal(targets.Maintenance))
+            : Loc.Format("Nutrition_GoalDetail", Loc.Kcal(targets.Bmr), Loc.Kcal(targets.Maintenance));
         MacrosText = Loc.Format("Nutrition_GoalMacros", Loc.Number(targets.Protein), Loc.Number(targets.Carbs), Loc.Number(targets.Fat));
         IsFloored = targets.IsFloored;
 
@@ -232,7 +310,13 @@ public sealed partial class NutritionGoalViewModel : ObservableObject, ISheetVie
                 await _store.SaveWeightAsync(DateTime.Today, weight);
             _settings.WaterGoalMl = _water;
             _settings.CountActiveEnergy = CountActive;
+            _settings.FastingHours = _fasting;
+            _settings.EatingStartHour = _eatingStart;
+            _settings.MealReminders = MealReminders;
+            _settings.WaterReminders = WaterReminders;
+            _settings.FastingReminders = FastingReminders && _fasting > 0;
             _settings.NutritionProfile = profile;
+            await _reminders.UpdateAsync();
             Palette.Haptic();
             SuccessToast.Show(Loc.Get("Nutrition_GoalSaved"));
             await Shell.Current.GoToAsync("..");

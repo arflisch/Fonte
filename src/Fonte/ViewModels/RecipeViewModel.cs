@@ -158,7 +158,7 @@ public sealed partial class RecipeViewModel : ObservableObject, IQueryAttributab
         var n = Math.Max(1, Servings);
         PortionText = Loc.Format("Recipe_Portion", Loc.Grams(total / n), Loc.Kcal(kcal / n));
         PortionMacrosText = Loc.Format("Nutrition_GoalMacros",
-            Loc.Number(Math.Round(protein / n)), Loc.Number(Math.Round(carbs / n)), Loc.Number(Math.Round(fat / n)));
+            Loc.Whole(protein / n), Loc.Whole(carbs / n), Loc.Whole(fat / n));
     }
 
     [RelayCommand]

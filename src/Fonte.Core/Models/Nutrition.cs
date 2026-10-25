@@ -152,3 +152,37 @@ public sealed class WaterEntry
 
     public DateTime At { get; set; } = DateTime.Now;
 }
+
+/// <summary>A meal eaten often ("my usual breakfast"), logged again in one tap.</summary>
+[Table("meal_templates")]
+public sealed class MealTemplate
+{
+    [PrimaryKey, AutoIncrement]
+    public int Id { get; set; }
+
+    [MaxLength(60)]
+    public string Name { get; set; } = string.Empty;
+
+    /// <summary>The meal it was saved from: offered first for that meal.</summary>
+    public Meal Meal { get; set; }
+
+    public DateTime? LastUsedAt { get; set; }
+
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+}
+
+[Table("meal_template_items")]
+public sealed class MealTemplateItem
+{
+    [PrimaryKey, AutoIncrement]
+    public int Id { get; set; }
+
+    [Indexed]
+    public int TemplateId { get; set; }
+
+    public int FoodId { get; set; }
+
+    public double Grams { get; set; }
+
+    public int Position { get; set; }
+}

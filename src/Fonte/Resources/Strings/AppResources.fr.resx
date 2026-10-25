@@ -886,7 +886,7 @@
     <value>Progression automatique</value>
   </data>
   <data name="Template_ProgressionText" xml:space="preserve">
-    <value>Quand toutes les séries atteignent leurs répétitions, la charge monte la fois suivante : +2,5 kg à la barre ou à la machine, +2 kg aux haltères, une répétition ou 5 secondes de plus sans charge. Une charge vide est reprise de ta première séance.</value>
+    <value>Quand toutes les séries atteignent leurs répétitions, la charge monte la fois suivante : +2,5 kg à la barre ou à la machine, +2 kg aux haltères, une répétition ou 5 secondes de plus sans charge. Une charge vide est reprise de ta première séance. En livres, +5 lb.</value>
   </data>
   <data name="Template_MoveUp" xml:space="preserve">
     <value>Monter</value>
@@ -1057,13 +1057,13 @@
     <value>Objectif de poids</value>
   </data>
   <data name="Body_GoalText" xml:space="preserve">
-    <value>En kilogrammes</value>
+    <value>En {0}</value>
   </data>
   <data name="Body_AddWeight" xml:space="preserve">
     <value>Poids du jour</value>
   </data>
   <data name="Body_AddWeightText" xml:space="preserve">
-    <value>En kilogrammes ; remplace la pesée déjà faite aujourd'hui.</value>
+    <value>En {0} ; remplace la pesée faite plus tôt aujourd'hui.</value>
   </data>
   <data name="Body_DeleteWeighing" xml:space="preserve">
     <value>Supprimer cette pesée</value>
@@ -1183,7 +1183,7 @@
     <value>Échauffement proposé</value>
   </data>
   <data name="Plates_Available" xml:space="preserve">
-    <value>Disques : {0} kg · à régler dans les réglages</value>
+    <value>Disques : {0} {1} · à régler dans les réglages</value>
   </data>
   <data name="Settings_TrainingSection" xml:space="preserve">
     <value>ENTRAÎNEMENT</value>
@@ -1207,7 +1207,7 @@
     <value>DISQUES</value>
   </data>
   <data name="Settings_PlatesHint" xml:space="preserve">
-    <value>Les disques de ta salle, en kg : le calculateur n'utilise que ceux-là.</value>
+    <value>Les disques de ta salle, en {0} : le calculateur n'utilise que ceux-là.</value>
   </data>
   <data name="Settings_OpenPlates" xml:space="preserve">
     <value>Ouvrir le calculateur de disques</value>
@@ -1981,9 +1981,6 @@ Tout ce qui est sur cet appareil sera remplacé, sauf les photos, qui sont gard�
   <data name="Nutrition_WeekEmpty" xml:space="preserve">
     <value>Rien de noté cette semaine pour l'instant.</value>
   </data>
-  <data name="Nutrition_WeekAverage" xml:space="preserve">
-    <value>Moyenne des jours notés : {0} · objectif {1}</value>
-  </data>
   <data name="Nutrition_Sources" xml:space="preserve">
     <value>Aliments : table Ciqual 2020 de l'ANSES (Licence Ouverte) et Open Food Facts (ODbL). Estimations, pas un avis médical.</value>
   </data>
@@ -2018,7 +2015,7 @@ Tout ce qui est sur cet appareil sera remplacé, sauf les photos, qui sont gard�
     <value>Taille (cm)</value>
   </data>
   <data name="Nutrition_Weight" xml:space="preserve">
-    <value>Poids (kg)</value>
+    <value>Poids ({0})</value>
   </data>
   <data name="Nutrition_Activity" xml:space="preserve">
     <value>Activité</value>
@@ -2258,6 +2255,237 @@ Tout ce qui est sur cet appareil sera remplacé, sauf les photos, qui sont gard�
     <value>Nutrition</value>
   </data>
   <data name="Pro_NutritionText" xml:space="preserve">
-    <value>Calories et macros selon votre objectif, 3 000 aliments hors ligne, scan des codes-barres, plats et eau</value>
+    <value>Calories et macros selon votre objectif, ajustées chaque semaine, 3 000 aliments hors ligne, scan, plats, repas types, jeûne et eau</value>
+  </data>
+  <data name="Workout_ColLb" xml:space="preserve">
+    <value>LB</value>
+  </data>
+  <data name="Unit_Kilograms" xml:space="preserve">
+    <value>kilogrammes</value>
+  </data>
+  <data name="Unit_Pounds" xml:space="preserve">
+    <value>livres</value>
+  </data>
+  <data name="Settings_Unit" xml:space="preserve">
+    <value>Unité de poids</value>
+  </data>
+  <data name="Settings_UnitKilograms" xml:space="preserve">
+    <value>Kilogrammes (kg)</value>
+  </data>
+  <data name="Settings_UnitPounds" xml:space="preserve">
+    <value>Livres (lb)</value>
+  </data>
+  <data name="Settings_Import" xml:space="preserve">
+    <value>Importer depuis Strong ou Hevy</value>
+  </data>
+  <data name="Settings_ImportHint" xml:space="preserve">
+    <value>Récupérez votre historique de séances</value>
+  </data>
+  <data name="Import_Title" xml:space="preserve">
+    <value>Importer</value>
+  </data>
+  <data name="Import_Intro" xml:space="preserve">
+    <value>Vous venez d'une autre app ? Exportez-y votre historique en fichier CSV, puis choisissez-le ici : vos séances, séries et records vous suivent.</value>
+  </data>
+  <data name="Import_StrongHow" xml:space="preserve">
+    <value>Profil › Réglages (roue dentée) › Export Strong Data, puis enregistrez le fichier dans Fichiers.</value>
+  </data>
+  <data name="Import_HevyHow" xml:space="preserve">
+    <value>Profil › Réglages › Export &amp; Import Data › Export Workouts, puis enregistrez le fichier dans Fichiers.</value>
+  </data>
+  <data name="Import_Safe" xml:space="preserve">
+    <value>Rien n'est remplacé : les séances déjà dans Fonte sont ignorées, importer deux fois est sans risque.</value>
+  </data>
+  <data name="Import_Choose" xml:space="preserve">
+    <value>Choisir le fichier</value>
+  </data>
+  <data name="Import_Confirm" xml:space="preserve">
+    <value>Importer</value>
+  </data>
+  <data name="Import_UnknownTitle" xml:space="preserve">
+    <value>Fichier non reconnu</value>
+  </data>
+  <data name="Import_UnknownText" xml:space="preserve">
+    <value>Ce n'est pas un export de séances de Strong ou Hevy, ou il ne contient aucune séance.</value>
+  </data>
+  <data name="Import_UnitQuestion" xml:space="preserve">
+    <value>Les charges de ce fichier sont-elles en kilogrammes ou en livres ?</value>
+  </data>
+  <data name="Import_From" xml:space="preserve">
+    <value>Depuis {0}</value>
+  </data>
+  <data name="Import_Workouts" xml:space="preserve">
+    <value>{0} · {1}</value>
+  </data>
+  <data name="Import_WorkoutsSome" xml:space="preserve">
+    <value>{0} · {1} ({2} déjà dans Fonte)</value>
+  </data>
+  <data name="Import_Period" xml:space="preserve">
+    <value>Du {0} au {1}</value>
+  </data>
+  <data name="Import_Unit" xml:space="preserve">
+    <value>Charges en {0}</value>
+  </data>
+  <data name="Import_ChangeUnit" xml:space="preserve">
+    <value>Changer</value>
+  </data>
+  <data name="Import_AllExercisesKnown" xml:space="preserve">
+    <value>Tous les exercices existent déjà dans Fonte.</value>
+  </data>
+  <data name="Import_NewExercises" xml:space="preserve">
+    <value>Exercices à créer ({0}) : {1}</value>
+  </data>
+  <data name="Import_OtherFile" xml:space="preserve">
+    <value>Choisir un autre fichier</value>
+  </data>
+  <data name="Import_DoneTitle" xml:space="preserve">
+    <value>Importé</value>
+  </data>
+  <data name="Import_DoneText" xml:space="preserve">
+    <value>Ajouté : {0}, {1}. Créé : {2}.</value>
+  </data>
+  <data name="Error_EmptyMeal" xml:space="preserve">
+    <value>Rien n'a encore été mangé à ce repas.</value>
+  </data>
+  <data name="FoodShelf_Templates" xml:space="preserve">
+    <value>Repas types</value>
+  </data>
+  <data name="FoodShelf_TemplatesEmpty" xml:space="preserve">
+    <value>Enregistrez un repas que vous mangez souvent avec « ⋯ › Enregistrer comme repas type » : il revient ici en une touche.</value>
+  </data>
+  <data name="MealTemplate_Delete" xml:space="preserve">
+    <value>Supprimer ce repas type</value>
+  </data>
+  <data name="Nutrition_SaveTemplate" xml:space="preserve">
+    <value>Enregistrer comme repas type</value>
+  </data>
+  <data name="Nutrition_TemplateName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="Nutrition_TemplateSaved" xml:space="preserve">
+    <value>Repas type enregistré</value>
+  </data>
+  <data name="Nutrition_TrainingDay" xml:space="preserve">
+    <value>🏋️ Jour d'entraînement · {0}</value>
+  </data>
+  <data name="Nutrition_RestDay" xml:space="preserve">
+    <value>😴 Jour de repos · {0}</value>
+  </data>
+  <data name="Nutrition_WeekLogged" xml:space="preserve">
+    <value>Jours notés : {0}</value>
+  </data>
+  <data name="Nutrition_WeekKcal" xml:space="preserve">
+    <value>kcal / jour</value>
+  </data>
+  <data name="Nutrition_WeekProtein" xml:space="preserve">
+    <value>protéines / jour</value>
+  </data>
+  <data name="Nutrition_WeekOnTarget" xml:space="preserve">
+    <value>dans la cible</value>
+  </data>
+  <data name="Nutrition_WeekWeight" xml:space="preserve">
+    <value>poids</value>
+  </data>
+  <data name="Nutrition_AdaptedOn" xml:space="preserve">
+    <value>Objectif ajusté le {1} : votre maintien réel est de {0}.</value>
+  </data>
+  <data name="Nutrition_AdaptedNow" xml:space="preserve">
+    <value>Objectif ajusté : votre maintien réel est de {0} ({1} jours notés, poids {2} par semaine).</value>
+  </data>
+  <data name="Nutrition_AdaptiveWaiting" xml:space="preserve">
+    <value>Ajustement hebdomadaire : {0}/{1} jours complets notés et {2}/3 pesées sur les 3 dernières semaines.</value>
+  </data>
+  <data name="Nutrition_GoalDetailMeasured" xml:space="preserve">
+    <value>Métabolisme de base {0} · maintien mesuré {1}</value>
+  </data>
+  <data name="Nutrition_Options" xml:space="preserve">
+    <value>Ajustements</value>
+  </data>
+  <data name="Nutrition_Adaptive" xml:space="preserve">
+    <value>Ajuster chaque semaine</value>
+  </data>
+  <data name="Nutrition_AdaptiveHint" xml:space="preserve">
+    <value>Mesure votre maintien réel à partir de vos repas et de vos pesées, et met l'objectif à jour.</value>
+  </data>
+  <data name="Nutrition_AdaptiveMeasured" xml:space="preserve">
+    <value>Maintien mesuré : {0} (le {1}).</value>
+  </data>
+  <data name="Nutrition_TrainingDays" xml:space="preserve">
+    <value>Plus les jours d'entraînement</value>
+  </data>
+  <data name="Nutrition_TrainingDaysHint" xml:space="preserve">
+    <value>+10 % les jours de séance, un peu moins les autres : la même semaine pour {0} séances.</value>
+  </data>
+  <data name="Fasting_Title" xml:space="preserve">
+    <value>Jeûne intermittent</value>
+  </data>
+  <data name="Fasting_Off" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="Fasting_Start" xml:space="preserve">
+    <value>La fenêtre de repas ouvre à</value>
+  </data>
+  <data name="Fasting_Window" xml:space="preserve">
+    <value>Repas de {0} à {1}</value>
+  </data>
+  <data name="Fasting_Eating" xml:space="preserve">
+    <value>Fenêtre de repas ouverte</value>
+  </data>
+  <data name="Fasting_ClosesAt" xml:space="preserve">
+    <value>Ferme à {0} · encore {1}</value>
+  </data>
+  <data name="Fasting_Fasting" xml:space="preserve">
+    <value>Jeûne depuis {0} sur {1} h</value>
+  </data>
+  <data name="Fasting_OpensAt" xml:space="preserve">
+    <value>Repas possible à partir de {0}</value>
+  </data>
+  <data name="Reminder_Section" xml:space="preserve">
+    <value>Rappels</value>
+  </data>
+  <data name="Reminder_Meals" xml:space="preserve">
+    <value>Noter mes repas</value>
+  </data>
+  <data name="Reminder_MealsHint" xml:space="preserve">
+    <value>À 9 h 30, 13 h 30 et 20 h 30</value>
+  </data>
+  <data name="Reminder_Water" xml:space="preserve">
+    <value>Boire de l'eau</value>
+  </data>
+  <data name="Reminder_WaterHint" xml:space="preserve">
+    <value>Toutes les 2 heures de 10 h à 20 h</value>
+  </data>
+  <data name="Reminder_Fasting" xml:space="preserve">
+    <value>Fenêtre de jeûne</value>
+  </data>
+  <data name="Reminder_FastingHint" xml:space="preserve">
+    <value>À l'ouverture, et une heure avant la fermeture</value>
+  </data>
+  <data name="Reminder_MealTitle" xml:space="preserve">
+    <value>Fonte</value>
+  </data>
+  <data name="Reminder_Breakfast" xml:space="preserve">
+    <value>Petit-déjeuner noté ? Ça prend dix secondes 🥐</value>
+  </data>
+  <data name="Reminder_Lunch" xml:space="preserve">
+    <value>N'oubliez pas de noter votre déjeuner 🥗</value>
+  </data>
+  <data name="Reminder_Dinner" xml:space="preserve">
+    <value>Notez votre dîner pour boucler la journée 🍽️</value>
+  </data>
+  <data name="Reminder_WaterTitle" xml:space="preserve">
+    <value>Un verre d'eau ? 💧</value>
+  </data>
+  <data name="Reminder_WaterText" xml:space="preserve">
+    <value>Touchez + 250 ml dans Fonte une fois bu.</value>
+  </data>
+  <data name="Reminder_FastingTitle" xml:space="preserve">
+    <value>Jeûne intermittent</value>
+  </data>
+  <data name="Reminder_FastingOpens" xml:space="preserve">
+    <value>Votre fenêtre de repas est ouverte.</value>
+  </data>
+  <data name="Reminder_FastingCloses" xml:space="preserve">
+    <value>Votre fenêtre de repas ferme dans une heure.</value>
   </data>
 </root>

@@ -148,17 +148,17 @@ public sealed partial class BodyViewModel : ReloadingViewModel
         WeightText = Loc.Weight(last.Kilograms);
         // Compared with eight weeks ago, or with the first weighing when they are more recent.
         var since = _weights.FirstOrDefault(w => w.Date >= last.Date.AddDays(-56)) ?? _weights[0];
-        var change = Math.Round(last.Kilograms - since.Kilograms, 1);
+        var change = Loc.ShownWeight(last.Kilograms - since.Kilograms);
         var weeks = Math.Max(1, (int)Math.Round((last.Date - since.Date).TotalDays / 7));
         WeightChangeText = since == last
             ? Loc.Day(last.Date)
-            : Loc.Format("Body_Change", Signed(change, "kg"), Loc.Count(weeks, "Week"));
+            : Loc.Format("Body_Change", Signed(change, Loc.WeightUnit), Loc.Count(weeks, "Week"));
         if (HasGoal)
         {
-            var left = Math.Round(goal - last.Kilograms, 1);
+            var left = Loc.ShownWeight(goal - last.Kilograms);
             GoalText = Math.Abs(left) < 0.05
                 ? Loc.Format("Body_GoalReached", Loc.Weight(goal))
-                : Loc.Format("Body_GoalLeft", Loc.Weight(goal), Signed(left, "kg"));
+                : Loc.Format("Body_GoalLeft", Loc.Weight(goal), Signed(left, Loc.WeightUnit));
             var start = _weights[0].Kilograms;
             GoalProgress = Math.Abs(goal - start) < 0.05 ? 1 : Math.Clamp((last.Kilograms - start) / (goal - start), 0, 1);
         }
@@ -172,6 +172,9 @@ public sealed partial class BodyViewModel : ReloadingViewModel
         HasChart = WeightPoints.Count >= 2 && _pro.IsUnlocked;
         Weighings = _weights.Reverse().Take(RecentWeighings).Select(w => new WeighingItem(w, DeleteWeighingAsync)).ToList();
     }
+
+    /// <summary>"kilograms" or "pounds", in the sentence that asks for a weight.</summary>
+    private static string UnitName => Loc.Pounds ? Loc.Get("Unit_Pounds") : Loc.Get("Unit_Kilograms");
 
     private string GoalPrompt => _pro.IsUnlocked ? Loc.Get("Body_SetGoal") : Loc.Get("Body_GoalPro");
 
@@ -191,8 +194,10 @@ public sealed partial class BodyViewModel : ReloadingViewModel
     private async Task AddWeightAsync()
     {
         var last = _weights.Count > 0 ? _weights[^1].Kilograms : (double?)null;
-        if (await _dialogs.PromptNumberAsync(Loc.Get("Body_AddWeight"), Loc.Get("Body_AddWeightText"), last) is not { } kilograms)
+        var shown = last is { } kg ? Loc.ShownWeight(kg) : (double?)null;
+        if (await _dialogs.PromptNumberAsync(Loc.Get("Body_AddWeight"), Loc.Format("Body_AddWeightText", UnitName), shown) is not { } typed)
             return;
+        var kilograms = Loc.TypedWeight(typed);
         try
         {
             await _store.SaveWeightAsync(DateTime.Today, kilograms);
@@ -210,8 +215,9 @@ public sealed partial class BodyViewModel : ReloadingViewModel
         if (!await OpenProUnlessUnlockedAsync())
             return;
         var current = _settings.GoalWeight;
-        var value = await _dialogs.PromptNumberAsync(Loc.Get("Body_GoalTitle"), Loc.Get("Body_GoalText"), current > 0 ? current : null);
-        if (value is { } goal && goal is >= 20 and <= 400)
+        var value = await _dialogs.PromptNumberAsync(Loc.Get("Body_GoalTitle"), Loc.Format("Body_GoalText", UnitName),
+            current > 0 ? Loc.ShownWeight(current) : null);
+        if (value is { } typed && Loc.TypedWeight(typed) is var goal and >= 20 and <= 400)
         {
             _settings.GoalWeight = goal;
             ShowWeights();

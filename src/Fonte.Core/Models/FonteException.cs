@@ -21,6 +21,7 @@ public enum FonteError
     InvalidFood,
     InvalidQuantity,
     EmptyRecipe,
+    EmptyMeal,
 }
 
 public sealed class FonteException(FonteError error, string message) : Exception(message)

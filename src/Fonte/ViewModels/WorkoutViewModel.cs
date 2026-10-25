@@ -651,7 +651,7 @@ public sealed partial class SetRowViewModel : ObservableObject
         _isDone = set.IsDone;
         _kind = set.Kind;
         _rpe = set.Rpe;
-        _weightText = set.Weight > 0 ? Loc.Number(set.Weight) : string.Empty;
+        _weightText = set.Weight > 0 ? Loc.WeightNumber(set.Weight) : string.Empty;
         _valueText = exercise.Exercise.Tracking switch
         {
             Tracking.Time when set.Seconds <= 0 => string.Empty,
@@ -736,7 +736,8 @@ public sealed partial class SetRowViewModel : ObservableObject
     [ObservableProperty]
     private bool _isDone;
 
-    public double Weight => ShowWeight ? Parse(WeightText) : 0;
+    /// <summary>The load typed, in kilograms.</summary>
+    public double Weight => ShowWeight ? Loc.TypedWeight(Parse(WeightText)) : 0;
 
     public int Reps => Exercise.Exercise.Tracking == Tracking.Time ? 0 : (int)Math.Round(Parse(ValueText));
 

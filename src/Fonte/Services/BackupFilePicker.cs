@@ -51,7 +51,12 @@ public sealed class BackupFilePicker(IFilePicker filePicker, IShare share)
     }
 
     /// <summary>Lets the user pick a backup file; returns the path of a local copy, or null if they cancelled.</summary>
-    public async Task<string?> OpenAsync()
+    public Task<string?> OpenAsync() => PickCopyAsync(RestorePath);
+
+    /// <summary>Lets the user pick the export of another app (a CSV file); returns a local copy, or null.</summary>
+    public Task<string?> OpenImportAsync() => PickCopyAsync(Path.Combine(FileSystem.CacheDirectory, "import.csv"));
+
+    private async Task<string?> PickCopyAsync(string destination)
     {
         await PresentationGuard.WaitUntilSettledAsync();
 #if IOS || MACCATALYST
@@ -72,8 +77,8 @@ public sealed class BackupFilePicker(IFilePicker filePicker, IShare share)
                     result.TrySetResult(null);
                     return;
                 }
-                File.Move(picked, RestorePath, overwrite: true);
-                result.TrySetResult(RestorePath);
+                File.Move(picked, destination, overwrite: true);
+                result.TrySetResult(destination);
             }
             catch (Exception ex)
             {
@@ -91,9 +96,9 @@ public sealed class BackupFilePicker(IFilePicker filePicker, IShare share)
             return null;
 
         await using var source = await file.OpenReadAsync();
-        await using var target = File.Create(RestorePath);
+        await using var target = File.Create(destination);
         await source.CopyToAsync(target);
-        return RestorePath;
+        return destination;
 #endif
     }
 
