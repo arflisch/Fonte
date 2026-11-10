@@ -67,6 +67,19 @@ public sealed partial class WorkoutViewModel : ReloadingViewModel
     [ObservableProperty]
     private bool _isResting;
 
+    /// <summary>The workout has a WOD (CrossFit template, or one timed already).</summary>
+    [ObservableProperty]
+    private bool _hasWod;
+
+    [ObservableProperty]
+    private string _wodTitle = string.Empty;
+
+    [ObservableProperty]
+    private bool _hasWodScore;
+
+    [ObservableProperty]
+    private string _wodScoreText = string.Empty;
+
     [ObservableProperty]
     private bool _isRestOver;
 
@@ -122,6 +135,10 @@ public sealed partial class WorkoutViewModel : ReloadingViewModel
             Exercises.Add(new WorkoutExerciseViewModel(detail.Entries[i], linkedFromPrevious, i == detail.Entries.Count - 1, this));
         }
         IsEmpty = Exercises.Count == 0;
+        HasWod = workout.WodFormat != WodFormat.None;
+        WodTitle = HasWod ? Loc.Wod(workout.WodFormat, workout.WodMinutes) : string.Empty;
+        HasWodScore = workout.HasWodScore;
+        WodScoreText = HasWodScore ? Loc.WodScore(workout) : string.Empty;
         IsLoaded = true;
         Tick();
 
@@ -171,7 +188,8 @@ public sealed partial class WorkoutViewModel : ReloadingViewModel
         if (done)
             row.Exercise.PrefillAfter(row);
         // In a superset, the rest comes after the last exercise of the chain.
-        if (done && _settings.RestTimerEnabled && !row.Exercise.IsLinkedToNext)
+        // A WOD runs on its own clock: no rest between its movements.
+        if (done && _settings.RestTimerEnabled && !row.Exercise.IsLinkedToNext && !row.Exercise.IsWod)
         {
             _rest.Start(row.Exercise.RestSeconds ?? _settings.RestSeconds);
             _restOverUntil = null;
@@ -230,6 +248,18 @@ public sealed partial class WorkoutViewModel : ReloadingViewModel
     private string ProLabel(string option) => _pro.IsUnlocked ? option : $"{option} · PRO";
 
     /// <summary>Opens the Fonte Pro page when it is locked; true when the feature can be used.</summary>
+    /// <summary>Opens the WOD timer, set to the workout's WOD when it has one (Fonte Pro).</summary>
+    [RelayCommand]
+    private async Task OpenWodAsync()
+    {
+        if (_workout is null || !await OpenProUnlessUnlockedAsync())
+            return;
+        var query = _workout.WodFormat == WodFormat.None
+            ? $"workout={_workout.Id}"
+            : $"workout={_workout.Id}&format={_workout.WodFormat}&minutes={_workout.WodMinutes}";
+        await Shell.Current.GoToAsync($"{Routes.Wod}?{query}");
+    }
+
     private async Task<bool> OpenProUnlessUnlockedAsync()
     {
         if (_pro.IsUnlocked)
@@ -533,6 +563,7 @@ public sealed class WorkoutExerciseViewModel
         var exercise = entry.Exercise;
         IsLinkedToNext = entry.Item.LinkedToNext && !isLast;
         IsLinkedFromPrevious = linkedFromPrevious;
+        IsWod = entry.Item.IsWod;
         TargetText = Target(exercise, entry.Item);
         RestSeconds = entry.Item.RestSeconds;
         RestText = RestSeconds is { } rest ? Loc.Format("Workout_RestShort", Loc.Seconds(rest)) : string.Empty;
@@ -563,6 +594,9 @@ public sealed class WorkoutExerciseViewModel
     public bool IsLinkedToNext { get; }
 
     public bool IsLinkedFromPrevious { get; }
+
+    /// <summary>A movement of the WOD: its reps are per round, and no rest follows its sets.</summary>
+    public bool IsWod { get; }
 
     /// <summary>What the template aims for: "Target 3 × 8 · 45 kg".</summary>
     public string TargetText { get; }
@@ -601,6 +635,15 @@ public sealed class WorkoutExerciseViewModel
     {
         if (item.TargetSets is not { } sets)
             return string.Empty;
+        // A WOD movement: what to do in each round.
+        if (item.IsWod)
+        {
+            var round = exercise.Tracking == Tracking.Time
+                ? item.TargetSeconds is { } held ? Loc.Seconds(held) : null
+                : item.TargetReps?.ToString(Loc.Culture);
+            if (round is not null)
+                return sets > 1 ? Loc.Format("Wod_TargetRounds", sets, round) : Loc.Format("Wod_TargetPerRound", round);
+        }
         var each = exercise.Tracking == Tracking.Time
             ? item.TargetSeconds is { } seconds ? Loc.Seconds(seconds) : null
             : item.TargetReps?.ToString(Loc.Culture);

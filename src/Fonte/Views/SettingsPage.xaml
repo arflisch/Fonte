@@ -52,6 +52,25 @@
                 <Label Margin="0,4,0,0" Style="{StaticResource FieldLabel}" Text="{l:Tr Settings_TrainingSection}" />
                 <Border Padding="16,0" Style="{StaticResource Card}">
                     <VerticalStackLayout>
+                        <Grid c:Touch.Command="{Binding ChooseSportCommand}" Style="{StaticResource Row}">
+                            <Border BackgroundColor="#26534AB7" Style="{StaticResource RowIcon}">
+                                <c:IconView Color="#534AB7" Data="{x:Static c:Icons.Barbell}" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                                <Label Style="{StaticResource RowTitle}" Text="{l:Tr Settings_Sport}" />
+                                <Label Style="{StaticResource Caption}" Text="{l:Tr Settings_SportHint}" />
+                            </VerticalStackLayout>
+                            <HorizontalStackLayout Grid.Column="2" Spacing="6" VerticalOptions="Center">
+                                <Label Style="{StaticResource Secondary}" Text="{Binding SportName}" VerticalOptions="Center" />
+                                <c:IconView
+                                    Color="{AppThemeBinding Light={StaticResource TextTertiaryLight}, Dark={StaticResource TextTertiaryDark}}"
+                                    Data="{x:Static c:Icons.ChevronRight}"
+                                    HeightRequest="16"
+                                    VerticalOptions="Center"
+                                    WidthRequest="16" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                        <BoxView Style="{StaticResource Divider}" />
                         <Grid c:Touch.Command="{Binding ChooseGoalCommand}" Style="{StaticResource Row}">
                             <Border BackgroundColor="#26E24B4A" Style="{StaticResource RowIcon}">
                                 <c:IconView Color="#E24B4A" Data="{x:Static c:Icons.Target}" />

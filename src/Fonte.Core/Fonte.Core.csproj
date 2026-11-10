@@ -17,6 +17,7 @@
   <ItemGroup>
     <!-- ANSES CIQUAL 2020 food composition table (Licence Ouverte), built by tools/ciqual_to_csv.py. -->
     <EmbeddedResource Include="Nutrition/ciqual.csv" LogicalName="Fonte.Core.ciqual.csv" />
+    <EmbeddedResource Include="Nutrition/recipes.json" LogicalName="Fonte.Core.recipes.json" />
   </ItemGroup>
 
 </Project>

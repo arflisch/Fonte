@@ -236,14 +236,23 @@
                         BindableLayout.ItemsSource="{Binding Catalog}"
                         ColumnDefinitions="*,*"
                         ColumnSpacing="10"
-                        RowDefinitions="Auto,Auto"
+                        RowDefinitions="Auto,Auto,Auto"
                         RowSpacing="10"
                         x:Name="CatalogGrid">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="vm:CatalogItemViewModel">
                                 <Border Padding="14" c:Touch.Command="{Binding FollowCommand}" Style="{StaticResource Card}">
                                     <VerticalStackLayout Spacing="4">
-                                        <Label FontSize="26" Text="{Binding Emoji}" />
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <Label FontSize="26" Text="{Binding Emoji}" />
+                                            <Border
+                                                Grid.Column="1"
+                                                IsVisible="{Binding IsLocked}"
+                                                Style="{StaticResource ProBadge}"
+                                                VerticalOptions="Start">
+                                                <Label Style="{StaticResource ProBadgeText}" />
+                                            </Border>
+                                        </Grid>
                                         <Label Style="{StaticResource Strong}" Text="{Binding Name}" />
                                         <Label MaxLines="2" Style="{StaticResource Caption}" Text="{Binding Text}" />
                                         <Label

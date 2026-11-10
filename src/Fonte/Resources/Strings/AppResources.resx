@@ -2488,4 +2488,343 @@ Everything on this device will be replaced, except the photos, which are kept.</
   <data name="Reminder_FastingCloses" xml:space="preserve">
     <value>Your eating window closes in an hour.</value>
   </data>
+  <data name="Ex_thruster" xml:space="preserve">
+    <value>Thruster</value>
+  </data>
+  <data name="Ex_power_clean" xml:space="preserve">
+    <value>Power clean</value>
+  </data>
+  <data name="Ex_push_press" xml:space="preserve">
+    <value>Push press</value>
+  </data>
+  <data name="Ex_snatch" xml:space="preserve">
+    <value>Snatch</value>
+  </data>
+  <data name="Ex_clean_and_jerk" xml:space="preserve">
+    <value>Clean and jerk</value>
+  </data>
+  <data name="Ex_wall_ball" xml:space="preserve">
+    <value>Wall ball</value>
+  </data>
+  <data name="Ex_kettlebell_swing" xml:space="preserve">
+    <value>Kettlebell swing</value>
+  </data>
+  <data name="Ex_box_jump" xml:space="preserve">
+    <value>Box jump</value>
+  </data>
+  <data name="Ex_air_squat" xml:space="preserve">
+    <value>Air squat</value>
+  </data>
+  <data name="Ex_burpee" xml:space="preserve">
+    <value>Burpee</value>
+  </data>
+  <data name="Ex_double_under" xml:space="preserve">
+    <value>Double under</value>
+  </data>
+  <data name="Ex_toes_to_bar" xml:space="preserve">
+    <value>Toes to bar</value>
+  </data>
+  <data name="Ex_handstand_push_up" xml:space="preserve">
+    <value>Handstand push-up</value>
+  </data>
+  <data name="Ex_muscle_up" xml:space="preserve">
+    <value>Muscle-up</value>
+  </data>
+  <data name="Ex_assault_bike" xml:space="preserve">
+    <value>Air bike</value>
+  </data>
+  <data name="Tip_thruster" xml:space="preserve">
+    <value>Front squat with the bar on the shoulders, then drive up and press it overhead in one motion.</value>
+  </data>
+  <data name="Tip_power_clean" xml:space="preserve">
+    <value>Bar close to the shins, push through the legs, pull high and catch it on the shoulders in a quarter squat.</value>
+  </data>
+  <data name="Tip_push_press" xml:space="preserve">
+    <value>Short dip of the knees, then drive with the legs and press the bar overhead, ribs down.</value>
+  </data>
+  <data name="Tip_snatch" xml:space="preserve">
+    <value>Wide grip, bar close to the body, extend hard and catch it arms locked overhead in a squat. Learn it light.</value>
+  </data>
+  <data name="Tip_clean_and_jerk" xml:space="preserve">
+    <value>Clean the bar to the shoulders, stand up, then drive it overhead with a split of the feet.</value>
+  </data>
+  <data name="Tip_wall_ball" xml:space="preserve">
+    <value>Full squat holding the ball at the chest, then throw it to the target as you stand up; catch and go again.</value>
+  </data>
+  <data name="Tip_kettlebell_swing" xml:space="preserve">
+    <value>Hinge at the hips, back flat, and snap the hips forward to swing the bell; the arms only guide it.</value>
+  </data>
+  <data name="Tip_box_jump" xml:space="preserve">
+    <value>Jump with both feet, land softly with the whole foot on the box and stand up fully; step down.</value>
+  </data>
+  <data name="Tip_air_squat" xml:space="preserve">
+    <value>Hips below the knees, heels on the floor, chest up; stand up fully at the top.</value>
+  </data>
+  <data name="Tip_burpee" xml:space="preserve">
+    <value>Chest to the floor, then jump the feet in and finish with a small jump and a clap overhead.</value>
+  </data>
+  <data name="Tip_double_under" xml:space="preserve">
+    <value>The rope passes twice under the feet in one jump: jump a little higher and turn with the wrists.</value>
+  </data>
+  <data name="Tip_toes_to_bar" xml:space="preserve">
+    <value>Hanging from the bar, swing slightly and bring both feet to touch the bar between the hands.</value>
+  </data>
+  <data name="Tip_handstand_push_up" xml:space="preserve">
+    <value>In a handstand against the wall, lower the head to the floor and press back up; scale with a box if needed.</value>
+  </data>
+  <data name="Tip_muscle_up" xml:space="preserve">
+    <value>A pull-up that turns into a dip above the bar or rings: pull hard to the chest, then press out.</value>
+  </data>
+  <data name="Tip_assault_bike" xml:space="preserve">
+    <value>Push and pull with arms and legs together; hold a pace you can keep for the whole interval.</value>
+  </data>
+  <data name="Program_crossfit_foundations" xml:space="preserve">
+    <value>CrossFit foundations</value>
+  </data>
+  <data name="ProgramText_crossfit_foundations" xml:space="preserve">
+    <value>CrossFit · strength then a short WOD</value>
+  </data>
+  <data name="Program_crossfit_performance" xml:space="preserve">
+    <value>CrossFit performance</value>
+  </data>
+  <data name="ProgramText_crossfit_performance" xml:space="preserve">
+    <value>CrossFit · Olympic lifts and harder WODs</value>
+  </data>
+  <data name="Template_cf_foundations_a" xml:space="preserve">
+    <value>Squat + AMRAP</value>
+  </data>
+  <data name="Template_cf_foundations_b" xml:space="preserve">
+    <value>Push press + For time</value>
+  </data>
+  <data name="Template_cf_foundations_c" xml:space="preserve">
+    <value>Deadlift + EMOM</value>
+  </data>
+  <data name="Template_cf_performance_a" xml:space="preserve">
+    <value>Power clean + For time</value>
+  </data>
+  <data name="Template_cf_performance_b" xml:space="preserve">
+    <value>Snatch + AMRAP</value>
+  </data>
+  <data name="Template_cf_performance_c" xml:space="preserve">
+    <value>Squat + EMOM</value>
+  </data>
+  <data name="Template_cf_performance_d" xml:space="preserve">
+    <value>Clean and jerk + For time</value>
+  </data>
+  <data name="Template_cf_performance_e" xml:space="preserve">
+    <value>Push press + AMRAP</value>
+  </data>
+  <data name="Sport_Strength" xml:space="preserve">
+    <value>Strength training</value>
+  </data>
+  <data name="Sport_CrossFit" xml:space="preserve">
+    <value>CrossFit</value>
+  </data>
+  <data name="Settings_Sport" xml:space="preserve">
+    <value>Sport</value>
+  </data>
+  <data name="Settings_SportHint" xml:space="preserve">
+    <value>The programs offered first</value>
+  </data>
+  <data name="Programs_CrossFitPro" xml:space="preserve">
+    <value>The CrossFit programs and the WOD timer come with Fonte Pro.</value>
+  </data>
+  <data name="Wod_Amrap" xml:space="preserve">
+    <value>AMRAP</value>
+  </data>
+  <data name="Wod_Emom" xml:space="preserve">
+    <value>EMOM</value>
+  </data>
+  <data name="Wod_ForTime" xml:space="preserve">
+    <value>For time</value>
+  </data>
+  <data name="Wod_AmrapHint" xml:space="preserve">
+    <value>As many rounds as possible before the time is up.</value>
+  </data>
+  <data name="Wod_EmomHint" xml:space="preserve">
+    <value>Every minute on the minute: do the work, rest until the next minute.</value>
+  </data>
+  <data name="Wod_ForTimeHint" xml:space="preserve">
+    <value>All the work as fast as possible, within the time cap.</value>
+  </data>
+  <data name="Wod_AmrapTitle" xml:space="preserve">
+    <value>AMRAP {0} min</value>
+  </data>
+  <data name="Wod_EmomTitle" xml:space="preserve">
+    <value>EMOM {0} min</value>
+  </data>
+  <data name="Wod_ForTimeCapTitle" xml:space="preserve">
+    <value>For time · cap {0} min</value>
+  </data>
+  <data name="Wod_ForTimeTitle" xml:space="preserve">
+    <value>For time</value>
+  </data>
+  <data name="Wod_ScoreRounds" xml:space="preserve">
+    <value>{0} rounds</value>
+  </data>
+  <data name="Wod_ScoreRoundsReps" xml:space="preserve">
+    <value>{0} rounds + {1} reps</value>
+  </data>
+  <data name="Wod_ScoreEmom" xml:space="preserve">
+    <value>{0} of {1} minutes done</value>
+  </data>
+  <data name="Wod_ScoreCap" xml:space="preserve">
+    <value>Time cap reached</value>
+  </data>
+  <data name="Wod_ScoreCapReps" xml:space="preserve">
+    <value>Time cap · {0} reps</value>
+  </data>
+  <data name="Wod_Format" xml:space="preserve">
+    <value>Format</value>
+  </data>
+  <data name="Wod_Duration" xml:space="preserve">
+    <value>Duration or time cap</value>
+  </data>
+  <data name="Wod_Start" xml:space="preserve">
+    <value>Start (10 s countdown)</value>
+  </data>
+  <data name="Wod_GetReady" xml:space="preserve">
+    <value>Get ready</value>
+  </data>
+  <data name="Wod_TimeLeft" xml:space="preserve">
+    <value>Time left</value>
+  </data>
+  <data name="Wod_EmomMinute" xml:space="preserve">
+    <value>Minute {0} of {1}</value>
+  </data>
+  <data name="Wod_Cap" xml:space="preserve">
+    <value>Time cap {0} min</value>
+  </data>
+  <data name="Wod_Rounds" xml:space="preserve">
+    <value>rounds</value>
+  </data>
+  <data name="Wod_AddRound" xml:space="preserve">
+    <value>+1 round</value>
+  </data>
+  <data name="Wod_Done" xml:space="preserve">
+    <value>Done!</value>
+  </data>
+  <data name="Wod_Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="Wod_Resume" xml:space="preserve">
+    <value>Resume</value>
+  </data>
+  <data name="Wod_ExtraReps" xml:space="preserve">
+    <value>Reps of the round not finished</value>
+  </data>
+  <data name="Wod_Save" xml:space="preserve">
+    <value>Save the score</value>
+  </data>
+  <data name="Wod_Saved" xml:space="preserve">
+    <value>Score saved</value>
+  </data>
+  <data name="Wod_StartTimer" xml:space="preserve">
+    <value>Start the WOD timer</value>
+  </data>
+  <data name="Wod_TimerLink" xml:space="preserve">
+    <value>WOD timer (AMRAP, EMOM, for time)</value>
+  </data>
+  <data name="Wod_Badge" xml:space="preserve">
+    <value>WOD</value>
+  </data>
+  <data name="Recipes_Title" xml:space="preserve">
+    <value>Recipes</value>
+  </data>
+  <data name="Recipes_Ideas" xml:space="preserve">
+    <value>Recipe ideas</value>
+  </data>
+  <data name="Recipes_IdeasHint" xml:space="preserve">
+    <value>Dishes with the amounts for what you have left</value>
+  </data>
+  <data name="Recipes_Target" xml:space="preserve">
+    <value>{0}: about {1} and {2} g of protein left for this meal</value>
+  </data>
+  <data name="Recipes_NoTarget" xml:space="preserve">
+    <value>Set up your targets to get the right amounts.</value>
+  </data>
+  <data name="Recipes_Portions" xml:space="preserve">
+    <value>{0} portion · {1} · {2} g protein</value>
+  </data>
+  <data name="Recipes_Minutes" xml:space="preserve">
+    <value>{0} min</value>
+  </data>
+  <data name="Recipes_Info" xml:space="preserve">
+    <value>{0} · recipe for {1}</value>
+  </data>
+  <data name="Recipes_PortionCount" xml:space="preserve">
+    <value>{0} portion(s)</value>
+  </data>
+  <data name="Recipes_Steps" xml:space="preserve">
+    <value>Steps</value>
+  </data>
+  <data name="Recipes_AddTo" xml:space="preserve">
+    <value>Add to {0}</value>
+  </data>
+  <data name="Recipes_Source" xml:space="preserve">
+    <value>Nutrients from the ANSES Ciqual table: estimates, they depend on the products used.</value>
+  </data>
+  <data name="RecipeTag_protein" xml:space="preserve">
+    <value>High protein</value>
+  </data>
+  <data name="RecipeTag_vegetarian" xml:space="preserve">
+    <value>Vegetarian</value>
+  </data>
+  <data name="RecipeTag_quick" xml:space="preserve">
+    <value>Quick</value>
+  </data>
+  <data name="Planner_Title" xml:space="preserve">
+    <value>With my ingredients</value>
+  </data>
+  <data name="Planner_Hint" xml:space="preserve">
+    <value>Pick your foods, Fonte works out the grams</value>
+  </data>
+  <data name="Planner_Intro" xml:space="preserve">
+    <value>Choose what you want to eat: Fonte works out how much of each to reach the calories and protein of this meal.</value>
+  </data>
+  <data name="Planner_Protein" xml:space="preserve">
+    <value>Protein (g)</value>
+  </data>
+  <data name="Planner_Ingredients" xml:space="preserve">
+    <value>Ingredients</value>
+  </data>
+  <data name="Planner_AddFood" xml:space="preserve">
+    <value>Add a food</value>
+  </data>
+  <data name="Planner_Result" xml:space="preserve">
+    <value>This meal brings</value>
+  </data>
+  <data name="Planner_FoodDetail" xml:space="preserve">
+    <value>{0} · {1} g protein</value>
+  </data>
+  <data name="Planner_StepStarch" xml:space="preserve">
+    <value>Prepare {0} as shown on the pack. The weight is for the food as named: raw or cooked.</value>
+  </data>
+  <data name="Planner_StepProtein" xml:space="preserve">
+    <value>Cook {0} in a hot pan or in the oven until cooked through.</value>
+  </data>
+  <data name="Planner_StepProteinFat" xml:space="preserve">
+    <value>Cook {0} in {1}, in a hot pan, until cooked through.</value>
+  </data>
+  <data name="Planner_StepFat" xml:space="preserve">
+    <value>Use {0} for cooking or as a dressing.</value>
+  </data>
+  <data name="Planner_StepVegetables" xml:space="preserve">
+    <value>Steam or sauté {0} for 5 to 8 minutes.</value>
+  </data>
+  <data name="Planner_StepOther" xml:space="preserve">
+    <value>Add {0}.</value>
+  </data>
+  <data name="Planner_StepServe" xml:space="preserve">
+    <value>Season to taste (herbs, spices, lemon) and serve.</value>
+  </data>
+  <data name="Wod_TargetPerRound" xml:space="preserve">
+    <value>{0} per round</value>
+  </data>
+  <data name="Wod_TargetRounds" xml:space="preserve">
+    <value>{0} rounds × {1}</value>
+  </data>
+  <data name="Recipes_Ingredients" xml:space="preserve">
+    <value>Ingredients (weight as named: raw or cooked)</value>
+  </data>
 </root>

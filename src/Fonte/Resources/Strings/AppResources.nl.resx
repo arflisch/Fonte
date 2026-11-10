@@ -2488,4 +2488,343 @@ Alles op dit apparaat wordt vervangen, behalve de foto's: die blijven bewaard.</
   <data name="Reminder_FastingCloses" xml:space="preserve">
     <value>Je eetvenster sluit over een uur.</value>
   </data>
+  <data name="Ex_thruster" xml:space="preserve">
+    <value>Thruster</value>
+  </data>
+  <data name="Ex_power_clean" xml:space="preserve">
+    <value>Power clean</value>
+  </data>
+  <data name="Ex_push_press" xml:space="preserve">
+    <value>Push press</value>
+  </data>
+  <data name="Ex_snatch" xml:space="preserve">
+    <value>Trekken (snatch)</value>
+  </data>
+  <data name="Ex_clean_and_jerk" xml:space="preserve">
+    <value>Stoten (clean and jerk)</value>
+  </data>
+  <data name="Ex_wall_ball" xml:space="preserve">
+    <value>Wall ball</value>
+  </data>
+  <data name="Ex_kettlebell_swing" xml:space="preserve">
+    <value>Kettlebell swing</value>
+  </data>
+  <data name="Ex_box_jump" xml:space="preserve">
+    <value>Box jump</value>
+  </data>
+  <data name="Ex_air_squat" xml:space="preserve">
+    <value>Air squat</value>
+  </data>
+  <data name="Ex_burpee" xml:space="preserve">
+    <value>Burpee</value>
+  </data>
+  <data name="Ex_double_under" xml:space="preserve">
+    <value>Double under</value>
+  </data>
+  <data name="Ex_toes_to_bar" xml:space="preserve">
+    <value>Toes to bar</value>
+  </data>
+  <data name="Ex_handstand_push_up" xml:space="preserve">
+    <value>Handstand push-up</value>
+  </data>
+  <data name="Ex_muscle_up" xml:space="preserve">
+    <value>Muscle-up</value>
+  </data>
+  <data name="Ex_assault_bike" xml:space="preserve">
+    <value>Air bike</value>
+  </data>
+  <data name="Tip_thruster" xml:space="preserve">
+    <value>Front squat met de stang op de schouders, kom krachtig omhoog en druk hem in één beweging boven je hoofd.</value>
+  </data>
+  <data name="Tip_power_clean" xml:space="preserve">
+    <value>Stang dicht bij de schenen, duw af met de benen, trek hoog en vang hem op de schouders in een kwartsquat.</value>
+  </data>
+  <data name="Tip_push_press" xml:space="preserve">
+    <value>Kleine kniebuiging, duw dan af met de benen en druk de stang boven je hoofd, ribben omlaag.</value>
+  </data>
+  <data name="Tip_snatch" xml:space="preserve">
+    <value>Brede greep, stang dicht bij het lichaam, explosief strekken en vangen met gestrekte armen in een squat. Licht aanleren.</value>
+  </data>
+  <data name="Tip_clean_and_jerk" xml:space="preserve">
+    <value>Breng de stang naar de schouders, kom recht en stoot hem boven je hoofd met een spreidstap.</value>
+  </data>
+  <data name="Tip_wall_ball" xml:space="preserve">
+    <value>Volledige squat met de bal tegen de borst, gooi hem bij het opstaan naar het doel; vang en ga door.</value>
+  </data>
+  <data name="Tip_kettlebell_swing" xml:space="preserve">
+    <value>Scharnier in de heupen met een vlakke rug en stuw de heupen naar voren; de armen sturen alleen.</value>
+  </data>
+  <data name="Tip_box_jump" xml:space="preserve">
+    <value>Spring met beide voeten, land zacht met de hele voet op de box, kom volledig recht en stap af.</value>
+  </data>
+  <data name="Tip_air_squat" xml:space="preserve">
+    <value>Heupen onder de knieën, hielen op de grond, borst omhoog; kom bovenaan volledig recht.</value>
+  </data>
+  <data name="Tip_burpee" xml:space="preserve">
+    <value>Borst op de grond, spring met de voeten naar voren en eindig met een sprongetje en de handen boven je hoofd.</value>
+  </data>
+  <data name="Tip_double_under" xml:space="preserve">
+    <value>Het touw gaat twee keer onder je voeten door per sprong: spring iets hoger en draai met de polsen.</value>
+  </data>
+  <data name="Tip_toes_to_bar" xml:space="preserve">
+    <value>Hangend aan de stang, neem een lichte zwaai en breng beide voeten tegen de stang tussen je handen.</value>
+  </data>
+  <data name="Tip_handstand_push_up" xml:space="preserve">
+    <value>In handstand tegen de muur, laat je hoofd naar de grond zakken en druk terug op; schaal met een box als nodig.</value>
+  </data>
+  <data name="Tip_muscle_up" xml:space="preserve">
+    <value>Een optrekking die overgaat in een dip boven de stang of ringen: trek krachtig tot de borst en druk dan uit.</value>
+  </data>
+  <data name="Tip_assault_bike" xml:space="preserve">
+    <value>Duw en trek met armen en benen samen; houd een tempo vol dat je het hele interval aankan.</value>
+  </data>
+  <data name="Program_crossfit_foundations" xml:space="preserve">
+    <value>CrossFit basis</value>
+  </data>
+  <data name="ProgramText_crossfit_foundations" xml:space="preserve">
+    <value>CrossFit · kracht en dan een korte WOD</value>
+  </data>
+  <data name="Program_crossfit_performance" xml:space="preserve">
+    <value>CrossFit prestatie</value>
+  </data>
+  <data name="ProgramText_crossfit_performance" xml:space="preserve">
+    <value>CrossFit · gewichtheffen en zwaardere WODs</value>
+  </data>
+  <data name="Template_cf_foundations_a" xml:space="preserve">
+    <value>Squat + AMRAP</value>
+  </data>
+  <data name="Template_cf_foundations_b" xml:space="preserve">
+    <value>Push press + For time</value>
+  </data>
+  <data name="Template_cf_foundations_c" xml:space="preserve">
+    <value>Deadlift + EMOM</value>
+  </data>
+  <data name="Template_cf_performance_a" xml:space="preserve">
+    <value>Power clean + For time</value>
+  </data>
+  <data name="Template_cf_performance_b" xml:space="preserve">
+    <value>Trekken + AMRAP</value>
+  </data>
+  <data name="Template_cf_performance_c" xml:space="preserve">
+    <value>Squat + EMOM</value>
+  </data>
+  <data name="Template_cf_performance_d" xml:space="preserve">
+    <value>Stoten + For time</value>
+  </data>
+  <data name="Template_cf_performance_e" xml:space="preserve">
+    <value>Push press + AMRAP</value>
+  </data>
+  <data name="Sport_Strength" xml:space="preserve">
+    <value>Krachttraining</value>
+  </data>
+  <data name="Sport_CrossFit" xml:space="preserve">
+    <value>CrossFit</value>
+  </data>
+  <data name="Settings_Sport" xml:space="preserve">
+    <value>Sport</value>
+  </data>
+  <data name="Settings_SportHint" xml:space="preserve">
+    <value>De programma's die eerst getoond worden</value>
+  </data>
+  <data name="Programs_CrossFitPro" xml:space="preserve">
+    <value>De CrossFit-programma's en de WOD-timer horen bij Fonte Pro.</value>
+  </data>
+  <data name="Wod_Amrap" xml:space="preserve">
+    <value>AMRAP</value>
+  </data>
+  <data name="Wod_Emom" xml:space="preserve">
+    <value>EMOM</value>
+  </data>
+  <data name="Wod_ForTime" xml:space="preserve">
+    <value>For time</value>
+  </data>
+  <data name="Wod_AmrapHint" xml:space="preserve">
+    <value>Zoveel mogelijk rondes voor de tijd om is.</value>
+  </data>
+  <data name="Wod_EmomHint" xml:space="preserve">
+    <value>Elke minuut: doe het werk en rust tot de volgende minuut.</value>
+  </data>
+  <data name="Wod_ForTimeHint" xml:space="preserve">
+    <value>Al het werk zo snel mogelijk, binnen de tijdslimiet.</value>
+  </data>
+  <data name="Wod_AmrapTitle" xml:space="preserve">
+    <value>AMRAP {0} min</value>
+  </data>
+  <data name="Wod_EmomTitle" xml:space="preserve">
+    <value>EMOM {0} min</value>
+  </data>
+  <data name="Wod_ForTimeCapTitle" xml:space="preserve">
+    <value>For time · limiet {0} min</value>
+  </data>
+  <data name="Wod_ForTimeTitle" xml:space="preserve">
+    <value>For time</value>
+  </data>
+  <data name="Wod_ScoreRounds" xml:space="preserve">
+    <value>{0} rondes</value>
+  </data>
+  <data name="Wod_ScoreRoundsReps" xml:space="preserve">
+    <value>{0} rondes + {1} herh.</value>
+  </data>
+  <data name="Wod_ScoreEmom" xml:space="preserve">
+    <value>{0} van {1} minuten gehaald</value>
+  </data>
+  <data name="Wod_ScoreCap" xml:space="preserve">
+    <value>Tijdslimiet bereikt</value>
+  </data>
+  <data name="Wod_ScoreCapReps" xml:space="preserve">
+    <value>Tijdslimiet · {0} herh.</value>
+  </data>
+  <data name="Wod_Format" xml:space="preserve">
+    <value>Formaat</value>
+  </data>
+  <data name="Wod_Duration" xml:space="preserve">
+    <value>Duur of tijdslimiet</value>
+  </data>
+  <data name="Wod_Start" xml:space="preserve">
+    <value>Starten (10 s aftellen)</value>
+  </data>
+  <data name="Wod_GetReady" xml:space="preserve">
+    <value>Maak je klaar</value>
+  </data>
+  <data name="Wod_TimeLeft" xml:space="preserve">
+    <value>Resterende tijd</value>
+  </data>
+  <data name="Wod_EmomMinute" xml:space="preserve">
+    <value>Minuut {0} van {1}</value>
+  </data>
+  <data name="Wod_Cap" xml:space="preserve">
+    <value>Limiet {0} min</value>
+  </data>
+  <data name="Wod_Rounds" xml:space="preserve">
+    <value>rondes</value>
+  </data>
+  <data name="Wod_AddRound" xml:space="preserve">
+    <value>+1 ronde</value>
+  </data>
+  <data name="Wod_Done" xml:space="preserve">
+    <value>Klaar!</value>
+  </data>
+  <data name="Wod_Pause" xml:space="preserve">
+    <value>Pauze</value>
+  </data>
+  <data name="Wod_Resume" xml:space="preserve">
+    <value>Hervatten</value>
+  </data>
+  <data name="Wod_ExtraReps" xml:space="preserve">
+    <value>Herhalingen van de onafgewerkte ronde</value>
+  </data>
+  <data name="Wod_Save" xml:space="preserve">
+    <value>Score opslaan</value>
+  </data>
+  <data name="Wod_Saved" xml:space="preserve">
+    <value>Score opgeslagen</value>
+  </data>
+  <data name="Wod_StartTimer" xml:space="preserve">
+    <value>WOD-timer starten</value>
+  </data>
+  <data name="Wod_TimerLink" xml:space="preserve">
+    <value>WOD-timer (AMRAP, EMOM, for time)</value>
+  </data>
+  <data name="Wod_Badge" xml:space="preserve">
+    <value>WOD</value>
+  </data>
+  <data name="Recipes_Title" xml:space="preserve">
+    <value>Recepten</value>
+  </data>
+  <data name="Recipes_Ideas" xml:space="preserve">
+    <value>Receptideeën</value>
+  </data>
+  <data name="Recipes_IdeasHint" xml:space="preserve">
+    <value>Gerechten met de hoeveelheden voor wat je nog over hebt</value>
+  </data>
+  <data name="Recipes_Target" xml:space="preserve">
+    <value>{0}: ongeveer {1} en {2} g eiwit voor deze maaltijd</value>
+  </data>
+  <data name="Recipes_NoTarget" xml:space="preserve">
+    <value>Stel je doelen in voor de juiste hoeveelheden.</value>
+  </data>
+  <data name="Recipes_Portions" xml:space="preserve">
+    <value>{0} portie · {1} · {2} g eiwit</value>
+  </data>
+  <data name="Recipes_Minutes" xml:space="preserve">
+    <value>{0} min</value>
+  </data>
+  <data name="Recipes_Info" xml:space="preserve">
+    <value>{0} · recept voor {1}</value>
+  </data>
+  <data name="Recipes_PortionCount" xml:space="preserve">
+    <value>{0} portie(s)</value>
+  </data>
+  <data name="Recipes_Steps" xml:space="preserve">
+    <value>Bereiding</value>
+  </data>
+  <data name="Recipes_AddTo" xml:space="preserve">
+    <value>Toevoegen aan {0}</value>
+  </data>
+  <data name="Recipes_Source" xml:space="preserve">
+    <value>Waarden uit de Ciqual-tabel van ANSES: schattingen, ze hangen af van de gebruikte producten.</value>
+  </data>
+  <data name="RecipeTag_protein" xml:space="preserve">
+    <value>Eiwitrijk</value>
+  </data>
+  <data name="RecipeTag_vegetarian" xml:space="preserve">
+    <value>Vegetarisch</value>
+  </data>
+  <data name="RecipeTag_quick" xml:space="preserve">
+    <value>Snel</value>
+  </data>
+  <data name="Planner_Title" xml:space="preserve">
+    <value>Met mijn ingrediënten</value>
+  </data>
+  <data name="Planner_Hint" xml:space="preserve">
+    <value>Kies je voeding, Fonte berekent de grammen</value>
+  </data>
+  <data name="Planner_Intro" xml:space="preserve">
+    <value>Kies wat je wilt eten: Fonte berekent hoeveel van elk je nodig hebt voor de calorieën en eiwitten van deze maaltijd.</value>
+  </data>
+  <data name="Planner_Protein" xml:space="preserve">
+    <value>Eiwit (g)</value>
+  </data>
+  <data name="Planner_Ingredients" xml:space="preserve">
+    <value>Ingrediënten</value>
+  </data>
+  <data name="Planner_AddFood" xml:space="preserve">
+    <value>Voeding toevoegen</value>
+  </data>
+  <data name="Planner_Result" xml:space="preserve">
+    <value>Deze maaltijd levert</value>
+  </data>
+  <data name="Planner_FoodDetail" xml:space="preserve">
+    <value>{0} · {1} g eiwit</value>
+  </data>
+  <data name="Planner_StepStarch" xml:space="preserve">
+    <value>Bereid {0} zoals op de verpakking staat. Het gewicht geldt voor de voeding zoals genoemd: rauw of gekookt.</value>
+  </data>
+  <data name="Planner_StepProtein" xml:space="preserve">
+    <value>Bak {0} in een hete pan of in de oven tot het gaar is.</value>
+  </data>
+  <data name="Planner_StepProteinFat" xml:space="preserve">
+    <value>Bak {0} in {1} in een hete pan tot het gaar is.</value>
+  </data>
+  <data name="Planner_StepFat" xml:space="preserve">
+    <value>Gebruik {0} om te bakken of als dressing.</value>
+  </data>
+  <data name="Planner_StepVegetables" xml:space="preserve">
+    <value>Stoom of bak {0} 5 tot 8 minuten.</value>
+  </data>
+  <data name="Planner_StepOther" xml:space="preserve">
+    <value>Voeg {0} toe.</value>
+  </data>
+  <data name="Planner_StepServe" xml:space="preserve">
+    <value>Kruid naar smaak (kruiden, specerijen, citroen) en serveer.</value>
+  </data>
+  <data name="Wod_TargetPerRound" xml:space="preserve">
+    <value>{0} per ronde</value>
+  </data>
+  <data name="Wod_TargetRounds" xml:space="preserve">
+    <value>{0} rondes × {1}</value>
+  </data>
+  <data name="Recipes_Ingredients" xml:space="preserve">
+    <value>Ingrediënten (gewicht zoals genoemd: rauw of gekookt)</value>
+  </data>
 </root>

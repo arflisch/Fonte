@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fonte.Views.RecipeDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Fonte.Controls"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:vm="clr-namespace:Fonte.ViewModels"
+    x:DataType="vm:RecipeDetailViewModel"
+    ios:Page.ModalPresentationStyle="PageSheet"
+    Shell.NavBarIsVisible="False"
+    SafeAreaEdges="All"
+    Shell.PresentationMode="ModalAnimated">
+
+    <ContentPage.Resources>
+        <Style x:Key="MacroValue" TargetType="Label">
+            <Setter Property="FontFamily" Value="OpenSansSemibold" />
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="MacroLabel" TargetType="Label" BasedOn="{StaticResource Caption}">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Grid Padding="20,18,20,6" ColumnDefinitions="100,*,100">
+            <Label
+                c:Touch.Command="{Binding CloseCommand}"
+                Style="{StaticResource LinkLabel}"
+                Text="{l:Tr Common_Cancel}" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,0,20,24" Spacing="18">
+                <VerticalStackLayout Spacing="2">
+                    <Label FontFamily="OpenSansSemibold" FontSize="24" Text="{Binding Name}" />
+                    <Label Style="{StaticResource Secondary}" Text="{Binding Info}" />
+                </VerticalStackLayout>
+
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                    <Label Style="{StaticResource Strong}" Text="{Binding PortionsText}" VerticalOptions="Center" />
+                    <HorizontalStackLayout Grid.Column="1" Spacing="8">
+                        <Border c:Touch.Command="{Binding FewerCommand}" Style="{StaticResource IconButton}">
+                            <Label FontFamily="OpenSansSemibold" FontSize="20" HorizontalOptions="Center" Text="−" VerticalOptions="Center" />
+                        </Border>
+                        <Border c:Touch.Command="{Binding MoreCommand}" Style="{StaticResource IconButton}">
+                            <c:IconView Color="{DynamicResource Accent}" Data="{x:Static c:Icons.Plus}" StrokeWidth="2.4" />
+                        </Border>
+                    </HorizontalStackLayout>
+                </Grid>
+
+                <Border Padding="16,14" Style="{StaticResource Card}">
+                    <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="6">
+                        <VerticalStackLayout>
+                            <Label Style="{StaticResource MacroValue}" Text="{Binding KcalText}" TextColor="{DynamicResource Accent}" />
+                            <Label Style="{StaticResource MacroLabel}" Text="kcal" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1">
+                            <Label Style="{StaticResource MacroValue}" Text="{Binding ProteinText}" TextColor="#E24B4A" />
+                            <Label Style="{StaticResource MacroLabel}" Text="{l:Tr Nutrition_Protein}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="2">
+                            <Label Style="{StaticResource MacroValue}" Text="{Binding CarbsText}" TextColor="#378ADD" />
+                            <Label Style="{StaticResource MacroLabel}" Text="{l:Tr Nutrition_Carbs}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="3">
+                            <Label Style="{StaticResource MacroValue}" Text="{Binding FatText}" TextColor="#E8B22C" />
+                            <Label Style="{StaticResource MacroLabel}" Text="{l:Tr Nutrition_Fat}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Recipes_Ingredients}" />
+                    <Border Padding="16,4" Style="{StaticResource Card}">
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding Ingredients}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="vm:IngredientLineItem">
+                                    <Grid Padding="0,10" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                        <Label Text="{Binding Name}" VerticalOptions="Center" />
+                                        <Label Grid.Column="1" FontFamily="OpenSansSemibold" Text="{Binding Quantity}" VerticalOptions="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="12">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Recipes_Steps}" />
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Steps}" Spacing="12">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="vm:StepItem">
+                                <Grid ColumnDefinitions="30,*" ColumnSpacing="10">
+                                    <Border
+                                        BackgroundColor="{DynamicResource AccentSoft}"
+                                        HeightRequest="26"
+                                        StrokeShape="RoundRectangle 13"
+                                        StrokeThickness="0"
+                                        VerticalOptions="Start"
+                                        WidthRequest="26">
+                                        <Label
+                                            FontFamily="OpenSansSemibold"
+                                            FontSize="13"
+                                            HorizontalOptions="Center"
+                                            Text="{Binding Number}"
+                                            TextColor="{DynamicResource Accent}"
+                                            VerticalOptions="Center" />
+                                    </Border>
+                                    <Label Grid.Column="1" Text="{Binding Text}" />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Border Grid.Row="2" Margin="20,8,20,12" c:Touch.Command="{Binding AddCommand}" Style="{StaticResource PrimaryButton}">
+            <Label Style="{StaticResource PrimaryButtonText}" Text="{Binding AddText}" />
+        </Border>
+    </Grid>
+</ContentPage>

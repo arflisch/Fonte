@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Fonte.Views.WodPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Fonte.Controls"
+    xmlns:l="clr-namespace:Fonte.Localization"
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:vm="clr-namespace:Fonte.ViewModels"
+    x:DataType="vm:WodViewModel"
+    ios:Page.ModalPresentationStyle="PageSheet"
+    Shell.NavBarIsVisible="False"
+    SafeAreaEdges="All"
+    Shell.PresentationMode="ModalAnimated">
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="ChipTemplate" x:DataType="vm:SelectableOption">
+            <Border
+                Margin="0,0,8,8"
+                c:Touch.Command="{Binding SelectCommand}"
+                Style="{StaticResource Chip}">
+                <Border.Triggers>
+                    <DataTrigger Binding="{Binding IsSelected}" TargetType="Border" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource AccentGradient}" />
+                        <Setter Property="Stroke" Value="Transparent" />
+                    </DataTrigger>
+                </Border.Triggers>
+                <Label FontFamily="OpenSansSemibold" FontSize="14" Text="{Binding Label}">
+                    <Label.Triggers>
+                        <DataTrigger Binding="{Binding IsSelected}" TargetType="Label" Value="True">
+                            <Setter Property="TextColor" Value="White" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </Border>
+        </DataTemplate>
+        <Style x:Key="RoundButton" TargetType="Border">
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 22" />
+            <Setter Property="HeightRequest" Value="64" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Sheet header -->
+        <Grid Padding="20,18,20,6" ColumnDefinitions="100,*,100">
+            <Label
+                c:Touch.Command="{Binding CloseCommand}"
+                Style="{StaticResource LinkLabel}"
+                Text="{l:Tr Common_Close}" />
+            <Label Grid.Column="1" Style="{StaticResource PageTitle}" Text="{Binding Title}" />
+        </Grid>
+
+        <!-- Format and duration -->
+        <ScrollView Grid.Row="1" IsVisible="{Binding IsSetup}">
+            <VerticalStackLayout Padding="20,12,20,32" Spacing="22">
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Wod_Format}" />
+                    <FlexLayout BindableLayout.ItemTemplate="{StaticResource ChipTemplate}" BindableLayout.ItemsSource="{Binding Formats}" Wrap="Wrap" />
+                    <Label Style="{StaticResource Caption}" Text="{Binding ClockLabel}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="10">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Wod_Duration}" />
+                    <FlexLayout BindableLayout.ItemTemplate="{StaticResource ChipTemplate}" BindableLayout.ItemsSource="{Binding MinuteOptions}" Wrap="Wrap" />
+                </VerticalStackLayout>
+                <Border Margin="0,10,0,0" c:Touch.Command="{Binding StartCommand}" Style="{StaticResource PrimaryButton}">
+                    <Label Style="{StaticResource PrimaryButtonText}" Text="{l:Tr Wod_Start}" />
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- The clock -->
+        <Grid
+            Grid.Row="1"
+            Padding="20,10,20,24"
+            IsVisible="{Binding IsRunningOrDone}"
+            RowDefinitions="*,Auto,Auto">
+            <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                <Label
+                    FontFamily="OpenSansSemibold"
+                    FontSize="96"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding ClockText}"
+                    TextColor="{DynamicResource Accent}" />
+                <Label HorizontalTextAlignment="Center" Style="{StaticResource Secondary}" Text="{Binding ClockLabel}" />
+                <c:ProgressPill
+                    Margin="20,6"
+                    FillColor="{DynamicResource Accent}"
+                    HeightRequest="8"
+                    Progress="{Binding Progress}"
+                    TrackColor="{DynamicResource AccentSoft}" />
+                <VerticalStackLayout IsVisible="{Binding IsAmrap}" Spacing="2">
+                    <Label
+                        FontFamily="OpenSansSemibold"
+                        FontSize="44"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding Rounds}" />
+                    <Label HorizontalTextAlignment="Center" Style="{StaticResource Caption}" Text="{l:Tr Wod_Rounds}" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- While it runs -->
+            <VerticalStackLayout Grid.Row="1" IsVisible="{Binding IsRunning}" Spacing="12">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12" IsVisible="{Binding IsAmrap}">
+                    <Border
+                        c:Touch.Command="{Binding RemoveRoundCommand}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceMutedLight}, Dark={StaticResource SurfaceMutedDark}}"
+                        Style="{StaticResource RoundButton}"
+                        WidthRequest="64">
+                        <Label FontFamily="OpenSansSemibold" FontSize="26" HorizontalOptions="Center" Text="−" VerticalOptions="Center" />
+                    </Border>
+                    <Border Grid.Column="1" c:Touch.Command="{Binding AddRoundCommand}" Background="{DynamicResource AccentGradient}" Style="{StaticResource RoundButton}">
+                        <Label FontFamily="OpenSansSemibold" FontSize="20" HorizontalOptions="Center" Text="{l:Tr Wod_AddRound}" TextColor="White" VerticalOptions="Center" />
+                    </Border>
+                </Grid>
+                <Border c:Touch.Command="{Binding DoneCommand}" Background="{DynamicResource AccentGradient}" IsVisible="{Binding IsForTime}" Style="{StaticResource RoundButton}">
+                    <Label FontFamily="OpenSansSemibold" FontSize="20" HorizontalOptions="Center" Text="{l:Tr Wod_Done}" TextColor="White" VerticalOptions="Center" />
+                </Border>
+                <Label
+                    Padding="0,6"
+                    c:Touch.Command="{Binding TogglePauseCommand}"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource LinkLabel}"
+                    Text="{l:Tr Wod_Pause}">
+                    <Label.Triggers>
+                        <DataTrigger Binding="{Binding IsPaused}" TargetType="Label" Value="True">
+                            <Setter Property="Text" Value="{l:Tr Wod_Resume}" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </VerticalStackLayout>
+
+            <!-- The score -->
+            <VerticalStackLayout Grid.Row="2" IsVisible="{Binding IsDone}" Spacing="12">
+                <Label
+                    FontFamily="OpenSansSemibold"
+                    FontSize="24"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding ResultText}" />
+                <VerticalStackLayout IsVisible="{Binding AsksExtraReps}" Spacing="6">
+                    <Label Style="{StaticResource FieldLabel}" Text="{l:Tr Wod_ExtraReps}" />
+                    <Border Style="{StaticResource InputField}">
+                        <Entry Keyboard="Numeric" MaxLength="3" Placeholder="0" Text="{Binding RepsText}" />
+                    </Border>
+                </VerticalStackLayout>
+                <Border c:Touch.Command="{Binding SaveCommand}" Style="{StaticResource PrimaryButton}">
+                    <Label Style="{StaticResource PrimaryButtonText}" Text="{l:Tr Wod_Save}" />
+                </Border>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

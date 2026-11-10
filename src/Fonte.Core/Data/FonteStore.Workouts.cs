@@ -275,7 +275,8 @@ public sealed partial class FonteStore
         var targets = await db.Table<TemplateExercise>().Where(t => t.TemplateId == templateId).ToListAsync();
         var items = await db.Table<WorkoutExercise>().Where(i => i.WorkoutId == workoutId).ToListAsync();
         var steps = new List<ProgressionStep>();
-        foreach (var target in targets)
+        // The movements of a WOD are scored as a whole, not raised one by one.
+        foreach (var target in targets.Where(t => !t.IsWod))
         {
             var exercise = await db.FindAsync<Exercise>(target.ExerciseId);
             if (exercise is null)
@@ -340,4 +341,18 @@ public sealed partial class FonteStore
     private static async Task<WorkoutSet> FindSetAsync(SQLiteAsyncConnection db, int setId) =>
         await db.FindAsync<WorkoutSet>(setId)
             ?? throw new FonteException(FonteError.SetNotFound, $"Set {setId} does not exist.");
+
+    /// <summary>Records the WOD of a workout and its score (rounds and repetitions, or time in seconds).</summary>
+    public async Task SaveWodScoreAsync(int workoutId, WodFormat format, int minutes, int rounds, int reps, int seconds)
+    {
+        var db = await GetConnectionAsync();
+        var workout = await FindWorkoutAsync(db, workoutId);
+        workout.WodFormat = format;
+        workout.WodMinutes = Math.Clamp(minutes, 0, 180);
+        workout.WodRounds = Math.Max(0, rounds);
+        workout.WodReps = Math.Max(0, reps);
+        workout.WodSeconds = Math.Max(0, seconds);
+        await db.UpdateAsync(workout);
+        OnChanged();
+    }
 }

@@ -1,3 +1,5 @@
+using Fonte.Core.Models;
+
 namespace Fonte.Core.Catalog;
 
 /// <summary>What the user trains for, chosen when the app is first opened: it shapes the repetitions and rests.</summary>
@@ -13,16 +15,28 @@ public enum TrainingGoal
     Fitness = 2,
 }
 
+/// <summary>The kind of training the user does: it decides the ready-made programs offered first.</summary>
+public enum TrainingSport
+{
+    Strength = 0,
+    CrossFit = 1,
+}
+
 /// <param name="ExerciseKey">Key of a built-in exercise (<see cref="ExerciseCatalog"/>).</param>
 /// <param name="Seconds">Duration to hold, for timed exercises (then <paramref name="Reps"/> is 0).</param>
-public sealed record CatalogTemplateExercise(string ExerciseKey, int Sets, int Reps, int Seconds = 0, bool LinkedToNext = false);
+/// <param name="IsWod">A movement of the template's WOD: <paramref name="Reps"/> are per round.</param>
+public sealed record CatalogTemplateExercise(string ExerciseKey, int Sets, int Reps, int Seconds = 0, bool LinkedToNext = false, bool IsWod = false);
+
+/// <summary>The WOD that ends a CrossFit template, its movements being the template exercises marked IsWod.</summary>
+public sealed record CatalogWod(WodFormat Format, int Minutes);
 
 /// <param name="Key">Also the translation key of its name ("Template_" + key).</param>
-public sealed record CatalogTemplate(string Key, IReadOnlyList<CatalogTemplateExercise> Exercises);
+public sealed record CatalogTemplate(string Key, IReadOnlyList<CatalogTemplateExercise> Exercises, CatalogWod? Wod = null);
 
 /// <param name="Key">Also the translation key of its name ("Program_" + key) and description ("ProgramText_" + key).</param>
 /// <param name="SessionsPerWeek">Workouts per week it is designed for.</param>
-public sealed record CatalogProgram(string Key, int SessionsPerWeek, int Weeks, IReadOnlyList<CatalogTemplate> Templates);
+public sealed record CatalogProgram(string Key, int SessionsPerWeek, int Weeks, IReadOnlyList<CatalogTemplate> Templates,
+    TrainingSport Sport = TrainingSport.Strength);
 
 /// <summary>Ready-made programs, each a few workout templates done in turn.</summary>
 public static class ProgramCatalog
@@ -129,6 +143,68 @@ public static class ProgramCatalog
                 new("plank", 3, 0, Seconds: 60),
             ]),
         ]),
+        new("crossfit_foundations", 3, 8,
+        [
+            new("cf_foundations_a",
+            [
+                new("squat", 5, 5),
+                new("wall_ball", 1, 10, LinkedToNext: true, IsWod: true),
+                new("kettlebell_swing", 1, 12, LinkedToNext: true, IsWod: true),
+                new("box_jump", 1, 10, IsWod: true),
+            ], new CatalogWod(WodFormat.Amrap, 12)),
+            new("cf_foundations_b",
+            [
+                new("push_press", 5, 5),
+                new("thruster", 3, 12, LinkedToNext: true, IsWod: true),
+                new("pull_up", 3, 10, IsWod: true),
+            ], new CatalogWod(WodFormat.ForTime, 15)),
+            new("cf_foundations_c",
+            [
+                new("deadlift", 5, 3),
+                new("kettlebell_swing", 1, 12, LinkedToNext: true, IsWod: true),
+                new("burpee", 1, 8, LinkedToNext: true, IsWod: true),
+                new("air_squat", 1, 15, IsWod: true),
+            ], new CatalogWod(WodFormat.Emom, 12)),
+        ], TrainingSport.CrossFit),
+        new("crossfit_performance", 5, 8,
+        [
+            new("cf_performance_a",
+            [
+                new("power_clean", 5, 3),
+                new("front_squat", 4, 5),
+                new("thruster", 3, 15, LinkedToNext: true, IsWod: true),
+                new("pull_up", 3, 15, IsWod: true),
+            ], new CatalogWod(WodFormat.ForTime, 12)),
+            new("cf_performance_b",
+            [
+                new("snatch", 5, 2),
+                new("double_under", 1, 30, LinkedToNext: true, IsWod: true),
+                new("toes_to_bar", 1, 10, LinkedToNext: true, IsWod: true),
+                new("kettlebell_swing", 1, 15, IsWod: true),
+            ], new CatalogWod(WodFormat.Amrap, 15)),
+            new("cf_performance_c",
+            [
+                new("squat", 5, 5),
+                new("assault_bike", 1, 0, Seconds: 40, LinkedToNext: true, IsWod: true),
+                new("burpee", 1, 10, LinkedToNext: true, IsWod: true),
+                new("wall_ball", 1, 15, LinkedToNext: true, IsWod: true),
+                new("toes_to_bar", 1, 12, IsWod: true),
+            ], new CatalogWod(WodFormat.Emom, 16)),
+            new("cf_performance_d",
+            [
+                new("clean_and_jerk", 6, 2),
+                new("muscle_up", 5, 3, LinkedToNext: true, IsWod: true),
+                new("box_jump", 5, 10, LinkedToNext: true, IsWod: true),
+                new("deadlift", 5, 8, IsWod: true),
+            ], new CatalogWod(WodFormat.ForTime, 20)),
+            new("cf_performance_e",
+            [
+                new("push_press", 5, 3),
+                new("handstand_push_up", 1, 5, LinkedToNext: true, IsWod: true),
+                new("pull_up", 1, 10, LinkedToNext: true, IsWod: true),
+                new("air_squat", 1, 15, IsWod: true),
+            ], new CatalogWod(WodFormat.Amrap, 20)),
+        ], TrainingSport.CrossFit),
     ];
 
     /// <summary>The program that fits a number of workouts per week best.</summary>
@@ -138,6 +214,12 @@ public static class ProgramCatalog
         4 => Find("upper_lower"),
         _ => Find("push_pull_legs"),
     };
+
+    /// <summary>The program for a sport, a goal and a number of workouts per week.</summary>
+    public static CatalogProgram Suggest(TrainingSport sport, TrainingGoal goal, int sessionsPerWeek) =>
+        sport == TrainingSport.CrossFit
+            ? Find(sessionsPerWeek >= 5 ? "crossfit_performance" : "crossfit_foundations")
+            : Suggest(goal, sessionsPerWeek);
 
     /// <summary>The program for a goal and a number of workouts per week, its repetitions adapted to the goal.</summary>
     public static CatalogProgram Suggest(TrainingGoal goal, int sessionsPerWeek) =>
@@ -149,7 +231,7 @@ public static class ProgramCatalog
     /// </summary>
     public static CatalogProgram Adapt(CatalogProgram program, TrainingGoal goal)
     {
-        if (goal == TrainingGoal.Muscle || program.Key == "five_by_five")
+        if (goal == TrainingGoal.Muscle || program.Key == "five_by_five" || program.Sport == TrainingSport.CrossFit)
             return program;
         return program with
         {

@@ -56,6 +56,12 @@ public sealed partial class SummaryViewModel : ObservableObject, IQueryAttributa
     private string _volumeText = string.Empty;
 
     [ObservableProperty]
+    private bool _hasWodScore;
+
+    [ObservableProperty]
+    private string _wodText = string.Empty;
+
+    [ObservableProperty]
     private string _setsText = string.Empty;
 
     [ObservableProperty]
@@ -151,6 +157,8 @@ public sealed partial class SummaryViewModel : ObservableObject, IQueryAttributa
         }
         DurationText = Loc.Duration(summary.Duration);
         VolumeText = Loc.Volume(summary.Volume);
+        HasWodScore = summary.Workout.HasWodScore;
+        WodText = HasWodScore ? $"{Loc.Wod(summary.Workout.WodFormat, summary.Workout.WodMinutes)} · {Loc.WodScore(summary.Workout)}" : string.Empty;
         SetsText = summary.SetCount.ToString(Loc.Culture);
         Records = summary.Records.Select(r => new RecordItem(Loc.ExerciseName(r.Exercise), Loc.Set(r.Exercise, r.Set), RecordDetail(r))).ToList();
         HasRecords = Records.Count > 0;

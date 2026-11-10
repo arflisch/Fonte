@@ -74,5 +74,22 @@ public static class ExerciseCatalog
         new("rowing_machine", MuscleGroup.Cardio, Equipment.Machine, Tracking.Time),
         new("cycling", MuscleGroup.Cardio, Equipment.Machine, Tracking.Time),
         new("jump_rope", MuscleGroup.Cardio, Equipment.Other, Tracking.Time),
+
+        // CrossFit
+        new("thruster", MuscleGroup.Legs, Equipment.Barbell),
+        new("power_clean", MuscleGroup.Legs, Equipment.Barbell),
+        new("push_press", MuscleGroup.Shoulders, Equipment.Barbell),
+        new("snatch", MuscleGroup.Legs, Equipment.Barbell),
+        new("clean_and_jerk", MuscleGroup.Legs, Equipment.Barbell),
+        new("wall_ball", MuscleGroup.Legs, Equipment.Other),
+        new("kettlebell_swing", MuscleGroup.Legs, Equipment.Kettlebell),
+        new("box_jump", MuscleGroup.Legs, Equipment.Bodyweight, Tracking.Reps),
+        new("air_squat", MuscleGroup.Legs, Equipment.Bodyweight, Tracking.Reps),
+        new("burpee", MuscleGroup.Cardio, Equipment.Bodyweight, Tracking.Reps),
+        new("double_under", MuscleGroup.Cardio, Equipment.Other, Tracking.Reps),
+        new("toes_to_bar", MuscleGroup.Core, Equipment.Bodyweight, Tracking.Reps),
+        new("handstand_push_up", MuscleGroup.Shoulders, Equipment.Bodyweight, Tracking.Reps),
+        new("muscle_up", MuscleGroup.Back, Equipment.Bodyweight, Tracking.Reps),
+        new("assault_bike", MuscleGroup.Cardio, Equipment.Machine, Tracking.Time),
     ];
 }

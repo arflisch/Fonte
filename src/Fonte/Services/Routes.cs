@@ -22,4 +22,8 @@ public static class Routes
     public const string CustomFood = "customfood";
     public const string Recipe = "recipe";
     public const string Import = "import";
+    public const string Wod = "wod";
+    public const string Recipes = "recipes";
+    public const string RecipeDetail = "recipedetail";
+    public const string MealPlanner = "mealplanner";
 }

@@ -1,6 +1,7 @@
 using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Fonte.Core.Data;
 using Fonte.Core.Models;
 using Fonte.Core.Nutrition;
@@ -30,6 +31,9 @@ public sealed partial class FoodSearchViewModel(
     private DateTime _date = DateTime.Today;
     private Meal _meal = FoodEntryViewModel.MealAt(DateTime.Now);
     private bool _isIngredient;
+
+    /// <summary>Choosing a food for the meal planner: a tap picks it, no quantity asked.</summary>
+    private bool _isPlan;
     private CancellationTokenSource? _typing;
     private bool _isBusy;
 
@@ -82,7 +86,8 @@ public sealed partial class FoodSearchViewModel(
             _date = day;
         if (query.TryGetValue("meal", out var meal) && Enum.TryParse<Meal>(meal?.ToString(), out var m))
             _meal = m;
-        _isIngredient = query.TryGetValue("mode", out var mode) && mode?.ToString() == "ingredient";
+        _isIngredient = query.TryGetValue("mode", out var mode) && mode?.ToString() is "ingredient" or "plan";
+        _isPlan = mode?.ToString() == "plan";
         CanCreateDish = !_isIngredient;
         Title = _isIngredient ? Loc.Get("Recipe_AddIngredient") : Loc.Meal(_meal);
         // A dish is made of foods, not of whole meals.
@@ -196,7 +201,16 @@ public sealed partial class FoodSearchViewModel(
         Reload();
     }
 
-    private Task OpenAsync(int foodId) => Shell.Current.GoToAsync($"{Routes.FoodEntry}?food={foodId}&{Destination}");
+    private Task OpenAsync(int foodId) => _isPlan ? PickAsync(foodId) : OpenEntryAsync(foodId);
+
+    private Task PickAsync(int foodId)
+    {
+        WeakReferenceMessenger.Default.Send(new PlanFoodPickedMessage(foodId));
+        Palette.Haptic();
+        return Shell.Current.GoToAsync("..");
+    }
+
+    private Task OpenEntryAsync(int foodId) => Shell.Current.GoToAsync($"{Routes.FoodEntry}?food={foodId}&{Destination}");
 
     [RelayCommand]
     private async Task SearchOnlineAsync()

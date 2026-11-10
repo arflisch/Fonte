@@ -33,6 +33,7 @@ public sealed class AppSettings
     private const string WaterRemindersKey = "water_reminders";
     private const string FastingRemindersKey = "fasting_reminders";
     private const string DayKindsKey = "day_kinds";
+    private const string SportKey = "sport";
 
     /// <summary>Rest durations offered, in seconds.</summary>
     public static readonly IReadOnlyList<int> RestChoices = [30, 45, 60, 90, 120, 150, 180, 240, 300];
@@ -200,6 +201,13 @@ public sealed class AppSettings
     {
         get => _preferences.Get(ActiveEnergyKey, false);
         set => Update(() => _preferences.Set(ActiveEnergyKey, value));
+    }
+
+    /// <summary>Strength training or CrossFit: the ready-made programs offered first.</summary>
+    public TrainingSport Sport
+    {
+        get => Enum.TryParse<TrainingSport>(_preferences.Get<string?>(SportKey, null), out var sport) ? sport : TrainingSport.Strength;
+        set => Update(() => _preferences.Set(SportKey, value.ToString()));
     }
 
     /// <summary>Hours of fasting each day (16 for 16:8); 0 when the user doesn't fast.</summary>

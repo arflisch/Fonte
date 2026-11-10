@@ -110,6 +110,17 @@
                     </Grid>
                 </Border>
 
+                <!-- WOD score -->
+                <Border Padding="16,14" IsVisible="{Binding HasWodScore}" Style="{StaticResource Card}">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                        <Label FontSize="24" Text="⏱️" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Style="{StaticResource Caption}" Text="{l:Tr Wod_Badge}" />
+                            <Label Style="{StaticResource Strong}" Text="{Binding WodText}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
                 <!-- Compared with last time -->
                 <Border IsVisible="{Binding HasComparison}" Padding="16,14" Style="{StaticResource Card}">
                     <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">

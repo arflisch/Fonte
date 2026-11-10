@@ -1,0 +1,1566 @@
+[
+ {
+  "key": "protein_oats",
+  "meal": "Breakfast",
+  "servings": 1,
+  "minutes": 5,
+  "tags": [
+   "protein",
+   "vegetarian"
+  ],
+  "ingredients": [
+   {
+    "code": "9311",
+    "grams": 60
+   },
+   {
+    "code": "19041",
+    "grams": 200
+   },
+   {
+    "code": "19644",
+    "grams": 150
+   },
+   {
+    "code": "13028",
+    "grams": 80
+   },
+   {
+    "code": "31008",
+    "grams": 10
+   }
+  ],
+  "name": {
+   "fr": "Porridge protéiné aux myrtilles",
+   "en": "Blueberry protein porridge",
+   "nl": "Proteïneporridge met blauwe bessen"
+  },
+  "steps": {
+   "fr": [
+    "Cuis les flocons d'avoine dans le lait 3 à 4 minutes en remuant.",
+    "Hors du feu, incorpore le fromage blanc.",
+    "Ajoute les myrtilles et le miel."
+   ],
+   "en": [
+    "Simmer the oats in the milk for 3 to 4 minutes, stirring.",
+    "Off the heat, stir in the quark.",
+    "Top with the blueberries and the honey."
+   ],
+   "nl": [
+    "Kook de havervlokken 3 tot 4 minuten in de melk, al roerend.",
+    "Roer van het vuur de magere kwark erdoor.",
+    "Werk af met de blauwe bessen en de honing."
+   ]
+  }
+ },
+ {
+  "key": "overnight_oats",
+  "meal": "Breakfast",
+  "servings": 1,
+  "minutes": 5,
+  "tags": [
+   "protein",
+   "vegetarian"
+  ],
+  "ingredients": [
+   {
+    "code": "9311",
+    "grams": 50
+   },
+   {
+    "code": "19860",
+    "grams": 150
+   },
+   {
+    "code": "19041",
+    "grams": 100
+   },
+   {
+    "code": "15047",
+    "grams": 10
+   },
+   {
+    "code": "13014",
+    "grams": 100
+   }
+  ],
+  "name": {
+   "fr": "Overnight oats au yaourt grec",
+   "en": "Greek yogurt overnight oats",
+   "nl": "Overnight oats met Griekse yoghurt"
+  },
+  "steps": {
+   "fr": [
+    "Mélange flocons, yaourt, lait et graines de chia dans un bocal.",
+    "Laisse une nuit au réfrigérateur.",
+    "Ajoute les fraises coupées le matin."
+   ],
+   "en": [
+    "Mix the oats, yogurt, milk and chia seeds in a jar.",
+    "Leave in the fridge overnight.",
+    "Add the sliced strawberries in the morning."
+   ],
+   "nl": [
+    "Meng havervlokken, yoghurt, melk en chiazaad in een pot.",
+    "Laat een nacht in de koelkast staan.",
+    "Voeg 's ochtends de gesneden aardbeien toe."
+   ]
+  }
+ },
+ {
+  "key": "egg_toast",
+  "meal": "Breakfast",
+  "servings": 1,
+  "minutes": 10,
+  "tags": [
+   "protein",
+   "vegetarian"
+  ],
+  "ingredients": [
+   {
+    "code": "22000",
+    "grams": 120
+   },
+   {
+    "code": "7110",
+    "grams": 70
+   },
+   {
+    "code": "13004",
+    "grams": 50
+   },
+   {
+    "code": "20047",
+    "grams": 80
+   }
+  ],
+  "name": {
+   "fr": "Toasts aux œufs brouillés et avocat",
+   "en": "Scrambled eggs and avocado toast",
+   "nl": "Toast met roerei en avocado"
+  },
+  "steps": {
+   "fr": [
+    "Bats les œufs et fais-les cuire doucement à la poêle en remuant.",
+    "Fais griller le pain et écrase l'avocat dessus.",
+    "Ajoute les œufs et la tomate en tranches."
+   ],
+   "en": [
+    "Beat the eggs and cook them gently in a pan, stirring.",
+    "Toast the bread and mash the avocado on it.",
+    "Top with the eggs and the sliced tomato."
+   ],
+   "nl": [
+    "Klop de eieren en bak ze zachtjes in een pan al roerend.",
+    "Rooster het brood en prak de avocado erop.",
+    "Leg de eieren en de tomaat in plakjes erop."
+   ]
+  }
+ },
+ {
+  "key": "quark_bowl",
+  "meal": "Breakfast",
+  "servings": 1,
+  "minutes": 3,
+  "tags": [
+   "protein",
+   "vegetarian"
+  ],
+  "ingredients": [
+   {
+    "code": "19644",
+    "grams": 250
+   },
+   {
+    "code": "13005",
+    "grams": 120
+   },
+   {
+    "code": "15000",
+    "grams": 20
+   },
+   {
+    "code": "31008",
+    "grams": 10
+   }
+  ],
+  "name": {
+   "fr": "Bol de fromage blanc banane-amandes",
+   "en": "Quark bowl with banana and almonds",
+   "nl": "Kwarkbowl met banaan en amandelen"
+  },
+  "steps": {
+   "fr": [
+    "Verse le fromage blanc dans un bol.",
+    "Ajoute la banane en rondelles et les amandes concassées.",
+    "Arrose de miel."
+   ],
+   "en": [
+    "Spoon the quark into a bowl.",
+    "Add the sliced banana and the chopped almonds.",
+    "Drizzle with honey."
+   ],
+   "nl": [
+    "Schep de kwark in een kom.",
+    "Voeg de banaan in schijfjes en de gehakte amandelen toe.",
+    "Besprenkel met honing."
+   ]
+  }
+ },
+ {
+  "key": "protein_pancakes",
+  "meal": "Breakfast",
+  "servings": 1,
+  "minutes": 15,
+  "tags": [
+   "protein",
+   "vegetarian"
+  ],
+  "ingredients": [
+   {
+    "code": "9311",
+    "grams": 50
+   },
+   {
+    "code": "22000",
+    "grams": 100
+   },
+   {
+    "code": "19644",
+    "grams": 100
+   },
+   {
+    "code": "13005",
+    "grams": 60
+   },
+   {
+    "code": "13015",
+    "grams": 80
+   }
+  ],
+  "name": {
+   "fr": "Pancakes protéinés aux framboises",
+   "en": "Protein pancakes with raspberries",
+   "nl": "Proteïnepannenkoekjes met frambozen"
+  },
+  "steps": {
+   "fr": [
+    "Mixe les flocons, les œufs, le fromage blanc et la banane.",
+    "Cuis de petites crêpes 2 minutes par face dans une poêle antiadhésive.",
+    "Sers avec les framboises."
+   ],
+   "en": [
+    "Blend the oats, eggs, quark and banana.",
+    "Cook small pancakes for 2 minutes per side in a non-stick pan.",
+    "Serve with the raspberries."
+   ],
+   "nl": [
+    "Mix havervlokken, eieren, kwark en banaan.",
+    "Bak kleine pannenkoekjes 2 minuten per kant in een antiaanbakpan.",
+    "Serveer met de frambozen."
+   ]
+  }
+ },
+ {
+  "key": "peanut_toast",
+  "meal": "Breakfast",
+  "servings": 1,
+  "minutes": 5,
+  "tags": [
+   "vegetarian"
+  ],
+  "ingredients": [
+   {
+    "code": "7110",
+    "grams": 70
+   },
+   {
+    "code": "15202",
+    "grams": 20
+   },
+   {
+    "code": "13005",
+    "grams": 100
+   },
+   {
+    "code": "19041",
+    "grams": 250
+   }
+  ],
+  "name": {
+   "fr": "Tartines beurre de cacahuète et banane",
+   "en": "Peanut butter and banana toast",
+   "nl": "Boterham met pindakaas en banaan"
+  },
+  "steps": {
+   "fr": [
+    "Fais griller le pain.",
+    "Tartine le beurre de cacahuète et ajoute la banane en rondelles.",
+    "Accompagne d'un verre de lait."
+   ],
+   "en": [
+    "Toast the bread.",
+    "Spread the peanut butter and top with the sliced banana.",
+    "Serve with a glass of milk."
+   ],
+   "nl": [
+    "Rooster het brood.",
+    "Smeer de pindakaas erop en leg de banaan in schijfjes erop.",
+    "Serveer met een glas melk."
+   ]
+  }
+ },
+ {
+  "key": "chicken_rice_broccoli",
+  "meal": "Lunch",
+  "servings": 2,
+  "minutes": 25,
+  "tags": [
+   "protein",
+   "mealprep"
+  ],
+  "ingredients": [
+   {
+    "code": "36017",
+    "grams": 300
+   },
+   {
+    "code": "9125",
+    "grams": 400
+   },
+   {
+    "code": "20057",
+    "grams": 300
+   },
+   {
+    "code": "17270",
+    "grams": 15
+   },
+   {
+    "code": "11104",
+    "grams": 20
+   }
+  ],
+  "name": {
+   "fr": "Poulet, riz basmati et brocoli",
+   "en": "Chicken, basmati rice and broccoli",
+   "nl": "Kip, basmatirijst en broccoli"
+  },
+  "steps": {
+   "fr": [
+    "Coupe le poulet en morceaux et saisis-le 6 à 8 minutes dans l'huile.",
+    "Cuis le brocoli à la vapeur 6 minutes.",
+    "Sers avec le riz cuit et arrose de sauce soja."
+   ],
+   "en": [
+    "Cut the chicken into pieces and sear it in the oil for 6 to 8 minutes.",
+    "Steam the broccoli for 6 minutes.",
+    "Serve with the cooked rice and a dash of soy sauce."
+   ],
+   "nl": [
+    "Snijd de kip in stukken en bak 6 tot 8 minuten in de olie.",
+    "Stoom de broccoli 6 minuten.",
+    "Serveer met de gekookte rijst en een scheutje sojasaus."
+   ]
+  }
+ },
+ {
+  "key": "beef_pasta",
+  "meal": "Lunch",
+  "servings": 2,
+  "minutes": 20,
+  "tags": [
+   "protein"
+  ],
+  "ingredients": [
+   {
+    "code": "6250",
+    "grams": 250
+   },
+   {
+    "code": "9811",
+    "grams": 400
+   },
+   {
+    "code": "20047",
+    "grams": 300
+   },
+   {
+    "code": "20034",
+    "grams": 80
+   },
+   {
+    "code": "17270",
+    "grams": 10
+   },
+   {
+    "code": "12120",
+    "grams": 20
+   }
+  ],
+  "name": {
+   "fr": "Pâtes à la bolognaise maigre",
+   "en": "Lean bolognese pasta",
+   "nl": "Pasta bolognese met mager gehakt"
+  },
+  "steps": {
+   "fr": [
+    "Fais revenir l'oignon émincé dans l'huile, puis la viande hachée.",
+    "Ajoute les tomates concassées et laisse mijoter 10 minutes.",
+    "Mélange aux pâtes cuites et parsème de parmesan."
+   ],
+   "en": [
+    "Soften the chopped onion in the oil, then brown the mince.",
+    "Add the chopped tomatoes and simmer for 10 minutes.",
+    "Toss with the cooked pasta and sprinkle with parmesan."
+   ],
+   "nl": [
+    "Fruit de gesnipperde ui in de olie en bak dan het gehakt.",
+    "Voeg de gehakte tomaten toe en laat 10 minuten sudderen.",
+    "Meng met de gekookte pasta en bestrooi met parmezaan."
+   ]
+  }
+ },
+ {
+  "key": "salmon_potatoes",
+  "meal": "Dinner",
+  "servings": 2,
+  "minutes": 30,
+  "tags": [
+   "protein",
+   "omega3"
+  ],
+  "ingredients": [
+   {
+    "code": "26036",
+    "grams": 300
+   },
+   {
+    "code": "4008",
+    "grams": 500
+   },
+   {
+    "code": "20061",
+    "grams": 300
+   },
+   {
+    "code": "17270",
+    "grams": 15
+   },
+   {
+    "code": "13009",
+    "grams": 30
+   }
+  ],
+  "name": {
+   "fr": "Saumon au four, pommes de terre et haricots verts",
+   "en": "Baked salmon, potatoes and green beans",
+   "nl": "Zalm uit de oven met aardappelen en sperziebonen"
+  },
+  "steps": {
+   "fr": [
+    "Cuis les pommes de terre en morceaux 15 minutes à l'eau.",
+    "Enfourne le saumon arrosé d'huile et de citron 12 minutes à 200 °C.",
+    "Cuis les haricots verts à la vapeur 8 minutes et sers ensemble."
+   ],
+   "en": [
+    "Boil the potatoes in chunks for 15 minutes.",
+    "Bake the salmon with the oil and lemon for 12 minutes at 200 °C.",
+    "Steam the green beans for 8 minutes and serve together."
+   ],
+   "nl": [
+    "Kook de aardappelen in stukken 15 minuten.",
+    "Bak de zalm met olie en citroen 12 minuten op 200 °C.",
+    "Stoom de sperziebonen 8 minuten en serveer samen."
+   ]
+  }
+ },
+ {
+  "key": "turkey_sweet_potato",
+  "meal": "Dinner",
+  "servings": 2,
+  "minutes": 30,
+  "tags": [
+   "protein"
+  ],
+  "ingredients": [
+   {
+    "code": "36304",
+    "grams": 300
+   },
+   {
+    "code": "4101",
+    "grams": 400
+   },
+   {
+    "code": "20020",
+    "grams": 300
+   },
+   {
+    "code": "17270",
+    "grams": 15
+   }
+  ],
+  "name": {
+   "fr": "Dinde, patate douce rôtie et courgette",
+   "en": "Turkey, roasted sweet potato and courgette",
+   "nl": "Kalkoen, geroosterde zoete aardappel en courgette"
+  },
+  "steps": {
+   "fr": [
+    "Coupe la patate douce en cubes et rôtis-la 25 minutes à 200 °C avec la moitié de l'huile.",
+    "Poêle les escalopes 4 minutes par face.",
+    "Fais sauter la courgette en rondelles dans le reste de l'huile."
+   ],
+   "en": [
+    "Dice the sweet potato and roast it for 25 minutes at 200 °C with half the oil.",
+    "Pan-fry the escalopes for 4 minutes per side.",
+    "Sauté the sliced courgette in the rest of the oil."
+   ],
+   "nl": [
+    "Snijd de zoete aardappel in blokjes en rooster 25 minuten op 200 °C met de helft van de olie.",
+    "Bak de schnitzels 4 minuten per kant.",
+    "Bak de courgette in schijfjes in de rest van de olie."
+   ]
+  }
+ },
+ {
+  "key": "lentil_curry",
+  "meal": "Dinner",
+  "servings": 3,
+  "minutes": 30,
+  "tags": [
+   "vegetarian",
+   "fiber"
+  ],
+  "ingredients": [
+   {
+    "code": "20535",
+    "grams": 200
+   },
+   {
+    "code": "18041",
+    "grams": 200
+   },
+   {
+    "code": "20047",
+    "grams": 300
+   },
+   {
+    "code": "20034",
+    "grams": 100
+   },
+   {
+    "code": "20059",
+    "grams": 150
+   },
+   {
+    "code": "9125",
+    "grams": 450
+   }
+  ],
+  "name": {
+   "fr": "Curry de lentilles corail et épinards",
+   "en": "Red lentil and spinach curry",
+   "nl": "Curry van rode linzen en spinazie"
+  },
+  "steps": {
+   "fr": [
+    "Fais revenir l'oignon, ajoute les lentilles, les tomates et 400 ml d'eau.",
+    "Laisse cuire 15 minutes, puis ajoute le lait de coco et les épinards.",
+    "Assaisonne de curry et sers avec le riz."
+   ],
+   "en": [
+    "Soften the onion, add the lentils, the tomatoes and 400 ml of water.",
+    "Simmer for 15 minutes, then add the coconut milk and the spinach.",
+    "Season with curry and serve with the rice."
+   ],
+   "nl": [
+    "Fruit de ui, voeg linzen, tomaten en 400 ml water toe.",
+    "Laat 15 minuten koken en voeg dan kokosmelk en spinazie toe.",
+    "Kruid met curry en serveer met de rijst."
+   ]
+  }
+ },
+ {
+  "key": "tuna_salad",
+  "meal": "Lunch",
+  "servings": 1,
+  "minutes": 10,
+  "tags": [
+   "protein",
+   "quick"
+  ],
+  "ingredients": [
+   {
+    "code": "26039",
+    "grams": 140
+   },
+   {
+    "code": "20532",
+    "grams": 120
+   },
+   {
+    "code": "20047",
+    "grams": 120
+   },
+   {
+    "code": "20019",
+    "grams": 100
+   },
+   {
+    "code": "17270",
+    "grams": 10
+   }
+  ],
+  "name": {
+   "fr": "Salade de thon et pois chiches",
+   "en": "Tuna and chickpea salad",
+   "nl": "Salade met tonijn en kikkererwten"
+  },
+  "steps": {
+   "fr": [
+    "Égoutte le thon et les pois chiches.",
+    "Coupe la tomate et le concombre en dés.",
+    "Mélange le tout avec l'huile, sel et poivre."
+   ],
+   "en": [
+    "Drain the tuna and the chickpeas.",
+    "Dice the tomato and the cucumber.",
+    "Toss everything with the oil, salt and pepper."
+   ],
+   "nl": [
+    "Laat de tonijn en de kikkererwten uitlekken.",
+    "Snijd tomaat en komkommer in blokjes.",
+    "Meng alles met de olie, zout en peper."
+   ]
+  }
+ },
+ {
+  "key": "chicken_wrap",
+  "meal": "Lunch",
+  "servings": 2,
+  "minutes": 15,
+  "tags": [
+   "protein",
+   "quick"
+  ],
+  "ingredients": [
+   {
+    "code": "36017",
+    "grams": 250
+   },
+   {
+    "code": "7815",
+    "grams": 120
+   },
+   {
+    "code": "13004",
+    "grams": 80
+   },
+   {
+    "code": "20047",
+    "grams": 120
+   },
+   {
+    "code": "19644",
+    "grams": 100
+   }
+  ],
+  "name": {
+   "fr": "Wraps au poulet et avocat",
+   "en": "Chicken and avocado wraps",
+   "nl": "Wraps met kip en avocado"
+  },
+  "steps": {
+   "fr": [
+    "Fais cuire le poulet en lamelles 6 minutes à la poêle.",
+    "Tartine les tortillas de fromage blanc et ajoute l'avocat.",
+    "Garnis de poulet et de tomate, puis roule."
+   ],
+   "en": [
+    "Cook the sliced chicken in a pan for 6 minutes.",
+    "Spread the tortillas with quark and add the avocado.",
+    "Fill with the chicken and the tomato, then roll up."
+   ],
+   "nl": [
+    "Bak de kip in reepjes 6 minuten in een pan.",
+    "Besmeer de tortilla's met kwark en voeg de avocado toe.",
+    "Beleg met kip en tomaat en rol op."
+   ]
+  }
+ },
+ {
+  "key": "cod_quinoa",
+  "meal": "Dinner",
+  "servings": 2,
+  "minutes": 25,
+  "tags": [
+   "protein",
+   "light"
+  ],
+  "ingredients": [
+   {
+    "code": "26043",
+    "grams": 300
+   },
+   {
+    "code": "9340",
+    "grams": 140
+   },
+   {
+    "code": "20087",
+    "grams": 200
+   },
+   {
+    "code": "20020",
+    "grams": 200
+   },
+   {
+    "code": "17270",
+    "grams": 15
+   }
+  ],
+  "name": {
+   "fr": "Cabillaud, quinoa et légumes sautés",
+   "en": "Cod with quinoa and sautéed vegetables",
+   "nl": "Kabeljauw met quinoa en gebakken groenten"
+  },
+  "steps": {
+   "fr": [
+    "Cuis le quinoa 12 minutes dans deux fois son volume d'eau.",
+    "Fais sauter poivron et courgette dans l'huile 8 minutes.",
+    "Poêle le cabillaud 3 minutes par face et sers sur le quinoa."
+   ],
+   "en": [
+    "Cook the quinoa for 12 minutes in twice its volume of water.",
+    "Sauté the pepper and the courgette in the oil for 8 minutes.",
+    "Pan-fry the cod for 3 minutes per side and serve on the quinoa."
+   ],
+   "nl": [
+    "Kook de quinoa 12 minuten in twee keer zijn volume water.",
+    "Bak paprika en courgette 8 minuten in de olie.",
+    "Bak de kabeljauw 3 minuten per kant en serveer op de quinoa."
+   ]
+  }
+ },
+ {
+  "key": "tofu_stir_fry",
+  "meal": "Dinner",
+  "servings": 2,
+  "minutes": 20,
+  "tags": [
+   "vegetarian",
+   "protein"
+  ],
+  "ingredients": [
+   {
+    "code": "20904",
+    "grams": 300
+   },
+   {
+    "code": "9086",
+    "grams": 300
+   },
+   {
+    "code": "20057",
+    "grams": 200
+   },
+   {
+    "code": "20087",
+    "grams": 150
+   },
+   {
+    "code": "11104",
+    "grams": 30
+   },
+   {
+    "code": "17130",
+    "grams": 15
+   }
+  ],
+  "name": {
+   "fr": "Wok de tofu et nouilles",
+   "en": "Tofu noodle stir-fry",
+   "nl": "Wok met tofu en noedels"
+  },
+  "steps": {
+   "fr": [
+    "Coupe le tofu en dés et fais-le dorer dans l'huile.",
+    "Ajoute brocoli et poivron, fais sauter 5 minutes.",
+    "Ajoute les nouilles cuites et la sauce soja, mélange 2 minutes."
+   ],
+   "en": [
+    "Dice the tofu and brown it in the oil.",
+    "Add the broccoli and the pepper and stir-fry for 5 minutes.",
+    "Add the cooked noodles and the soy sauce, toss for 2 minutes."
+   ],
+   "nl": [
+    "Snijd de tofu in blokjes en bak goudbruin in de olie.",
+    "Voeg broccoli en paprika toe en wok 5 minuten.",
+    "Voeg de gekookte noedels en de sojasaus toe en meng 2 minuten."
+   ]
+  }
+ },
+ {
+  "key": "chili",
+  "meal": "Dinner",
+  "servings": 4,
+  "minutes": 35,
+  "tags": [
+   "protein",
+   "mealprep"
+  ],
+  "ingredients": [
+   {
+    "code": "6250",
+    "grams": 400
+   },
+   {
+    "code": "20524",
+    "grams": 400
+   },
+   {
+    "code": "20047",
+    "grams": 500
+   },
+   {
+    "code": "20034",
+    "grams": 150
+   },
+   {
+    "code": "20087",
+    "grams": 200
+   },
+   {
+    "code": "9125",
+    "grams": 600
+   }
+  ],
+  "name": {
+   "fr": "Chili con carne",
+   "en": "Chili con carne",
+   "nl": "Chili con carne"
+  },
+  "steps": {
+   "fr": [
+    "Fais revenir l'oignon et le poivron, puis la viande hachée.",
+    "Ajoute tomates, haricots et épices (cumin, paprika), laisse mijoter 20 minutes.",
+    "Sers avec le riz."
+   ],
+   "en": [
+    "Soften the onion and the pepper, then brown the mince.",
+    "Add the tomatoes, beans and spices (cumin, paprika), simmer for 20 minutes.",
+    "Serve with the rice."
+   ],
+   "nl": [
+    "Fruit ui en paprika en bak dan het gehakt.",
+    "Voeg tomaten, bonen en kruiden (komijn, paprika) toe en laat 20 minuten sudderen.",
+    "Serveer met de rijst."
+   ]
+  }
+ },
+ {
+  "key": "omelette",
+  "meal": "Dinner",
+  "servings": 1,
+  "minutes": 10,
+  "tags": [
+   "protein",
+   "vegetarian",
+   "quick"
+  ],
+  "ingredients": [
+   {
+    "code": "22000",
+    "grams": 180
+   },
+   {
+    "code": "20056",
+    "grams": 100
+   },
+   {
+    "code": "20059",
+    "grams": 60
+   },
+   {
+    "code": "19590",
+    "grams": 40
+   },
+   {
+    "code": "7110",
+    "grams": 50
+   }
+  ],
+  "name": {
+   "fr": "Omelette champignons, épinards et mozzarella",
+   "en": "Mushroom, spinach and mozzarella omelette",
+   "nl": "Omelet met champignons, spinazie en mozzarella"
+  },
+  "steps": {
+   "fr": [
+    "Fais revenir les champignons, puis les épinards 1 minute.",
+    "Verse les œufs battus, ajoute la mozzarella.",
+    "Plie l'omelette et sers avec le pain."
+   ],
+   "en": [
+    "Sauté the mushrooms, then the spinach for 1 minute.",
+    "Pour in the beaten eggs and add the mozzarella.",
+    "Fold the omelette and serve with the bread."
+   ],
+   "nl": [
+    "Bak de champignons en dan de spinazie 1 minuut.",
+    "Giet de geklopte eieren erbij en voeg de mozzarella toe.",
+    "Vouw de omelet dicht en serveer met het brood."
+   ]
+  }
+ },
+ {
+  "key": "shrimp_couscous",
+  "meal": "Lunch",
+  "servings": 2,
+  "minutes": 15,
+  "tags": [
+   "protein",
+   "quick"
+  ],
+  "ingredients": [
+   {
+    "code": "10021",
+    "grams": 300
+   },
+   {
+    "code": "9611",
+    "grams": 350
+   },
+   {
+    "code": "20020",
+    "grams": 200
+   },
+   {
+    "code": "20047",
+    "grams": 150
+   },
+   {
+    "code": "17270",
+    "grams": 15
+   },
+   {
+    "code": "13009",
+    "grams": 20
+   }
+  ],
+  "name": {
+   "fr": "Crevettes sautées et semoule aux légumes",
+   "en": "Sautéed prawns with vegetable couscous",
+   "nl": "Gebakken garnalen met groentecouscous"
+  },
+  "steps": {
+   "fr": [
+    "Prépare la semoule avec de l'eau bouillante, couvre 5 minutes.",
+    "Fais sauter courgette et tomate dans la moitié de l'huile.",
+    "Poêle les crevettes 3 minutes avec le citron et sers ensemble."
+   ],
+   "en": [
+    "Pour boiling water over the couscous and cover for 5 minutes.",
+    "Sauté the courgette and tomato in half the oil.",
+    "Pan-fry the prawns for 3 minutes with the lemon and serve together."
+   ],
+   "nl": [
+    "Giet kokend water over de couscous en dek 5 minuten af.",
+    "Bak courgette en tomaat in de helft van de olie.",
+    "Bak de garnalen 3 minuten met de citroen en serveer samen."
+   ]
+  }
+ },
+ {
+  "key": "feta_bowl",
+  "meal": "Lunch",
+  "servings": 1,
+  "minutes": 15,
+  "tags": [
+   "vegetarian"
+  ],
+  "ingredients": [
+   {
+    "code": "9340",
+    "grams": 70
+   },
+   {
+    "code": "20532",
+    "grams": 120
+   },
+   {
+    "code": "20019",
+    "grams": 100
+   },
+   {
+    "code": "20047",
+    "grams": 100
+   },
+   {
+    "code": "12066",
+    "grams": 40
+   },
+   {
+    "code": "17270",
+    "grams": 10
+   }
+  ],
+  "name": {
+   "fr": "Bowl quinoa, pois chiches et feta",
+   "en": "Quinoa, chickpea and feta bowl",
+   "nl": "Bowl met quinoa, kikkererwten en feta"
+  },
+  "steps": {
+   "fr": [
+    "Cuis le quinoa 12 minutes et laisse tiédir.",
+    "Coupe concombre et tomate, égoutte les pois chiches.",
+    "Assemble le bol, émiette la feta et arrose d'huile."
+   ],
+   "en": [
+    "Cook the quinoa for 12 minutes and let it cool slightly.",
+    "Chop the cucumber and tomato, drain the chickpeas.",
+    "Assemble the bowl, crumble the feta and drizzle with oil."
+   ],
+   "nl": [
+    "Kook de quinoa 12 minuten en laat iets afkoelen.",
+    "Snijd komkommer en tomaat, laat de kikkererwten uitlekken.",
+    "Stel de bowl samen, verkruimel de feta en besprenkel met olie."
+   ]
+  }
+ },
+ {
+  "key": "ham_sandwich",
+  "meal": "Lunch",
+  "servings": 1,
+  "minutes": 5,
+  "tags": [
+   "quick"
+  ],
+  "ingredients": [
+   {
+    "code": "7111",
+    "grams": 80
+   },
+   {
+    "code": "28902",
+    "grams": 80
+   },
+   {
+    "code": "19644",
+    "grams": 40
+   },
+   {
+    "code": "20047",
+    "grams": 60
+   },
+   {
+    "code": "20019",
+    "grams": 50
+   }
+  ],
+  "name": {
+   "fr": "Sandwich jambon-crudités",
+   "en": "Ham and salad sandwich",
+   "nl": "Sandwich met ham en rauwkost"
+  },
+  "steps": {
+   "fr": [
+    "Tartine le pain de mie de fromage blanc.",
+    "Ajoute le jambon, la tomate et le concombre en tranches.",
+    "Referme et coupe en deux."
+   ],
+   "en": [
+    "Spread the bread with quark.",
+    "Add the ham, the sliced tomato and cucumber.",
+    "Close and cut in half."
+   ],
+   "nl": [
+    "Besmeer het brood met kwark.",
+    "Leg de ham, tomaat en komkommer in plakjes erop.",
+    "Klap dicht en snijd doormidden."
+   ]
+  }
+ },
+ {
+  "key": "greek_yogurt_snack",
+  "meal": "Snack",
+  "servings": 1,
+  "minutes": 2,
+  "tags": [
+   "vegetarian",
+   "quick"
+  ],
+  "ingredients": [
+   {
+    "code": "19860",
+    "grams": 170
+   },
+   {
+    "code": "15005",
+    "grams": 15
+   },
+   {
+    "code": "31008",
+    "grams": 10
+   }
+  ],
+  "name": {
+   "fr": "Yaourt grec, noix et miel",
+   "en": "Greek yogurt with walnuts and honey",
+   "nl": "Griekse yoghurt met walnoten en honing"
+  },
+  "steps": {
+   "fr": [
+    "Verse le yaourt dans un bol.",
+    "Ajoute les noix concassées et le miel."
+   ],
+   "en": [
+    "Spoon the yogurt into a bowl.",
+    "Top with the chopped walnuts and the honey."
+   ],
+   "nl": [
+    "Schep de yoghurt in een kom.",
+    "Werk af met de gehakte walnoten en de honing."
+   ]
+  }
+ },
+ {
+  "key": "eggs_snack",
+  "meal": "Snack",
+  "servings": 1,
+  "minutes": 12,
+  "tags": [
+   "protein",
+   "vegetarian"
+  ],
+  "ingredients": [
+   {
+    "code": "22010",
+    "grams": 120
+   },
+   {
+    "code": "20009",
+    "grams": 100
+   }
+  ],
+  "name": {
+   "fr": "Œufs durs et bâtonnets de carotte",
+   "en": "Boiled eggs and carrot sticks",
+   "nl": "Hardgekookte eieren met wortelstaafjes"
+  },
+  "steps": {
+   "fr": [
+    "Cuis les œufs 10 minutes dans l'eau bouillante, puis refroidis-les.",
+    "Coupe la carotte en bâtonnets."
+   ],
+   "en": [
+    "Boil the eggs for 10 minutes, then cool them.",
+    "Cut the carrot into sticks."
+   ],
+   "nl": [
+    "Kook de eieren 10 minuten en laat ze afkoelen.",
+    "Snijd de wortel in staafjes."
+   ]
+  }
+ },
+ {
+  "key": "apple_peanut",
+  "meal": "Snack",
+  "servings": 1,
+  "minutes": 2,
+  "tags": [
+   "vegetarian",
+   "quick"
+  ],
+  "ingredients": [
+   {
+    "code": "13039",
+    "grams": 150
+   },
+   {
+    "code": "15202",
+    "grams": 20
+   }
+  ],
+  "name": {
+   "fr": "Pomme et beurre de cacahuète",
+   "en": "Apple with peanut butter",
+   "nl": "Appel met pindakaas"
+  },
+  "steps": {
+   "fr": [
+    "Coupe la pomme en quartiers.",
+    "Trempe-les dans le beurre de cacahuète."
+   ],
+   "en": [
+    "Cut the apple into wedges.",
+    "Dip them in the peanut butter."
+   ],
+   "nl": [
+    "Snijd de appel in partjes.",
+    "Dip ze in de pindakaas."
+   ]
+  }
+ },
+ {
+  "key": "recovery_shake",
+  "meal": "Snack",
+  "servings": 1,
+  "minutes": 3,
+  "tags": [
+   "protein",
+   "vegetarian",
+   "quick"
+  ],
+  "ingredients": [
+   {
+    "code": "19041",
+    "grams": 300
+   },
+   {
+    "code": "13005",
+    "grams": 120
+   },
+   {
+    "code": "19644",
+    "grams": 150
+   },
+   {
+    "code": "9311",
+    "grams": 30
+   }
+  ],
+  "name": {
+   "fr": "Shake de récupération banane",
+   "en": "Banana recovery shake",
+   "nl": "Herstelshake met banaan"
+  },
+  "steps": {
+   "fr": [
+    "Mets tous les ingrédients dans un blender.",
+    "Mixe 30 secondes et bois après la séance."
+   ],
+   "en": [
+    "Put all the ingredients in a blender.",
+    "Blend for 30 seconds and drink after your workout."
+   ],
+   "nl": [
+    "Doe alle ingrediënten in een blender.",
+    "Mix 30 seconden en drink na je training."
+   ]
+  }
+ },
+ {
+  "key": "rice_cakes_cottage",
+  "meal": "Snack",
+  "servings": 1,
+  "minutes": 3,
+  "tags": [
+   "protein",
+   "quick"
+  ],
+  "ingredients": [
+   {
+    "code": "7352",
+    "grams": 30
+   },
+   {
+    "code": "19585",
+    "grams": 80
+   },
+   {
+    "code": "28902",
+    "grams": 40
+   }
+  ],
+  "name": {
+   "fr": "Galettes de riz, ricotta et jambon",
+   "en": "Rice cakes with ricotta and ham",
+   "nl": "Rijstwafels met ricotta en ham"
+  },
+  "steps": {
+   "fr": [
+    "Tartine les galettes de ricotta.",
+    "Ajoute le jambon et un peu de poivre."
+   ],
+   "en": [
+    "Spread the rice cakes with ricotta.",
+    "Top with the ham and a little pepper."
+   ],
+   "nl": [
+    "Besmeer de rijstwafels met ricotta.",
+    "Leg de ham erop en wat peper."
+   ]
+  }
+ },
+ {
+  "key": "chicken_pasta_pesto",
+  "meal": "Dinner",
+  "servings": 2,
+  "minutes": 20,
+  "tags": [
+   "protein"
+  ],
+  "ingredients": [
+   {
+    "code": "36017",
+    "grams": 250
+   },
+   {
+    "code": "9811",
+    "grams": 350
+   },
+   {
+    "code": "20047",
+    "grams": 200
+   },
+   {
+    "code": "20059",
+    "grams": 100
+   },
+   {
+    "code": "12120",
+    "grams": 30
+   },
+   {
+    "code": "17270",
+    "grams": 15
+   }
+  ],
+  "name": {
+   "fr": "Pâtes au poulet, tomates et épinards",
+   "en": "Chicken pasta with tomatoes and spinach",
+   "nl": "Pasta met kip, tomaat en spinazie"
+  },
+  "steps": {
+   "fr": [
+    "Saisis le poulet en dés dans l'huile 6 minutes.",
+    "Ajoute tomates et épinards, laisse fondre 3 minutes.",
+    "Mélange aux pâtes cuites et ajoute le parmesan."
+   ],
+   "en": [
+    "Sear the diced chicken in the oil for 6 minutes.",
+    "Add the tomatoes and spinach and cook for 3 minutes.",
+    "Toss with the cooked pasta and add the parmesan."
+   ],
+   "nl": [
+    "Bak de kip in blokjes 6 minuten in de olie.",
+    "Voeg tomaat en spinazie toe en laat 3 minuten slinken.",
+    "Meng met de gekookte pasta en voeg de parmezaan toe."
+   ]
+  }
+ },
+ {
+  "key": "bean_soup",
+  "meal": "Dinner",
+  "servings": 3,
+  "minutes": 30,
+  "tags": [
+   "vegetarian",
+   "fiber",
+   "light"
+  ],
+  "ingredients": [
+   {
+    "code": "20511",
+    "grams": 400
+   },
+   {
+    "code": "20009",
+    "grams": 200
+   },
+   {
+    "code": "20034",
+    "grams": 100
+   },
+   {
+    "code": "4008",
+    "grams": 300
+   },
+   {
+    "code": "20047",
+    "grams": 300
+   },
+   {
+    "code": "17270",
+    "grams": 15
+   }
+  ],
+  "name": {
+   "fr": "Soupe de haricots blancs et légumes",
+   "en": "White bean and vegetable soup",
+   "nl": "Soep met witte bonen en groenten"
+  },
+  "steps": {
+   "fr": [
+    "Fais revenir oignon et carotte dans l'huile.",
+    "Ajoute pommes de terre, tomates et 1 litre d'eau, cuis 20 minutes.",
+    "Ajoute les haricots, chauffe 5 minutes et mixe à moitié."
+   ],
+   "en": [
+    "Soften the onion and carrot in the oil.",
+    "Add the potatoes, tomatoes and 1 litre of water, cook for 20 minutes.",
+    "Add the beans, heat for 5 minutes and half-blend."
+   ],
+   "nl": [
+    "Fruit ui en wortel in de olie.",
+    "Voeg aardappelen, tomaten en 1 liter water toe en kook 20 minuten.",
+    "Voeg de bonen toe, verwarm 5 minuten en pureer half."
+   ]
+  }
+ },
+ {
+  "key": "salmon_bowl",
+  "meal": "Lunch",
+  "servings": 1,
+  "minutes": 15,
+  "tags": [
+   "protein",
+   "omega3"
+  ],
+  "ingredients": [
+   {
+    "code": "26036",
+    "grams": 130
+   },
+   {
+    "code": "9125",
+    "grams": 180
+   },
+   {
+    "code": "13004",
+    "grams": 60
+   },
+   {
+    "code": "20019",
+    "grams": 80
+   },
+   {
+    "code": "11104",
+    "grams": 15
+   }
+  ],
+  "name": {
+   "fr": "Poke bowl au saumon",
+   "en": "Salmon poke bowl",
+   "nl": "Pokébowl met zalm"
+  },
+  "steps": {
+   "fr": [
+    "Coupe le saumon en dés et arrose-le de sauce soja.",
+    "Dispose le riz dans un bol.",
+    "Ajoute saumon, avocat et concombre en tranches."
+   ],
+   "en": [
+    "Dice the salmon and drizzle it with soy sauce.",
+    "Put the rice in a bowl.",
+    "Top with the salmon, avocado and sliced cucumber."
+   ],
+   "nl": [
+    "Snijd de zalm in blokjes en besprenkel met sojasaus.",
+    "Doe de rijst in een kom.",
+    "Leg zalm, avocado en komkommer in plakjes erop."
+   ]
+  }
+ },
+ {
+  "key": "turkey_chili_bowl",
+  "meal": "Lunch",
+  "servings": 2,
+  "minutes": 20,
+  "tags": [
+   "protein",
+   "fiber"
+  ],
+  "ingredients": [
+   {
+    "code": "36304",
+    "grams": 250
+   },
+   {
+    "code": "20524",
+    "grams": 250
+   },
+   {
+    "code": "9125",
+    "grams": 300
+   },
+   {
+    "code": "20087",
+    "grams": 150
+   },
+   {
+    "code": "20047",
+    "grams": 200
+   }
+  ],
+  "name": {
+   "fr": "Bowl dinde, haricots rouges et riz",
+   "en": "Turkey, kidney bean and rice bowl",
+   "nl": "Bowl met kalkoen, kidneybonen en rijst"
+  },
+  "steps": {
+   "fr": [
+    "Coupe la dinde en lamelles et saisis-la 6 minutes.",
+    "Ajoute poivron, tomate et haricots, laisse cuire 8 minutes.",
+    "Sers sur le riz avec un peu de paprika."
+   ],
+   "en": [
+    "Slice the turkey and sear it for 6 minutes.",
+    "Add the pepper, tomato and beans and cook for 8 minutes.",
+    "Serve on the rice with a little paprika."
+   ],
+   "nl": [
+    "Snijd de kalkoen in reepjes en bak 6 minuten.",
+    "Voeg paprika, tomaat en bonen toe en laat 8 minuten koken.",
+    "Serveer op de rijst met wat paprikapoeder."
+   ]
+  }
+ },
+ {
+  "key": "cottage_berries",
+  "meal": "Snack",
+  "servings": 1,
+  "minutes": 2,
+  "tags": [
+   "protein",
+   "vegetarian",
+   "quick"
+  ],
+  "ingredients": [
+   {
+    "code": "19644",
+    "grams": 200
+   },
+   {
+    "code": "13015",
+    "grams": 100
+   },
+   {
+    "code": "15047",
+    "grams": 10
+   }
+  ],
+  "name": {
+   "fr": "Fromage blanc, framboises et chia",
+   "en": "Quark with raspberries and chia",
+   "nl": "Kwark met frambozen en chiazaad"
+  },
+  "steps": {
+   "fr": [
+    "Verse le fromage blanc dans un bol.",
+    "Ajoute les framboises et les graines de chia."
+   ],
+   "en": [
+    "Spoon the quark into a bowl.",
+    "Add the raspberries and the chia seeds."
+   ],
+   "nl": [
+    "Schep de kwark in een kom.",
+    "Voeg de frambozen en het chiazaad toe."
+   ]
+  }
+ }
+]

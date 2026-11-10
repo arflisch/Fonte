@@ -15,7 +15,7 @@ public sealed partial class TranslationTests
     private static readonly string[] DynamicPrefixes =
     [
         "Error_", "Ex_", "Tip_", "Muscle_", "Equipment_", "Tracking_", "Goal_", "GoalText_", "Measure_",
-        "Program_", "ProgramText_", "Template_", "Meal_", "Sex_", "Activity_", "WeightGoal_", "FoodShelf_",
+        "Program_", "ProgramText_", "Template_", "Meal_", "Sex_", "Activity_", "WeightGoal_", "FoodShelf_", "Sport_", "Wod_", "RecipeTag_",
     ];
 
     public static TheoryData<string> Languages => new() { "fr", "nl" };

@@ -61,6 +61,8 @@ public sealed partial class FonteStore
                     Name = name($"Template_{catalog.Templates[t].Key}"),
                     Position = t,
                     CreatedAt = now,
+                    WodFormat = catalog.Templates[t].Wod?.Format ?? WodFormat.None,
+                    WodMinutes = catalog.Templates[t].Wod?.Minutes ?? 0,
                 };
                 conn.Insert(template);
                 var items = catalog.Templates[t].Exercises;
@@ -77,6 +79,7 @@ public sealed partial class FonteStore
                         Reps = items[e].Reps,
                         Seconds = items[e].Seconds,
                         LinkedToNext = items[e].LinkedToNext,
+                        IsWod = items[e].IsWod,
                     });
                 }
             }
@@ -290,7 +293,7 @@ public sealed partial class FonteStore
         var template = await FindTemplateAsync(db, templateId);
         var items = await db.Table<TemplateExercise>().Where(i => i.TemplateId == templateId).OrderBy(i => i.Position).ToListAsync();
         var done = await GetDoneSetsAsync(db);
-        var workout = new Workout { StartedAt = now, TemplateId = template.Id };
+        var workout = new Workout { StartedAt = now, TemplateId = template.Id, WodFormat = template.WodFormat, WodMinutes = template.WodMinutes };
 
         await db.RunInTransactionAsync(conn =>
         {
@@ -309,6 +312,7 @@ public sealed partial class FonteStore
                     TargetWeight = target.Weight > 0 ? target.Weight : null,
                     TargetSeconds = target.Seconds > 0 ? target.Seconds : null,
                     RestSeconds = target.RestSeconds > 0 ? target.RestSeconds : null,
+                    IsWod = target.IsWod,
                 };
                 conn.Insert(item);
 

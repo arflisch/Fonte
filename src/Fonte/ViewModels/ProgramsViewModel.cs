@@ -86,8 +86,12 @@ public sealed partial class ProgramsViewModel(
         Templates = templates.Select(t => new TemplateItemViewModel(t, null, false, OpenTemplateAsync, launcher.StartTemplateAsync)).ToList();
         HasTemplates = Templates.Count > 0;
 
-        Catalog = ProgramCatalog.All.Select(p => new CatalogItemViewModel(p, FollowCatalogAsync)).ToList();
         IsLocked = !pro.IsUnlocked;
+        // The programs of the user's sport first; CrossFit ones come with Fonte Pro.
+        Catalog = ProgramCatalog.All
+            .OrderBy(p => p.Sport == settings.Sport ? 0 : 1)
+            .Select(p => new CatalogItemViewModel(p, FollowCatalogAsync, IsLocked && p.Sport == TrainingSport.CrossFit))
+            .ToList();
     }
 
     /// <summary>Free users can create a few workouts of their own; Fonte Pro has no limit.</summary>
@@ -103,6 +107,9 @@ public sealed partial class ProgramsViewModel(
     private async Task FollowCatalogAsync(CatalogProgram catalog)
     {
         var name = Loc.Get($"Program_{catalog.Key}");
+        if (catalog.Sport == TrainingSport.CrossFit
+            && !await pro.EnsureUnlockedAsync(dialogs, name, Loc.Get("Programs_CrossFitPro")))
+            return;
         var confirmed = await dialogs.ConfirmAsync(
             Loc.Format("Programs_FollowTitle", name),
             HasActive ? Loc.Format("Programs_FollowReplace", ActiveName) : Loc.Get("Programs_FollowText"),
@@ -289,8 +296,9 @@ public sealed class ProgramRowViewModel
 /// <summary>A ready-made program offered to follow.</summary>
 public sealed class CatalogItemViewModel
 {
-    public CatalogItemViewModel(CatalogProgram program, Func<CatalogProgram, Task> follow)
+    public CatalogItemViewModel(CatalogProgram program, Func<CatalogProgram, Task> follow, bool isLocked)
     {
+        IsLocked = isLocked;
         Name = Loc.Get($"Program_{program.Key}");
         Text = Loc.Get($"ProgramText_{program.Key}");
         Plan = Loc.Format("Programs_CatalogPlan", program.SessionsPerWeek, program.Weeks);
@@ -299,6 +307,8 @@ public sealed class CatalogItemViewModel
             "full_body" => "🌱",
             "five_by_five" => "🏋️",
             "upper_lower" => "⚖️",
+            "crossfit_foundations" => "🤸",
+            "crossfit_performance" => "⏱️",
             _ => "🔥",
         };
         FollowCommand = new AsyncRelayCommand(() => follow(program));
@@ -311,6 +321,9 @@ public sealed class CatalogItemViewModel
     public string Plan { get; }
 
     public string Emoji { get; }
+
+    /// <summary>A CrossFit program while Fonte Pro is locked: it shows a "PRO" badge.</summary>
+    public bool IsLocked { get; }
 
     public IAsyncRelayCommand FollowCommand { get; }
 }

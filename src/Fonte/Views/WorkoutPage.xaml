@@ -154,6 +154,20 @@
                                             <Border
                                                 Margin="0,6,0,0"
                                                 Padding="8,3"
+                                                BackgroundColor="#26E24B4A"
+                                                HorizontalOptions="Start"
+                                                IsVisible="{Binding IsWod}"
+                                                StrokeShape="RoundRectangle 9"
+                                                StrokeThickness="0">
+                                                <Label
+                                                    FontFamily="OpenSansSemibold"
+                                                    FontSize="12"
+                                                    Text="{l:Tr Wod_Badge}"
+                                                    TextColor="#E24B4A" />
+                                            </Border>
+                                            <Border
+                                                Margin="0,6,0,0"
+                                                Padding="8,3"
                                                 BackgroundColor="{DynamicResource AccentSoft}"
                                                 HorizontalOptions="Start"
                                                 IsVisible="{Binding HasTarget}"
@@ -356,6 +370,42 @@
                     </BindableLayout.ItemTemplate>
                 </VerticalStackLayout>
 
+                <!-- WOD: the workout's own, or a timer for any workout -->
+                <Border
+                    Margin="0,4,0,0"
+                    Padding="16,14"
+                    c:Touch.Command="{Binding OpenWodCommand}"
+                    Background="{DynamicResource HeroGradient}"
+                    IsVisible="{Binding HasWod}"
+                    StrokeShape="RoundRectangle 22"
+                    StrokeThickness="0">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                        <c:IconView
+                            Color="White"
+                            Data="{x:Static c:Icons.Timer}"
+                            HeightRequest="26"
+                            VerticalOptions="Center"
+                            WidthRequest="26" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                            <Label FontFamily="OpenSansSemibold" FontSize="17" Text="{Binding WodTitle}" TextColor="White" />
+                            <Label FontSize="13" Text="{l:Tr Wod_StartTimer}" TextColor="{StaticResource WhiteSoft}">
+                                <Label.Triggers>
+                                    <DataTrigger Binding="{Binding HasWodScore}" TargetType="Label" Value="True">
+                                        <Setter Property="Text" Value="{Binding WodScoreText}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </VerticalStackLayout>
+                        <c:IconView
+                            Grid.Column="2"
+                            Color="White"
+                            Data="{x:Static c:Icons.Play}"
+                            HeightRequest="20"
+                            VerticalOptions="Center"
+                            WidthRequest="20" />
+                    </Grid>
+                </Border>
+
                 <!-- Add an exercise -->
                 <Border
                     x:Name="AddExerciseButton"
@@ -373,6 +423,21 @@
                         <Label Style="{StaticResource PrimaryButtonText}" Text="{l:Tr Workout_AddExercise}" />
                     </HorizontalStackLayout>
                 </Border>
+
+                <HorizontalStackLayout
+                    Padding="0,8,0,0"
+                    c:Touch.Command="{Binding OpenWodCommand}"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding HasWod, Converter={StaticResource InvertBool}}"
+                    Spacing="6">
+                    <c:IconView
+                        Color="{DynamicResource Accent}"
+                        Data="{x:Static c:Icons.Timer}"
+                        HeightRequest="18"
+                        VerticalOptions="Center"
+                        WidthRequest="18" />
+                    <Label Style="{StaticResource LinkLabel}" Text="{l:Tr Wod_TimerLink}" VerticalOptions="Center" />
+                </HorizontalStackLayout>
 
                 <Label
                     Padding="0,10"

@@ -234,6 +234,21 @@ public static class WorkoutImport
         A("rowing_machine", "rowing (machine)", "rowing machine", "rower", "rowing"),
         A("cycling", "cycling", "cycling (indoor)", "stationary bike", "bike", "spinning"),
         A("jump_rope", "jump rope", "skipping"),
+        A("thruster", "thruster (barbell)", "thruster", "thrusters"),
+        A("power_clean", "power clean", "power clean (barbell)", "hang power clean"),
+        A("push_press", "push press", "push press (barbell)"),
+        A("snatch", "snatch", "snatch (barbell)", "power snatch"),
+        A("clean_and_jerk", "clean and jerk", "clean and jerk (barbell)", "clean & jerk"),
+        A("wall_ball", "wall ball", "wall balls", "wall ball (medicine ball)"),
+        A("kettlebell_swing", "kettlebell swing", "kettlebell swing (kettlebell)", "russian kettlebell swing", "american kettlebell swing"),
+        A("box_jump", "box jump", "box jumps"),
+        A("air_squat", "air squat", "squat (bodyweight)", "bodyweight squat"),
+        A("burpee", "burpee", "burpees"),
+        A("double_under", "double under", "double unders", "jump rope double under"),
+        A("toes_to_bar", "toes to bar", "toes to bar (bodyweight)"),
+        A("handstand_push_up", "handstand push up", "handstand pushup", "hspu"),
+        A("muscle_up", "muscle up", "ring muscle up", "bar muscle up"),
+        A("assault_bike", "assault bike", "air bike", "echo bike"),
     ];
 
     private static Alias A(string key, params string[] names) => new(key, names.Select(Normalize).ToHashSet());

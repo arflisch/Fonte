@@ -34,6 +34,12 @@ public static class Loc
     public static string Meal(Meal meal) => L[$"Meal_{meal}"];
 
     /// <summary>CIQUAL foods have a French and an English name: French in French, English otherwise.</summary>
+    /// <summary>"fr", "en" or "nl": the language of the built-in recipes to show.</summary>
+    public static string LanguageCode => L.Language.Code;
+
+    /// <summary>The name of a CIQUAL food in the app's language (French, or English otherwise).</summary>
+    public static string CatalogFoodName(Core.Nutrition.CatalogFood food) => L.Language.Code == "fr" ? food.NameFr : food.NameEn;
+
     public static string FoodName(Food food) =>
         food.Source == FoodSource.Catalog && L.Language.Code != "fr" && !string.IsNullOrEmpty(food.NameEn) ? food.NameEn : food.Name;
 
@@ -92,6 +98,28 @@ public static class Loc
         Core.Models.Tracking.Time => Seconds(set.Seconds),
         Core.Models.Tracking.WeightAndReps when set.Weight > 0 => $"{WeightNumber(set.Weight)} × {set.Reps}",
         _ => set.Reps.ToString(L.Culture),
+    };
+
+    /// <summary>"AMRAP 12 min", "EMOM 10 min", "For time · cap 15 min".</summary>
+    public static string Wod(WodFormat format, int minutes) => format switch
+    {
+        WodFormat.Amrap => Format("Wod_AmrapTitle", minutes),
+        WodFormat.Emom => Format("Wod_EmomTitle", minutes),
+        WodFormat.ForTime when minutes > 0 => Format("Wod_ForTimeCapTitle", minutes),
+        WodFormat.ForTime => Get("Wod_ForTimeTitle"),
+        _ => string.Empty,
+    };
+
+    /// <summary>The score of a WOD: "7 rounds + 14 reps", "8:42", "Time cap".</summary>
+    public static string WodScore(Workout workout) => workout.WodFormat switch
+    {
+        WodFormat.Amrap => workout.WodReps > 0
+            ? Format("Wod_ScoreRoundsReps", workout.WodRounds, workout.WodReps)
+            : Format("Wod_ScoreRounds", workout.WodRounds),
+        WodFormat.Emom => Format("Wod_ScoreEmom", workout.WodRounds, workout.WodMinutes),
+        WodFormat.ForTime when workout.WodSeconds > 0 => Clock(TimeSpan.FromSeconds(workout.WodSeconds)),
+        WodFormat.ForTime => workout.WodReps > 0 ? Format("Wod_ScoreCapReps", workout.WodReps) : Get("Wod_ScoreCap"),
+        _ => string.Empty,
     };
 
     /// <summary>A duration counted in seconds: "45 s", "2 min", "1 min 30", "1 h 05".</summary>

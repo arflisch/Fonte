@@ -37,6 +37,7 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
         _restText = Loc.Seconds(settings.RestSeconds);
         _isRestTimerEnabled = settings.RestTimerEnabled;
         _goalName = NameOf(settings.Goal);
+        _sportName = Loc.Get($"Sport_{settings.Sport}");
         _sessionsText = Loc.Format("Settings_SessionsValue", settings.SessionsPerWeek);
         // Without Fonte Pro the app stays violet, whatever colour was chosen before.
         var accent = AccentTheme.Current;
@@ -110,6 +111,9 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
 
     [ObservableProperty]
     private string _goalName;
+
+    [ObservableProperty]
+    private string _sportName;
 
     [ObservableProperty]
     private string _sessionsText;
@@ -213,6 +217,22 @@ public sealed partial class SettingsViewModel : ObservableObject, ISheetViewMode
             _settings.RestSeconds = ProgramCatalog.RestSeconds(goal);
             RestText = Loc.Seconds(_settings.RestSeconds);
         }
+    }
+
+    [RelayCommand]
+    private async Task ChooseSportAsync()
+    {
+        var sports = Enum.GetValues<TrainingSport>();
+        var current = _settings.Sport;
+        var names = sports.ToDictionary(s => s, s => Loc.Get($"Sport_{s}"));
+        var choice = await _dialogs.ChooseAsync(Loc.Get("Settings_Sport"), null,
+            [.. sports.Select(s => s == current ? $"{names[s]}  ✓" : names[s])]);
+        if (choice is null)
+            return;
+        var sport = sports.First(s => choice.Replace("✓", string.Empty).Trim() == names[s]);
+        _settings.Sport = sport;
+        SportName = names[sport];
+        Palette.Haptic();
     }
 
     [RelayCommand]

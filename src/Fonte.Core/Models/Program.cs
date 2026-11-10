@@ -48,6 +48,10 @@ public sealed class WorkoutTemplate
     public string? CatalogKey { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+    public WodFormat WodFormat { get; set; }
+
+    public int WodMinutes { get; set; }
 }
 
 [Table("template_exercises")]
@@ -80,4 +84,6 @@ public sealed class TemplateExercise
 
     /// <summary>Rest after each set, in seconds; 0 for the rest chosen in the settings.</summary>
     public int RestSeconds { get; set; }
+
+    public bool IsWod { get; set; }
 }

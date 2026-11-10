@@ -311,8 +311,14 @@ public sealed partial class NutritionViewModel(
         var copy = Loc.Get("Nutrition_CopyYesterday");
         var clear = Loc.Get("Nutrition_ClearMeal");
         var save = Loc.Get("Nutrition_SaveTemplate");
+        var ideas = Loc.Get("Recipes_Ideas");
         var hasFoods = _day?.Meals.Single(m => m.Meal == meal).Foods.Count > 0;
-        var choice = await dialogs.ChooseAsync(Loc.Meal(meal), hasFoods ? clear : null, hasFoods ? [copy, save] : [copy]);
+        var choice = await dialogs.ChooseAsync(Loc.Meal(meal), hasFoods ? clear : null, hasFoods ? [ideas, copy, save] : [ideas, copy]);
+        if (choice == ideas)
+        {
+            await Shell.Current.GoToAsync($"{Routes.Recipes}?date={Iso(_date)}&meal={meal}");
+            return;
+        }
         if (choice == save)
         {
             var name = await dialogs.PromptAsync(save, Loc.Get("Nutrition_TemplateName"), Loc.Meal(meal), 60);
@@ -387,6 +393,9 @@ public sealed partial class NutritionViewModel(
             await health.DeleteWaterAsync(removed);
         }
     }
+
+    [RelayCommand]
+    private Task OpenRecipesAsync() => Shell.Current.GoToAsync($"{Routes.Recipes}?date={Iso(_date)}&meal={FoodEntryViewModel.MealAt(DateTime.Now)}");
 
     [RelayCommand]
     private Task OpenGoalAsync() => Shell.Current.GoToAsync(Routes.NutritionGoal);

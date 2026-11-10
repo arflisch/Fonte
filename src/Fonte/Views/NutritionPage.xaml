@@ -288,6 +288,24 @@
                         </Grid>
                     </Border>
 
+                    <!-- What to eat -->
+                    <Border Padding="16,12" c:Touch.Command="{Binding OpenRecipesCommand}" Style="{StaticResource Card}">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Label FontSize="26" Text="👩‍🍳" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                                <Label Style="{StaticResource Strong}" Text="{l:Tr Recipes_Ideas}" />
+                                <Label Style="{StaticResource Caption}" Text="{l:Tr Recipes_IdeasHint}" />
+                            </VerticalStackLayout>
+                            <c:IconView
+                                Grid.Column="2"
+                                Color="{DynamicResource Accent}"
+                                Data="{x:Static c:Icons.ChevronRight}"
+                                HeightRequest="18"
+                                VerticalOptions="Center"
+                                WidthRequest="18" />
+                        </Grid>
+                    </Border>
+
                     <!-- Meals -->
                     <VerticalStackLayout BindableLayout.ItemsSource="{Binding Meals}" Spacing="12">
                         <BindableLayout.ItemTemplate>
